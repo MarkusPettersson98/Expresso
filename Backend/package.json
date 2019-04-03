@@ -1,7 +1,7 @@
 {
-  "name": "personal-site",
+  "name": "togepi",
   "version": "1.0.0",
-  "description": "Personal website",
+  "description": "Software engineering project",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
