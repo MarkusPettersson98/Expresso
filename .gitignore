@@ -57,3 +57,7 @@ Temporary Items
 .vscode
 *.swp
 *.swo
+
+# Code cov
+
+coverage
