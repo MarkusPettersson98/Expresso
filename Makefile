@@ -1,4 +1,4 @@
-.PHONY: clean clean-frontend
+.PHONY: clean clean-frontend clean-backend install backend backend-prod frontend frontend-prod
 
 install: backend frontend
 
