@@ -8,4 +8,4 @@ script:
     - cd Frontend
     - npm run check-eslint-config
     - npm run check-code
-    - npm test
+    - npm run test-with-cov
