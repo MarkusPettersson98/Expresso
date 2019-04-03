@@ -3,8 +3,6 @@ node_js:
     - node
 before_install:
     - npm update
-install:
-    - npm install
 script:
     - make install
     - cd Frontend
