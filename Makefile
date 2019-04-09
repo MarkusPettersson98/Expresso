@@ -1,26 +1,36 @@
 .PHONY: clean clean-frontend clean-backend install backend backend-prod frontend frontend-prod
 
+backend_path = Backend
+frontend_path = Frontend
+frontend_dist = dist
+
+dependencies = node_modules
+
 install: backend frontend
 
 clean: clean-backend clean-frontend
-	rm -rf Frontend/dist/;
+	@rm -rf $(frontend_path)/$(frontend_dist);
 
 backend:
-	cd Backend; npm install;
+	@cd $(backend_path); \
+	npm install
 
 backend-prod:
 
 clean-backend:
-	cd Backend; rm -rf node_modules;
+	@cd $(backend_path); \
+	rm -rf $(dependencies)
 
-frontend: 
-	cd Frontend; npm install;
+frontend:
+	@cd $(frontend_path); \
+	npm install
 
 frontend-prod: clean-frontend frontend
-	cd Frontend; npm run build;
+	@cd $(frontend_path); \
+	npm run build;
 
 clean-frontend:
-	cd Frontend; rm -rf node_modules;
+	@cd $(frontend_path); \
+	rm -rf $(dependencies);
 
 
-	
