@@ -1,7 +1,9 @@
 const express = require("express");
-require('dotenv').config()
 const bodyParser = require("body-parser");
-const cors = require('cors');
+const cors = require("cors");
+
+require("dotenv").config();
+const port = process.env.APP_PORT || 8000;
 
 const app = express();
 
@@ -11,8 +13,8 @@ app.use(bodyParser.json());
 // Allow CORS
 app.use(cors());
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get("/", (req, res) => res.send("Hello World!"));
 
-app.listen(process.env.APP_PORT, () => {
-  console.log(`Listening on port ${process.env.APP_PORT}..`)
+app.listen(port, () => {
+    console.log(`Listening on port ${port}..`);
 });
