@@ -1,46 +1,19 @@
 import React, {Component} from 'react';
 import {AppRegistry, ScrollView, StyleSheet, ImageBackground, Text, View} from 'react-native';
 
+import shops from "./dummy-data";
+
 
 export default class Blockcomp extends Component{
     render(){
         return(
             <ScrollView contentContainerStyle = {styles.container}>
-                <View style = {styles.innerC}>
-                    <View style = {styles.item} onPress = {console.log('pressed biblan')}>
-                        <ImageBackground source = {require('./resources/biblan.jpg')} resizeMode = 'cover' style={{width: '100%', height: '100%', borderRadius: 20}}>
-                            <Text style={styles.text}>Biblioteket</Text>
-                        </ImageBackground>
-                    </View>    
-                    <View style = {styles.item}>
-                        <ImageBackground source = {require('./resources/bulten.jpg')} resizeMode = 'cover' style={{width: '100%', height: '100%', borderRadius: 20}}>
-                            <Text style={styles.text}>Bulten</Text>
-                        </ImageBackground>
-                    </View>
-                </View>
-                <View style = {styles.innerC}>
-                    <View style = {styles.item}>
-                        <ImageBackground source = {require('./resources/linsen.jpg')} resizeMode = 'cover' style={{width: '100%', height: '100%', borderRadius: 20}}>
-                            <Text style={styles.text}>Linsen</Text>
-                        </ImageBackground>
-                    </View>
-                    <View style = {styles.item}>
-                        <ImageBackground source = {require('./resources/vera.jpg')} resizeMode = 'cover' style={{width: '100%', height: '100%', borderRadius: 20}}>
-                            <Text style={styles.text}>Veras café</Text>
-                        </ImageBackground>
-                    </View>
-                </View>
-                <View style = {styles.innerC}>
-                    <View style = {styles.item}>
-                        <ImageBackground source = {require('./resources/wijkanders.jpg')} resizeMode = 'cover' style={{width: '100%', height: '100%', borderRadius: 20}}>
-                            <Text style={styles.text}>Wijkanders</Text>
-                        </ImageBackground>
-                    </View>
-                </View>
+                <ShopViews />
             </ScrollView>
         );
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -57,9 +30,8 @@ const styles = StyleSheet.create({
     item: {
         height: 200,
         width: '50%',
-        //borderRadius: 20,
         borderWidth: 10,
-        justifyContent: 'center', 
+        justifyContent: 'center',
         borderColor: '#F0F7F4',
         backgroundColor: 'black'
     },
@@ -69,5 +41,19 @@ const styles = StyleSheet.create({
         color: 'white',
     }
 })
+
+
+const ShopViews = shops.map((shop) => {
+    return (
+        <View style = {styles.innerC}>
+            <View style = {styles.item}>
+                <ImageBackground source = {shop.picture} resizeMode = 'cover' style={{width: '100%', height: '100%', borderRadius: 20}}>
+                    <Text style={styles.text}>{shop.name}</Text>
+                </ImageBackground>
+            </View>
+        </View>
+    );
+});
+
 
 AppRegistry.registerComponent('Blockcomp', () => Blockcomp);
