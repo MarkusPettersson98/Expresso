@@ -8,9 +8,11 @@ import shops from "./dummy-data";
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        flexDirection: 'column',
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: "wrap",
         backgroundColor: '#F0F7F4',
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
 });
 
