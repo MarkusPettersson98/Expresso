@@ -28,7 +28,13 @@ const BlockShopView = ({index, name, picture}) => {
     return (
         <View style = {styles.innerC}>
             <View style = {styles.item}>
-                <ImageBackground key = {index} source = {picture} resizeMode = 'cover' style={{width: '100%', height: '100%', borderRadius: 20}}  >
+                <ImageBackground key = {index}
+                                 source = {picture}
+                                 style={
+                                     {width: '100%',
+                                      height: '100%',
+                                      borderRadius: 20}}
+                                 resizeMode = 'cover' >
                     <Text style={styles.text}>{name}</Text>
                 </ImageBackground>
             </View>
