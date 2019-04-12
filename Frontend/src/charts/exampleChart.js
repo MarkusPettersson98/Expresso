@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { VictoryChart, VictoryBar } from 'victory';
+import { VictoryChart, VictoryBar, VictoryAxis} from 'victory';
 import { currentData } from '../data/reciepts';
 
 // k
 const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
+const weekdays_short = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const example = () => {
 
@@ -15,10 +15,19 @@ const example = () => {
         console.log(weekdays[index]);
     }
 
-    return (  
+    return (
         <VictoryChart
-            domainPadding={30} // determines distance from 
+            domainPadding={30} // determines distance from eachother and "walls"
         >
+        <VictoryAxis
+          tickValues={[1, 2, 3, 4, 5, 6, 7]}
+          tickFormat={[...weekdays_short]} //spead the array to assign values
+        />
+
+        <VictoryAxis
+          dependentAxis
+          tickFormat={(x) => (`${x}st`)}
+        />
             <VictoryBar
                 data={currentData}
                 events={[
@@ -40,5 +49,7 @@ const example = () => {
         </VictoryChart>
     )
 }
+
+
 
 export default example;
