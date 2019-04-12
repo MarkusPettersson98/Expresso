@@ -1,54 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { VictoryChart, VictoryBar } from 'victory';
-import dailySold from '../data/reciepts';
+import { currentData } from '../data/reciepts';
 
-const [MON, TUE, WED, THU, FRI, SAT, SUN] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+// k
+const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 
 const example = () => {
 
-    const goToPage = (day) => {
-        switch (day) {
-            case MON:
-                console.log('MON');
-                break;
-            case TUE:
-                console.log('TUE');
-                break;
-            case WED:
-                console.log('WED');
-                break;
-            case THU:
-                console.log('THU');
-                break;
-            case FRI:
-                console.log('FRI');
-                break;
-            default:
-                console.log('weekend');
-        }
+    // placeholder to for what to do when clicked on
+    // examples, show how the sale went this monday.
+    //           compare this monday to other mondays.
+    const goToPage = (index) => {
+        console.log(weekdays[index]);
     }
-    return (
+
+    return (  
         <VictoryChart
-            domainPadding={30}
+            domainPadding={30} // determines distance from 
         >
             <VictoryBar
-                data={[
-                    { x: "1/4", y: dailySold["1/4"].orders, label: MON },
-                    { x: "2/4", y: dailySold["2/4"].orders, label: TUE },
-                    { x: "3/4", y: dailySold["3/4"].orders, label: WED },
-                    { x: "4/4", y: dailySold["4/4"].orders, label: THU },
-                    { x: "5/4", y: dailySold["5/4"].orders, label: FRI },
-                ]}
+                data={currentData}
                 events={[
                     {
                         target: "data",
                         eventHandlers: {
-                            onClick: () => {
+                            onClick: (p) => {
                                 return [{
-                                    target: "labels",
+                                    target: "data", // the bars hold an index. we match index with out weekdays array.
                                     mutation: (props) => {
-                                        goToPage(props.text);
+                                        goToPage(props.index);
                                     }
                                 }];
                             }
