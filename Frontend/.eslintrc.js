@@ -42,7 +42,6 @@ module.exports = {
     'no-use-before-define': 0,
     'prefer-template': 2,
     'react/jsx-closing-tag-location': 0,
-    'react/forbid-prop-types': 0,
     'react/jsx-filename-extension': 0,
     'react/jsx-no-target-blank': 0,
     'react/require-default-props': 0,
