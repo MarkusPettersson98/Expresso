@@ -2,11 +2,11 @@
 export const daily_Sold = {
     '1/4': {
         day: 'Monday',
-        orders: 5
+        orders: 14
     },
     '2/4': {
         day: 'Tuesday',
-        orders: 2
+        orders: 4
     },
     '3/4': {
         day: 'Wednesday',
@@ -22,11 +22,11 @@ export const daily_Sold = {
     },
     '6/4': {
         day: 'Saturday',
-        orders: 8
+        orders: 4
     },
     '7/4': {
         day: 'Sunday',
-        orders: 8
+        orders: 1
     }
 }
 
