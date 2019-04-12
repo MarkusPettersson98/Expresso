@@ -12,7 +12,7 @@ const shops = [
         "picture": require('./resources/vera.jpg'),
     },
     {
-        "name": "Wijaknders",
+        "name": "Wijkanders",
         "picture": require('./resources/wijkanders.jpg'),
     },
 ];
