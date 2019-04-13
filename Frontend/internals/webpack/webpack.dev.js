@@ -6,7 +6,7 @@ module.exports = require('./webpack.base')({
   mode: 'development',
   devServer: {
     hot: true,
-    port: 3000,
+    port: 3001,
     stats: {
         colors: true,
         hash: false,

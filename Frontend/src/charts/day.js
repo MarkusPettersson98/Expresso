@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     VictoryChart,
     VictoryTheme,
@@ -8,12 +8,12 @@ import {
 } from 'victory';
 
 import { days } from '../data/reciepts';
-
+/* eslint react/prop-types: 0 */
 const daily = ({ backToPage, daySelected }) => {
-
-    const data = days[daySelected].sales.map((sales, index) => {
-        return { x: index + days[daySelected].openingHour, y: sales };
-    });
+    const data = days[daySelected].sales.map((sales, index) => ({
+        x: index + days[daySelected].openingHour,
+        y: sales,
+    }));
 
     const handleClickWeek = () => {
         backToPage();
@@ -21,8 +21,12 @@ const daily = ({ backToPage, daySelected }) => {
     return (
         <div>
             <div>
-                <h1>{daySelected}'s sale</h1>
-                <button onClick={handleClickWeek}>Weekly overview</button>
+                <h1>
+                    {daySelected} {"'s sale"}
+                </h1>
+                <button type="button" onClick={handleClickWeek}>
+                    Weekly overview
+                </button>
             </div>
             <div style={{ width: '70%', height: '10%' }}>
                 <VictoryChart
