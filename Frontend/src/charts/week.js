@@ -32,24 +32,24 @@ const example = () => {
     // examples, show how the sale went this monday.
     //           compare this monday to other mondays.
     const goToPage = index => {
-        switch (index) {
-            case 0:
-                setDailyGraph(<Daily backToPage={backToWeekly} />);
-            default:
-                console.log('Clicked on', weekdays[index]);
-        }
+        setDailyGraph(
+            <Daily
+                backToPage={backToWeekly}
+                daySelected={weekdays[index].toLowerCase()}
+            />,
+        );
     };
 
     const backToWeekly = () => {
         setDailyGraph('');
     };
-
+    // this is only temporary, this renders weekly graph if dailyGraph is "falsy", bad practice for sure
     return dailyGraph ? (
         dailyGraph
     ) : (
         <div>
             <div>
-                <h1>This weeks sales, click on monday</h1>
+                <h1>This weeks sales, click on bar for daily sales</h1>
             </div>
             <div style={{ width: '70%', height: '100%' }}>
                 <VictoryChart domainPadding={50} width={1000} height={500}>
@@ -63,7 +63,7 @@ const example = () => {
                     />
 
                     <VictoryAxis
-                        axisLabelComponent={<VictoryLabel dy={-10}/>}
+                        axisLabelComponent={<VictoryLabel dy={-10} />}
                         label="Sålt kaffe"
                         dependentAxis
                         tickFormat={x => `${x}`}
