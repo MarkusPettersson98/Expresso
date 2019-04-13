@@ -35,7 +35,6 @@ const example = () => {
         switch (index) {
             case 0:
                 setDailyGraph(<Daily />);
-
             default:
                 console.log('Clicked on', weekdays[index]);
         }
@@ -45,11 +44,11 @@ const example = () => {
         dailyGraph
     ) : (
         <div>
-            <body>
+            <div>
                 <h1>This weeks sales, click on monday</h1>
-            </body>
-            <div style={{ width: '70%', height: '50%' }}>
-                <VictoryChart domainPadding={50}>
+            </div>
+            <div style={{ width: '70%', height: '100%' }}>
+                <VictoryChart domainPadding={50} width={1000} height={500}>
                     <VictoryAxis
                         label="Dagar"
                         tickValues={[1, 2, 3, 4, 5, 6, 7]}
@@ -60,7 +59,7 @@ const example = () => {
                         axisLabelComponent={<VictoryLabel dy={-10} />}
                         label="Sålt kaffe"
                         dependentAxis
-                        tickFormat={x => `${x}st`}
+                        tickFormat={x => `${x}`}
                         fixLabelOverlap
                     />
                     <VictoryBar

@@ -1,31 +1,31 @@
 export const dailySold = {
     '1/4': {
         day: 'Monday',
-        orders: 14,
+        orders: 690,
     },
     '2/4': {
         day: 'Tuesday',
-        orders: 4,
+        orders: 500,
     },
     '3/4': {
         day: 'Wednesday',
-        orders: 10,
+        orders: 450,
     },
     '4/4': {
         day: 'Thursday',
-        orders: 6,
+        orders: 549,
     },
     '5/4': {
         day: 'Friday',
-        orders: 8,
+        orders: 398,
     },
     '6/4': {
         day: 'Saturday',
-        orders: 4,
+        orders: 50,
     },
     '7/4': {
         day: 'Sunday',
-        orders: 1,
+        orders: 0,
     },
 };
 
