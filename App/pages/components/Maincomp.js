@@ -5,7 +5,7 @@ import {default as ShopView} from './ListShopView';
 import shops from './dummy-data';
 
 
-export default Maincomp = () => {
+export default Maincomp = (props) => {
 
     const ShopViews = shops.map((shop, index) => {
         return (<ShopView key = {index}
