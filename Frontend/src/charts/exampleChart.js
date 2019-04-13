@@ -3,6 +3,8 @@ import { VictoryChart, VictoryBar, VictoryAxis, VictoryLabel } from 'victory';
 
 import { currentData } from '../data/reciepts';
 
+/* eslint react/prop-types: 0 */
+
 const weekdays = [
     'Monday',
     'Tuesday',
