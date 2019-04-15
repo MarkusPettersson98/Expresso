@@ -14,20 +14,6 @@ export default class Homepage extends Component{
     _pressBV = () => this.setState({ toggle: 'BV' })
     _pressMV = () => this.setState({ toggle: 'MV' })
 
-    renderSwitch(param){
-        switch(param){
-            case 'LV':
-                return <Maincomp />;
-            case 'BV':
-                return <Blockcomp />;
-            case 'MV':
-                return <Mapcomp />;
-            default: 
-                return <Mapcomp />;
-        }
-    }
-
-
     render(){
         const {toggle} = this.state;
         return(
@@ -38,8 +24,10 @@ export default class Homepage extends Component{
                     <Button title = 'Block' style = {styles.item} onPress = {this._pressBV} color = 'black'/>
                     <Button title = 'Map' style = {styles.item} onPress = {this._pressMV} color = 'black'/>
                 </View>
-                
-                {this.renderSwitch(toggle)}
+
+                {this.state.toggle == 'LV' && <Maincomp />}
+                {this.state.toggle == 'BV' && <Blockcomp />}
+                {this.state.toggle == 'MV' && <Mapcomp />}
             </View>
         );
     }
@@ -53,13 +41,13 @@ const styles = StyleSheet.create({
         height: '5%',
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-evenly', 
+        justifyContent: 'space-evenly',
         backgroundColor: '#F0F7F4',
         borderBottomWidth: 5,
     },
     item: {
         width: '33%',
-        justifyContent: 'center', 
+        justifyContent: 'center',
         backgroundColor: '#F0F7F4',
         textDecorationLine: 'none',
 
