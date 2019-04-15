@@ -1,4 +1,4 @@
-const shops = [
+export const shops = [
     {
         name: 'Biblioteket',
         picture: require('./resources/biblan.jpg'),
@@ -56,30 +56,31 @@ export const cappuccino = {
   volume: 500,
   id: 124
 }
-export const coffe =[
+export const coffee =[
     {
         shop: 'Biblioteket',
-        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+        coffees: [{name: 'Bryggkaffe', price: 12}] 
     },
     {
         shop: 'Bulten',
-        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+        coffees: [{name: 'Latte', price: 10}] 
     },
     {
         shop: 'Linsen',
-        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+        coffees: [{name: 'Bryggkaffe', price: 12}] 
     },
     {
         shop: 'Vera café',
-        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+        coffees: [{name: 'Cappucino', price: 15}] 
     },    
     {
-        shop: 'Bulten',
-        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+        shop: 'Wijkanders',
+        coffees: [{name: 'Bryggkaffe', price: 12}] 
     },
 
 ];
 
+<<<<<<< HEAD
 export const latte = {
   name: "Caffee Latte",
   price: 28,
@@ -137,4 +138,6 @@ export const one_brygg_kaffe_one_cappuchino_in_cart = {
 };
 
 export default shops;
+=======
+>>>>>>> CoffeView
 
