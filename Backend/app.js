@@ -18,9 +18,12 @@ app.get("/", (req, res) => res.send("Hej Världen!"));
 
 // Define API endpoints below
 // Get all shops
-app.get("/api/allShops", api.getAllShops);
+app.get("/api/getAllShops", api.getAllShops);
 
-// Get all coffee products from one shops
+// Get information about one shop
+app.get("/api/getShop/:shop", api.getShop);
+
+// Get all coffee products from one shop
 app.get("/api/getCoffee/:shop", api.getCoffee);
 
 app.listen(port, () => {
