@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 // Allow CORS
 app.use(cors());
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => res.send("Mad uppdatering"));
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}..`);
