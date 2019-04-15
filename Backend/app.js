@@ -17,7 +17,11 @@ app.use(cors());
 app.get("/", (req, res) => res.send("Hej Världen!"));
 
 // Define API endpoints below
+// Get all shops
 app.get("/api/allShops", api.getAllShops);
+
+// Get all coffee products from one shops
+app.get("/api/getCoffee/:shop", api.getCoffee);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}..`);
