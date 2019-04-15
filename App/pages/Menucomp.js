@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import {
   createDrawerNavigator,
@@ -10,16 +10,15 @@ import Screen1 from './Homepage';
 import Screen2 from './Screen2';
 import Screen3 from './Screen3';
  
-class NavigationDrawerStructure extends Component {
+const NavigationDrawerStructure = props => {
   //Structure for the navigatin Drawer
-  toggleDrawer = () => {
+  toggleDrawer = (navigationProps) => {
     //Props to open/close the drawer
-    this.props.navigationProps.toggleDrawer();
+    navigationProps.toggleDrawer();
   };
-  render() {
     return (
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
+        <TouchableOpacity onPress={() => toggleDrawer(props.navigationProps)}>
           {/*Donute Button Image */}
           <Image
             source={require('./components/resources/menu.png')}
@@ -28,8 +27,8 @@ class NavigationDrawerStructure extends Component {
         </TouchableOpacity>
       </View>
     );
-  }
 }
+
 
 const FirstActivity_StackNavigator = createStackNavigator({
   //All the screen from the Screen1 will be indexed here
