@@ -12,9 +12,9 @@ import Screen3 from './Screen3';
  
 const NavigationDrawerStructure = props => {
   //Structure for the navigatin Drawer
-  toggleDrawer = (nP) => {
+  toggleDrawer = (navigationProps) => {
     //Props to open/close the drawer
-    nP.toggleDrawer();
+    navigationProps.toggleDrawer();
   };
     return (
       <View style={{ flexDirection: 'row' }}>
