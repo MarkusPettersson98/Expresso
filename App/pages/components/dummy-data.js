@@ -56,6 +56,29 @@ export const cappuccino = {
   volume: 500,
   id: 124
 }
+export const coffe =[
+    {
+        shop: 'Biblioteket',
+        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+    },
+    {
+        shop: 'Bulten',
+        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+    },
+    {
+        shop: 'Linsen',
+        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+    },
+    {
+        shop: 'Vera café',
+        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+    },    
+    {
+        shop: 'Bulten',
+        coffes: [{name1: 'Bryggkaffe', price1: 12}, {name2: 'Cappucino', price2: 15}] 
+    },
+
+];
 
 export const latte = {
   name: "Caffee Latte",
@@ -114,3 +137,4 @@ export const one_brygg_kaffe_one_cappuchino_in_cart = {
 };
 
 export default shops;
+
