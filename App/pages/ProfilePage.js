@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { AppRegistry, View, Text } from "react-native";
 
-export default class Screen2 extends Component {
+export default class ProfilePage extends Component {
     render() {
         return (
             <View>
