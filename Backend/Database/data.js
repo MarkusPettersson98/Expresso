@@ -36,7 +36,7 @@ const shops = [
     }
 ];
 
-const coffee = [
+const assortment = [
     {
         shop: "Biblioteket",
         coffees: [
@@ -76,5 +76,5 @@ const coffee = [
 
 module.exports = {
     shops: shops,
-    coffee: coffee
+    assortment: assortment
 };
