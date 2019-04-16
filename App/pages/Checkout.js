@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import {
-    AppRegistry,
-    View,
-    TouchableOpacity,
-    StyleSheet,
-    Text
-} from "react-native";
+import { AppRegistry, View, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default class AlignItemsBasics extends Component {
+export default class CheckoutPage extends Component {
     render() {
         return (
             <View style={styles.app}>
@@ -44,6 +38,3 @@ const styles = StyleSheet.create({
         color: "#004068"
     }
 });
-
-// skip this line if using Create React Native App
-AppRegistry.registerComponent("AwesomeProject", () => AlignItemsBasics);
