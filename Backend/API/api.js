@@ -32,7 +32,7 @@ const lookUpCoffee = (requestedShop) => {
     */
     const lookup = location => location.shop === requestedShop;
     const foundShop = coffee.find(lookup);
-    return foundShop.coffees;
+    return foundShop ? foundShop.coffees : false;
 };
 
 const detailsFromShop = (lookUp, req, res) => {
