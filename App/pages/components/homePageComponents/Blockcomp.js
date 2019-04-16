@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const Blockcomp = () => {
+export default (Blockcomp = () => {
     // Create a view for every available shop
     const ShopViews = shops.map((shop, index) => {
         return <ShopView key={index} name={shop.name} picture={shop.picture} />;
@@ -26,8 +26,6 @@ const Blockcomp = () => {
             {ShopViews}
         </ScrollView>
     );
-};
-
-export default Blockcomp;
+});
 
 AppRegistry.registerComponent("Blockcomp", Blockcomp);

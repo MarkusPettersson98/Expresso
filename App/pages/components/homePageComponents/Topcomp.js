@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import { AppRegistry, Image, StyleSheet, View } from "react-native";
 
-const Topcomp = () => {
+export default class Topcomp extends Component {
+    render() {
         return (
             <View style={styles.top}>
                 <Image
@@ -10,6 +11,7 @@ const Topcomp = () => {
                 />
             </View>
         );
+    }
 }
 const styles = StyleSheet.create({
     container: {
@@ -22,7 +24,5 @@ const styles = StyleSheet.create({
         backgroundColor: "#F0F7F4"
     }
 });
-
-export default Topcomp;
 
 AppRegistry.registerComponent("Topcomp", () => Topcomp);

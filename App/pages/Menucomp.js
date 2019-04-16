@@ -9,17 +9,23 @@ import Homepage from "./Homepage";
 import Profilepage from "./ProfilePage";
 import Loginpage from "./LoginPage";
 import Checkoutpage from "./Checkout";
-import CheckoutHeader from "./components/headerComponents/CheckoutHeaderIcon";
-import DrawerHeader from './components/headerComponents/DrawerHeaderIcon';
+import CheckoutHeader from "./components/headerComponents/Checkout";
+import DrawerHeader from "./components/headerComponents/Drawer";
 
-
-    /*  
+/*  
     Temporarily, all of the stackNavigators carry a checkoutScreen. 
     There is some documentation regarding defaultNavitationOptions which can be looked into,
     so that we dont need to fix the header and add the checkoutscreen navigation ability, however,
     I (robert) did to no real success without it being really buggy. 
     */
 
+// so that the colour of the header is located at one spot.
+const headerStyling = {
+    headerStyle: {
+        backgroundColor: "#F0F7F4"
+    },
+    headerTintColor: "#000"
+};
 
 const HomePage_StackNavigator = createStackNavigator({
     First: {
@@ -28,20 +34,15 @@ const HomePage_StackNavigator = createStackNavigator({
             title: "Home Screen",
             headerLeft: <DrawerHeader navigationProps={navigation} />,
             headerRight: <CheckoutHeader navigationProps={navigation} />,
-            headerStyle: {
-                backgroundColor: "#F0F7F4"
-            },
-            headerTintColor: "#000"
+
+            ...headerStyling
+            
         })
     },
     Checkout: {
         screen: Checkoutpage,
-        navigationOptions: () => ({
-            headerStyle: {
-                backgroundColor: "#F0F7F4"
-            },
-            headerTintColor: "#000"
-        })
+        navigationOptions: () => ({...headerStyling})
+
     }
 });
 
@@ -52,14 +53,14 @@ const ProfilePage_StackNavigator = createStackNavigator({
             title: "Profile Screen",
             headerLeft: <DrawerHeader navigationProps={navigation} />,
             headerRight: <CheckoutHeader navigationProps={navigation} />,
-            headerStyle: {
-                backgroundColor: "#F0F7F4"
-            },
-            headerTintColor: "#000"
+
+            ...headerStyling
         })
     },
     Checkout: {
-        screen: Checkoutpage
+        screen: Checkoutpage,
+        navigationOptions: () => ({...headerStyling})
+
     }
 });
 
@@ -70,14 +71,14 @@ const LoginScreen_StackNavigator = createStackNavigator({
             title: "Login Screen",
             headerLeft: <DrawerHeader navigationProps={navigation} />,
             headerRight: <CheckoutHeader navigationProps={navigation} />,
-            headerStyle: {
-                backgroundColor: "#F0F7F4"
-            },
-            headerTintColor: "#000"
+
+            ...headerStyling
         })
     },
     Checkout: {
-        screen: Checkoutpage
+        screen: Checkoutpage,
+        navigationOptions: () => ({...headerStyling})
+
     }
 });
 
