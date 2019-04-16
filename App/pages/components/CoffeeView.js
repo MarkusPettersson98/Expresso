@@ -3,29 +3,37 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 const styles = StyleSheet.create({
     item: {
+        flex: 1,
         height: 200,
         width: '50%',
         borderWidth: 10,
         justifyContent: 'center',
         borderColor: '#F0F7F4',
-        backgroundColor: 'black'
+        backgroundColor: 'brown',
+        alignItems: 'center',
+        borderRadius: 40,
     },
-    text: {
+    nameText: {
         fontWeight: 'bold',
         fontSize: 25,
         color: 'white',
-    }
+    },
+    priceText: {
+        fontWeight: 'bold',
+        fontSize: 25,
+        color: 'white',
+    },
 });
 
 
 const CoffeeView = ({ name, price }) => {
     return (
-        <View style = {styles.item}>
-            <TouchableOpacity>
-                <Text style={styles.text}>{price}</Text>
-                <Text style={styles.text}>{name}</Text>
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+            style = {styles.item}
+            activeOpacity = {0.8}>
+            <Text style={styles.nameText}>{name}</Text>
+            <Text style={styles.priceText}>{price}</Text>
+        </TouchableOpacity>
     );
 };
 

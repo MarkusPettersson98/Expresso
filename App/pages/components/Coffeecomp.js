@@ -9,10 +9,11 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
+        justifyContent: 'center',
         flexWrap: "wrap",
         backgroundColor: '#F0F7F4',
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
 });
 
