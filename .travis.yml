@@ -10,6 +10,6 @@ script:
     - npm run check-code
     - npm run test-with-cov
     - cd ../Backend
-    - npm test
+    - npm run test-with-cov
 notifications:
   email: false
