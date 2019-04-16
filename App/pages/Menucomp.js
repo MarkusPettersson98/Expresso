@@ -9,8 +9,8 @@ import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import Loginpage from './LoginPage';
 import Checkoutpage from './Checkout';
-import CheckoutHeader from './components/header/Checkout';
-import DrawerHeader from './components/header/Drawer';
+import CheckoutHeader from './components/header/CheckoutHeaderIcon';
+import DrawerHeader from './components/header/DrawerHeaderIcon';
 
 /*  
     Temporarily, all of the stackNavigators carry a checkoutScreen. 
