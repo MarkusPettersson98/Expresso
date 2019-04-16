@@ -55,7 +55,13 @@ const detailsFromShop = (lookUp, req, res) => {
 };
 
 module.exports = {
-    getAllShops: getAllShops,
-    getShop: getShop,
-    getCoffee: getCoffee
+    api: {
+        getAllShops: getAllShops,
+        getShop: getShop,
+        getCoffee: getCoffee,
+    },
+    testable: {
+        lookUpShop: lookUpShop,
+        lookUpCoffee: lookUpCoffee,
+    },
 };
