@@ -41,4 +41,6 @@ const shops = [
     },
 ];
 
+export const myCart = true;
+
 export default shops;
