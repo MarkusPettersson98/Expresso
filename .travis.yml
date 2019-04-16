@@ -9,5 +9,7 @@ script:
     - npm run check-eslint-config
     - npm run check-code
     - npm run test-with-cov
+    - cd ../Backend
+    - npm test
 notifications:
   email: false
