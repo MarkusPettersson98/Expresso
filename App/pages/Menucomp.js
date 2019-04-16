@@ -9,6 +9,8 @@ import {
 import Screen1 from './Homepage';
 import Screen2 from './Screen2';
 import Screen3 from './Screen3';
+import CheckoutHeader from './components/headerComponents/Checkout';
+import DrawerHeader from './components/headerComponents/Drawer';
  
 const NavigationDrawerStructure = props => {
   //Structure for the navigatin Drawer
@@ -36,7 +38,8 @@ const FirstActivity_StackNavigator = createStackNavigator({
     screen: Screen1,
     navigationOptions: ({ navigation }) => ({
       title: 'Home Screen',
-      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerLeft: <DrawerHeader navigationProps={navigation} />,
+      headerRight: <CheckoutHeader navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: '#F0F7F4',
       },
@@ -51,7 +54,8 @@ const Screen2_StackNavigator = createStackNavigator({
     screen: Screen2,
     navigationOptions: ({ navigation }) => ({
       title: 'Screen 2',
-      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerLeft: <DrawerHeader navigationProps={navigation} />,
+      headerRight: <CheckoutHeader navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: '#F0F7F4',
       },
@@ -66,7 +70,8 @@ const Screen3_StackNavigator = createStackNavigator({
     screen: Screen3,
     navigationOptions: ({ navigation }) => ({
       title: 'Screen 3',
-      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerLeft: <DrawerHeader navigationProps={navigation} />,
+      headerRight: <CheckoutHeader navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: '#F0F7F4',
       },

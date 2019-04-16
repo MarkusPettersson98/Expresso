@@ -9,7 +9,7 @@ import Checkout from './components/headerComponents/Checkout';
 
 
 export default class Homepage extends Component{
-    static navigationOptions = ({navigation}) => {
+   /* static navigationOptions = ({navigation}) => {
         return {
             headerLeft: <Drawer navigationProps={navigation} />,
             headerRight: <Checkout navigationProps={navigation} />,
@@ -17,7 +17,7 @@ export default class Homepage extends Component{
                 backgroundColor: "#F0F7F4"
             },
             headerTintColor: "#000"
-      }};
+      }};*/
 
 
     state = {

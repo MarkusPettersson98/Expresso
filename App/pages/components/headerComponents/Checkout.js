@@ -10,7 +10,7 @@ export default class Checkout extends React.Component {
     render() {
         return (
             <View style={{ flexDirection: "row", margin: 5 }}>
-                <TouchableOpacity onPress={() => this.props.navigationProps.navigate('Checkout')}>
+                <TouchableOpacity onPress={() => {console.log('hej'); this.props.navigationProps.navigate('Checkout')}}>
                     {/*Donute Button Image */}
                     <Ionicons name="ios-cart" size={32} />
                 </TouchableOpacity>
