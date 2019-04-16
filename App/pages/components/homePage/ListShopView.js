@@ -1,5 +1,5 @@
-import React from "react";
-import { ImageBackground, Text, View } from "react-native";
+import React from 'react';
+import { ImageBackground, Text, View } from 'react-native';
 
 const ShopView = ({ name, picture }) => {
     return (
@@ -22,19 +22,19 @@ const styles = {
         borderLeftWidth: 14,
         borderBottomWidth: 7,
         borderRightWidth: 14,
-        justifyContent: "center",
-        borderColor: "#F0F7F4",
-        backgroundColor: "black"
+        justifyContent: 'center',
+        borderColor: '#F0F7F4',
+        backgroundColor: 'black',
     },
     text: {
-        fontWeight: "bold",
+        fontWeight: 'bold',
         fontSize: 25,
-        color: "white"
+        color: 'white',
     },
     image: {
-        width: "100%",
-        height: "100%"
-    }
+        width: '100%',
+        height: '100%',
+    },
 };
 
 export default ShopView;

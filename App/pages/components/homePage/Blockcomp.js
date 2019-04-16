@@ -1,18 +1,18 @@
-import React from "react";
-import { AppRegistry, ScrollView, StyleSheet } from "react-native";
+import React from 'react';
+import { AppRegistry, ScrollView, StyleSheet } from 'react-native';
 
-import { default as ShopView } from "./BlockShopView.js";
-import shops from "../dummy-data";
+import { default as ShopView } from './BlockShopView.js';
+import shops from '../dummy-data';
 
 const styles = StyleSheet.create({
     container: {
-        width: "100%",
+        width: '100%',
         flex: 1,
-        flexDirection: "row",
-        flexWrap: "wrap",
-        backgroundColor: "#F0F7F4",
-        alignItems: "flex-start"
-    }
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        backgroundColor: '#F0F7F4',
+        alignItems: 'flex-start',
+    },
 });
 
 export default (Blockcomp = () => {
@@ -28,4 +28,4 @@ export default (Blockcomp = () => {
     );
 });
 
-AppRegistry.registerComponent("Blockcomp", Blockcomp);
+AppRegistry.registerComponent('Blockcomp', Blockcomp);

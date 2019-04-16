@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { StyleSheet, Button, View } from "react-native";
-import Topcomp from "./components/homePage/Topcomp";
-import Maincomp from "./components/homePage/Maincomp";
-import Blockcomp from "./components/homePage/Blockcomp";
-import Mapcomp from "./components/homePage/Mapcomp";
+import React, { Component } from 'react';
+import { StyleSheet, Button, View } from 'react-native';
+import Topcomp from './components/homePage/Topcomp';
+import Maincomp from './components/homePage/Maincomp';
+import Blockcomp from './components/homePage/Blockcomp';
+import Mapcomp from './components/homePage/Mapcomp';
 
 export default class Homepage extends Component {
     state = {
-        toggle: "LV"
+        toggle: 'LV',
     };
-    _pressLV = () => this.setState({ toggle: "LV" });
-    _pressBV = () => this.setState({ toggle: "BV" });
-    _pressMV = () => this.setState({ toggle: "MV" });
+    _pressLV = () => this.setState({ toggle: 'LV' });
+    _pressBV = () => this.setState({ toggle: 'BV' });
+    _pressMV = () => this.setState({ toggle: 'MV' });
 
     render() {
         return (
@@ -38,9 +38,9 @@ export default class Homepage extends Component {
                     />
                 </View>
 
-                {this.state.toggle == "LV" && <Maincomp />}
-                {this.state.toggle == "BV" && <Blockcomp />}
-                {this.state.toggle == "MV" && <Mapcomp />}
+                {this.state.toggle == 'LV' && <Maincomp />}
+                {this.state.toggle == 'BV' && <Blockcomp />}
+                {this.state.toggle == 'MV' && <Mapcomp />}
             </View>
         );
     }
@@ -48,20 +48,20 @@ export default class Homepage extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     butcontainer: {
-        height: "5%",
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        backgroundColor: "#F0F7F4",
-        borderBottomWidth: 5
+        height: '5%',
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        backgroundColor: '#F0F7F4',
+        borderBottomWidth: 5,
     },
     item: {
-        width: "33%",
-        justifyContent: "center",
-        backgroundColor: "#F0F7F4",
-        textDecorationLine: "none"
-    }
+        width: '33%',
+        justifyContent: 'center',
+        backgroundColor: '#F0F7F4',
+        textDecorationLine: 'none',
+    },
 });

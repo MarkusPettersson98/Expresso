@@ -1,7 +1,6 @@
-import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-
+import React, { Component } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 // returns the empty checkout view
 const EmptyCheckout = () => {
@@ -25,18 +24,18 @@ export default EmptyCheckout;
 const styles = StyleSheet.create({
     app: {
         flex: 1,
-        alignItems: "stretch"
+        alignItems: 'stretch',
     },
     content: {
         flex: 1,
-        backgroundColor: "white",
-        alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap"
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
     },
     text: {
         fontSize: 30,
-        fontWeight: "bold",
-        color: "#004068"
-    }
+        fontWeight: 'bold',
+        color: '#004068',
+    },
 });

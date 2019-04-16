@@ -1,6 +1,6 @@
-import React from "react";
-import { View, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { View, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const Drawer = props => {
     //Structure for the navigatin Drawer
@@ -9,7 +9,7 @@ const Drawer = props => {
         navigationProps.toggleDrawer();
     };
     return (
-        <View style={{ flexDirection: "row", margin: 5 }}>
+        <View style={{ flexDirection: 'row', margin: 5 }}>
             <TouchableOpacity
                 onPress={() => toggleDrawer(props.navigationProps)}
             >
