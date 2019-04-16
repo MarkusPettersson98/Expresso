@@ -80,7 +80,6 @@ export const coffee =[
 
 ];
 
-<<<<<<< HEAD
 export const latte = {
   name: "Caffee Latte",
   price: 28,
@@ -138,6 +137,4 @@ export const one_brygg_kaffe_one_cappuchino_in_cart = {
 };
 
 export default shops;
-=======
->>>>>>> CoffeView
 
