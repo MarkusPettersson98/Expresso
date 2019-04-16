@@ -23,7 +23,8 @@ const lookUpShop = (requestedShop) => {
       Return all available information about requested shop
     */
     const lookup = shop => shop.name === requestedShop;
-    return shops.find(lookup);
+    const foundShop = shops.find(lookup);
+    return foundShop ? foundShop : false;
 };
 
 const lookUpCoffee = (requestedShop) => {
