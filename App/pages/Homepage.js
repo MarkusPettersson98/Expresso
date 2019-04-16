@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Button, View } from "react-native";
-import Topcomp from "./components/Topcomp";
-import Maincomp from "./components/Maincomp";
-import Blockcomp from "./components/Blockcomp";
-import Mapcomp from "./components/Mapcomp";
+import { StyleSheet, Button, View } from "react-native";
+import Topcomp from "./components/homePageComponents/Topcomp";
+import Maincomp from "./components/homePageComponents/Maincomp";
+import Blockcomp from "./components/homePageComponents/Blockcomp";
+import Mapcomp from "./components/homePageComponents/Mapcomp";
 
 export default class Homepage extends Component {
     state = {

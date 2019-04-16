@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import { AppRegistry, View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default class CheckoutPage extends Component {
+
+
+    componentDidMount() {
+        console.log('enter checkout');
+        // check if the cart is empty or not, and conditionally render empty or not
+    }
+
+    componentWillUnmount() {
+        console.log('exit checkout');
+    }
+
     render() {
         return (
             <View style={styles.app}>

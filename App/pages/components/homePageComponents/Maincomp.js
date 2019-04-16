@@ -2,7 +2,7 @@ import React from 'react';
 import {AppRegistry, ScrollView} from 'react-native';
 
 import {default as ShopView} from './ListShopView';
-import shops from './dummy-data';
+import shops from '../dummy-data';
 
 
 export default Maincomp = (props) => {

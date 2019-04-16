@@ -1,8 +1,8 @@
 import React from 'react';
-import {AppRegistry, ScrollView, StyleSheet, ImageBackground, Text, View} from 'react-native';
+import {AppRegistry, ScrollView, StyleSheet} from 'react-native';
 
 import {default as ShopView} from "./BlockShopView.js";
-import shops from "./dummy-data";
+import shops from "../dummy-data";
 
 
 const styles = StyleSheet.create({
