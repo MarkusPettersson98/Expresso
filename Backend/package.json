@@ -5,11 +5,13 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test-with-cov": "jest && codecov"
   },
-  "keywords": [
-    "personal"
-  ],
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
   "author": "Markus Pettersson",
   "license": "ISC",
   "dependencies": {
@@ -19,6 +21,8 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "codecov": "^3.3.0",
+    "jest": "^24.7.1",
     "nodemon": "^1.18.10"
   }
 }
