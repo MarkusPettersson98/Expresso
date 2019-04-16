@@ -25,10 +25,16 @@ const styles = StyleSheet.create({
     },
 });
 
+const getCoffeButtonHandler = () => {
+
+    console.log("test");
+}
+
+
 
 const CoffeeView = ({ name, price }) => {
     return (
-        <TouchableOpacity
+        <TouchableOpacity onPress={getCoffeButtonHandler}
             style = {styles.item}
             activeOpacity = {0.8}>
             <Text style={styles.nameText}>{name}</Text>
