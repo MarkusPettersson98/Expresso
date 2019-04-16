@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { AppRegistry, StyleSheet, View } from "react-native";
-import MapView from "react-native-maps";
-import shops from "./dummy-data";
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, View } from 'react-native';
+import MapView from 'react-native-maps';
+import shops from '../dummy-data';
 
 export default class Mapcomp extends Component {
     constructor() {
@@ -14,11 +14,11 @@ export default class Mapcomp extends Component {
                         title={shop.name}
                         coordinate={{
                             latitude: shop.coordinates.latitude,
-                            longitude: shop.coordinates.longitude
+                            longitude: shop.coordinates.longitude,
                         }}
                     />
                 );
-            })
+            }),
         };
     }
 
@@ -31,7 +31,7 @@ export default class Mapcomp extends Component {
                         latitude: 57.689388,
                         longitude: 11.977315,
                         latitudeDelta: 0.1,
-                        longitudeDelta: 0.1
+                        longitudeDelta: 0.1,
                     }}
                 >
                     {this.state.markers}
@@ -42,23 +42,23 @@ export default class Mapcomp extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        width: "100%",
-        height: "85%",
+        width: '100%',
+        height: '85%',
         //borderTopWidth: 5,
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
-        justifyContent: "flex-end",
-        alignItems: "center"
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
     map: {
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         bottom: 0,
-        right: 0
-    }
+        right: 0,
+    },
 });
 
-AppRegistry.registerComponent("Mapcomp", () => Mapcomp);
+AppRegistry.registerComponent('Mapcomp', () => Mapcomp);

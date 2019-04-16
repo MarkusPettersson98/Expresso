@@ -1,12 +1,14 @@
 import React from 'react';
-import {ImageBackground, Text, View} from 'react-native';
+import { ImageBackground, Text, View } from 'react-native';
 
-const ShopView = ({name, picture}) => {
+const ShopView = ({ name, picture }) => {
     return (
-        <View style = {styles.item}>
-            <ImageBackground source = {picture}
-                             resizeMode = 'cover'
-                             style={styles.image}>
+        <View style={styles.item}>
+            <ImageBackground
+                source={picture}
+                resizeMode="cover"
+                style={styles.image}
+            >
                 <Text style={styles.text}>{name}</Text>
             </ImageBackground>
         </View>
@@ -22,7 +24,7 @@ const styles = {
         borderRightWidth: 14,
         justifyContent: 'center',
         borderColor: '#F0F7F4',
-        backgroundColor: 'black'
+        backgroundColor: 'black',
     },
     text: {
         fontWeight: 'bold',

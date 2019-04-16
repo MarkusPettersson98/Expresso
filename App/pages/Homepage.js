@@ -1,28 +1,41 @@
-import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, State, Button, View} from 'react-native';
-import Topcomp from './components/Topcomp';
-import Maincomp from './components/Maincomp';
-import Blockcomp from './components/Blockcomp';
-import Mapcomp from './components/Mapcomp';
+import React, { Component } from 'react';
+import { StyleSheet, Button, View } from 'react-native';
+import Topcomp from './components/homePage/Topcomp';
+import Maincomp from './components/homePage/Maincomp';
+import Blockcomp from './components/homePage/Blockcomp';
+import Mapcomp from './components/homePage/Mapcomp';
 
-
-export default class Homepage extends Component{
+export default class Homepage extends Component {
     state = {
-        toggle: 'LV'
-    }
-    _pressLV = () => this.setState({ toggle: 'LV' })
-    _pressBV = () => this.setState({ toggle: 'BV' })
-    _pressMV = () => this.setState({ toggle: 'MV' })
+        toggle: 'LV',
+    };
+    _pressLV = () => this.setState({ toggle: 'LV' });
+    _pressBV = () => this.setState({ toggle: 'BV' });
+    _pressMV = () => this.setState({ toggle: 'MV' });
 
-    render(){
-        const {toggle} = this.state;
-        return(
-            <View style = {styles.container}>
+    render() {
+        return (
+            <View style={styles.container}>
                 <Topcomp />
-                <View style = {styles.butcontainer}>
-                    <Button title = 'List' style = {styles.item} onPress = {this._pressLV} color = 'black'/>
-                    <Button title = 'Block' style = {styles.item} onPress = {this._pressBV} color = 'black'/>
-                    <Button title = 'Map' style = {styles.item} onPress = {this._pressMV} color = 'black'/>
+                <View style={styles.butcontainer}>
+                    <Button
+                        title="List"
+                        style={styles.item}
+                        onPress={this._pressLV}
+                        color="black"
+                    />
+                    <Button
+                        title="Block"
+                        style={styles.item}
+                        onPress={this._pressBV}
+                        color="black"
+                    />
+                    <Button
+                        title="Map"
+                        style={styles.item}
+                        onPress={this._pressMV}
+                        color="black"
+                    />
                 </View>
 
                 {this.state.toggle == 'LV' && <Maincomp />}
@@ -50,8 +63,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#F0F7F4',
         textDecorationLine: 'none',
-
-    }
-})
-
-AppRegistry.registerComponent('Homepage', () => Homepage);
+    },
+});
