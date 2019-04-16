@@ -9,16 +9,6 @@ import Checkout from './components/headerComponents/Checkout';
 
 
 export default class Homepage extends Component{
-   /* static navigationOptions = ({navigation}) => {
-        return {
-            headerLeft: <Drawer navigationProps={navigation} />,
-            headerRight: <Checkout navigationProps={navigation} />,
-            headerStyle: {
-                backgroundColor: "#F0F7F4"
-            },
-            headerTintColor: "#000"
-      }};*/
-
 
     state = {
         toggle: 'LV'

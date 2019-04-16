@@ -6,9 +6,10 @@ import {
   createAppContainer,
 } from 'react-navigation';
  
-import Screen1 from './Homepage';
+import Homepage from './Homepage';
 import Screen2 from './Screen2';
 import Screen3 from './Screen3';
+import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/headerComponents/Checkout';
 import DrawerHeader from './components/headerComponents/Drawer';
  
@@ -35,7 +36,7 @@ const NavigationDrawerStructure = props => {
 const FirstActivity_StackNavigator = createStackNavigator({
   //All the screen from the Screen1 will be indexed here
   First: {
-    screen: Screen1,
+    screen: Homepage,
     navigationOptions: ({ navigation }) => ({
       title: 'Home Screen',
       headerLeft: <DrawerHeader navigationProps={navigation} />,
@@ -46,6 +47,9 @@ const FirstActivity_StackNavigator = createStackNavigator({
       headerTintColor: '#000',
     }),
   },
+  Checkout: {
+    screen: Checkoutpage
+  }
 });
  
 const Screen2_StackNavigator = createStackNavigator({
@@ -53,7 +57,7 @@ const Screen2_StackNavigator = createStackNavigator({
   Second: {
     screen: Screen2,
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 2',
+      title: 'Profile Screen',
       headerLeft: <DrawerHeader navigationProps={navigation} />,
       headerRight: <CheckoutHeader navigationProps={navigation} />,
       headerStyle: {
@@ -62,6 +66,9 @@ const Screen2_StackNavigator = createStackNavigator({
       headerTintColor: '#000',
     }),
   },
+  Checkout: {
+    screen: Checkoutpage
+  }
 });
  
 const Screen3_StackNavigator = createStackNavigator({
@@ -69,7 +76,7 @@ const Screen3_StackNavigator = createStackNavigator({
   Third: {
     screen: Screen3,
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 3',
+      title: 'Login Screen',
       headerLeft: <DrawerHeader navigationProps={navigation} />,
       headerRight: <CheckoutHeader navigationProps={navigation} />,
       headerStyle: {
@@ -78,6 +85,9 @@ const Screen3_StackNavigator = createStackNavigator({
       headerTintColor: '#000',
     }),
   },
+  Checkout: {
+    screen: Checkoutpage
+  }
 });
  
 const DrawerNavigatorExample = createDrawerNavigator({
