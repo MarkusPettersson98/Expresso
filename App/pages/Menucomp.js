@@ -12,8 +12,16 @@ import Checkoutpage from "./Checkout";
 import CheckoutHeader from "./components/headerComponents/Checkout";
 import DrawerHeader from "./components/headerComponents/Drawer";
 
+
+    /*  
+    Temporarily, all of the stackNavigators carry a checkoutScreen. 
+    There is some documentation regarding defaultNavitationOptions which can be looked into,
+    so that we dont need to fix the header and add the checkoutscreen navigation ability, however,
+    I (robert) did to no real success without it being really buggy. 
+    */
+
+
 const HomePage_StackNavigator = createStackNavigator({
-    //All the screen from the Screen1 will be indexed here
     First: {
         screen: Homepage,
         navigationOptions: ({ navigation }) => ({
@@ -32,7 +40,6 @@ const HomePage_StackNavigator = createStackNavigator({
 });
 
 const ProfilePage_StackNavigator = createStackNavigator({
-    //All the screen from the Screen2 will be indexed here
     Second: {
         screen: Profilepage,
         navigationOptions: ({ navigation }) => ({
@@ -51,7 +58,6 @@ const ProfilePage_StackNavigator = createStackNavigator({
 });
 
 const LoginScreen_StackNavigator = createStackNavigator({
-    //All the screen from the Screen3 will be indexed here
     Third: {
         screen: Loginpage,
         navigationOptions: ({ navigation }) => ({
