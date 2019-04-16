@@ -1,12 +1,25 @@
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, State, Button, View} from 'react-native';
+import {AppRegistry, StyleSheet, State, Button, View, TouchableOpacity} from 'react-native';
 import Topcomp from './components/Topcomp';
 import Maincomp from './components/Maincomp';
 import Blockcomp from './components/Blockcomp';
 import Mapcomp from './components/Mapcomp';
+import Drawer from './components/headerComponents/Drawer';
+import Checkout from './components/headerComponents/Checkout';
 
 
 export default class Homepage extends Component{
+    static navigationOptions = ({navigation}) => {
+        return {
+            headerLeft: <Drawer navigationProps={navigation} />,
+            headerRight: <Checkout navigationProps={navigation} />,
+            headerStyle: {
+                backgroundColor: "#F0F7F4"
+            },
+            headerTintColor: "#000"
+      }};
+
+
     state = {
         toggle: 'LV'
     }
@@ -15,7 +28,6 @@ export default class Homepage extends Component{
     _pressMV = () => this.setState({ toggle: 'MV' })
 
     render(){
-        const {toggle} = this.state;
         return(
             <View style = {styles.container}>
                 <Topcomp />
