@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { AppRegistry, View, Text } from "react-native";
 
-export default class Screen2 extends Component {
-    render() {
-        return (
-            <View>
-                <Text>Profile</Text>
-            </View>
-        );
-    }
-}
+export default (ProfilePage = () => {
+    return (
+        <View>
+            <Text>Profile</Text>
+        </View>
+    );
+});

@@ -4,7 +4,7 @@ import { AppRegistry, ScrollView } from "react-native";
 import { default as ShopView } from "./ListShopView";
 import shops from "../dummy-data";
 
-export default (Maincomp = props => {
+const Maincomp = () => {
     const ShopViews = shops.map((shop, index) => {
         return <ShopView key={index} name={shop.name} picture={shop.picture} />;
     });
@@ -14,7 +14,7 @@ export default (Maincomp = props => {
             {ShopViews}
         </ScrollView>
     );
-});
+};
 
 const styles = {
     container: {
@@ -24,5 +24,7 @@ const styles = {
         justifyContent: "center"
     }
 };
+
+export default Maincomp;
 
 AppRegistry.registerComponent("Maincomp", Maincomp);

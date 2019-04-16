@@ -9,8 +9,8 @@ import Homepage from "./Homepage";
 import Profilepage from "./ProfilePage";
 import Loginpage from "./LoginPage";
 import Checkoutpage from "./Checkout";
-import CheckoutHeader from "./components/headerComponents/Checkout";
-import DrawerHeader from "./components/headerComponents/Drawer";
+import CheckoutHeader from "./components/headerComponents/CheckoutHeaderIcon";
+import DrawerHeader from './components/headerComponents/DrawerHeaderIcon';
 
 
     /*  
@@ -35,7 +35,13 @@ const HomePage_StackNavigator = createStackNavigator({
         })
     },
     Checkout: {
-        screen: Checkoutpage
+        screen: Checkoutpage,
+        navigationOptions: () => ({
+            headerStyle: {
+                backgroundColor: "#F0F7F4"
+            },
+            headerTintColor: "#000"
+        })
     }
 });
 
