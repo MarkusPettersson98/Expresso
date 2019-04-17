@@ -2,12 +2,12 @@ import { combineReducers } from 'redux'
 import { CART_ADD_COFFEE, ITEM_DECREMENT, ITEM_INCREMENT } from './actions'
 import { brygg_kaffe } from '../dummy-data';
 
-const INITIAL_STATE = [brygg_kaffe]
+const INITIAL_STATE = [{coffee : brygg_kaffe, amount: 1}]
 
 function cart(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CART_ADD_COFFEE:
-      return [...state, action.coffee]
+      return [...state, {coffee: action.coffee, amount: 1}]
 
     case ITEM_INCREMENT:
       // find item, increment the counter.

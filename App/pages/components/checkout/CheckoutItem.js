@@ -6,6 +6,7 @@ import { incrementCoffee } from '../redux/actions';
 
 
 const CheckoutItem = props => {
+    const coffee = props.cart[0].coffee;
     return (
         <View
             style={{
@@ -30,7 +31,7 @@ const CheckoutItem = props => {
                     flex: 4,
                 }}
             >
-                <Text style={styles.titleText}>{props.name}</Text>
+                <Text style={styles.titleText}>{coffee.name}</Text>
                 <Text style={styles.descText}>Egen mugg</Text>
                 <View
                     style={{
@@ -39,7 +40,7 @@ const CheckoutItem = props => {
                         marginTop: 15,
                     }}
                 >
-                    <TouchableOpacity className = 'decrement coffee amount' onPress={() => console.log('decrement listitem with id:', props.id)}>
+                    <TouchableOpacity className = 'decrement coffee amount' onPress={() => console.log(props)}>
                         <AntDesign
                             name="minuscircleo"
                             size={20}
@@ -49,7 +50,7 @@ const CheckoutItem = props => {
 
                     <Text style={styles.numberText}>1</Text>
 
-                    <TouchableOpacity className = 'increment coffee amount' onPress={() => props.onIncrementCoffee(props.id)}>
+                    <TouchableOpacity className = 'increment coffee amount' onPress={() => props.onIncrementCoffee(coffee.id)}>
                         <AntDesign
                             name="pluscircleo"
                             size={20}
@@ -64,7 +65,7 @@ const CheckoutItem = props => {
                     alignItems: 'flex-end',
                 }}
             >
-                <Text style={styles.priceText}>{`${props.price} kr`}</Text>
+                <Text style={styles.priceText}>{`${coffee.price} kr`}</Text>
             </View>
         </View>
     );
