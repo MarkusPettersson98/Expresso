@@ -7,7 +7,7 @@ export default class Topcomp extends Component {
             <View style={styles.top}>
                 <Image
                     style={{ width: '85%', height: '80%', top: '15%' }}
-                    source={require('../resources/ExpressoLogo.psd')}
+                    source={require('../resources/ExpressoTransp.png')}
                 />
             </View>
         );
