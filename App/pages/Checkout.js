@@ -21,12 +21,12 @@ const CheckoutPage = (props) => {
             justifyContent: 'center',
           }}>
             <TouchableOpacity onPress={() => props.onAddItem()}>
-                <AntDesign name="pluscircle" size={32} />
+                <AntDesign name="pluscircle" size={32} color='#57454B' />
             </TouchableOpacity>
           </View>
 
           <View style={{
-            flex: 3,
+            flex: 6,
             alignItems: 'center',
           }}>
             {!props.cart.length && (<Text>Empty cart</Text>)}

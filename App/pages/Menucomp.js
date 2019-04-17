@@ -12,11 +12,11 @@ import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/Checkout';
 import DrawerHeader from './components/header/Drawer';
 
-/*  
-    Temporarily, all of the stackNavigators carry a checkoutScreen. 
+/*
+    Temporarily, all of the stackNavigators carry a checkoutScreen.
     There is some documentation regarding defaultNavitationOptions which can be looked into,
     so that we dont need to fix the header and add the checkoutscreen navigation ability, however,
-    I (robert) did to no real success without it being really buggy. 
+    I (robert) did to no real success without it being really buggy.
     */
 
 // so that the colour of the header is located at one spot.
@@ -40,7 +40,7 @@ const HomePage_StackNavigator = createStackNavigator({
     },
     Checkout: {
         screen: Checkoutpage,
-        navigationOptions: () => ({ ...headerStyling }),
+        navigationOptions: () => ({ title: 'Varukorg', ...headerStyling }),
     },
 });
 
@@ -57,7 +57,7 @@ const ProfilePage_StackNavigator = createStackNavigator({
     },
     Checkout: {
         screen: Checkoutpage,
-        navigationOptions: () => ({ ...headerStyling }),
+        navigationOptions: () => ({ title: 'Varukorg', ...headerStyling }),
     },
 });
 
@@ -74,7 +74,7 @@ const LoginScreen_StackNavigator = createStackNavigator({
     },
     Checkout: {
         screen: Checkoutpage,
-        navigationOptions: () => ({ ...headerStyling }),
+        navigationOptions: () => ({ title: 'Varukorg', ...headerStyling }),
     },
 });
 
