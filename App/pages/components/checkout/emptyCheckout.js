@@ -10,7 +10,7 @@ const EmptyCheckout = () => {
                 <Ionicons
                     name="ios-cafe"
                     size={256}
-                    color="#005073"
+                    color="#57454B"
                     ios="ios-cafe"
                 />
                 <Text style={styles.text}>Du har inte beställt kaffe</Text>
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 30,
         fontWeight: 'bold',
-        color: '#004068',
+        color: '#57454B',
     },
 });

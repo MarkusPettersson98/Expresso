@@ -71,7 +71,9 @@ const CheckoutItem = props => {
                 }}
             >
                 <Text style={styles.priceText}>{`${
-                    orderItem.coffee.price
+                    orderItem.amount < 0
+                        ? 0
+                        : orderItem.amount * orderItem.coffee.price
                 } kr`}</Text>
             </View>
         </View>

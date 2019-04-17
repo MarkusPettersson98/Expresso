@@ -10,7 +10,7 @@ import EmptycheckoutPage from './components/checkout/emptyCheckout.js';
 import CheckoutItem from './components/checkout/CheckoutItem'
 
 const CheckoutPage = (props) => {
-    // TODO: Change myCart to be dependent on a global state instead of dummy-data
+    // TODO: rewrite the rendering of items using amount, we should probably delete items with amount < 0, but allow items with 0 amount
     return (
         <View style={{
           flex: 1,
@@ -29,7 +29,7 @@ const CheckoutPage = (props) => {
             flex: 6,
             alignItems: 'center',
           }}>
-            {!props.cart.length && (<Text>Empty cart</Text>)}
+            {!props.cart.length && (<EmptycheckoutPage/>)}
             {props.cart.map((orderItem, i) => (
                 <CheckoutItem key={i} orderItem={orderItem} />
             ))}
