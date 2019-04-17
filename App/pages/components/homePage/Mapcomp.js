@@ -3,43 +3,37 @@ import { AppRegistry, StyleSheet, View } from 'react-native';
 import MapView from 'react-native-maps';
 import shops from '../dummy-data';
 
-export default class Mapcomp extends Component {
-    constructor() {
-        super();
-        this.state = {
-            markers: shops.map((shop, index) => {
-                return (
-                    <MapView.Marker
-                        key={index}
-                        title={shop.name}
-                        coordinate={{
-                            latitude: shop.coordinates.latitude,
-                            longitude: shop.coordinates.longitude,
-                        }}
-                    />
-                );
-            }),
-        };
-    }
-
-    render() {
+export default Mapcomp = () => {
+    const markers = shops.map((shop, index) => {
         return (
-            <View style={styles.container}>
-                <MapView
-                    style={styles.map}
-                    region={{
-                        latitude: 57.689388,
-                        longitude: 11.977315,
-                        latitudeDelta: 0.1,
-                        longitudeDelta: 0.1,
-                    }}
-                >
-                    {this.state.markers}
-                </MapView>
-            </View>
+            <MapView.Marker
+                key={index}
+                title={shop.name}
+                coordinate={{
+                    latitude: shop.coordinates.latitude,
+                    longitude: shop.coordinates.longitude,
+                }}
+            />
         );
-    }
+    });
+
+    return (
+        <View style={styles.container}>
+            <MapView
+                style={styles.map}
+                region={{
+                    latitude: 57.689388,
+                    longitude: 11.977315,
+                    latitudeDelta: 0.1,
+                    longitudeDelta: 0.1,
+                }}
+            >
+                {markers}
+            </MapView>
+        </View>
+    );
 }
+
 const styles = StyleSheet.create({
     container: {
         width: '100%',
