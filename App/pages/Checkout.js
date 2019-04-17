@@ -28,6 +28,7 @@ const CheckoutPage = (props) => {
             flex: 3,
             alignItems: 'center',
           }}>
+            {!props.cart.length && (<Text>Empty cart</Text>)}
             {props.cart.map((coffee, i) => (
                 <Text key={i}>{`Coffee: ${coffee.name}, Price: ${coffee.price}`}</Text>
             ))}
