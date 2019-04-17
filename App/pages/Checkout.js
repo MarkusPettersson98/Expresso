@@ -1,18 +1,51 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { myCart } from './components/dummy-data';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { brygg_kaffe } from './components/dummy-data';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { AntDesign } from '@expo/vector-icons';
+import { addCoffee } from './components/redux/actions'
 
 import EmptycheckoutPage from './components/checkout/emptyCheckout.js';
 
-const CheckoutPage = () => {
+const CheckoutPage = (props) => {
     // TODO: Change myCart to be dependent on a global state instead of dummy-data
-    return myCart ? (
-        <EmptycheckoutPage />
-    ) : (
-        <View>
-            <Text> The actual CheckoutPage </Text>
+    return (
+        <View style={{
+          flex: 1,
+        }}>
+          <View style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <TouchableOpacity onPress={() => props.onAddItem()}>
+                <AntDesign name="pluscircle" size={32} />
+            </TouchableOpacity>
+          </View>
+
+          <View style={{
+            flex: 3,
+            alignItems: 'center',
+          }}>
+            {props.cart.map((coffee, i) => (
+                <Text key={i}>{`Coffee: ${coffee.name}, Price: ${coffee.price}`}</Text>
+            ))}
+          </View>
         </View>
     );
 };
 
-export default CheckoutPage;
+const mapStateToProps = state => {
+  return { cart: state.cart }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddItem: () => {
+      dispatch(addCoffee(brygg_kaffe))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);

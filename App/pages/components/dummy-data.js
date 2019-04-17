@@ -43,4 +43,11 @@ const shops = [
 
 export const myCart = true;
 
+export const brygg_kaffe = {
+  name: "Bryggkaffe",
+  price: 12,
+  volume: 330,
+  id: 123
+}
+
 export default shops;
