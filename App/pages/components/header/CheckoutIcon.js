@@ -8,7 +8,11 @@ const Checkout = props => {
             <TouchableOpacity
                 onPress={() => props.navigationProps.navigate('Checkout')}
             >
-                <Ionicons name="ios-cart" size={32} />
+                <Ionicons
+                    name="ios-cart"
+                    size={props.styling.size}
+                    color={props.styling.color}
+                />
             </TouchableOpacity>
         </View>
     );

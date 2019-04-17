@@ -9,8 +9,8 @@ import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import Loginpage from './LoginPage';
 import Checkoutpage from './Checkout';
-import CheckoutHeader from './components/header/Checkout';
-import DrawerHeader from './components/header/Drawer';
+import CheckoutHeader from './components/header/CheckoutIcon';
+import DrawerHeader from './components/header/DrawerIcon';
 
 /*
     Temporarily, all of the stackNavigators carry a checkoutScreen.
@@ -20,11 +20,18 @@ import DrawerHeader from './components/header/Drawer';
     */
 
 // so that the colour of the header is located at one spot.
+
 const headerStyling = {
     headerStyle: {
-        backgroundColor: '#F0F7F4',
+        backgroundColor: '#57454B',
     },
-    headerTintColor: '#000',
+    headerTintColor: '#fff',
+};
+
+// determines icon sizes and color
+const headerIconStyling = {
+    size: 32,
+    color: '#F0F7F4',
 };
 
 const HomePage_StackNavigator = createStackNavigator({
@@ -32,8 +39,18 @@ const HomePage_StackNavigator = createStackNavigator({
         screen: Homepage,
         navigationOptions: ({ navigation }) => ({
             title: 'Home Screen',
-            headerLeft: <DrawerHeader navigationProps={navigation} />,
-            headerRight: <CheckoutHeader navigationProps={navigation} />,
+            headerLeft: (
+                <DrawerHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+            headerRight: (
+                <CheckoutHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
 
             ...headerStyling,
         }),
@@ -49,8 +66,18 @@ const ProfilePage_StackNavigator = createStackNavigator({
         screen: Profilepage,
         navigationOptions: ({ navigation }) => ({
             title: 'Profile Screen',
-            headerLeft: <DrawerHeader navigationProps={navigation} />,
-            headerRight: <CheckoutHeader navigationProps={navigation} />,
+            headerLeft: (
+                <DrawerHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+            headerRight: (
+                <CheckoutHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
 
             ...headerStyling,
         }),
@@ -66,8 +93,18 @@ const LoginScreen_StackNavigator = createStackNavigator({
         screen: Loginpage,
         navigationOptions: ({ navigation }) => ({
             title: 'Login Screen',
-            headerLeft: <DrawerHeader navigationProps={navigation} />,
-            headerRight: <CheckoutHeader navigationProps={navigation} />,
+            headerLeft: (
+                <DrawerHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+            headerRight: (
+                <CheckoutHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
 
             ...headerStyling,
         }),
