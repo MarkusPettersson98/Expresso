@@ -31,7 +31,7 @@ const CheckoutPage = (props) => {
           }}>
             {!props.cart.length && (<Text>Empty cart</Text>)}
             {props.cart.map((coffee, i) => (
-                <CheckoutItem key={i} name={coffee.name} price={coffee.price} />
+                <CheckoutItem key={i} id={coffee.id} name={coffee.name} price={coffee.price} />
             ))}
           </View>
         </View>
