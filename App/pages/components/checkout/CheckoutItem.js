@@ -2,11 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-import { incrementCoffee } from '../redux/actions';
-
+import { incrementCoffee, decrementCoffee } from '../redux/actions';
 
 const CheckoutItem = props => {
-    const coffee = props.cart[0].coffee;
+    const orderItem = props.orderItem;
     return (
         <View
             style={{
@@ -31,7 +30,7 @@ const CheckoutItem = props => {
                     flex: 4,
                 }}
             >
-                <Text style={styles.titleText}>{coffee.name}</Text>
+                <Text style={styles.titleText}>{orderItem.coffee.name}</Text>
                 <Text style={styles.descText}>Egen mugg</Text>
                 <View
                     style={{
@@ -40,7 +39,10 @@ const CheckoutItem = props => {
                         marginTop: 15,
                     }}
                 >
-                    <TouchableOpacity className = 'decrement coffee amount' onPress={() => console.log(props)}>
+                    <TouchableOpacity
+                        className="decrement coffee amount"
+                        onPress={() => props.onDecrementCoffee(orderItem)}
+                    >
                         <AntDesign
                             name="minuscircleo"
                             size={20}
@@ -48,9 +50,12 @@ const CheckoutItem = props => {
                         />
                     </TouchableOpacity>
 
-                    <Text style={styles.numberText}>1</Text>
+                    <Text style={styles.numberText}>{orderItem.amount}</Text>
 
-                    <TouchableOpacity className = 'increment coffee amount' onPress={() => props.onIncrementCoffee(coffee.id)}>
+                    <TouchableOpacity
+                        className="increment coffee amount"
+                        onPress={() => props.onIncrementCoffee(orderItem)}
+                    >
                         <AntDesign
                             name="pluscircleo"
                             size={20}
@@ -65,7 +70,9 @@ const CheckoutItem = props => {
                     alignItems: 'flex-end',
                 }}
             >
-                <Text style={styles.priceText}>{`${coffee.price} kr`}</Text>
+                <Text style={styles.priceText}>{`${
+                    orderItem.coffee.price
+                } kr`}</Text>
             </View>
         </View>
     );
@@ -95,15 +102,21 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  return { cart: state.cart }
+    return { cart: state.cart };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    onIncrementCoffee: (id) => {
-      dispatch(incrementCoffee(id))
-    }
-  }
-}
+    return {
+        onIncrementCoffee: orderItem => {
+            dispatch(incrementCoffee(orderItem));
+        },
+        onDecrementCoffee: orderItem => {
+            dispatch(decrementCoffee(orderItem));
+        },
+    };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckoutItem);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(CheckoutItem);

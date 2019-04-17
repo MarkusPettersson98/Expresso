@@ -16,8 +16,12 @@ export const ITEM_DECREMENT = 'ITEM_DECREMENT'
  * action creators
  */
 
-export function incrementCoffee(id) {
-  return {type: ITEM_INCREMENT, id}
+export function incrementCoffee(orderItem) {
+  return {type: ITEM_INCREMENT, ...orderItem}
+}
+
+export function decrementCoffee(orderItem) {
+  return {type: ITEM_DECREMENT, ...orderItem}
 }
 
 

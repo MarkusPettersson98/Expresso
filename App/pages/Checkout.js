@@ -11,7 +11,6 @@ import CheckoutItem from './components/checkout/CheckoutItem'
 
 const CheckoutPage = (props) => {
     // TODO: Change myCart to be dependent on a global state instead of dummy-data
-    console.log(props);
     return (
         <View style={{
           flex: 1,
@@ -31,8 +30,8 @@ const CheckoutPage = (props) => {
             alignItems: 'center',
           }}>
             {!props.cart.length && (<Text>Empty cart</Text>)}
-            {props.cart.map((obj, i) => (
-                <CheckoutItem key={i} id={obj.coffee.id} name={obj.coffee.name} price={obj.coffee.price} />
+            {props.cart.map((orderItem, i) => (
+                <CheckoutItem key={i} orderItem={orderItem} />
             ))}
           </View>
         </View>
