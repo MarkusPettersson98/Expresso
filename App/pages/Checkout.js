@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions'
 
 import EmptycheckoutPage from './components/checkout/emptyCheckout.js';
+import CheckoutItem from './components/checkout/CheckoutItem'
 
 const CheckoutPage = (props) => {
     // TODO: Change myCart to be dependent on a global state instead of dummy-data
@@ -30,7 +31,7 @@ const CheckoutPage = (props) => {
           }}>
             {!props.cart.length && (<Text>Empty cart</Text>)}
             {props.cart.map((coffee, i) => (
-                <Text key={i}>{`Coffee: ${coffee.name}, Price: ${coffee.price}`}</Text>
+                <CheckoutItem key={i} name={coffee.name} price={coffee.price} />
             ))}
           </View>
         </View>
