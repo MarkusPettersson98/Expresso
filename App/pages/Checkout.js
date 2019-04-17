@@ -1,14 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { brygg_kaffe } from './components/dummy-data';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
 import CheckoutItem from './components/checkout/CheckoutItem';
 
 const CheckoutPage = props => {
-    // TODO: rewrite the rendering of items using amount, we should probably delete items with amount < 0, but allow items with 0 amount
     return (
         <View
             style={{
