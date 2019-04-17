@@ -19,21 +19,28 @@ import DrawerHeader from './components/header/DrawerIcon';
     I (robert) did to no real success without it being really buggy. 
     */
 
-// so that the colour of the header is located at one spot.
+
+// determines background color and the color of title of page
 const headerStyling = {
     headerStyle: {
-        backgroundColor: '#F0F7F4',
+        backgroundColor: '#57454B',
     },
-    headerTintColor: '#000',
+    headerTintColor: '#fff',
 };
+
+// determines icon sizes and color
+const headerIconStyling = {
+    size: 32,
+    color: '#F0F7F4'
+}
 
 const HomePage_StackNavigator = createStackNavigator({
     First: {
         screen: Homepage,
         navigationOptions: ({ navigation }) => ({
             title: 'Home Screen',
-            headerLeft: <DrawerHeader navigationProps={navigation} />,
-            headerRight: <CheckoutHeader navigationProps={navigation} />,
+            headerLeft: <DrawerHeader navigationProps={navigation} styling={headerIconStyling} />,
+            headerRight: <CheckoutHeader navigationProps={navigation} styling={headerIconStyling}/>,
 
             ...headerStyling,
         }),

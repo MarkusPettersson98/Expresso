@@ -14,7 +14,7 @@ const Drawer = props => {
                 onPress={() => toggleDrawer(props.navigationProps)}
             >
                 {/*Donute Button Image */}
-                <Ionicons name="ios-menu" size={32} />
+                <Ionicons name="ios-menu" size={props.styling.size} color={props.styling.color} />
             </TouchableOpacity>
         </View>
     );

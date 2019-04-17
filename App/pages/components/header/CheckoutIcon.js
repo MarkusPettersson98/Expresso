@@ -5,12 +5,14 @@ import { Ionicons } from '@expo/vector-icons';
 const Checkout = props => {
     return (
         <View style={{ flexDirection: 'row', margin: 5 }}>
-            <TouchableOpacity
-                onPress={() => props.navigationProps.navigate('Checkout')}
-            >
-                <Ionicons name="ios-cart" size={32} />
-            </TouchableOpacity>
-        </View>
+                <TouchableOpacity
+                    onPress={() =>
+                        props.navigationProps.navigate('Checkout')
+                    }
+                >
+                    <Ionicons name="ios-cart" size={props.styling.size} color={props.styling.color} />
+                </TouchableOpacity>
+            </View>
     );
 };
 
