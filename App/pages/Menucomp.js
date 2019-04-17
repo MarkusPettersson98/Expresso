@@ -16,11 +16,11 @@ import DrawerHeader from './components/header/DrawerIcon';
     Temporarily, all of the stackNavigators carry a checkoutScreen.
     There is some documentation regarding defaultNavitationOptions which can be looked into,
     so that we dont need to fix the header and add the checkoutscreen navigation ability, however,
-    I (robert) did to no real success without it being really buggy.
-    */
+    I (robert) tried to no success without it being really buggy.
+*/
+
 
 // so that the colour of the header is located at one spot.
-
 const headerStyling = {
     headerStyle: {
         backgroundColor: '#57454B',
@@ -28,7 +28,7 @@ const headerStyling = {
     headerTintColor: '#fff',
 };
 
-// determines icon sizes and color
+// determines icon sizes and color, could possibly be moved to a 'styles'-file to avoid passing props.
 const headerIconStyling = {
     size: 32,
     color: '#F0F7F4',

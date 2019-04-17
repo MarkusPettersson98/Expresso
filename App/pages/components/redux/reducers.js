@@ -4,6 +4,9 @@ import { brygg_kaffe } from '../dummy-data';
 
 const INITIAL_STATE = [];
 
+// TODO: what will need to be done when multiple coffees with different ID.s arrive,
+// write a check as suggested below in CART_ADD_COFFEE.
+
 function cart(state = INITIAL_STATE, action) {
     switch (action.type) {
         // add basic coffee to cart
@@ -15,11 +18,8 @@ function cart(state = INITIAL_STATE, action) {
         // if the cart is not empty =>
         // fall through to increment already selected coffee
 
-        // TODO: what will need to be done when multiple coffees with different ID.s arrive,
-        // write a check as suggested above.
-
         case ITEM_INCREMENT:
-            // here we traverse state orderItems and check where id:s match, where they match we increment.
+            // traverse state orderItems and check where id:s match, where they match we increment.
             return state.map(item => {
                 if (item.coffee.id === action.coffee.id) {
                     return { ...item, amount: item.amount + 1 };
