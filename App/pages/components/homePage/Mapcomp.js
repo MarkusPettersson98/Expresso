@@ -24,8 +24,8 @@ export default Mapcomp = () => {
                 region={{
                     latitude: 57.689388,
                     longitude: 11.977315,
-                    latitudeDelta: 0.1,
-                    longitudeDelta: 0.1,
+                    latitudeDelta: 0.015,
+                    longitudeDelta: 0.015,
                 }}
             >
                 {markers}
