@@ -13,6 +13,7 @@ function cart(state = INITIAL_STATE, action) {
       // find item, increment the counter.
       // return state
       // do use action.coffeeID
+      console.log("increment", action.id)
       return state;
     case ITEM_DECREMENT:
       // find item, decrement the counter.

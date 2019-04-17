@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import { incrementCoffee } from '../redux/actions';
+
 
 const CheckoutItem = props => {
     return (
@@ -46,7 +49,7 @@ const CheckoutItem = props => {
 
                     <Text style={styles.numberText}>1</Text>
 
-                    <TouchableOpacity className = 'increment coffee amount' onPress={() => console.log('increment listitem with id:', props.id)}>
+                    <TouchableOpacity className = 'increment coffee amount' onPress={() => props.onIncrementCoffee(props.id)}>
                         <AntDesign
                             name="pluscircleo"
                             size={20}
@@ -90,4 +93,16 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CheckoutItem;
+const mapStateToProps = state => {
+  return { cart: state.cart }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onIncrementCoffee: (id) => {
+      dispatch(incrementCoffee(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutItem);
