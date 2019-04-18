@@ -31,6 +31,7 @@ export function cart(orderItems = INITIAL_STATE, action) {
                     amount: existingItem ? existingItem.amount + 1 : 1,
                 },
             });
+
         case ITEM_INCREMENT:
             id = action.orderItem.coffee.id;
             existingItem = orderItems[id];
@@ -41,6 +42,7 @@ export function cart(orderItems = INITIAL_STATE, action) {
                     amount: existingItem ? existingItem.amount + 1 : 1,
                 },
             });
+
         case ITEM_DECREMENT:
             id = action.orderItem.coffee.id;
             existingItem = orderItems[id];
@@ -56,6 +58,7 @@ export function cart(orderItems = INITIAL_STATE, action) {
                     amount: existingItem ? existingItem.amount - 1 : 1,
                 },
             });
+
         case CART_CLEAR:
             return {};
         default:
