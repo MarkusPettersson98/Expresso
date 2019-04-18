@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
 import CheckoutItem from './components/checkout/CheckoutItem';
-import EmptycheckoutPage from './components/checkout/emptyCheckout'
+import EmptycheckoutPage from './components/checkout/emptyCheckout';
 
 const CheckoutPage = props => {
     return (
