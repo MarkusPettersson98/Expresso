@@ -6,8 +6,6 @@ import { incrementCoffee, decrementCoffee } from '../redux/actions';
 
 const CheckoutItem = props => {
     const orderItem = props.orderItem;
-    console.log(orderItem);
-
     const checkDecrementCoffee = (orderItem) => {
       if (props.orderItem.amount == 1) {
         return Alert.alert(
