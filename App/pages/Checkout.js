@@ -6,8 +6,11 @@ import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
 import CheckoutItem from './components/checkout/CheckoutItem';
 import EmptycheckoutPage from './components/checkout/emptyCheckout';
+import OrderButton from './components/checkout/OrderButton';
 
 const CheckoutPage = props => {
+    let isCartPopulated = Object.keys(props.cart).length;
+
     return (
         <View
             style={{
@@ -32,14 +35,39 @@ const CheckoutPage = props => {
 
             <View
                 style={{
-                    flex: 6,
+                    flex: 7,
                     alignItems: 'center',
                 }}
             >
-                {!Object.keys(props.cart).length && <EmptycheckoutPage />}
+                {!isCartPopulated && <EmptycheckoutPage />}
                 {Object.values(props.cart).map((orderItem, i) => (
                     <CheckoutItem key={i} orderItem={orderItem} />
                 ))}
+            </View>
+            <View
+                style={{
+                    flex: 1.5,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                {!isCartPopulated || (
+                    <OrderButton
+                        onPress={() => {
+                            let total = 0;
+                            console.log('Du beställde:');
+                            Object.values(props.cart).forEach((orderItem) => {
+                                total = total + orderItem.coffee.price * orderItem.amount;
+                                console.log(
+                                    orderItem.amount,
+                                    ':',
+                                    orderItem.coffee.name,
+                                );
+                            });
+                            console.log('Kostnad:', total)
+                        }}
+                    />
+                )}
             </View>
         </View>
     );
@@ -51,7 +79,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItem: (coffee) => {
+        onAddItem: coffee => {
             dispatch(addCoffee(coffee));
         },
     };
