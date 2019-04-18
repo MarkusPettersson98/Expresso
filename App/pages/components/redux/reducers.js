@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { CART_ADD_COFFEE, ITEM_DECREMENT, ITEM_INCREMENT } from './actions';
+import { CART_ADD_COFFEE, CART_CLEAR, ITEM_DECREMENT, ITEM_INCREMENT } from './actions';
 
 /*
   INITIAL_STATE
@@ -21,6 +21,8 @@ function cart(orderItems = INITIAL_STATE, action) {
           return Object.assign({}, orderItems,
             {[action.coffee.id]: { coffee: action.coffee, amount: existingItem ? existingItem.amount + 1 : 1 }}
           )
+        case CART_CLEAR:
+          return {};
         case ITEM_INCREMENT:
           existingItem = orderItems[action.coffee.id];
           return Object.assign({}, orderItems,
