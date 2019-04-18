@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
-import { CART_ADD_COFFEE, CART_CLEAR, ITEM_DECREMENT, ITEM_INCREMENT } from './actions';
+import {
+    CART_ADD_COFFEE,
+    CART_CLEAR,
+    ITEM_DECREMENT,
+    ITEM_INCREMENT,
+} from './actions';
 
 /*
   INITIAL_STATE
@@ -11,33 +16,48 @@ import { CART_ADD_COFFEE, CART_CLEAR, ITEM_DECREMENT, ITEM_INCREMENT } from './a
     ...
   }
 */
-const INITIAL_STATE = {};
+export const INITIAL_STATE = {};
 
-function cart(orderItems = INITIAL_STATE, action) {
+export function cart(orderItems = INITIAL_STATE, action) {
     let existingItem;
+    let id;
     switch (action.type) {
         case CART_ADD_COFFEE:
-          existingItem = orderItems[action.coffee.id];
-          return Object.assign({}, orderItems,
-            {[action.coffee.id]: { coffee: action.coffee, amount: existingItem ? existingItem.amount + 1 : 1 }}
-          )
-        case CART_CLEAR:
-          return {};
+            id = action.coffee.id;
+            existingItem = orderItems[id];
+            return Object.assign({}, orderItems, {
+                [id]: {
+                    coffee: action.coffee,
+                    amount: existingItem ? existingItem.amount + 1 : 1,
+                },
+            });
         case ITEM_INCREMENT:
-          existingItem = orderItems[action.coffee.id];
-          return Object.assign({}, orderItems,
-            {[action.coffee.id]: { coffee: action.coffee, amount: existingItem ? existingItem.amount + 1 : 1 }}
-          )
+            id = action.orderItem.coffee.id;
+            existingItem = orderItems[id];
+
+            return Object.assign({}, orderItems, {
+                [id]: {
+                    coffee: action.orderItem.coffee,
+                    amount: existingItem ? existingItem.amount + 1 : 1,
+                },
+            });
         case ITEM_DECREMENT:
-          existingItem = orderItems[action.coffee.id];
-          if (existingItem.amount == 1) { // Delete item
-            let newState = Object.assign({}, orderItems);
-            delete newState[action.coffee.id];
-            return newState
-          }
-          return Object.assign({}, orderItems,
-            {[action.coffee.id]: { coffee: action.coffee, amount: existingItem ? existingItem.amount - 1 : 1 }}
-          )
+            id = action.orderItem.coffee.id;
+            existingItem = orderItems[id];
+            if (existingItem.amount == 1) {
+                // Delete item
+                let newState = Object.assign({}, orderItems);
+                delete newState[id];
+                return newState;
+            }
+            return Object.assign({}, orderItems, {
+                [id]: {
+                    coffee: action.orderItem.coffee,
+                    amount: existingItem ? existingItem.amount - 1 : 1,
+                },
+            });
+        case CART_CLEAR:
+            return {};
         default:
             return orderItems;
     }
