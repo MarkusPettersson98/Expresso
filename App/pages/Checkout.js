@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { brygg_kaffe } from './components/dummy-data';
+import { brygg_kaffe, cappuccino } from './components/dummy-data';
 import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
 import CheckoutItem from './components/checkout/CheckoutItem';
+import EmptycheckoutPage from './components/checkout/emptyCheckout'
 
 const CheckoutPage = props => {
     return (
@@ -16,11 +17,15 @@ const CheckoutPage = props => {
             <View
                 style={{
                     flex: 1,
+                    flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}
             >
-                <TouchableOpacity onPress={() => props.onAddItem()}>
+                <TouchableOpacity onPress={() => props.onAddItem(brygg_kaffe)}>
+                    <AntDesign name="pluscircle" size={32} color="#57454B" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.onAddItem(cappuccino)}>
                     <AntDesign name="pluscircle" size={32} color="#57454B" />
                 </TouchableOpacity>
             </View>
@@ -31,8 +36,8 @@ const CheckoutPage = props => {
                     alignItems: 'center',
                 }}
             >
-                {!props.cart.length && <EmptycheckoutPage />}
-                {props.cart.map((orderItem, i) => (
+                {!Object.keys(props.cart).length && <EmptycheckoutPage />}
+                {Object.values(props.cart).map((orderItem, i) => (
                     <CheckoutItem key={i} orderItem={orderItem} />
                 ))}
             </View>
@@ -46,8 +51,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItem: () => {
-            dispatch(addCoffee(brygg_kaffe));
+        onAddItem: (coffee) => {
+            dispatch(addCoffee(coffee));
         },
     };
 };

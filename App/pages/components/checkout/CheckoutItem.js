@@ -42,6 +42,7 @@ const CheckoutItem = props => {
                     <TouchableOpacity
                         className="decrement coffee amount"
                         onPress={() => props.onDecrementCoffee(orderItem)}
+                        hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
                     >
                         <AntDesign
                             name="minuscircleo"
@@ -55,6 +56,7 @@ const CheckoutItem = props => {
                     <TouchableOpacity
                         className="increment coffee amount"
                         onPress={() => props.onIncrementCoffee(orderItem)}
+                        hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
                     >
                         <AntDesign
                             name="pluscircleo"
