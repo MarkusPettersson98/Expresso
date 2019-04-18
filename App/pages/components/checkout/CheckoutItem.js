@@ -1,11 +1,30 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { incrementCoffee, decrementCoffee } from '../redux/actions';
 
 const CheckoutItem = props => {
     const orderItem = props.orderItem;
+
+    const checkDecrementCoffee = (orderItem) => {
+      if (props.orderItem.amount == 1) {
+        return Alert.alert(
+          'Varning',
+          'Är du säker på att du vill ta bort varan?',
+          [
+            {
+              text: 'Avbryt',
+              //onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'OK', onPress: () => props.onDecrementCoffee(orderItem)},
+          ]
+        );
+      }
+      return props.onDecrementCoffee(orderItem)
+    }
+
     return (
         <View
             style={{
@@ -40,8 +59,7 @@ const CheckoutItem = props => {
                     }}
                 >
                     <TouchableOpacity
-                        className="decrement coffee amount"
-                        onPress={() => props.onDecrementCoffee(orderItem)}
+                        onPress={() => checkDecrementCoffee(orderItem)}
                         hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
                     >
                         <AntDesign
@@ -54,7 +72,6 @@ const CheckoutItem = props => {
                     <Text style={styles.numberText}>{orderItem.amount}</Text>
 
                     <TouchableOpacity
-                        className="increment coffee amount"
                         onPress={() => props.onIncrementCoffee(orderItem)}
                         hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
                     >

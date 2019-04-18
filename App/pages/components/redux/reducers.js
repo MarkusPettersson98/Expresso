@@ -28,6 +28,11 @@ function cart(orderItems = INITIAL_STATE, action) {
           )
         case ITEM_DECREMENT:
           existingItem = orderItems[action.coffee.id];
+          if (existingItem.amount == 1) { // Delete item
+            let newState = Object.assign({}, orderItems);
+            delete newState[action.coffee.id];
+            return newState
+          }
           return Object.assign({}, orderItems,
             {[action.coffee.id]: { coffee: action.coffee, amount: existingItem ? existingItem.amount - 1 : 1 }}
           )
