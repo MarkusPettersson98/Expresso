@@ -1,7 +1,7 @@
 const shops = [
     {
         name: 'Biblioteket',
-        picture: require('./resources/biblan.jpg'),
+        picture: './resources/biblan.jpg',
         coordinates: {
             latitude: 57.690382,
             longitude: 11.978556,
@@ -9,7 +9,7 @@ const shops = [
     },
     {
         name: 'Bulten',
-        picture: require('./resources/bulten.jpg'),
+        picture: './resources/bulten.jpg',
         coordinates: {
             latitude: 57.689008,
             longitude: 11.978538,
@@ -17,7 +17,7 @@ const shops = [
     },
     {
         name: 'Linsen',
-        picture: require('./resources/linsen.jpg'),
+        picture: './resources/linsen.jpg',
         coordinates: {
             latitude: 57.687962,
             longitude: 11.978813,
@@ -25,7 +25,7 @@ const shops = [
     },
     {
         name: 'Veras Café',
-        picture: require('./resources/vera.jpg'),
+        picture: './resources/vera.jpg',
         coordinates: {
             latitude: 57.693158,
             longitude: 11.975036,
@@ -33,7 +33,7 @@ const shops = [
     },
     {
         name: 'Wijkanders',
-        picture: require('./resources/wijkanders.jpg'),
+        picture: './resources/wijkanders.jpg',
         coordinates: {
             latitude: 57.692538,
             longitude: 11.97539,
