@@ -13,6 +13,8 @@ const ClearCheckout = ( {cart, dispatch} ) => {
             <TouchableOpacity
                 onPress={() => dispatch(clearCart())}
                 disabled={emptyCart}
+                hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+
             >
                 <Feather
                     name="trash-2"
