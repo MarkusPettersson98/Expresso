@@ -2,6 +2,7 @@
  * action types
  */
 export const CART_ADD_COFFEE = 'CART_ADD_COFFEE';
+export const CART_CLEAR = 'CART_CLEAR';
 export const ITEM_INCREMENT = 'ITEM_INCREMENT';
 export const ITEM_DECREMENT = 'ITEM_DECREMENT';
 
@@ -14,13 +15,17 @@ export const ITEM_DECREMENT = 'ITEM_DECREMENT';
  */
 
 export function incrementCoffee(orderItem) {
-    return { type: ITEM_INCREMENT, ...orderItem };
+    return { type: ITEM_INCREMENT, orderItem };
 }
 
 export function decrementCoffee(orderItem) {
-    return { type: ITEM_DECREMENT, ...orderItem };
+    return { type: ITEM_DECREMENT, orderItem };
 }
 
 export function addCoffee(coffee) {
     return { type: CART_ADD_COFFEE, coffee };
+}
+
+export function clearCart() {
+  return { type: CART_CLEAR };
 }

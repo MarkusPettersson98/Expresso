@@ -1,13 +1,16 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { brygg_kaffe } from './components/dummy-data';
+import { brygg_kaffe, cappuccino } from './components/dummy-data';
 import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
 import CheckoutItem from './components/checkout/CheckoutItem';
 import EmptycheckoutPage from './components/checkout/emptyCheckout';
+import OrderButton from './components/checkout/OrderButton';
 
 const CheckoutPage = props => {
+    let isCartPopulated = Object.keys(props.cart).length;
+
     return (
         <View
             style={{
@@ -17,25 +20,54 @@ const CheckoutPage = props => {
             <View
                 style={{
                     flex: 1,
+                    flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}
             >
-                <TouchableOpacity onPress={() => props.onAddItem()}>
+                <TouchableOpacity onPress={() => props.onAddItem(brygg_kaffe)}>
+                    <AntDesign name="pluscircle" size={32} color="#57454B" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.onAddItem(cappuccino)}>
                     <AntDesign name="pluscircle" size={32} color="#57454B" />
                 </TouchableOpacity>
             </View>
 
             <View
                 style={{
-                    flex: 6,
+                    flex: 7,
                     alignItems: 'center',
                 }}
             >
-                {!props.cart.length && <EmptycheckoutPage />}
-                {props.cart.map((orderItem, i) => (
+                {!isCartPopulated && <EmptycheckoutPage />}
+                {Object.values(props.cart).map((orderItem, i) => (
                     <CheckoutItem key={i} orderItem={orderItem} />
                 ))}
+            </View>
+            <View
+                style={{
+                    flex: 1.5,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                {!isCartPopulated || (
+                    <OrderButton
+                        onPress={() => {
+                            let total = 0;
+                            console.log('Du beställde:');
+                            Object.values(props.cart).forEach((orderItem) => {
+                                total = total + orderItem.coffee.price * orderItem.amount;
+                                console.log(
+                                    orderItem.amount,
+                                    ':',
+                                    orderItem.coffee.name,
+                                );
+                            });
+                            console.log('Kostnad:', total)
+                        }}
+                    />
+                )}
             </View>
         </View>
     );
@@ -47,8 +79,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItem: () => {
-            dispatch(addCoffee(brygg_kaffe));
+        onAddItem: coffee => {
+            dispatch(addCoffee(coffee));
         },
     };
 };

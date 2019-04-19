@@ -1,36 +1,66 @@
 import { combineReducers } from 'redux';
-import { CART_ADD_COFFEE, ITEM_DECREMENT, ITEM_INCREMENT } from './actions';
+import {
+    CART_ADD_COFFEE,
+    CART_CLEAR,
+    ITEM_DECREMENT,
+    ITEM_INCREMENT,
+} from './actions';
 
-const INITIAL_STATE = [];
+/*
+  INITIAL_STATE
+  An object with key: coffeeId and value is an object that contains
+  coffee type and amount.
+  {
+    123: {coffee: {...}, amount: 1},
+    124: {coffee: {...}, amount: 5},
+    ...
+  }
+*/
+export const INITIAL_STATE = {};
 
-// TODO: what will need to be done when multiple coffees with different ID.s arrive,
-// write a check in CART_ADD_COFFEE that checks if the id already is in the orderItems-Array,
-// using for example :
-//               if (!orderItems.length || (check if action.coffee.id is in orderItems))
-
-function cart(orderItems = INITIAL_STATE, action) {
+export function cart(orderItems = INITIAL_STATE, action) {
+    let existingItem;
+    let id;
     switch (action.type) {
         case CART_ADD_COFFEE:
-            if (!orderItems.length ) {
-                return [...orderItems, { coffee: action.coffee, amount: 1 }];
-            }
+            id = action.coffee.id;
+            existingItem = orderItems[id];
+            return Object.assign({}, orderItems, {
+                [id]: {
+                    coffee: action.coffee,
+                    amount: existingItem ? existingItem.amount + 1 : 1,
+                },
+            });
 
-        // else =>
         case ITEM_INCREMENT:
-            // traverse orderItems and check where id:s match, return copied state with incremented item amount.
-            return orderItems.map(item => {
-                if (item.coffee.id === action.coffee.id) {
-                    return { ...item, amount: item.amount + 1 };
-                }
-                return item;
+            id = action.orderItem.coffee.id;
+            existingItem = orderItems[id];
+
+            return Object.assign({}, orderItems, {
+                [id]: {
+                    coffee: action.orderItem.coffee,
+                    amount: existingItem ? existingItem.amount + 1 : 1,
+                },
             });
+
         case ITEM_DECREMENT:
-            return orderItems.map(item => {
-                if (item.coffee.id === action.coffee.id) {
-                    return { ...item, amount: item.amount - 1 };
-                }
-                return item;
+            id = action.orderItem.coffee.id;
+            existingItem = orderItems[id];
+            if (existingItem.amount == 1) {
+                // Delete item
+                let newState = Object.assign({}, orderItems);
+                delete newState[id];
+                return newState;
+            }
+            return Object.assign({}, orderItems, {
+                [id]: {
+                    coffee: action.orderItem.coffee,
+                    amount: existingItem ? existingItem.amount - 1 : 1,
+                },
             });
+
+        case CART_CLEAR:
+            return {};
         default:
             return orderItems;
     }

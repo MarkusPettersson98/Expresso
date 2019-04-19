@@ -50,4 +50,11 @@ export const brygg_kaffe = {
   id: 123
 }
 
+export const cappuccino = {
+  name: "Cappuccino",
+  price: 28,
+  volume: 500,
+  id: 124
+}
+
 export default shops;

@@ -10,6 +10,7 @@ import Profilepage from './ProfilePage';
 import Loginpage from './LoginPage';
 import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
+import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import DrawerHeader from './components/header/DrawerIcon';
 
 /*
@@ -57,7 +58,13 @@ const HomePage_StackNavigator = createStackNavigator({
     },
     Checkout: {
         screen: Checkoutpage,
-        navigationOptions: () => ({ title: 'Varukorg', ...headerStyling }),
+        navigationOptions: () => ({
+          title: 'Varukorg',
+          headerRight: (
+            <ClearCheckoutHeader />
+          ),
+          ...headerStyling
+        }),
     },
 });
 
@@ -84,7 +91,13 @@ const ProfilePage_StackNavigator = createStackNavigator({
     },
     Checkout: {
         screen: Checkoutpage,
-        navigationOptions: () => ({ title: 'Varukorg', ...headerStyling }),
+        navigationOptions: () => ({
+          title: 'Varukorg',
+          headerRight: (
+            <ClearCheckoutHeader />
+          ),
+          ...headerStyling
+        }),
     },
 });
 
@@ -111,7 +124,13 @@ const LoginScreen_StackNavigator = createStackNavigator({
     },
     Checkout: {
         screen: Checkoutpage,
-        navigationOptions: () => ({ title: 'Varukorg', ...headerStyling }),
+        navigationOptions: () => ({
+          title: 'Varukorg',
+          headerRight: (
+            <ClearCheckoutHeader />
+          ),
+          ...headerStyling
+        }),
     },
 });
 

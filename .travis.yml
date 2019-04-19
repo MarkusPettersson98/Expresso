@@ -11,5 +11,7 @@ script:
     - npm run test-with-cov
     - cd ../Backend
     - npm run test-with-cov
+    - cd ../App
+    - npm run test-with-cov
 notifications:
   email: false
