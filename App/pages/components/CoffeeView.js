@@ -29,7 +29,7 @@ const CoffeeView = ({ name, price }) => {
 
     const getCoffeeButtonHandler = () => {
 
-        console.log('kaffesort: ' + name, 'Pris: ' +price);
+        console.log('Kaffesort: ' + name, 'Pris: ' + price);
     }
     return (
         <TouchableOpacity onPress={getCoffeeButtonHandler}
