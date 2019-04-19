@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 import Topcomp from './components/homePage/Topcomp';
-import Maincomp from './components/homePage/Maincomp';
+import Listcomp from './components/homePage/Listcomp';
 import Blockcomp from './components/homePage/Blockcomp';
 import Mapcomp from './components/homePage/Mapcomp';
 
@@ -38,7 +38,7 @@ export default class Homepage extends Component {
                     />
                 </View>
 
-                {this.state.toggle == 'LV' && <Maincomp />}
+                {this.state.toggle == 'LV' && <Listcomp />}
                 {this.state.toggle == 'BV' && <Blockcomp />}
                 {this.state.toggle == 'MV' && <Mapcomp />}
             </View>
