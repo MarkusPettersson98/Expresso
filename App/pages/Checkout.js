@@ -7,9 +7,14 @@ import { addCoffee } from './components/redux/actions';
 import CheckoutItem from './components/checkout/CheckoutItem';
 import EmptycheckoutPage from './components/checkout/emptyCheckout';
 import OrderButton from './components/checkout/OrderButton';
+import TotalAmount from './components/checkout/TotalAmount';
 
 const CheckoutPage = props => {
     let isCartPopulated = Object.keys(props.cart).length;
+    let total = 0;
+    Object.values(props.cart).forEach((orderItem) => {
+        total = total + orderItem.coffee.price * orderItem.amount;
+    });
 
     return (
         <View
@@ -44,6 +49,7 @@ const CheckoutPage = props => {
                     <CheckoutItem key={i} orderItem={orderItem} />
                 ))}
             </View>
+            {!isCartPopulated || <TotalAmount total={total} />}
             <View
                 style={{
                     flex: 1.5,
@@ -54,10 +60,8 @@ const CheckoutPage = props => {
                 {!isCartPopulated || (
                     <OrderButton
                         onPress={() => {
-                            let total = 0;
                             console.log('Du beställde:');
                             Object.values(props.cart).forEach((orderItem) => {
-                                total = total + orderItem.coffee.price * orderItem.amount;
                                 console.log(
                                     orderItem.amount,
                                     ':',
