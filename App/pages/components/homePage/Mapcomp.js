@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View } from 'react-native';
 import MapView from 'react-native-maps';
-import shops from '../dummy-data';
 
 export default class Mapcomp extends Component {
-    constructor() {
+    constructor({shops}) {
         super();
         this.state = {
             markers: shops.map((shop, index) => {

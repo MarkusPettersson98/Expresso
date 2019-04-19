@@ -2,7 +2,6 @@ import React from 'react';
 import { AppRegistry, ScrollView, StyleSheet } from 'react-native';
 
 import { default as ShopView } from './BlockShopView.js';
-import shops from '../dummy-data';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,7 +14,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default (Blockcomp = () => {
+export default (Blockcomp = ({shops}) => {
     // Create a view for every available shop
     const ShopViews = shops.map((shop, index) => {
         return <ShopView key={index} name={shop.name} picture={shop.picture} />;

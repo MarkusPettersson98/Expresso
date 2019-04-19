@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View } from 'react-native';
+import { StyleSheet, Button, View, TextInput} from 'react-native';
 import Topcomp from './components/homePage/Topcomp';
 import Listcomp from './components/homePage/Listcomp';
 import Blockcomp from './components/homePage/Blockcomp';
 import Mapcomp from './components/homePage/Mapcomp';
 
+import shops from './components/dummy-data';
+
+const searchFilter = (expression, collection) => {
+    // Given an expression/text and a collection of strings, for every element in collection
+    // check if (sub)string from collection matches expression
+
+    // eg, if collection.element = bulten, expression = bul ----> bul === bul // true
+
+    // Match shop names against expression (match all against empty string)
+    const partialMatch = ({name}) => {
+        const partialName = name.slice(0, expression.length);
+        const lowerCaseExpression = expression.toLowerCase();
+        const lowerCasePartialName = partialName.toLowerCase();
+        return '' === lowerCaseExpression || lowerCasePartialName === lowerCaseExpression;
+    };
+
+    // Return all partial matches in collection
+    return collection.filter(partialMatch);
+};
+
 export default class Homepage extends Component {
     state = {
         toggle: 'LV',
+        filteredShops: shops,
     };
     _pressLV = () => this.setState({ toggle: 'LV' });
     _pressBV = () => this.setState({ toggle: 'BV' });
@@ -38,9 +59,16 @@ export default class Homepage extends Component {
                     />
                 </View>
 
-                {this.state.toggle == 'LV' && <Listcomp />}
-                {this.state.toggle == 'BV' && <Blockcomp />}
-                {this.state.toggle == 'MV' && <Mapcomp />}
+                <TextInput 
+                onChangeText = {(search) => {
+                    this.setState({filteredShops: searchFilter(search, shops)});
+                }}
+                placeholder = 'Placeholder'
+                />
+
+                {this.state.toggle == 'LV' && <Listcomp shops={this.state.filteredShops}/>}
+                {this.state.toggle == 'BV' && <Blockcomp shops={this.state.filteredShops}/>}
+                {this.state.toggle == 'MV' && <Mapcomp shops={this.state.filteredShops}/>}
             </View>
         );
     }
