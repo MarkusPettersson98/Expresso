@@ -15,11 +15,11 @@ export const ITEM_DECREMENT = 'ITEM_DECREMENT';
  */
 
 export function incrementCoffee(orderItem) {
-    return { type: ITEM_INCREMENT, ...orderItem };
+    return { type: ITEM_INCREMENT, orderItem };
 }
 
 export function decrementCoffee(orderItem) {
-    return { type: ITEM_DECREMENT, ...orderItem };
+    return { type: ITEM_DECREMENT, orderItem };
 }
 
 export function addCoffee(coffee) {
