@@ -4,7 +4,7 @@ import Topcomp from './components/homePage/Topcomp';
 import Listcomp from './components/homePage/Listcomp';
 import Blockcomp from './components/homePage/Blockcomp';
 import Mapcomp from './components/homePage/Mapcomp';
-import Searchbar from './components/homePage/Searchbar';
+import ShopSearchbar from './components/homePage/ShopSearchbar';
 
 import shops from './components/dummy-data';
 
@@ -47,7 +47,7 @@ export default class Homepage extends Component {
                     />
                 </View>
 
-                <Searchbar
+                <ShopSearchbar
                     onChange={this.updateShops}
                 />
 

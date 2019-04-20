@@ -3,7 +3,7 @@ import { AppRegistry, ScrollView } from 'react-native';
 
 import { default as ShopView } from './ListShopView';
 
-export default (Listcomp = ({shops}) => {
+export default (Listcomp = ({ shops }) => {
     const ShopViews = shops.map((shop, index) => {
         return <ShopView key={index} name={shop.name} picture={shop.picture} />;
     });
