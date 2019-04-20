@@ -9,7 +9,7 @@ export default class Mapcomp extends Component {
         this.state = {
             markers: shops.map((shop, index) => {
                 return (
-                    <MapView.Marker
+                    <MapView.Marker onPress={() => alert('coffee')}
                         key={index}
                         title={shop.name}
                         coordinate={{
