@@ -4,7 +4,7 @@ import Topcomp from './components/homePage/Topcomp';
 import Listcomp from './components/homePage/Listcomp';
 import Blockcomp from './components/homePage/Blockcomp';
 import Mapcomp from './components/homePage/Mapcomp';
-import ShopSearchbar from './components/homePage/ShopSearchbar';
+import ShopSearchbar from './components/homePage/searchbar/ShopSearchbar';
 
 import shops from './components/dummy-data';
 
