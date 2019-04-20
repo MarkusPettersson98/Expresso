@@ -3,7 +3,7 @@ import { AppRegistry, StyleSheet, View } from 'react-native';
 import MapView from 'react-native-maps';
 
 export default class Mapcomp extends Component {
-    constructor({shops}) {
+    constructor({ shops }) {
         super();
         this.state = {
             markers: shops.map((shop, index) => {

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default (Blockcomp = ({shops}) => {
+export default (Blockcomp = ({ shops }) => {
     // Create a view for every available shop
     const ShopViews = shops.map((shop, index) => {
         return <ShopView key={index} name={shop.name} picture={shop.picture} />;

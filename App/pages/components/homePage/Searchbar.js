@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyleSheet, TextInput} from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
 
 const Searchbar = (props) => {
     return (
-        <TextInput 
-            onChangeText = {(expression) => {
+        <TextInput
+            onChangeText={(expression) => {
                 const applySearchFilter = (collection) => searchFilter(expression, collection);
                 props.onChange(applySearchFilter);
             }}
-            placeholder = 'Placeholder'
+            placeholder='Placeholder'
         />
     );
 };
@@ -20,7 +20,7 @@ const searchFilter = (expression, collection) => {
     // eg, if collection.element = bulten, expression = bul ----> bul === bul // true
 
     // Match shop names against expression (match all against empty string)
-    const partialMatch = ({name}) => {
+    const partialMatch = ({ name }) => {
         const partialName = name.slice(0, expression.length);
         const lowerCaseExpression = expression.toLowerCase();
         const lowerCasePartialName = partialName.toLowerCase();

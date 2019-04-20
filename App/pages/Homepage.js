@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View, TextInput} from 'react-native';
+import { StyleSheet, Button, View, TextInput } from 'react-native';
 import Topcomp from './components/homePage/Topcomp';
 import Listcomp from './components/homePage/Listcomp';
 import Blockcomp from './components/homePage/Blockcomp';
@@ -16,7 +16,7 @@ export default class Homepage extends Component {
     };
 
     // Apply callback to shops, updating current shops
-    updateShops = (callback) => this.setState({shops: callback(shops)});
+    updateShops = (callback) => this.setState({ shops: callback(shops) });
 
     _pressLV = () => this.setState({ toggle: 'LV' });
     _pressBV = () => this.setState({ toggle: 'BV' });
@@ -47,13 +47,13 @@ export default class Homepage extends Component {
                     />
                 </View>
 
-                <Searchbar 
+                <Searchbar
                     onChange={this.updateShops}
                 />
 
-                {this.state.toggle == 'LV' && <Listcomp shops={this.state.shops}/>}
-                {this.state.toggle == 'BV' && <Blockcomp shops={this.state.shops}/>}
-                {this.state.toggle == 'MV' && <Mapcomp shops={this.state.shops}/>}
+                {this.state.toggle == 'LV' && <Listcomp shops={this.state.shops} />}
+                {this.state.toggle == 'BV' && <Blockcomp shops={this.state.shops} />}
+                {this.state.toggle == 'MV' && <Mapcomp shops={this.state.shops} />}
             </View>
         );
     }
