@@ -42,14 +42,16 @@ const CheckoutPage = props => {
                 style={{
                     flex: 7,
                     alignItems: 'center',
+                    width: '100%',
                 }}
             >
-                
-                <ScrollView
+                {!isCartPopulated ? (
+                    <EmptycheckoutPage />
+                ) : (
+                    <ScrollView
                         contentContainerStyle={{
-                            flex: 10,
+                            flex: 7,
                             alignItems: 'center',
-                            justifyContent: 'center',
                             width: '100%',
                         }}
                     >
@@ -57,8 +59,9 @@ const CheckoutPage = props => {
                             <CheckoutItem key={i} orderItem={orderItem} />
                         ))}
                     </ScrollView>
-                
+                )}
             </View>
+            
             {!isCartPopulated || <TotalAmount total={total} />}
             <View
                 style={{
