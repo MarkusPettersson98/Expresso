@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View } from 'react-native';
-import MapView from 'react-native-maps';
-import shops from '../dummy-data';
+import React, { Component } from "react";
+import { AppRegistry, StyleSheet, View, Text, TouchableOpacity, TouchableWithoutFeedback} from "react-native";
+import MapView from "react-native-maps";
+import shops from "../dummy-data";
 
 export default class Mapcomp extends Component {
     constructor() {
@@ -9,14 +9,21 @@ export default class Mapcomp extends Component {
         this.state = {
             markers: shops.map((shop, index) => {
                 return (
-                    <MapView.Marker onPress={() => alert('coffee')}
+                  <View>
+                    <MapView.Marker
                         key={index}
-                        title={shop.name}
                         coordinate={{
                             latitude: shop.coordinates.latitude,
                             longitude: shop.coordinates.longitude,
                         }}
-                    />
+                    >
+                    <MapView.Callout onPress ={() => alert('coffee')}>
+                      <TouchableOpacity onPress={() => onMarkerPress({index})}>
+                        <Text>{shop.name}</Text>
+                      </TouchableOpacity>
+                    </MapView.Callout>
+                    </MapView.Marker>
+                  </View>
                 );
             }),
         };
@@ -44,7 +51,6 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '85%',
-        //borderTopWidth: 5,
         top: 0,
         left: 0,
         bottom: 0,
