@@ -8,6 +8,7 @@ import CheckoutItem from './components/checkout/CheckoutItem';
 import EmptycheckoutPage from './components/checkout/emptyCheckout';
 import OrderButton from './components/checkout/OrderButton';
 import TotalAmount from './components/checkout/TotalAmount';
+import PickUpLocation from './components/checkout/pickUpPointView';
 
 const CheckoutPage = props => {
     let isCartPopulated = Object.keys(props.cart).length;
@@ -62,17 +63,18 @@ const CheckoutPage = props => {
                 )}
             </View>
 
-            {!isCartPopulated || <View classdesc='Holds the pickupPoint'
-                style={{
-                    flex: 2,
-                  alignItems: 'center',
-                    width: '100%',
-                    backgroundColor: 'black',
-                }}
-            >
-
-            </View>
-            }
+            {!isCartPopulated || (
+                <View
+                    classdesc="Holds the pickupPoint"
+                    style={{
+                        flex: 2,
+                        alignItems: 'center',
+                        width: '100%',
+                    }}
+                >
+                    <PickUpLocation />
+                </View>
+            )}
 
             {!isCartPopulated || <TotalAmount total={total} />}
             <View
