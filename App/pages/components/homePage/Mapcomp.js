@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, View, Text, TouchableOpacity, TouchableWithoutFeedback} from "react-native";
+import { AppRegistry, StyleSheet, View, Text, TouchableOpacity} from "react-native";
 import MapView from "react-native-maps";
 import shops from "../dummy-data";
 
@@ -9,9 +9,8 @@ export default class Mapcomp extends Component {
         this.state = {
             markers: shops.map((shop, index) => {
                 return (
-                  <View>
+                  <View key={index}>
                     <MapView.Marker
-                        key={index}
                         coordinate={{
                             latitude: shop.coordinates.latitude,
                             longitude: shop.coordinates.longitude,
