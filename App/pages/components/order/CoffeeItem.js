@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
     item: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const CoffeeView = ({ name, price }) => {
+const CoffeeIcon = ({ name, price }) => {
 
     const getCoffeeButtonHandler = () => {
 
@@ -33,12 +33,12 @@ const CoffeeView = ({ name, price }) => {
     }
     return (
         <TouchableOpacity onPress={getCoffeeButtonHandler}
-            style = {styles.item}
-            activeOpacity = {0.8}>
+            style={styles.item}
+            activeOpacity={0.8}>
             <Text style={styles.nameText}>{name}</Text>
             <Text style={styles.priceText}>{price}</Text>
         </TouchableOpacity>
     );
 };
 
-export default CoffeeView;
+export default CoffeeIcon;
