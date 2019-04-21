@@ -7,12 +7,9 @@ import TotalAmount from './TotalAmount';
 import PickUpLocation from './pickUpPointView';
 
 const NonEmptyCheckoutPage = props => {
-	let total = 0;
 	let orderItems = Object.values(props.cart);
-    orderItems.forEach(orderItem => {
-        total = total + orderItem.coffee.price * orderItem.amount;
-    });
-
+	let total = getTotalOrder(orderItems);
+    
     return (
         <View
             style={{
@@ -76,6 +73,15 @@ const NonEmptyCheckoutPage = props => {
         </View>
     );
 };
+
+
+export const getTotalOrder = orderItems => {
+	let total = 0;
+	orderItems.forEach(orderItem => {
+        total = total + orderItem.coffee.price * orderItem.amount;
+    });
+	return total;
+}
 
 const mapStateToProps = state => {
     return { cart: state.cart };
