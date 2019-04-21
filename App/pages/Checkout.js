@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
-import { brygg_kaffe, cappuccino } from './components/dummy-data';
+import { brygg_kaffe, cappuccino, latte } from './components/dummy-data';
 import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
@@ -37,6 +37,9 @@ const CheckoutPage = props => {
                 <TouchableOpacity onPress={() => props.onAddItem(cappuccino)}>
                     <AntDesign name="pluscircle" size={32} color="#57454B" />
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.onAddItem(latte)}>
+                    <AntDesign name="pluscircle" size={32} color="#57454B" />
+                </TouchableOpacity>
             </View>
 
             <View
@@ -51,7 +54,7 @@ const CheckoutPage = props => {
                 ) : (
                     <ScrollView
                         contentContainerStyle={{
-                            flex: 7,
+                            flexGrow: 7,
                             alignItems: 'center',
                             width: '100%',
                         }}

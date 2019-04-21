@@ -23,11 +23,13 @@ export default (pickUpPoint = () => {
             <View
                 style={{
                     flexDirection: 'row',
+                    marginTop: 16,
                 }}
             >
                 <FontAwesome
                     style={{
-                        paddingTop: 10,
+                        paddingVertical: 10,
+                        paddingHorizontal: 5,
                     }}
                     name="map-pin"
                     size={20}
@@ -37,20 +39,19 @@ export default (pickUpPoint = () => {
                     style={{
                         justifyContent: 'space-between',
                         flexDirection: 'row',
-                        width: '90%',
-                        paddingTop: 10,
+                        alignItems: 'center',
+                        flex: 1,
+                        paddingHorizontal: 20,
                     }}
                 >
                     <View
                         style={{
-                            paddingLeft: 15,
                             flexDirection: 'column',
                         }}
                     >
-                        <Text style={styles.cafeText}> Bulten</Text>
+                        <Text style={styles.cafeText}>Bulten</Text>
                         <Text style={styles.locationText}>
-                            {' '}
-                            Hörsalsvägen 7, Johanneberg{' '}
+                            Hörsalsvägen 7, Johanneberg
                         </Text>
                     </View>
                     <Ionicons name="ios-arrow-up" size={20} color="gray" />
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     },
     cafeText: {
         fontWeight: '500',
-        fontSize: 25,
+        fontSize: 20,
         color: '#57454B',
     },
     locationText: {
