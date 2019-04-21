@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { brygg_kaffe, cappuccino } from './components/dummy-data';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { brygg_kaffe, cappuccino, latte } from './components/dummy-data';
 import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
@@ -8,11 +8,12 @@ import CheckoutItem from './components/checkout/CheckoutItem';
 import EmptycheckoutPage from './components/checkout/emptyCheckout';
 import OrderButton from './components/checkout/OrderButton';
 import TotalAmount from './components/checkout/TotalAmount';
+import PickUpLocation from './components/checkout/pickUpPointView';
 
 const CheckoutPage = props => {
     let isCartPopulated = Object.keys(props.cart).length;
     let total = 0;
-    Object.values(props.cart).forEach((orderItem) => {
+    Object.values(props.cart).forEach(orderItem => {
         total = total + orderItem.coffee.price * orderItem.amount;
     });
 
@@ -36,19 +37,48 @@ const CheckoutPage = props => {
                 <TouchableOpacity onPress={() => props.onAddItem(cappuccino)}>
                     <AntDesign name="pluscircle" size={32} color="#57454B" />
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.onAddItem(latte)}>
+                    <AntDesign name="pluscircle" size={32} color="#57454B" />
+                </TouchableOpacity>
             </View>
 
             <View
                 style={{
-                    flex: 7,
+                    flex: 5,
                     alignItems: 'center',
+                    width: '100%',
                 }}
             >
-                {!isCartPopulated && <EmptycheckoutPage />}
-                {Object.values(props.cart).map((orderItem, i) => (
-                    <CheckoutItem key={i} orderItem={orderItem} />
-                ))}
+                {!isCartPopulated ? (
+                    <EmptycheckoutPage />
+                ) : (
+                    <ScrollView
+                        contentContainerStyle={{
+                            flexGrow: 7,
+                            alignItems: 'center',
+                            width: '100%',
+                        }}
+                    >
+                        {Object.values(props.cart).map((orderItem, i) => (
+                            <CheckoutItem key={i} orderItem={orderItem} />
+                        ))}
+                    </ScrollView>
+                )}
             </View>
+
+            {!isCartPopulated || (
+                <View
+                    classdesc="Holds the pickupPoint"
+                    style={{
+                        flex: 2,
+                        alignItems: 'center',
+                        width: '100%',
+                    }}
+                >
+                    <PickUpLocation />
+                </View>
+            )}
+
             {!isCartPopulated || <TotalAmount total={total} />}
             <View
                 style={{
@@ -61,14 +91,14 @@ const CheckoutPage = props => {
                     <OrderButton
                         onPress={() => {
                             console.log('Du beställde:');
-                            Object.values(props.cart).forEach((orderItem) => {
+                            Object.values(props.cart).forEach(orderItem => {
                                 console.log(
                                     orderItem.amount,
                                     ':',
                                     orderItem.coffee.name,
                                 );
                             });
-                            console.log('Kostnad:', total)
+                            console.log('Kostnad:', total);
                         }}
                     />
                 )}
