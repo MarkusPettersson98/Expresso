@@ -12,7 +12,7 @@ import {
     brygg_kaffe_in_cart,
     two_brygg_kaffe_in_cart,
     two_brygg_kaffe_one_cappuchino_in_cart,
-} from './dummy-data';
+} from '../../dummy-data';
 
 test('add 1 (one) brygg_kaffe to an empty cart', () => {
     expect(cart({}, addCoffee(brygg_kaffe))).toEqual(brygg_kaffe_in_cart);
