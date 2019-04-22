@@ -1,4 +1,4 @@
-//import { getTotalOrder } from '../NonEmptyCheckout';
+import { getTotalOrder } from '../NonEmptyCheckout';
 import {
     brygg_kaffe,
     cappuccino,
@@ -11,5 +11,5 @@ import {
 // how to fix, will reaturn.
 
 test('if empty cart, total should be 0', () => {
-//	expect(getTotalOrder({})).toEqual(0);
+	expect(getTotalOrder({})).toEqual(0);
 })

@@ -7,9 +7,9 @@ import TotalAmount from './TotalAmount';
 import PickUpLocation from './pickUpPointView';
 
 const NonEmptyCheckoutPage = props => {
-	let orderItems = Object.values(props.cart);
-	let total = getTotalOrder(orderItems);
-    
+    let orderItems = Object.values(props.cart);
+    let total = getTotalOrder(orderItems);
+
     return (
         <View
             style={{
@@ -48,7 +48,7 @@ const NonEmptyCheckoutPage = props => {
             </View>
 
             <TotalAmount total={total} />
-			
+
             <View
                 style={{
                     flex: 1.5,
@@ -74,14 +74,17 @@ const NonEmptyCheckoutPage = props => {
     );
 };
 
-
 export const getTotalOrder = orderItems => {
-	let total = 0;
-	orderItems.forEach(orderItem => {
-        total = total + orderItem.coffee.price * orderItem.amount;
-    });
-	return total;
-}
+    let total = 0;
+    // check if the orderItem is an empty object using
+    // https://coderwall.com/p/_g3x9q/how-to-check-if-javascript-object-is-empty
+    if (Object.keys(orderItems).length) {
+        orderItems.forEach(orderItem => {
+            total = total + orderItem.coffee.price * orderItem.amount;
+        });
+    }
+    return total;
+};
 
 const mapStateToProps = state => {
     return { cart: state.cart };
