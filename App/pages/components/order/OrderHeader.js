@@ -1,10 +1,30 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ImageBackground, StyleSheet } from 'react-native';
 
-const OrderHeader = () => {
+const OrderHeader = ({ picture }) => {
     return (
-        <View></View>
+        <View style={styles.item}>
+            <ImageBackground
+                source={picture}
+                resizeMode="cover"
+                style={styles.image}
+            >
+            </ImageBackground>
+        </View>
     );
-}
+};
+
+const styles = StyleSheet.create({
+    item: {
+        height: 250,
+        justifyContent: 'center',
+        borderColor: '#F0F7F4',
+        backgroundColor: 'black',
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+    },
+});
 
 export default OrderHeader;
