@@ -1,20 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Topcomp from './pages/components/Topcomp';
-import Blockcomp from './pages/components/Blockcomp';
-import Maincomp from './pages/components/Maincomp';
-import Mapcomp from './pages/components/Mapcomp';
-import Screen2 from './pages/Screen2';
-import Homepage from './pages/Homepage';
-import Menucomp from './pages/Menucomp';
+import React from "react";
+import { View } from "react-native";
+import Menucomp from "./pages/Menucomp";
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import expressoApp from './pages/components/redux/reducers'
+
+const store = createStore(expressoApp);
 
 export default class App extends React.Component {
   render() {
-    return (
-      <View style={{flex: 1}}>
-        <Menucomp />
-      </View>
-    );
-  }
+        return (
+          <Provider store={store}>
+            <View style={{ flex: 1 }}>
+                <Menucomp />
+            </View>
+          </Provider>
+        );
+    }
 }
-

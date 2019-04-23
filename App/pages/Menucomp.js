@@ -1,104 +1,158 @@
-import React, { Component } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
 import {
-  createDrawerNavigator,
-  createStackNavigator,
-  createAppContainer,
+    createDrawerNavigator,
+    createStackNavigator,
+    createAppContainer,
 } from 'react-navigation';
- 
-import Screen1 from './Homepage';
-import Screen2 from './Screen2';
-import Screen3 from './Screen3';
- 
-class NavigationDrawerStructure extends Component {
-  //Structure for the navigatin Drawer
-  toggleDrawer = () => {
-    //Props to open/close the drawer
-    this.props.navigationProps.toggleDrawer();
-  };
-  render() {
-    return (
-      <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
-          {/*Donute Button Image */}
-          <Image
-            source={require('./components/resources/menu.png')}
-            style={{ width: 25, height: 25, marginLeft: 5 }}
-          />
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
 
-const FirstActivity_StackNavigator = createStackNavigator({
-  //All the screen from the Screen1 will be indexed here
-  First: {
-    screen: Screen1,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Home Screen',
-      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
-      headerStyle: {
-        backgroundColor: '#F0F7F4',
-      },
-      headerTintColor: '#000',
-    }),
-  },
-});
- 
-const Screen2_StackNavigator = createStackNavigator({
-  //All the screen from the Screen2 will be indexed here
-  Second: {
-    screen: Screen2,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Screen 2',
-      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
-      headerStyle: {
-        backgroundColor: '#F0F7F4',
-      },
-      headerTintColor: '#000',
-    }),
-  },
-});
- 
-const Screen3_StackNavigator = createStackNavigator({
-  //All the screen from the Screen3 will be indexed here
-  Third: {
-    screen: Screen3,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Screen 3',
-      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
-      headerStyle: {
-        backgroundColor: '#F0F7F4',
-      },
-      headerTintColor: '#000',
-    }),
-  },
-});
- 
-const DrawerNavigatorExample = createDrawerNavigator({
-  //Drawer Optons and indexing
-  Screen1: {
-    //Title
-    screen: FirstActivity_StackNavigator,
-    navigationOptions: {
-      drawerLabel: 'Home Screen',
+import Homepage from './Homepage';
+import Profilepage from './ProfilePage';
+import Loginpage from './LoginPage';
+import Checkoutpage from './Checkout';
+import CheckoutHeader from './components/header/CheckoutIcon';
+import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
+import DrawerHeader from './components/header/DrawerIcon';
+
+/*
+    Temporarily, all of the stackNavigators carry a checkoutScreen.
+    There is some documentation regarding defaultNavitationOptions which can be looked into,
+    so that we dont need to fix the header and add the checkoutscreen navigation ability, however,
+    I (robert) tried to no success without it being really buggy.
+*/
+
+
+// so that the colour of the header is located at one spot.
+const headerStyling = {
+    headerStyle: {
+        backgroundColor: '#57454B',
     },
-  },
-  Screen2: {
-    //Title
-    screen: Screen2_StackNavigator,
-    navigationOptions: {
-      drawerLabel: 'Profile Screen',
+    headerTintColor: '#fff',
+};
+
+// determines icon sizes and color, could possibly be moved to a 'styles'-file to avoid passing props.
+const headerIconStyling = {
+    size: 32,
+    color: '#F0F7F4',
+};
+
+const HomePage_StackNavigator = createStackNavigator({
+    First: {
+        screen: Homepage,
+        navigationOptions: ({ navigation }) => ({
+            title: 'Home Screen',
+            headerLeft: (
+                <DrawerHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+            headerRight: (
+                <CheckoutHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+
+            ...headerStyling,
+        }),
     },
-  },
-  Screen3: {
-    //Title
-    screen: Screen3_StackNavigator,
-    navigationOptions: {
-      drawerLabel: 'Login Screen',
+    Checkout: {
+        screen: Checkoutpage,
+        navigationOptions: () => ({
+          title: 'Varukorg',
+          headerRight: (
+            <ClearCheckoutHeader />
+          ),
+          ...headerStyling
+        }),
     },
-  },
 });
- 
-export default createAppContainer(DrawerNavigatorExample);
+
+const ProfilePage_StackNavigator = createStackNavigator({
+    Second: {
+        screen: Profilepage,
+        navigationOptions: ({ navigation }) => ({
+            title: 'Profile Screen',
+            headerLeft: (
+                <DrawerHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+            headerRight: (
+                <CheckoutHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+
+            ...headerStyling,
+        }),
+    },
+    Checkout: {
+        screen: Checkoutpage,
+        navigationOptions: () => ({
+          title: 'Varukorg',
+          headerRight: (
+            <ClearCheckoutHeader />
+          ),
+          ...headerStyling
+        }),
+    },
+});
+
+const LoginScreen_StackNavigator = createStackNavigator({
+    Third: {
+        screen: Loginpage,
+        navigationOptions: ({ navigation }) => ({
+            title: 'Login Screen',
+            headerLeft: (
+                <DrawerHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+            headerRight: (
+                <CheckoutHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+
+            ...headerStyling,
+        }),
+    },
+    Checkout: {
+        screen: Checkoutpage,
+        navigationOptions: () => ({
+          title: 'Varukorg',
+          headerRight: (
+            <ClearCheckoutHeader />
+          ),
+          ...headerStyling
+        }),
+    },
+});
+
+const DrawerNavigator = createDrawerNavigator({
+    Home: {
+        screen: HomePage_StackNavigator,
+        navigationOptions: {
+            drawerLabel: 'Home Screen',
+        },
+    },
+    Profile: {
+        screen: ProfilePage_StackNavigator,
+        navigationOptions: {
+            drawerLabel: 'Profile Screen',
+        },
+    },
+    Login: {
+        screen: LoginScreen_StackNavigator,
+        navigationOptions: {
+            drawerLabel: 'Login Screen',
+        },
+    },
+});
+
+export default createAppContainer(DrawerNavigator);
