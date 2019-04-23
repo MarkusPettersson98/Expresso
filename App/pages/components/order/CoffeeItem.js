@@ -20,9 +20,11 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     priceText: {
+        flex: 1,
         fontWeight: 'bold',
         fontSize: 25,
         color: '#7C6A70',
+        textAlign: 'right',
     },
 });
 
