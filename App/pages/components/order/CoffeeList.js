@@ -24,8 +24,8 @@ export default CoffeeList = ({ selectedShop }) => {
         return allShops.shop == selectedShop;
     });
     // Create a view for every available coffee
-    const CoffeeIcons = shop.coffees.map((coffee, index) => {
-        return (<CoffeeIcon key={index} name={coffee.name} price={coffee.price} />);
+    const CoffeeItems = shop.coffees.map((coffee, index) => {
+        return (<CoffeeItem key={index} name={coffee.name} price={coffee.price} description={coffee.description} />);
     });
 
 
