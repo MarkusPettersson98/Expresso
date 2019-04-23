@@ -9,9 +9,6 @@ import {
 
 } from '../../dummy-data';
 
-// curreuntly getting errors because of usage of stylesheet, cant wrap head around
-// how to fix, will reaturn.
-
 test('if empty cart, total should be 0', () => {
 	expect(getTotalOrder({})).toEqual(0);
 })
