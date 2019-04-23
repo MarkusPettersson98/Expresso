@@ -4,7 +4,7 @@ import Menucomp from "./pages/Menucomp";
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import expressoApp from './pages/components/redux/reducers'
-import CoffeeList from "./pages/components/order/CoffeeList";
+import Order from "./pages/components/order/Order";
 
 const store = createStore(expressoApp);
 
@@ -14,7 +14,8 @@ export default class App extends React.Component {
           <Provider store={store}>
             <View style={{ flex: 1 }}>
                 {/* <Menucomp /> */}
-                <CoffeeList selectedShop={"Biblioteket"}/>
+                <Order />
+                {/* <CoffeeList selectedShop={"Biblioteket"} /> */}
             </View>
           </Provider>
         );
