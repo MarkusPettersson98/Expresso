@@ -26,7 +26,7 @@ test('add a brygg_kaffe to a cart with 1 (one) brygg_kaffe in it', () => {
 
 test('increment brygg_kaffe to a cart with 1 (one) brygg_kaffe in it', () => {
     expect(
-        cart(brygg_kaffe_in_cart, incrementCoffee(brygg_kaffe_in_cart['123'])),
+        cart(brygg_kaffe_in_cart, incrementCoffee(brygg_kaffe)),
     ).toEqual(two_brygg_kaffe_in_cart);
 });
 
@@ -34,7 +34,7 @@ test('decrement brygg_kaffe to a cart with 2 (two) brygg_kaffe in it', () => {
     expect(
         cart(
             two_brygg_kaffe_in_cart,
-            decrementCoffee(two_brygg_kaffe_in_cart['123']),
+            decrementCoffee(brygg_kaffe),
         ),
     ).toEqual({
         '123': {
@@ -61,7 +61,7 @@ test('decrement 1 (one) cappuchino from a cart with 2 (two) brygg_kaffe and 1 (o
     expect(
         cart(
             two_brygg_kaffe_one_cappuchino_in_cart,
-            decrementCoffee(two_brygg_kaffe_one_cappuchino_in_cart['124']),
+            decrementCoffee(cappuccino),
         ),
     ).toEqual({
         '123': {
@@ -75,7 +75,7 @@ test('decrement brygg_kaffe from a cart with 2 (two) brygg_kaffe and 1 (one) cap
     expect(
         cart(
             two_brygg_kaffe_one_cappuchino_in_cart,
-            decrementCoffee(two_brygg_kaffe_one_cappuchino_in_cart['123']),
+            decrementCoffee(brygg_kaffe),
         ),
     ).toEqual({
         '123': {
