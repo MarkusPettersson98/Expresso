@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const OrderCartIcon = props => {
+const OrderCartIcon = ({ cartAmount }) => {
     return (
         <View style={{ flexDirection: 'row', margin: 5 }}>
             <Ionicons
@@ -11,7 +11,7 @@ const OrderCartIcon = props => {
             />
             <View style={styles.cartIndicator}>
                 <Text style={styles.cartIndicatorText}>
-                    10
+                    {cartAmount ? cartAmount : 0}
                 </Text>
             </View>
         </View>
