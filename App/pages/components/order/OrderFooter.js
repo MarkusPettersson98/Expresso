@@ -1,17 +1,19 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import OrderCartIcon from './OrderCartIcon';
+import OrderCheckoutButton from './OrderCheckoutButton';
 
 const OrderFooter = (props) => {
     return (
         <View style={styles.footer}>
-            <OrderCartIcon cartAmount={10} />
-            <TouchableOpacity
-                onPress={() => props.navigationProps.navigate('Checkout')}
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-            </TouchableOpacity>
+            <View style={{
+                flexDirection: 'column',
+            }}>
+                <OrderCartIcon cartAmount={10} />
+
+                <OrderCheckoutButton />
+            </View>
         </View>
     );
 };
@@ -19,16 +21,9 @@ const OrderFooter = (props) => {
 const styles = StyleSheet.create({
     footer: {
         flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 40,
-        backgroundColor: 'brown',
-        maxHeight: 80,
-    },
-    cartIcon: {
-        height: 50,
-        justifyContent: 'center',
-        borderColor: '#F0F7F4',
-        backgroundColor: 'black',
+        
+        backgroundColor: '#57454B',
+        maxHeight: 100,
     },
     text: {
         fontWeight: 'bold',

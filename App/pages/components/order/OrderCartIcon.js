@@ -4,13 +4,21 @@ import { Ionicons } from '@expo/vector-icons';
 
 const OrderCartIcon = ({ cartAmount }) => {
     return (
-        <View style={{ flexDirection: 'row', margin: 5 }}>
-            <Ionicons
-                name="ios-cart"
-                size={30}
-            />
-            <View style={styles.cartIndicator}>
-                <Text style={styles.cartIndicatorText}>
+        <View style={{
+            alignItems: 'flex-start',
+        }}>
+            <View style={styles.cartIcon}>
+                <Ionicons
+                    name="ios-cart"
+                    size={40}
+                    color={'white'}
+                />
+            </View>
+
+            <View 
+            style={styles.cartIconCounter}
+            >
+                <Text style={styles.cartIconText}>
                     {cartAmount ? cartAmount : 0}
                 </Text>
             </View>
@@ -19,16 +27,24 @@ const OrderCartIcon = ({ cartAmount }) => {
 };
 
 const styles = StyleSheet.create({
-    cartIndicator: {
+    cartIcon: {
         position: 'absolute',
-        left: 15,
-        top: -12,
-        backgroundColor: '#09CDDA',
+        left: 10,
+        top: -10,
+        marginLeft: 20,
+        marginTop: 30,
+    },
+    cartIconCounter: {
+        position: 'absolute',
+        left: 30,
+        top: -10,
+        marginLeft: 18,
+        marginTop: 20,
+        backgroundColor: '#5AA3B7',
         color: 'white',
         borderRadius: 1000,
-        flex: 1,
     },
-    cartIndicatorText: {
+    cartIconText: {
         borderWidth: 3,
         borderColor: 'white',
         fontSize: 15,
