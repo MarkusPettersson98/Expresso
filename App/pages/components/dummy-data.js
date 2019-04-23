@@ -59,7 +59,23 @@ export const cappuccino = {
 export const coffee =[
     {
         shop: 'Biblioteket',
-        coffees: [{name: 'Bryggkaffe', price: 12}] 
+        coffees: [
+        {
+            name: 'Bryggkaffe', 
+            price: 12,
+            description: 'Bränt kaffe från Hubben',
+        },
+        {
+            name: 'Kaffe',
+            price: 12,
+            description: 'Mellanrost från Skåne',
+        },
+        {
+            name: 'Kokkaffe', 
+            price: 12,
+            description: 'Mörkrost från Brasilien',
+        },
+        ]
     },
     {
         shop: 'Bulten',
