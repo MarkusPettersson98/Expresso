@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    createDrawerNavigator,
+    createBottomTabNavigator,
     createStackNavigator,
     createAppContainer,
 } from 'react-navigation';
@@ -19,7 +19,6 @@ import DrawerHeader from './components/header/DrawerIcon';
     so that we dont need to fix the header and add the checkoutscreen navigation ability, however,
     I (robert) tried to no success without it being really buggy.
 */
-
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -40,12 +39,6 @@ const HomePage_StackNavigator = createStackNavigator({
         screen: Homepage,
         navigationOptions: ({ navigation }) => ({
             title: 'Home Screen',
-            headerLeft: (
-                <DrawerHeader
-                    navigationProps={navigation}
-                    styling={headerIconStyling}
-                />
-            ),
             headerRight: (
                 <CheckoutHeader
                     navigationProps={navigation}
@@ -59,11 +52,9 @@ const HomePage_StackNavigator = createStackNavigator({
     Checkout: {
         screen: Checkoutpage,
         navigationOptions: () => ({
-          title: 'Varukorg',
-          headerRight: (
-            <ClearCheckoutHeader />
-          ),
-          ...headerStyling
+            title: 'Varukorg',
+            headerRight: <ClearCheckoutHeader />,
+            ...headerStyling,
         }),
     },
 });
@@ -73,12 +64,6 @@ const ProfilePage_StackNavigator = createStackNavigator({
         screen: Profilepage,
         navigationOptions: ({ navigation }) => ({
             title: 'Profile Screen',
-            headerLeft: (
-                <DrawerHeader
-                    navigationProps={navigation}
-                    styling={headerIconStyling}
-                />
-            ),
             headerRight: (
                 <CheckoutHeader
                     navigationProps={navigation}
@@ -92,11 +77,9 @@ const ProfilePage_StackNavigator = createStackNavigator({
     Checkout: {
         screen: Checkoutpage,
         navigationOptions: () => ({
-          title: 'Varukorg',
-          headerRight: (
-            <ClearCheckoutHeader />
-          ),
-          ...headerStyling
+            title: 'Varukorg',
+            headerRight: <ClearCheckoutHeader />,
+            ...headerStyling,
         }),
     },
 });
@@ -106,12 +89,6 @@ const LoginScreen_StackNavigator = createStackNavigator({
         screen: Loginpage,
         navigationOptions: ({ navigation }) => ({
             title: 'Login Screen',
-            headerLeft: (
-                <DrawerHeader
-                    navigationProps={navigation}
-                    styling={headerIconStyling}
-                />
-            ),
             headerRight: (
                 <CheckoutHeader
                     navigationProps={navigation}
@@ -125,34 +102,43 @@ const LoginScreen_StackNavigator = createStackNavigator({
     Checkout: {
         screen: Checkoutpage,
         navigationOptions: () => ({
-          title: 'Varukorg',
-          headerRight: (
-            <ClearCheckoutHeader />
-          ),
-          ...headerStyling
+            title: 'Varukorg',
+            headerRight: <ClearCheckoutHeader />,
+            ...headerStyling,
         }),
     },
 });
 
-const DrawerNavigator = createDrawerNavigator({
-    Home: {
+export const Tabs = createBottomTabNavigator({
+    Lista: {
         screen: HomePage_StackNavigator,
-        navigationOptions: {
-            drawerLabel: 'Home Screen',
-        },
     },
-    Profile: {
-        screen: ProfilePage_StackNavigator,
-        navigationOptions: {
-            drawerLabel: 'Profile Screen',
-        },
-    },
-    Login: {
+    QR: {
         screen: LoginScreen_StackNavigator,
-        navigationOptions: {
-            drawerLabel: 'Login Screen',
-        },
+    },
+    profile: {
+        screen: ProfilePage_StackNavigator,
     },
 });
 
-export default createAppContainer(DrawerNavigator);
+export const RootStack = createStackNavigator(
+    {
+        Main: {
+            screen: Tabs,
+        },
+        Checkout: {
+            screen: Checkoutpage,
+            navigationOptions: () => ({
+                title: 'Varukorg',
+                headerRight: <ClearCheckoutHeader />,
+                ...headerStyling,
+            }),
+        },
+    },
+    {
+        mode: 'modal',
+        headerMode: 'none',
+    },
+);
+
+export default createAppContainer(RootStack);
