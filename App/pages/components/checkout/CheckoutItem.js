@@ -17,11 +17,11 @@ const CheckoutItem = props => {
               //onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
-            {text: 'OK', onPress: () => props.onDecrementCoffee(orderItem)},
+            {text: 'OK', onPress: () => props.onDecrementCoffee(orderItem.coffee)},
           ]
         );
       }
-      return props.onDecrementCoffee(orderItem)
+      return props.onDecrementCoffee(orderItem.coffee)
     }
 
     return (
@@ -71,7 +71,7 @@ const CheckoutItem = props => {
                     <Text style={styles.numberText}>{orderItem.amount}</Text>
 
                     <TouchableOpacity
-                        onPress={() => props.onIncrementCoffee(orderItem)}
+                        onPress={() => props.onIncrementCoffee(orderItem.coffee)}
                         hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
                     >
                         <AntDesign
@@ -127,11 +127,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCoffee: orderItem => {
-            dispatch(incrementCoffee(orderItem));
+        onIncrementCoffee: coffee => {
+            dispatch(incrementCoffee(coffee));
         },
-        onDecrementCoffee: orderItem => {
-            dispatch(decrementCoffee(orderItem));
+        onDecrementCoffee: coffee => {
+            dispatch(decrementCoffee(coffee));
         },
     };
 };
