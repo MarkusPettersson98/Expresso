@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import { clearCart } from '../redux/actions';
 
 const ClearCheckout = ( {cart, dispatch} ) => {
-    // checks if the cart is using wacky logic, could/should be swapped with prettier solution
-    // renders conditionally
+    // checks if the cart is emtpy using the length of keys, 0 being 'falsy'
     const emptyCart = !Object.keys(cart).length;
     const checkClearCart = () => {
       return Alert.alert(

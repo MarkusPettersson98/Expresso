@@ -23,6 +23,7 @@
     "jest": "^24.7.1"
   },
   "jest": {
+    "preset": "react-native",
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
   },

@@ -1,8 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { SimpleLineIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
-import { connect } from 'react-redux';
-import { incrementCoffee, decrementCoffee } from '../redux/actions';
+import { View, Text, StyleSheet } from 'react-native';
+import {FontAwesome, Ionicons } from '@expo/vector-icons';
 
 export default (pickUpPoint = () => {
     return (
