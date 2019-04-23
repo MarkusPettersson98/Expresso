@@ -16,7 +16,7 @@ const OrderHeader = ({ picture }) => {
 const styles = StyleSheet.create({
     item: {
         justifyContent: 'flex-start',
-        height: 250,
+        height: 175,
         justifyContent: 'center',
         borderColor: '#F0F7F4',
         backgroundColor: 'black',
