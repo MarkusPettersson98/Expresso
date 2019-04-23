@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, ScrollView, StyleSheet, ImageBackground, Text, View } from 'react-native';
+import { AppRegistry, ScrollView, StyleSheet, ImageBackground, Text, View, TouchableOpacity } from 'react-native';
 
 import { default as CoffeeItem } from "./CoffeeItem";
 import { coffee } from "../dummy-data";
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         marginTop: 20,
-        flexWrap: "wrap",
+        // flexWrap: "wrap",
         alignItems: 'center',
     },
 });
@@ -25,7 +25,9 @@ export default CoffeeList = ({ selectedShop }) => {
     });
     // Create a view for every available coffee
     const CoffeeItems = shop.coffees.map((coffee, index) => {
-        return (<CoffeeItem key={index} name={coffee.name} price={coffee.price} description={coffee.description} />);
+        return (
+            <CoffeeItem key={index} coffee={coffee} />
+        );
     });
 
 

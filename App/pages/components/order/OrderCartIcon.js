@@ -12,7 +12,7 @@ const OrderCartIcon = ({ cartAmount }) => {
                     size={40}
                     color={'white'} />
                 <Text style={styles.cartIconText}>
-                    {cartAmount ? cartAmount : 0}
+                    {cartAmount}
                 </Text>
             </View>
 

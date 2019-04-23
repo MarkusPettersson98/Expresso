@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 
 import CoffeeList from './CoffeeList';
 import OrderFooter from './OrderFooter';
@@ -7,12 +8,10 @@ import OrderHeader from './OrderHeader';
 
 import { shops, coffees } from '../dummy-data';
 
-const Order = () => {
+const Order = props => {
 
-    const cart = {
-        amount: 1,
-        total: 120,
-    }
+    const cart = props.cart;
+    console.log('cart', cart); 
 
     /* Debugging variables TODO: replace with API calls */
     const Biblioteket = shops.find((shop) => shop.name === 'Biblioteket');
@@ -25,6 +24,12 @@ const Order = () => {
         </View>
     );
 
-}
+};
 
-export default Order;
+const mapStateToProps = state => {
+    return { cart: state.cart };
+};
+
+export default connect(
+    mapStateToProps,
+)(Order);

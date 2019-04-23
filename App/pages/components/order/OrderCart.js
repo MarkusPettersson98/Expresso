@@ -5,6 +5,9 @@ import OrderCartIcon from './OrderCartIcon';
 
 const OrderCart = ({ cart }) => {
 
+    const total = cart.total ? cart.total : 0;
+    const amount = cart.amonut ? cart.amount : 0;
+
     return (
 
         <View style={{
@@ -12,9 +15,9 @@ const OrderCart = ({ cart }) => {
             justifyContent: 'center',
             alignItems: 'flex-end',
         }}>
-            <OrderCartIcon cartAmount={cart.amount} />
+            <OrderCartIcon cartAmount={amount} />
             <Text style={styles.cartPriceText}>
-              {`${cart.total} kr`}
+              {`${total} kr`}
             </Text>
         </View>
     );
