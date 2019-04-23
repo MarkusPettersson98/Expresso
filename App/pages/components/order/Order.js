@@ -9,17 +9,19 @@ import { shops, coffees } from '../dummy-data';
 
 const Order = () => {
 
+    const cart = {
+        amount: 1,
+        total: 120,
+    }
+
     /* Debugging variables TODO: replace with API calls */
     const Biblioteket = shops.find((shop) => shop.name === 'Biblioteket');
-    // const coffeeAssortment = coffees.find(assortment => assortment.shop === Biblioteket.name);
 
     return (
-        <View style={{ flex: 1, }}>
-            <OrderHeader
-                picture={Biblioteket.picture} />
-            <CoffeeList
-                selectedShop={Biblioteket.name} />
-            <OrderFooter />
+        <View style={{ flex: 1 }}>
+            <OrderHeader picture={Biblioteket.picture} />
+            <CoffeeList selectedShop={Biblioteket.name} />
+            <OrderFooter cart={cart} />
         </View>
     );
 

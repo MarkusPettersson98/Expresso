@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         marginTop: 20,
         flexWrap: "wrap",
-        // backgroundColor: '#F0F7F4',
         alignItems: 'center',
     },
 });

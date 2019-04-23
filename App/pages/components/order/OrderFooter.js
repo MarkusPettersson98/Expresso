@@ -1,16 +1,18 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-import OrderCartIcon from './OrderCartIcon';
+import OrderCart from './OrderCart';
 import OrderCheckoutButton from './OrderCheckoutButton';
 
-const OrderFooter = (props) => {
+const OrderFooter = ({ cart }) => {
     return (
         <View style={styles.footer}>
             <View style={{
-                flexDirection: 'column',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
             }}>
-                <OrderCartIcon cartAmount={10} />
+                <OrderCart cart={cart} />
 
                 <OrderCheckoutButton />
             </View>
@@ -21,7 +23,6 @@ const OrderFooter = (props) => {
 const styles = StyleSheet.create({
     footer: {
         flex: 1,
-        
         backgroundColor: '#57454B',
         maxHeight: 100,
     },

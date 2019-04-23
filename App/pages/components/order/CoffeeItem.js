@@ -44,18 +44,10 @@ const CoffeeItem = ({ name, price, description }) => {
                 paddingBottom: 20,
             }}
         >
-            <View
-                style={{
-                    flex: 1,
-                }}
-            >
+            <View style={{ flex: 1 }}>
                 <SimpleLineIcons name="cup" size={20} color="#57454B" />
             </View>
-            <View
-                style={{
-                    flex: 4,
-                }}
-            >
+            <View style={{ flex: 4 }}>
                 <Text style={styles.titleText}>{name}</Text>
                 <Text style={styles.descText}>{description}</Text>
                 <View
@@ -63,17 +55,14 @@ const CoffeeItem = ({ name, price, description }) => {
                         flexDirection: 'row',
                         alignItems: 'center',
                         marginTop: 15,
-                    }}
-                >
-
+                    }}>
                 </View>
             </View>
             <View
                 style={{
                     flex: 1,
                     alignItems: 'flex-end',
-                }}
-            >
+                }}>
                 <Text style={styles.priceText}>{`${price} kr`}</Text>
             </View>
         </View>

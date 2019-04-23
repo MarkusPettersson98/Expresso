@@ -16,7 +16,6 @@ const OrderCheckoutButton = ({ cartAmount }) => {
                     style={styles.OrderButtonText}>
                     Betala >
                 </Text>
-
             </TouchableOpacity>
 
         </View>
@@ -25,7 +24,6 @@ const OrderCheckoutButton = ({ cartAmount }) => {
 
 const styles = StyleSheet.create({
     OrderButton: {
-        alignItems: 'flex-end',
         marginRight: 30,
         marginTop: 25,
         color: 'white',
