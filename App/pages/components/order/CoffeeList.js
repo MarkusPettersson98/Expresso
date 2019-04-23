@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         flexWrap: "wrap",
-        backgroundColor: '#F0F7F4',
+        // backgroundColor: '#F0F7F4',
         alignItems: 'center',
     },
 });
