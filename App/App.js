@@ -14,7 +14,7 @@ export default class App extends React.Component {
           <Provider store={store}>
             <View style={{ flex: 1 }}>
                 {/* <Menucomp /> */}
-                <CoffeeList selectedShop={"Bulten"}/>
+                <CoffeeList selectedShop={"Biblioteket"}/>
             </View>
           </Provider>
         );

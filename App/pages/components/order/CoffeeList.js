@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppRegistry, ScrollView, StyleSheet, ImageBackground, Text, View } from 'react-native';
 
-import { default as CoffeeIcon } from "./CoffeeIcon";
+import { default as CoffeeItem } from "./CoffeeItem";
 import { coffee } from "../dummy-data";
 
 
@@ -31,7 +31,7 @@ export default CoffeeList = ({ selectedShop }) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            {CoffeeIcons}
+            {CoffeeItems}
         </ScrollView>
     );
 

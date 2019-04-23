@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const styles = StyleSheet.create({
     item: {
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     priceText: {
         fontWeight: 'bold',
         fontSize: 25,
-        color: 'white',
+        color: '#7C6A70',
     },
 });
 
@@ -64,29 +65,7 @@ const CoffeeItem = ({ name, price, description }) => {
                         marginTop: 15,
                     }}
                 >
-                    <TouchableOpacity
-                        // onPress={() => checkDecrementCoffee(orderItem)}
-                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    >
-                        <AntDesign
-                            name="minuscircleo"
-                            size={20}
-                            color="#5AA3B7"
-                        />
-                    </TouchableOpacity>
 
-                    {/* <Text style={styles.numberText}>{orderItem.amount}</Text> */}
-
-                    <TouchableOpacity
-                        // onPress={() => props.onIncrementCoffee(orderItem)}
-                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    >
-                        <AntDesign
-                            name="pluscircleo"
-                            size={20}
-                            color="#5AA3B7"
-                        />
-                    </TouchableOpacity>
                 </View>
             </View>
             <View
@@ -101,4 +80,4 @@ const CoffeeItem = ({ name, price, description }) => {
     );
 };
 
-export default CoffeeIcon;
+export default CoffeeItem;
