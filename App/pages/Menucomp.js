@@ -37,76 +37,19 @@ const headerIconStyling = {
 const HomePage_StackNavigator = createStackNavigator({
     First: {
         screen: Homepage,
-        navigationOptions: ({ navigation }) => ({
-            title: 'Home Screen',
-            headerRight: (
-                <CheckoutHeader
-                    navigationProps={navigation}
-                    styling={headerIconStyling}
-                />
-            ),
-
-            ...headerStyling,
-        }),
-    },
-    Checkout: {
-        screen: Checkoutpage,
-        navigationOptions: () => ({
-            title: 'Varukorg',
-            headerRight: <ClearCheckoutHeader />,
-            ...headerStyling,
-        }),
     },
 });
 
 const ProfilePage_StackNavigator = createStackNavigator({
     Second: {
         screen: Profilepage,
-        navigationOptions: ({ navigation }) => ({
-            title: 'Profile Screen',
-            headerRight: (
-                <CheckoutHeader
-                    navigationProps={navigation}
-                    styling={headerIconStyling}
-                />
-            ),
-
-            ...headerStyling,
-        }),
-    },
-    Checkout: {
-        screen: Checkoutpage,
-        navigationOptions: () => ({
-            title: 'Varukorg',
-            headerRight: <ClearCheckoutHeader />,
-            ...headerStyling,
-        }),
     },
 });
 
 const LoginScreen_StackNavigator = createStackNavigator({
     Third: {
         screen: Loginpage,
-        navigationOptions: ({ navigation }) => ({
-            title: 'Login Screen',
-            headerRight: (
-                <CheckoutHeader
-                    navigationProps={navigation}
-                    styling={headerIconStyling}
-                />
-            ),
-
-            ...headerStyling,
-        }),
-    },
-    Checkout: {
-        screen: Checkoutpage,
-        navigationOptions: () => ({
-            title: 'Varukorg',
-            headerRight: <ClearCheckoutHeader />,
-            ...headerStyling,
-        }),
-    },
+    }
 });
 
 export const Tabs = createBottomTabNavigator({
@@ -125,6 +68,16 @@ export const RootStack = createStackNavigator(
     {
         Main: {
             screen: Tabs,
+            navigationOptions: ({ navigation }) => ({
+                title: 'Main',
+                headerRight: (
+                    <CheckoutHeader
+                        navigationProps={navigation}
+                        styling={headerIconStyling}
+                    />
+                ),
+                ...headerStyling,
+            }),
         },
         Checkout: {
             screen: Checkoutpage,
@@ -137,7 +90,6 @@ export const RootStack = createStackNavigator(
     },
     {
         mode: 'modal',
-        headerMode: 'none',
     },
 );
 
