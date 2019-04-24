@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import OrderCartIcon from './OrderCartIcon';
 import { calculateCartPrice, calculateCartAmount } from '../redux/cartFunctions';
@@ -10,7 +10,6 @@ const OrderCart = ({ cart }) => {
     const amount = calculateCartAmount(cart);
 
     return (
-
         <View style={{
             flexDirection: 'row',
             justifyContent: 'center',
