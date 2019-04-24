@@ -11,8 +11,7 @@ import { shops, coffees } from '../dummy-data';
 const Order = props => {
 
     const cart = props.cart;
-    console.log('cart', cart); 
-
+    
     /* Debugging variables TODO: replace with API calls */
     const Biblioteket = shops.find((shop) => shop.name === 'Biblioteket');
 

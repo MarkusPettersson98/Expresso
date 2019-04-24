@@ -5,7 +5,7 @@ import OrderCart from './OrderCart';
 import OrderCheckoutButton from './OrderCheckoutButton';
 
 const OrderFooter = ({ cart }) => {
-    console.log('OrderFooter', cart);
+
     return (
         <View style={styles.footer}>
             <View style={{
