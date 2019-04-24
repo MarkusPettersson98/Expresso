@@ -1,10 +1,42 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View } from 'react-native';
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Text,
+    TouchableOpacity,
+} from 'react-native';
 import MapView from 'react-native-maps';
 import shops from '../dummy-data';
 
-export default Mapcomp = () => {
-    const markers = shops.map((shop, index) => {
+export default class Mapcomp extends Component {
+    constructor() {
+        super();
+        this.state = {
+            markers: shops.map((shop, index) => {
+                return (
+                    <View key={index}>
+                        <MapView.Marker
+                            coordinate={{
+                                latitude: shop.coordinates.latitude,
+                                longitude: shop.coordinates.longitude,
+                            }}
+                        >
+                            <MapView.Callout onPress={() => alert('coffee')}>
+                                <TouchableOpacity
+                                    onPress={() => onMarkerPress({ index })}
+                                >
+                                    <Text>{shop.name}</Text>
+                                </TouchableOpacity>
+                            </MapView.Callout>
+                        </MapView.Marker>
+                    </View>
+                );
+            }),
+        };
+    }
+
+    render() {
         return (
             <MapView.Marker
                 key={index}
@@ -38,7 +70,6 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '85%',
-        //borderTopWidth: 5,
         top: 0,
         left: 0,
         bottom: 0,
