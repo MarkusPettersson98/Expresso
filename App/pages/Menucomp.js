@@ -11,6 +11,7 @@ import QRpage from './QRpage';
 import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
+import ExitCheckout from './components/header/ExitCheckout';
 import {
     Feather,
     FontAwesome,
@@ -129,9 +130,10 @@ export const RootStack = createStackNavigator(
         },
         Checkout: {
             screen: Checkoutpage,
-            navigationOptions: () => ({
+            navigationOptions: ({ navigation }) => ({
                 title: 'Varukorg',
                 headerRight: <ClearCheckoutHeader />,
+                headerLeft: <ExitCheckout navigationProps={navigation} />,
                 ...headerStyling,
             }),
         },
