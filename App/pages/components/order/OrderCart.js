@@ -2,11 +2,12 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import OrderCartIcon from './OrderCartIcon';
+import { calculateCartPrice, calculateCartAmount } from '../redux/cartFunctions';
 
 const OrderCart = ({ cart }) => {
 
-    const total = cart.total ? cart.total : 0;
-    const amount = cart.amount ? cart.amount : 0;
+    const total = calculateCartPrice(cart);
+    const amount = calculateCartAmount(cart);
 
     return (
 
