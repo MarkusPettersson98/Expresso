@@ -4,16 +4,15 @@ import { Ionicons } from '@expo/vector-icons';
 
 const OrderCartIcon = ({ cartAmount }) => {
     return (
-        
-            <View style={styles.cartIcon}>
-                <Ionicons
-                    name="ios-cart"
-                    size={40}
-                    color={'white'} />
-                <Text style={styles.cartIconText}>
-                    {cartAmount}
-                </Text>
-            </View>
+        <View style={styles.cartIcon}>
+            <Ionicons
+                name="ios-cart"
+                size={40}
+                color={'white'} />
+            <Text style={styles.cartIconText}>
+                {cartAmount}
+            </Text>
+        </View>
 
     );
 };

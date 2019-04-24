@@ -1,11 +1,9 @@
 import React from 'react';
-import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { connect } from 'react-redux';
 import { addCoffee } from '../redux/actions';
-
-
 
 const styles = StyleSheet.create({
     item: {
@@ -36,7 +34,6 @@ const styles = StyleSheet.create({
 const CoffeeItem = props => {
 
     const coffee = props.coffee;
-    //console.log('coffee', coffee);
 
     return (
         <View

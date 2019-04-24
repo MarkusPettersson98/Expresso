@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const OrderCheckoutButton = ({ cartAmount }) => {
+const OrderCheckoutButton = () => {
 
-    const clickAction = () => console.log("Hej");
+    const clickAction = () => console.log("OrderCheckoutButton: Klickade på betala");
 
     return (
-
         <View
             style={styles.OrderButton}>
             <TouchableOpacity

@@ -17,9 +17,9 @@ export const calculateCartAmount = orderItems => {
     // there are in cart and add to total amount
 
     const totalOrderItemAmount = orderItem => orderItem.amount;
-    
+
     return Object.keys(orderItems).reduce(
-        ((currentTotalAmount, key) =>  {
+        ((currentTotalAmount, key) => {
             const orderItem = orderItems[key];
             return currentTotalAmount + totalOrderItemAmount(orderItem);
         }), 0);

@@ -6,7 +6,7 @@ import CoffeeList from './CoffeeList';
 import OrderFooter from './OrderFooter';
 import OrderHeader from './OrderHeader';
 
-import { shops, coffees } from '../dummy-data';
+import { shops } from '../dummy-data';
 
 const Order = props => {
 
