@@ -13,6 +13,9 @@ export default class Homepage extends Component {
     _pressBV = () => this.setState({ toggle: 'BV' });
     _pressMV = () => this.setState({ toggle: 'MV' });
 
+    navigate = this.props.navigation.navigate;
+
+
     render() {
         return (
             <View style={styles.container}>
@@ -38,7 +41,7 @@ export default class Homepage extends Component {
                     />
                 </View>
 
-                {this.state.toggle == 'LV' && <Maincomp />}
+                {this.state.toggle == 'LV' && <Maincomp navigate={this.navigate} />}
                 {this.state.toggle == 'BV' && <Blockcomp />}
                 {this.state.toggle == 'MV' && <Mapcomp />}
             </View>

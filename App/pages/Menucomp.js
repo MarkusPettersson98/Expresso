@@ -12,6 +12,8 @@ import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import ExitCheckout from './components/header/ExitCheckout';
+import Order from './components/order/Order';
+
 import {
     Feather,
     FontAwesome,
@@ -119,6 +121,19 @@ export const RootStack = createStackNavigator(
             screen: Tabs,
             navigationOptions: ({ navigation }) => ({
                 title: 'Main',
+                headerRight: (
+                    <CheckoutHeader
+                        navigationProps={navigation}
+                        styling={headerIconStyling}
+                    />
+                ),
+                ...headerStyling,
+            }),
+        },
+        Order: {
+            screen: Order,
+            navigationOptions: ({ navigation }) => ({
+                title: 'Order',
                 headerRight: (
                     <CheckoutHeader
                         navigationProps={navigation}

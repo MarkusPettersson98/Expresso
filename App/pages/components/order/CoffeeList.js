@@ -22,7 +22,7 @@ export default CoffeeList = ({ selectedShop }) => {
     const shop = coffee.find((allShops) => {
         return allShops.shop == selectedShop;
     });
-    
+
     // Create a view for every available coffee
     const CoffeeItems = shop.coffees.map((coffee, index) => {
         return (

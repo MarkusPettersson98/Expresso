@@ -4,9 +4,9 @@ import { AppRegistry, ScrollView } from 'react-native';
 import { default as ShopView } from './ListShopView';
 import shops from '../dummy-data';
 
-export default (Maincomp = props => {
+export default Maincomp = props => {
     const ShopViews = shops.map((shop, index) => {
-        return <ShopView key={index} name={shop.name} picture={shop.picture} />;
+        return <ShopView key={index} name={shop.name} picture={shop.picture} navigate={props.navigate}/>;
     });
 
     return (
@@ -14,7 +14,7 @@ export default (Maincomp = props => {
             {ShopViews}
         </ScrollView>
     );
-});
+};
 
 const styles = {
     container: {
