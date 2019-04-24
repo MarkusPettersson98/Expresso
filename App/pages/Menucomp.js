@@ -32,59 +32,85 @@ const headerIconStyling = {
 };
 
 const tabIconStyling = {
-    size: 24,
+    size: 26,
     selected: '#362D30',
     inactive: '#9C9497',
 };
 
-export const Tabs = createBottomTabNavigator({
-    Lista: {
-        screen: Homepage,
-        navigationOptions: {
-            tabBarLabel: 'Lista',
-            tabBarIcon: ({ focused, tintColor }) => {
-                return (
-                    <Feather
-                        name={'list'}
-                        color={focused ? tabIconStyling.selected : tabIconStyling.inactive}
-                        size={tabIconStyling.size}
-                    />
-                );
+export const Tabs = createBottomTabNavigator(
+    {
+        Lista: {
+            screen: Homepage,
+            navigationOptions: {
+                tabBarLabel: 'Lista',
+                tabBarIcon: ({ focused, tintColor }) => {
+                    return (
+                        <Feather
+                            name={'list'}
+                            color={
+                                focused
+                                    ? tabIconStyling.selected
+                                    : tabIconStyling.inactive
+                            }
+                            size={tabIconStyling.size}
+                        />
+                    );
+                },
             },
         },
-    },
 
-    QR: {
-        screen: QRpage,
-        navigationOptions: {
-            tabBarLabel: 'QR',
-            tabBarIcon: ({ focused, tintColor }) => {
-                return (
-                    <FontAwesome
-                        name={'qrcode'}
-                        color={focused ? tabIconStyling.selected : tabIconStyling.inactive}
-                        size={tabIconStyling.size}
-                    />
-                );
+        QR: {
+            screen: QRpage,
+            navigationOptions: {
+                tabBarLabel: 'QR',
+                tabBarIcon: ({ focused, tintColor }) => {
+                    return (
+                        <FontAwesome
+                            name={'qrcode'}
+                            color={
+                                focused
+                                    ? tabIconStyling.selected
+                                    : tabIconStyling.inactive
+                            }
+                            size={tabIconStyling.size}
+                        />
+                    );
+                },
+            },
+        },
+        profile: {
+            screen: Profilepage,
+            navigationOptions: {
+                tabBarLabel: 'Profil',
+                tabBarIcon: ({ focused, tintColor }) => {
+                    return (
+                        <Feather
+                            name={'github'}
+                            color={
+                                focused
+                                    ? tabIconStyling.selected
+                                    : tabIconStyling.inactive
+                            }
+                            size={tabIconStyling.size}
+                        />
+                    );
+                },
             },
         },
     },
-    profile: {
-        screen: Profilepage,
-        navigationOptions: {
-            tabBarLabel: 'Profil',
-            tabBarIcon: ({ focused, tintColor }) => {
-                return (
-                    <Feather
-                        name={'github'}
-                        color={focused ? tabIconStyling.selected : tabIconStyling.inactive}
-                        size={tabIconStyling.size}
-                    />
-                );
+    {
+        tabBarOptions: {
+            activeTintColor: '#362D30',
+            activeBackgroundColor: '#eee',
+            labelStyle: {
+                fontSize: 12,
+            },
+            style: {
+                backgroundColor: 'white',
             },
         },
     },
-});
+);
 
 export const RootStack = createStackNavigator(
     {
