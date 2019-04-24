@@ -27,5 +27,5 @@ export function addCoffee(coffee) {
 }
 
 export function clearCart() {
-  return { type: CART_CLEAR };
+    return { type: CART_CLEAR };
 }

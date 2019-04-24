@@ -20,7 +20,6 @@ import DrawerHeader from './components/header/DrawerIcon';
     I (robert) tried to no success without it being really buggy.
 */
 
-
 // so that the colour of the header is located at one spot.
 const headerStyling = {
     headerStyle: {
@@ -59,11 +58,9 @@ const HomePage_StackNavigator = createStackNavigator({
     Checkout: {
         screen: Checkoutpage,
         navigationOptions: () => ({
-          title: 'Varukorg',
-          headerRight: (
-            <ClearCheckoutHeader />
-          ),
-          ...headerStyling
+            title: 'Varukorg',
+            headerRight: <ClearCheckoutHeader />,
+            ...headerStyling,
         }),
     },
 });
@@ -92,11 +89,9 @@ const ProfilePage_StackNavigator = createStackNavigator({
     Checkout: {
         screen: Checkoutpage,
         navigationOptions: () => ({
-          title: 'Varukorg',
-          headerRight: (
-            <ClearCheckoutHeader />
-          ),
-          ...headerStyling
+            title: 'Varukorg',
+            headerRight: <ClearCheckoutHeader />,
+            ...headerStyling,
         }),
     },
 });
@@ -125,11 +120,9 @@ const LoginScreen_StackNavigator = createStackNavigator({
     Checkout: {
         screen: Checkoutpage,
         navigationOptions: () => ({
-          title: 'Varukorg',
-          headerRight: (
-            <ClearCheckoutHeader />
-          ),
-          ...headerStyling
+            title: 'Varukorg',
+            headerRight: <ClearCheckoutHeader />,
+            ...headerStyling,
         }),
     },
 });

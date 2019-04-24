@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, ImageBackground, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {
+    View,
+    ImageBackground,
+    Text,
+    StyleSheet,
+    TouchableWithoutFeedback,
+} from 'react-native';
 
 const styles = StyleSheet.create({
     item: {
@@ -8,30 +14,31 @@ const styles = StyleSheet.create({
         borderWidth: 10,
         justifyContent: 'center',
         borderColor: '#F0F7F4',
-        backgroundColor: 'black'
+        backgroundColor: 'black',
     },
     text: {
         fontWeight: 'bold',
         fontSize: 25,
         color: 'white',
-    }
+    },
 });
 
-
-const BlockShopView = ({index, name, picture}) => {
+const BlockShopView = ({ index, name, picture }) => {
     return (
-        <View style = {styles.item}>
-        <TouchableWithoutFeedback onPress={() => alert('coffee')}> 
-            <ImageBackground key = {index}
-                             source = {picture}
-                             style={{
-                                 width: '100%',
-                                 height: '100%',
-                                 borderRadius: 20,
-                             }}
-                             resizeMode = 'cover' >
-                <Text style={styles.text}>{name}</Text>
-            </ImageBackground>
+        <View style={styles.item}>
+            <TouchableWithoutFeedback onPress={() => alert('coffee')}>
+                <ImageBackground
+                    key={index}
+                    source={picture}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: 20,
+                    }}
+                    resizeMode="cover"
+                >
+                    <Text style={styles.text}>{name}</Text>
+                </ImageBackground>
             </TouchableWithoutFeedback>
         </View>
     );

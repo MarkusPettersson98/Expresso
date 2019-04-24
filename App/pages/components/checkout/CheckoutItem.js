@@ -6,23 +6,27 @@ import { incrementCoffee, decrementCoffee } from '../redux/actions';
 
 const CheckoutItem = props => {
     const orderItem = props.orderItem;
-    const checkDecrementCoffee = (orderItem) => {
-      if (props.orderItem.amount == 1) {
-        return Alert.alert(
-          'Varning',
-          'Är du säker på att du vill ta bort varan?',
-          [
-            {
-              text: 'Avbryt',
-              //onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-            {text: 'OK', onPress: () => props.onDecrementCoffee(orderItem.coffee)},
-          ]
-        );
-      }
-      return props.onDecrementCoffee(orderItem.coffee)
-    }
+    const checkDecrementCoffee = orderItem => {
+        if (props.orderItem.amount == 1) {
+            return Alert.alert(
+                'Varning',
+                'Är du säker på att du vill ta bort varan?',
+                [
+                    {
+                        text: 'Avbryt',
+                        //onPress: () => console.log('Cancel Pressed'),
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'OK',
+                        onPress: () =>
+                            props.onDecrementCoffee(orderItem.coffee),
+                    },
+                ],
+            );
+        }
+        return props.onDecrementCoffee(orderItem.coffee);
+    };
 
     return (
         <View
@@ -59,7 +63,7 @@ const CheckoutItem = props => {
                 >
                     <TouchableOpacity
                         onPress={() => checkDecrementCoffee(orderItem)}
-                        hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                     >
                         <AntDesign
                             name="minuscircleo"
@@ -71,8 +75,10 @@ const CheckoutItem = props => {
                     <Text style={styles.numberText}>{orderItem.amount}</Text>
 
                     <TouchableOpacity
-                        onPress={() => props.onIncrementCoffee(orderItem.coffee)}
-                        hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+                        onPress={() =>
+                            props.onIncrementCoffee(orderItem.coffee)
+                        }
+                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                     >
                         <AntDesign
                             name="pluscircleo"
