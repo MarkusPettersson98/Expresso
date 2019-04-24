@@ -1,7 +1,13 @@
-import React, { Component } from "react";
-import { AppRegistry, StyleSheet, View, Text, TouchableOpacity} from "react-native";
-import MapView from "react-native-maps";
-import shops from "../dummy-data";
+import React, { Component } from 'react';
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Text,
+    TouchableOpacity,
+} from 'react-native';
+import MapView from 'react-native-maps';
+import shops from '../dummy-data';
 
 export default class Mapcomp extends Component {
     constructor() {
@@ -9,20 +15,22 @@ export default class Mapcomp extends Component {
         this.state = {
             markers: shops.map((shop, index) => {
                 return (
-                  <View key={index}>
-                    <MapView.Marker
-                        coordinate={{
-                            latitude: shop.coordinates.latitude,
-                            longitude: shop.coordinates.longitude,
-                        }}
-                    >
-                    <MapView.Callout onPress ={() => alert('coffee')}>
-                      <TouchableOpacity onPress={() => onMarkerPress({index})}>
-                        <Text>{shop.name}</Text>
-                      </TouchableOpacity>
-                    </MapView.Callout>
-                    </MapView.Marker>
-                  </View>
+                    <View key={index}>
+                        <MapView.Marker
+                            coordinate={{
+                                latitude: shop.coordinates.latitude,
+                                longitude: shop.coordinates.longitude,
+                            }}
+                        >
+                            <MapView.Callout onPress={() => alert('coffee')}>
+                                <TouchableOpacity
+                                    onPress={() => onMarkerPress({ index })}
+                                >
+                                    <Text>{shop.name}</Text>
+                                </TouchableOpacity>
+                            </MapView.Callout>
+                        </MapView.Marker>
+                    </View>
                 );
             }),
         };

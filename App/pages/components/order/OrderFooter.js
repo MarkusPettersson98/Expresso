@@ -5,14 +5,15 @@ import OrderCart from './OrderCart';
 import OrderCheckoutButton from './OrderCheckoutButton';
 
 const OrderFooter = ({ cart }) => {
-
     return (
         <View style={styles.footer}>
-            <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-            }}>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                }}
+            >
                 <OrderCart cart={cart} />
 
                 <OrderCheckoutButton />

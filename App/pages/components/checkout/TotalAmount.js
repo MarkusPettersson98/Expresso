@@ -1,17 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const TotalAmount = ({total}) => {
+const TotalAmount = ({ total }) => {
     return (
-        <View style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginHorizontal: '5%',
-        }}>
-          <Text style={styles.titleText}>Totalt:</Text>
-          <Text style={styles.priceText}>{`${total} kr`}</Text>
+        <View
+            style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginHorizontal: '5%',
+            }}
+        >
+            <Text style={styles.titleText}>Totalt:</Text>
+            <Text style={styles.priceText}>{`${total} kr`}</Text>
         </View>
     );
 };

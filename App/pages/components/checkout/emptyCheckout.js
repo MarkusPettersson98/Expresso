@@ -19,7 +19,7 @@ export default EmptyCheckout;
 
 const styles = StyleSheet.create({
     app: {
-        flex: 1
+        flex: 1,
     },
     content: {
         flex: 1,

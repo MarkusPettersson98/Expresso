@@ -2,23 +2,25 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import OrderCartIcon from './OrderCartIcon';
-import { calculateCartPrice, calculateCartAmount } from '../redux/cartFunctions';
+import {
+    calculateCartPrice,
+    calculateCartAmount,
+} from '../redux/cartFunctions';
 
 const OrderCart = ({ cart }) => {
-
     const total = calculateCartPrice(cart);
     const amount = calculateCartAmount(cart);
 
     return (
-        <View style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-        }}>
+        <View
+            style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+            }}
+        >
             <OrderCartIcon cartAmount={amount} />
-            <Text style={styles.cartPriceText}>
-                {`${total} kr`}
-            </Text>
+            <Text style={styles.cartPriceText}>{`${total} kr`}</Text>
         </View>
     );
 };

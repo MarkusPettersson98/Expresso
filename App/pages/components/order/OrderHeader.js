@@ -7,8 +7,8 @@ const OrderHeader = ({ picture }) => {
             <ImageBackground
                 source={picture}
                 resizeMode="cover"
-                style={styles.image}>
-            </ImageBackground>
+                style={styles.image}
+            />
         </View>
     );
 };

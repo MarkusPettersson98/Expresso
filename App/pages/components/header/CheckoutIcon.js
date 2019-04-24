@@ -7,8 +7,7 @@ const Checkout = props => {
         <View style={{ flexDirection: 'row', margin: 5 }}>
             <TouchableOpacity
                 onPress={() => props.navigationProps.navigate('Checkout')}
-                hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
-
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
                 <Ionicons
                     name="ios-cart"
