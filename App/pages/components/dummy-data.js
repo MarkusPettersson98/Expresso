@@ -64,16 +64,19 @@ export const coffee =[
             name: 'Bryggkaffe', 
             price: 12,
             description: 'Bränt kaffe från Hubben',
+            id: 123,
         },
         {
             name: 'Kaffe',
             price: 12,
             description: 'Mellanrost från Skåne',
+            id: 124,
         },
         {
             name: 'Kokkaffe', 
             price: 12,
             description: 'Mörkrost från Brasilien',
+            id: 125,
         },
         ]
     },
