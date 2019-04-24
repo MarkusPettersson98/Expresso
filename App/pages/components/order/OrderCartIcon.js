@@ -4,8 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const OrderCartIcon = ({ cartAmount }) => {
     return (
-        <View style={{
-        }}>
+        
             <View style={styles.cartIcon}>
                 <Ionicons
                     name="ios-cart"
@@ -16,8 +15,6 @@ const OrderCartIcon = ({ cartAmount }) => {
                 </Text>
             </View>
 
-
-        </View>
     );
 };
 

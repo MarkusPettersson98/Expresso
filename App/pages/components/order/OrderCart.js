@@ -6,7 +6,7 @@ import OrderCartIcon from './OrderCartIcon';
 const OrderCart = ({ cart }) => {
 
     const total = cart.total ? cart.total : 0;
-    const amount = cart.amonut ? cart.amount : 0;
+    const amount = cart.amount ? cart.amount : 0;
 
     return (
 
@@ -17,7 +17,7 @@ const OrderCart = ({ cart }) => {
         }}>
             <OrderCartIcon cartAmount={amount} />
             <Text style={styles.cartPriceText}>
-              {`${total} kr`}
+                {`${total} kr`}
             </Text>
         </View>
     );
