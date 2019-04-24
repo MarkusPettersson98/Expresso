@@ -19,45 +19,39 @@ import {
 export const INITIAL_STATE = {};
 
 export function cart(orderItems = INITIAL_STATE, action) {
-    let existingItem;
     let id;
+    let existingItem;
+
     switch (action.type) {
         case CART_ADD_COFFEE:
+        case ITEM_INCREMENT:
             id = action.coffee.id;
             existingItem = orderItems[id];
-            return Object.assign({}, orderItems, {
+
+            return {
+                ...orderItems,
                 [id]: {
                     coffee: action.coffee,
                     amount: existingItem ? existingItem.amount + 1 : 1,
                 },
-            });
-
-        case ITEM_INCREMENT:
-            id = action.orderItem.coffee.id;
-            existingItem = orderItems[id];
-
-            return Object.assign({}, orderItems, {
-                [id]: {
-                    coffee: action.orderItem.coffee,
-                    amount: existingItem ? existingItem.amount + 1 : 1,
-                },
-            });
+            };
 
         case ITEM_DECREMENT:
-            id = action.orderItem.coffee.id;
+            id = action.coffee.id;
             existingItem = orderItems[id];
             if (existingItem.amount == 1) {
                 // Delete item
                 let newState = Object.assign({}, orderItems);
                 delete newState[id];
                 return newState;
+            } else {
+                return Object.assign({}, orderItems, {
+                    [id]: {
+                        coffee: action.coffee,
+                        amount: existingItem ? existingItem.amount - 1 : 1,
+                    },
+                });
             }
-            return Object.assign({}, orderItems, {
-                [id]: {
-                    coffee: action.orderItem.coffee,
-                    amount: existingItem ? existingItem.amount - 1 : 1,
-                },
-            });
 
         case CART_CLEAR:
             return {};

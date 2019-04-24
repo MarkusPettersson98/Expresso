@@ -5,10 +5,11 @@ import CheckoutItem from './CheckoutItem';
 import OrderButton from './OrderButton';
 import TotalAmount from './TotalAmount';
 import PickUpLocation from './pickUpPointView';
+import { calculateCartPrice } from '../redux/cartFunctions';
 
 const NonEmptyCheckoutPage = props => {
     let orderItems = Object.values(props.cart);
-    let total = getTotalOrder(orderItems);
+    let total = calculateCartPrice(orderItems);
 
     return (
         <View
@@ -72,19 +73,6 @@ const NonEmptyCheckoutPage = props => {
             </View>
         </View>
     );
-};
-
-export const getTotalOrder = orderItems => {
-    let total = 0;
-    // check if the orderItem is an empty object using
-    // https://coderwall.com/p/_g3x9q/how-to-check-if-javascript-object-is-empty
-    if (Object.keys(orderItems).length) {
-		// loop through object using https://stackoverflow.com/a/5737192
-        Object.keys(orderItems).forEach(function(key) {
-            total = total + orderItems[key].coffee.price * orderItems[key].amount;
-        });
-    }
-    return total;
 };
 
 const mapStateToProps = state => {
