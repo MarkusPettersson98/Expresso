@@ -7,18 +7,15 @@ import {
 
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
-import Loginpage from './LoginPage';
+import QRpage from './QRpage';
 import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
-import DrawerHeader from './components/header/DrawerIcon';
-
-/*
-    Temporarily, all of the stackNavigators carry a checkoutScreen.
-    There is some documentation regarding defaultNavitationOptions which can be looked into,
-    so that we dont need to fix the header and add the checkoutscreen navigation ability, however,
-    I (robert) tried to no success without it being really buggy.
-*/
+import {
+    Feather,
+    FontAwesome,
+    MaterialCommunityIcons,
+} from '@expo/vector-icons';
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -34,15 +31,58 @@ const headerIconStyling = {
     color: '#F0F7F4',
 };
 
+const tabIconStyling = {
+    size: 24,
+    selected: '#362D30',
+    inactive: '#9C9497',
+};
+
 export const Tabs = createBottomTabNavigator({
     Lista: {
         screen: Homepage,
+        navigationOptions: {
+            tabBarLabel: 'Lista',
+            tabBarIcon: ({ focused, tintColor }) => {
+                return (
+                    <Feather
+                        name={'list'}
+                        color={focused ? tabIconStyling.selected : tabIconStyling.inactive}
+                        size={tabIconStyling.size}
+                    />
+                );
+            },
+        },
     },
+
     QR: {
-        screen: Loginpage,
+        screen: QRpage,
+        navigationOptions: {
+            tabBarLabel: 'QR',
+            tabBarIcon: ({ focused, tintColor }) => {
+                return (
+                    <FontAwesome
+                        name={'qrcode'}
+                        color={focused ? tabIconStyling.selected : tabIconStyling.inactive}
+                        size={tabIconStyling.size}
+                    />
+                );
+            },
+        },
     },
     profile: {
         screen: Profilepage,
+        navigationOptions: {
+            tabBarLabel: 'Profil',
+            tabBarIcon: ({ focused, tintColor }) => {
+                return (
+                    <Feather
+                        name={'github'}
+                        color={focused ? tabIconStyling.selected : tabIconStyling.inactive}
+                        size={tabIconStyling.size}
+                    />
+                );
+            },
+        },
     },
 });
 
