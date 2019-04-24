@@ -1,4 +1,4 @@
-import { calculateCartPrice } from '../NonEmptyCheckout';
+import { calculateCartPrice } from '../../redux/cartFunctions';
 import {
     brygg_kaffe,
     cappuccino,
