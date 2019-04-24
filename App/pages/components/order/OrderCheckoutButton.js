@@ -13,7 +13,7 @@ const OrderCheckoutButton = () => {
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} >
                 <Text
                     style={styles.OrderButtonText}>
-                    Betala >
+                    BETALA >
                 </Text>
             </TouchableOpacity>
 
@@ -23,13 +23,14 @@ const OrderCheckoutButton = () => {
 
 const styles = StyleSheet.create({
     OrderButton: {
-        marginRight: 30,
+        marginRight: 25,
         marginTop: 25,
         color: 'white',
     },
     OrderButtonText: {
-        borderColor: 'white',
-        fontSize: 25,
+        fontWeight: '500',
+        letterSpacing: 2,
+        fontSize: 20,
         color: 'white',
     },
 });
