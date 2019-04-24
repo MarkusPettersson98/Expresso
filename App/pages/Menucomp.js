@@ -34,33 +34,15 @@ const headerIconStyling = {
     color: '#F0F7F4',
 };
 
-const HomePage_StackNavigator = createStackNavigator({
-    First: {
-        screen: Homepage,
-    },
-});
-
-const ProfilePage_StackNavigator = createStackNavigator({
-    Second: {
-        screen: Profilepage,
-    },
-});
-
-const LoginScreen_StackNavigator = createStackNavigator({
-    Third: {
-        screen: Loginpage,
-    }
-});
-
 export const Tabs = createBottomTabNavigator({
     Lista: {
-        screen: HomePage_StackNavigator,
+        screen: Homepage,
     },
     QR: {
-        screen: LoginScreen_StackNavigator,
+        screen: Loginpage,
     },
     profile: {
-        screen: ProfilePage_StackNavigator,
+        screen: Profilepage,
     },
 });
 
