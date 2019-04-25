@@ -51,7 +51,7 @@ export const Homepage_Stack = createStackNavigator(
     },
     {
         // in order to have stacknavigator inside of tabnavigator.
-        headerMode: 'none'
+        headerMode: 'none',
     },
 );
 

@@ -9,7 +9,6 @@ import OrderHeader from './OrderHeader';
 import { shops } from '../dummy-data';
 
 const Order = props => {
-
     const selectedShop = props.navigation.state.params.selectedShop;
     const foundShop = shops.find(shop => shop.name === selectedShop);
 
