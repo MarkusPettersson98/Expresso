@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
-const OrderCheckoutButton = () => {
+
+
+const OrderCheckoutButton = (props) => {
     const clickAction = () =>
-        console.log('OrderCheckoutButton: Klickade på betala');
+        props.navigation.navigate('Checkout');
 
     return (
         <View style={styles.OrderButton}>
@@ -31,4 +34,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default OrderCheckoutButton;
+export default withNavigation(OrderCheckoutButton);
