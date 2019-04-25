@@ -42,9 +42,9 @@ export default class Homepage extends Component {
                 </View>
 
                 <View style={styles.contentContainer}>
-                  {this.state.toggle == 'LV' && <Maincomp />}
-                  {this.state.toggle == 'BV' && <Blockcomp />}
-                  {this.state.toggle == 'MV' && <Mapcomp />}
+                  {this.state.toggle == 'LV' && <Maincomp navigate={this.navigate}/>}
+                  {this.state.toggle == 'BV' && <Blockcomp navigate={this.navigate} />}
+                  {this.state.toggle == 'MV' && <Mapcomp navigate={this.navigate}/>}
                 </View>
             </View>
         );

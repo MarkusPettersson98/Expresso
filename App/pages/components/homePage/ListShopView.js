@@ -6,7 +6,7 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native';
 
-const ShopView = ({ name, picture, navigate }) => {
+const ShopView = ({ index ,name, picture, navigate }) => {
     console.log('ListShopView', navigate);
     return (
         <View style={styles.item}>
@@ -14,6 +14,7 @@ const ShopView = ({ name, picture, navigate }) => {
                 onPress={() => navigate('Order', { selectedShop: name })}
             >
                 <ImageBackground
+                    key={index}
                     source={picture}
                     resizeMode="cover"
                     style={styles.image}

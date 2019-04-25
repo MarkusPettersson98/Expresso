@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, Text, StyleSheet } from 'react-native';
+import { View, ImageBackground, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 const styles = StyleSheet.create({
     item: {
@@ -17,21 +17,25 @@ const styles = StyleSheet.create({
     },
 });
 
-const BlockShopView = ({ index, name, picture }) => {
+const BlockShopView = ({ index, name, picture, navigate }) => {
     return (
         <View style={styles.item}>
-            <ImageBackground
-                key={index}
-                source={picture}
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 20,
-                }}
-                resizeMode="cover"
+            <TouchableWithoutFeedback
+                onPress={() => navigate('Order', { selectedShop: name })}
             >
-                <Text style={styles.text}>{name}</Text>
-            </ImageBackground>
+                <ImageBackground
+                    key={index}
+                    source={picture}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: 20,
+                    }}
+                    resizeMode="cover"
+                >
+                    <Text style={styles.text}>{name}</Text>
+                </ImageBackground>
+            </TouchableWithoutFeedback>
         </View>
     );
 };
