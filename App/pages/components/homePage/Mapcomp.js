@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 import shops from '../dummy-data';
+import Order from '../order/Order'
+import { withNavigation } from 'react-navigation';
 
-export default class Mapcomp extends Component {
+class Mapcomp extends Component {
     constructor() {
         super();
         this.state = {
@@ -22,7 +24,7 @@ export default class Mapcomp extends Component {
                                 longitude: shop.coordinates.longitude,
                             }}
                         >
-                            <MapView.Callout onPress={() => alert('coffee')}>
+                            <MapView.Callout onPress={() => this.props.navigation.navigate('Order')}>
                                 <TouchableOpacity
                                     onPress={() => onMarkerPress({ index })}
                                 >
@@ -75,3 +77,4 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('Mapcomp', () => Mapcomp);
+export default withNavigation(Mapcomp);
