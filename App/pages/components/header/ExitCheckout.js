@@ -6,7 +6,7 @@ const ExitCheckout = props => {
     return (
         <View style={{ flexDirection: 'row', margin: 5 }}>
             <TouchableOpacity
-                onPress={() => props.navigationProps.navigate('Main')}
+                onPress={() => props.navigationProps.goBack()}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
 				style={{flexDirection: 'row'}}
             >

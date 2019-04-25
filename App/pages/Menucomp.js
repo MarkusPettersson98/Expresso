@@ -40,10 +40,34 @@ const tabIconStyling = {
     inactive: '#9C9497',
 };
 
+export const Homepage_Stack = createStackNavigator({
+    Homepage: {
+        screen: Homepage,
+        navigationOptions: {
+        },
+    },
+    Order: {
+        screen: Order,
+        navigationOptions: ({ navigation }) => ({
+            title: 'Order',
+            headerRight: (
+                <CheckoutHeader
+                    navigationProps={navigation}
+                    styling={headerIconStyling}
+                />
+            ),
+            ...headerStyling,
+        }),
+    },
+}, {
+    // in order to have stacknavigator inside of tabnavigator.
+    headerMode: 'none'
+});
+
 export const Tabs = createBottomTabNavigator(
     {
         Lista: {
-            screen: Homepage,
+            screen: Homepage_Stack,
             navigationOptions: {
                 tabBarLabel: 'Lista',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -130,19 +154,6 @@ export const RootStack = createStackNavigator(
                 ...headerStyling,
             }),
         },
-        Order: {
-            screen: Order,
-            navigationOptions: ({ navigation }) => ({
-                title: 'Order',
-                headerRight: (
-                    <CheckoutHeader
-                        navigationProps={navigation}
-                        styling={headerIconStyling}
-                    />
-                ),
-                ...headerStyling,
-            }),
-        },
         Checkout: {
             screen: Checkoutpage,
             navigationOptions: ({ navigation }) => ({
@@ -154,7 +165,7 @@ export const RootStack = createStackNavigator(
         },
     },
     {
-        mode: 'modal',
+        mode: 'card',
     },
 );
 

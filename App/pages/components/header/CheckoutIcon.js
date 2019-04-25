@@ -6,7 +6,7 @@ const Checkout = props => {
     return (
         <View style={{ flexDirection: 'row', margin: 5 }}>
             <TouchableOpacity
-                onPress={() => props.navigationProps.navigate('Checkout')}
+                onPress={() => props.navigationProps.push('Checkout')}
                 hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
 
             >
