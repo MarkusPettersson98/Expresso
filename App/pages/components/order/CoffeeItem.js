@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
 });
 
 const CoffeeItem = props => {
-
     const coffee = props.coffee;
 
     return (
@@ -71,32 +70,19 @@ const CoffeeItem = props => {
                             paddingLeft: 10,
                         }}
                     >
-                        <Text
-                            style={styles.titleText}
-                        >
-                            {coffee.name}
-                        </Text>
-                        <Text
-                            style={styles.descText}
-                        >
+                        <Text style={styles.titleText}>{coffee.name}</Text>
+                        <Text style={styles.descText}>
                             {coffee.description}
                         </Text>
                     </View>
-
                 </View>
                 <View>
-                    <Text
-                        style={styles.priceText}
-                    >{`${coffee.price} kr`}
-                    </Text>
+                    <Text style={styles.priceText}>{`${coffee.price} kr`}</Text>
                 </View>
-
             </TouchableOpacity>
-
         </View>
     );
 };
-
 
 const mapStateToProps = state => {
     return { cart: state.cart };

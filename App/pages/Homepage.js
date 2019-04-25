@@ -41,9 +41,11 @@ export default class Homepage extends Component {
                     />
                 </View>
 
-                {this.state.toggle == 'LV' && <Maincomp navigate={this.navigate} />}
-                {this.state.toggle == 'BV' && <Blockcomp />}
-                {this.state.toggle == 'MV' && <Mapcomp />}
+                <View style={styles.contentContainer}>
+                  {this.state.toggle == 'LV' && <Maincomp />}
+                  {this.state.toggle == 'BV' && <Blockcomp />}
+                  {this.state.toggle == 'MV' && <Mapcomp />}
+                </View>
             </View>
         );
     }
@@ -54,12 +56,14 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     butcontainer: {
-        height: '5%',
-        width: '100%',
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         backgroundColor: '#F0F7F4',
         borderBottomWidth: 5,
+    },
+    contentContainer: {
+      flex: 20,
     },
     item: {
         width: '33%',

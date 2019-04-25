@@ -25,18 +25,14 @@ export default CoffeeList = ({ selectedShop }) => {
 
     // Create a view for every available coffee
     const CoffeeItems = shop.coffees.map((coffee, index) => {
-        return (
-            <CoffeeItem key={index} coffee={coffee} />
-        );
+        return <CoffeeItem key={index} coffee={coffee} />;
     });
-
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
             {CoffeeItems}
         </ScrollView>
     );
-
-}
+};
 
 AppRegistry.registerComponent('CoffeeList', CoffeeList);

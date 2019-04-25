@@ -10,15 +10,15 @@ const OrderCart = ({ cart }) => {
     const amount = calculateCartAmount(cart);
 
     return (
-        <View style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-        }}>
+        <View
+            style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+            }}
+        >
             <OrderCartIcon cartAmount={amount} />
-            <Text style={styles.cartPriceText}>
-                {`${total} kr`}
-            </Text>
+            <Text style={styles.cartPriceText}>{`${total} kr`}</Text>
         </View>
     );
 };

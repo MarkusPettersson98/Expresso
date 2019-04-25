@@ -12,8 +12,7 @@ const Drawer = props => {
         <View style={{ flexDirection: 'row', margin: 5 }}>
             <TouchableOpacity
                 onPress={() => toggleDrawer(props.navigationProps)}
-                hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
-
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
                 {/*Donute Button Image */}
                 <Ionicons

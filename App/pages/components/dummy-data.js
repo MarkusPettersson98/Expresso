@@ -44,68 +44,66 @@ export const shops = [
 export const myCart = true;
 
 export const brygg_kaffe = {
-  name: "Bryggkaffe",
-  price: 12,
-  volume: 330,
-  id: 123
-}
+    name: 'Bryggkaffe',
+    price: 12,
+    volume: 330,
+    id: 123,
+};
 
 export const cappuccino = {
-  name: "Cappuccino",
-  price: 28,
-  volume: 500,
-  id: 124
-}
-export const coffee =[
+    name: 'Cappuccino',
+    price: 28,
+    volume: 500,
+    id: 124,
+};
+export const coffee = [
     {
         shop: 'Biblioteket',
         coffees: [
-        {
-            name: 'Bryggkaffe', 
-            price: 12,
-            description: 'Bränt kaffe från Hubben',
-            id: 123,
-        },
-        {
-            name: 'Kaffe',
-            price: 12,
-            description: 'Mellanrost från Skåne',
-            id: 124,
-        },
-        {
-            name: 'Kokkaffe', 
-            price: 12,
-            description: 'Mörkrost från Brasilien',
-            id: 125,
-        },
-        ]
+            {
+                name: 'Bryggkaffe',
+                price: 12,
+                description: 'Bränt kaffe från Hubben',
+                id: 123,
+            },
+            {
+                name: 'Kaffe',
+                price: 12,
+                description: 'Mellanrost från Skåne',
+                id: 124,
+            },
+            {
+                name: 'Kokkaffe',
+                price: 12,
+                description: 'Mörkrost från Brasilien',
+                id: 125,
+            },
+        ],
     },
     {
         shop: 'Bulten',
-        coffees: [{name: 'Latte', price: 10}] 
+        coffees: [{ name: 'Latte', price: 10 }],
     },
     {
         shop: 'Linsen',
-        coffees: [{name: 'Bryggkaffe', price: 12}] 
+        coffees: [{ name: 'Bryggkaffe', price: 12 }],
     },
     {
         shop: 'Vera café',
-        coffees: [{name: 'Cappucino', price: 15}] 
-    },    
+        coffees: [{ name: 'Cappucino', price: 15 }],
+    },
     {
         shop: 'Wijkanders',
-        coffees: [{name: 'Bryggkaffe', price: 12}] 
+        coffees: [{ name: 'Bryggkaffe', price: 12 }],
     },
-
 ];
 
 export const latte = {
-  name: "Caffee Latte",
-  price: 28,
-  volume: 500,
-  id: 125
-}
-
+    name: 'Caffee Latte',
+    price: 28,
+    volume: 500,
+    id: 125,
+};
 
 export const brygg_kaffe_in_cart = {
     '123': {
