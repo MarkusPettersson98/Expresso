@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, ImageBackground, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {
+    View,
+    ImageBackground,
+    Text,
+    StyleSheet,
+    TouchableWithoutFeedback,
+} from 'react-native';
 
 const styles = StyleSheet.create({
     item: {

@@ -6,8 +6,7 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native';
 
-const ShopView = ({ index ,name, picture, navigate }) => {
-    console.log('ListShopView', navigate);
+const ShopView = ({ index, name, picture, navigate }) => {
     return (
         <View style={styles.item}>
             <TouchableWithoutFeedback

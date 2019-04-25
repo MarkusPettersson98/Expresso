@@ -19,10 +19,11 @@ const defaultRegion = {
 }
 
 class Mapcomp extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       region: defaultRegion,
+      navigation: props.navigate, 
     }
   }
 
