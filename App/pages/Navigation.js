@@ -40,29 +40,38 @@ const tabIconStyling = {
     inactive: '#9C9497',
 };
 
-export const Homepage_Stack = createStackNavigator({
-    Homepage: {
-        screen: Homepage,
-        navigationOptions: {
+export const Homepage_Stack = createStackNavigator(
+    {
+        Homepage: {
+            screen: Homepage,
+            navigationOptions: ({ navigation }) => ({
+                headerRight: (
+                    <CheckoutHeader
+                        navigationProps={navigation}
+                        styling={headerIconStyling}
+                    />
+                ),
+                ...headerStyling,
+            }),
+        },
+        Order: {
+            screen: Order,
+            navigationOptions: ({ navigation }) => ({
+                headerRight: (
+                    <CheckoutHeader
+                        navigationProps={navigation}
+                        styling={headerIconStyling}
+                    />
+                ),
+                ...headerStyling,
+            }),
         },
     },
-    Order: {
-        screen: Order,
-        navigationOptions: ({ navigation }) => ({
-            title: 'Order',
-            headerRight: (
-                <CheckoutHeader
-                    navigationProps={navigation}
-                    styling={headerIconStyling}
-                />
-            ),
-            ...headerStyling,
-        }),
+    {
+        // in order to have stacknavigator inside of tabnavigator.
+        //headerMode: 'none'
     },
-}, {
-    // in order to have stacknavigator inside of tabnavigator.
-    headerMode: 'none'
-});
+);
 
 export const Tabs = createBottomTabNavigator(
     {
@@ -139,33 +148,31 @@ export const Tabs = createBottomTabNavigator(
     },
 );
 
+export const Checkoutpage_stack = createStackNavigator({
+    // in order to have a header..... 
+    Checkout: {
+        screen: Checkoutpage,
+        navigationOptions: ({ navigation }) => ({
+            title: 'Varukorg',
+            headerRight: <ClearCheckoutHeader />,
+            headerLeft: <ExitCheckout navigationProps={navigation} />,
+            ...headerStyling,
+        }),
+    },
+});
+
 export const RootStack = createStackNavigator(
     {
         Main: {
             screen: Tabs,
-            navigationOptions: ({ navigation }) => ({
-                title: 'Main',
-                headerRight: (
-                    <CheckoutHeader
-                        navigationProps={navigation}
-                        styling={headerIconStyling}
-                    />
-                ),
-                ...headerStyling,
-            }),
         },
         Checkout: {
-            screen: Checkoutpage,
-            navigationOptions: ({ navigation }) => ({
-                title: 'Varukorg',
-                headerRight: <ClearCheckoutHeader />,
-                headerLeft: <ExitCheckout navigationProps={navigation} />,
-                ...headerStyling,
-            }),
+            screen: Checkoutpage_stack,
         },
     },
     {
         mode: 'card',
+        headerMode: 'none',
     },
 );
 

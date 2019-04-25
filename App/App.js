@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import Menucomp from "./pages/Menucomp";
+import Navigation from "./pages/Navigation";
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import expressoApp from './pages/components/redux/reducers'
@@ -13,7 +13,7 @@ export default class App extends React.Component {
         return (
           <Provider store={store}>
             <View style={{ flex: 1 }}>
-                <Menucomp />
+                <Navigation />
                 {/* <Order /> */}
                 {/* <CoffeeList selectedShop={"Biblioteket"} /> */}
             </View>
