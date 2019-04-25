@@ -22,7 +22,7 @@ const Map = props => {
                     latitude: shop.coordinates.latitude,
                     longitude: shop.coordinates.longitude,
                 }}
-                onCalloutPress={() => props.navigation.navigate('Order')}
+                onCalloutPress={() => props.navigation.navigate('Order', { selectedShop: shop.name })}
             />
         </View>
       ))
