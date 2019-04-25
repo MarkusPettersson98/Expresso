@@ -16,19 +16,14 @@ const Map = props => {
       return props.shops.map((shop, index) => (
         <View key={index}>
             <MapView.Marker
+                key={index}
+                title={shop.name}
                 coordinate={{
                     latitude: shop.coordinates.latitude,
                     longitude: shop.coordinates.longitude,
                 }}
-            >
-                <MapView.Callout onPress={() => props.navigation.navigate('Order')}>
-                    <TouchableOpacity
-                        onPress={() => onMarkerPress({ index })}
-                    >
-                        <Text>{shop.name}</Text>
-                    </TouchableOpacity>
-                </MapView.Callout>
-            </MapView.Marker>
+                onCalloutPress={() => props.navigation.navigate('Order')}
+            />
         </View>
       ))
     }
