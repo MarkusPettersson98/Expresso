@@ -1,52 +1,66 @@
 import allData from './dummy-data';
 
+
+/**
+  * Returns all the names of all the shops in the database
+  * This only inlcudes the names of the shops  
+  */
 export const getAllShopNames = () => {
-    /*
-      Returns the names of all the avaiable shops 
-    */
-    const nameMap = ( shop ) => 
-    {
-        return shop.name 
-    }
-    return  allData.shops.map(nameMap) ;
+
+  const getName = (shop) => {
+    return shop.name
+  }
+
+  return allData.shops.map(getName);
 };
 
+/**
+  * Returns all the information of a all the shops in the database
+  * This includes the names and the coordinates  
+  */
 export const getAllShopInfo = () => {
-/*  
-    Returns the coordinates (longitude and latitude) and the name of all the avaiable shops
-*/
-    const shopMap = ( info ) => 
-    {
-        return {
-            namn: info.name,
-            coordinates: info.coordinates
-        }
-    }  
-     return allData.shops.map(shopMap); 
-}; 
 
- //Kanske onödig att ha med (?)
- export const getCoffeeInfo = (wantedCoffee) => {
-
-    //Returns all the info about a specific coffeesort 
-
-    const foundCoffee = allData.coffeeSorts.find(function( coffee ){
-        return coffee.name == wantedCoffee; 
-     }); 
-    return foundCoffee; 
+  const getInformation = (info) => {
+    return {
+      namn: info.name,
+      coordinates: info.coordinates
+    }
+  }
+  return allData.shops.map(getInformation);
 };
 
-export const getAllCoffeeFromAShop = ( wantedShop ) => {
-/* 
-    Returns all the coffesorts in a specific shop 
-*/
+/**
+  * Returns all the coffesorts in a specific shop 
+  * @param wantedShop  The name of the wanted shop 
+  */
+export const getAllCoffeeFromAShop = (wantedShop) => {
 
-    const foundShop = allData.shops.find(function( shop ){
-        return shop.name == wantedShop; 
-     }); 
 
-     console.log('foundshop',foundShop);
+  const foundShop = allData.shops.find(function (shop) {
+    return shop.name.toUpperCase() == wantedShop.toUpperCase();
+  });
 
-    return foundShop.drinkList; 
-}; 
+  return foundShop.drinkList;
+};
 
+/**
+  * Returns all the information about a specific shop 
+  * This includes name, coordinates and the drinkList of the shop 
+  * @param wantedShop  The name of the wanted shop 
+  */
+export const getShop = (wantedShop) => {
+
+  const foundShop = allData.shops.find(function (shop) {
+
+
+    return shop.name.toUpperCase() == wantedShop.toUpperCase();
+  }
+
+  );
+
+   return {
+    name: foundShop.name,
+    coordinates: foundShop.coordinates,
+    drinkList: foundShop.drinkList,
+  };
+};
