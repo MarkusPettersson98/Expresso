@@ -9,6 +9,12 @@ import {
 
 } from '../../dummy-data';
 
+
+/**
+ * This is tests of logic for the prices of the cart
+ */
+
+
 test('if empty cart, total should be 0', () => {
 	expect(calculateCartPrice({})).toEqual(0);
 })
