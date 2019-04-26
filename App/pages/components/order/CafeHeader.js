@@ -1,6 +1,13 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
 
+/**
+ * @file This is the header for the order page, which is a purely presentational component.
+ *
+ * @param picture OrderHeader.js expects to receive a picture which is should render onto itself
+ *
+ */
+
 const CafeHeader = ({ picture }) => {
     return (
         <View style={styles.item}>
