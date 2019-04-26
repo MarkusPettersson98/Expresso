@@ -5,7 +5,9 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 /**
  * This is the component that displays where the coffe should be picked up, or rather where the coffe is ordered from.
  * Currently, this component is static, meaning it doesnt change, it always displays bulten.
- * This will be fixed when we pass in a props of what coffeshop it should display. 
+ * This will be fixed when we pass in a props of what coffeshop it should display. Since its parent component is 
+ * nonemptycheckout the passing of props should be done there, or possibly it could use redux state. 
+ * 
  */
 
 
@@ -22,7 +24,7 @@ export default (pickUpPoint = () => {
                 paddingLeft: 25,
             }}
         >
-            <Text className="hämtas på" style={styles.titleText}>
+            <Text style={styles.titleText}>
                 Hämtas på
             </Text>
             <View
