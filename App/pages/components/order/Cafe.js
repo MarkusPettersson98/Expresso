@@ -14,7 +14,8 @@ import { shops } from '../dummy-data';
  * Order.js is broken down into three main components. A header, the coffee assortment and a footer
  * with information about the current order, such as number of coffees currently in cart and total price.
  *
- * Order.js is responsible for passing down information about the cart to it's child component.
+ * Order.js is responsible for passing down information about the selected shop aswell as the cart
+ * to it's child component.
  *
  */
 
