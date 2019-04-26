@@ -7,18 +7,21 @@ import {
     calculateCartAmount,
 } from '../redux/cartFunctions';
 
+/**
+ * @file This is a presenetational view that shows the user the current state of the cart.
+ *
+ * Since cart does not have any properties containing information about the amount of coffees
+ * or total price of all coffees, we need to calculate them using some functions related to
+ * the state of the cart. Further reading in {@link cartFunctions.js}
+ *
+ */
+
 const CafeCartIcon = ({ cart }) => {
     const total = calculateCartPrice(cart);
     const amount = calculateCartAmount(cart);
 
     return (
-        <View
-            style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-            }}
-        >
+        <View style={styles.cartAlignItems}>
             <OrderCartIconCounter cartAmount={amount} />
             <Text style={styles.cartPriceText}>{`${total} kr`}</Text>
         </View>
@@ -33,6 +36,11 @@ const styles = StyleSheet.create({
         borderRadius: 1000,
         color: 'white',
         marginLeft: 10,
+    },
+    cartAlignItems: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
     },
 });
 
