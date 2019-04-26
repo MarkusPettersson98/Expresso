@@ -9,16 +9,15 @@ import { calculateCartPrice } from '../redux/cartFunctions';
 
 
 /** 
- * The view that is being shown in Checkout.js when the cart is empty, i.e not populated
- * 
- * This view shows the empty cart and text, perhaps this view could benefit from recommending the customer a purchase
- * that s/he has done before.
+ * The view that is being shown in Checkout.js when the cart is populated
  * 
  * This view contains:
  * 
  * CheckoutItem
  * PickUpPointView
  * OrderButton
+ * 
+ * And passes logic to them using props
  * 
  * @param {cart} props carries the redux state cart, which can be looked at in redux/reducers.js 
  */
