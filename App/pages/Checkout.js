@@ -15,7 +15,8 @@ import NonEmptyCheckoutPage from './components/checkout/NonEmptyCheckout';
  * EmptyCheckoutPage
  * and does so depending on the boolean isCartPopulated.
  * 
-  
+ * The TouchableOpacities are remnants of when we wanted to have the ability to add items directly from the checkout-view
+ * and will be removed in stable versions.
  */
 
 const CheckoutPage = props => {
