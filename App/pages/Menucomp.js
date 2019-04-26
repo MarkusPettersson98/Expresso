@@ -12,6 +12,7 @@ import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import DrawerHeader from './components/header/DrawerIcon';
+import Order from './components/order/Order'
 
 /*
     Temporarily, all of the stackNavigators carry a checkoutScreen.
@@ -63,6 +64,13 @@ const HomePage_StackNavigator = createStackNavigator({
             ...headerStyling,
         }),
     },
+    Order: {
+      screen: Order,
+      navigationOptions: () => ({
+          title: 'Order',
+          ...headerStyling,
+      }),
+    }
 });
 
 const ProfilePage_StackNavigator = createStackNavigator({
