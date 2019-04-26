@@ -2,6 +2,14 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+/**
+ * @file This is the cart icon along with the small circle above the cart icon.
+ * This component's job is to render the current amount of items in the cart.
+ *
+ * @param cartAmount The total amount of items currently in cart.
+ *
+ */
+
 const OrderCartIconCounter = ({ cartAmount }) => {
     return (
         <View style={styles.cartIcon}>
