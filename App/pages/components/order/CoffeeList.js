@@ -15,18 +15,9 @@ import { coffee } from '../dummy-data';
  *
  */
 
-const styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        marginTop: 20,
-        alignItems: 'center',
-    },
-});
-
 export default (CoffeeList = ({ selectedShop }) => {
+
+    // TODO: Remove this function call, render passed down objects instead
     const shop = coffee.find(allShops => {
         return allShops.shop == selectedShop;
     });
@@ -41,6 +32,18 @@ export default (CoffeeList = ({ selectedShop }) => {
             {CoffeeItems}
         </ScrollView>
     );
+});
+
+
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        marginTop: 20,
+        alignItems: 'center',
+    },
 });
 
 AppRegistry.registerComponent('CoffeeList', CoffeeList);
