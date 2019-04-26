@@ -2,6 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
+/**
+ * This is the component that displays where the coffe should be picked up, or rather where the coffe is ordered from.
+ * Currently, this component is static, meaning it doesnt change, it always displays bulten.
+ * This will be fixed when we pass in a props of what coffeshop it should display. 
+ */
+
+
 export default (pickUpPoint = () => {
     return (
         <View
