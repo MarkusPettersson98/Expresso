@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import CafeCart from './CafeCart';
+import CafeCartIcon from './CafeCartIcon';
 import CafeCheckoutButton from './CafeCheckoutButton';
 
 /**
@@ -18,7 +18,7 @@ const CafeFooter = ({ cart }) => {
     return (
         <View style={styles.footer}>
             <View style={styles.footerRow}>
-                <CafeCart cart={cart} />
+                <CafeCartIcon cart={cart} />
 
                 <CafeCheckoutButton />
             </View>

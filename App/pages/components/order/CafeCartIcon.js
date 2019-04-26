@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import OrderCartIcon from './OrderCartIcon';
+import OrderCartIconCounter from './OrderCartIconCounter';
 import {
     calculateCartPrice,
     calculateCartAmount,
@@ -19,7 +19,7 @@ const CafeCartIcon = ({ cart }) => {
                 alignItems: 'flex-end',
             }}
         >
-            <OrderCartIcon cartAmount={amount} />
+            <OrderCartIconCounter cartAmount={amount} />
             <Text style={styles.cartPriceText}>{`${total} kr`}</Text>
         </View>
     );
