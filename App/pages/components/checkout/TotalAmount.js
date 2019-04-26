@@ -1,6 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+/** 
+ * Residing in the checkout folder, this is the component that displays the total amount of an order aswell as 'kr' 
+ * using styling.
+ * 
+ * @param {total} total is the price of which the component should display. 
+ */
 const TotalAmount = ({ total }) => {
     return (
         <View
