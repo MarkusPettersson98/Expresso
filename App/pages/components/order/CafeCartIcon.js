@@ -14,6 +14,8 @@ import {
  * or total price of all coffees, we need to calculate them using some functions related to
  * the state of the cart. Further reading in {@link cartFunctions.js}
  *
+ * @param cart The current cart object in redux.
+ *
  */
 
 const CafeCartIcon = ({ cart }) => {
