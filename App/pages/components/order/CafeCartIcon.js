@@ -1,34 +1,38 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, StyleSheet } from 'react-native';
 
-const CafeCartIcon = ({ cartAmount }) => {
+import OrderCartIcon from './OrderCartIcon';
+import {
+    calculateCartPrice,
+    calculateCartAmount,
+} from '../redux/cartFunctions';
+
+const CafeCartIcon = ({ cart }) => {
+    const total = calculateCartPrice(cart);
+    const amount = calculateCartAmount(cart);
+
     return (
-        <View style={styles.cartIcon}>
-            <Ionicons name="ios-cart" size={40} color={'white'} />
-            <Text style={styles.cartIconText}>{cartAmount}</Text>
+        <View
+            style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+            }}
+        >
+            <OrderCartIcon cartAmount={amount} />
+            <Text style={styles.cartPriceText}>{`${total} kr`}</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    cartIcon: {
-        marginTop: 20,
-        marginLeft: 20,
-    },
-    cartIconText: {
-        position: 'absolute',
-        backgroundColor: '#5AA3B7',
-        overflow: 'hidden',
-        fontSize: 15,
+    cartPriceText: {
+        borderWidth: 3,
+        borderColor: 'white',
+        fontSize: 30,
+        borderRadius: 1000,
         color: 'white',
-        textAlign: 'center',
-        width: 20,
-        height: 20,
-        lineHeight: 20,
-        borderRadius: 20 / 2,
-        marginLeft: 20,
-        marginTop: -5,
+        marginLeft: 10,
     },
 });
 
