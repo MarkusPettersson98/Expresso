@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#57454B',
         maxHeight: 100,
-    },
+g    },
     text: {
         fontWeight: 'bold',
         fontSize: 25,
