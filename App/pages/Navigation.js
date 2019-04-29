@@ -15,7 +15,6 @@ import ExitCheckout from './components/header/ExitCheckout';
 import {
     Feather,
     FontAwesome,
-    MaterialCommunityIcons,
 } from '@expo/vector-icons';
 
 // so that the colour of the header is located at one spot.
