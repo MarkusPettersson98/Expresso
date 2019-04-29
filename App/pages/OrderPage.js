@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-export default class qrPage extends Component {
+export default class orderpage extends Component {
     render() {
         return (
             <View>
-                <Text>QR</Text>
+                <Text>Order</Text>
             </View>
         );
     }

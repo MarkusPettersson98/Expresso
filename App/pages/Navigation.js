@@ -7,12 +7,13 @@ import {
 
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
-import QRpage from './QRpage';
+import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import ExitCheckout from './components/header/ExitCheckout';
-import { Feather, FontAwesome } from '@expo/vector-icons';
+import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -75,14 +76,14 @@ export const Tabs = createBottomTabNavigator(
             },
         },
 
-        QR: {
-            screen: QRpage,
+        Order: {
+            screen: OrderPage,
             navigationOptions: {
-                tabBarLabel: 'QR',
+                tabBarLabel: 'Köp',
                 tabBarIcon: ({ focused, tintColor }) => {
                     return (
-                        <FontAwesome
-                            name={'qrcode'}
+                        <MaterialIcons
+                            name={'receipt'}
                             color={
                                 focused
                                     ? tabIconStyling.selected

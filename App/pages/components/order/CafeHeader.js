@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
 
-const OrderHeader = ({ picture }) => {
+const CafeHeader = ({ picture }) => {
     return (
         <View style={styles.item}>
             <ImageBackground
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default OrderHeader;
+export default CafeHeader;
