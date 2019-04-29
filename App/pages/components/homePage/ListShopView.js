@@ -6,10 +6,13 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native';
 
-const ShopView = ({ name, picture }) => {
+import { withNavigation } from 'react-navigation';
+
+const ShopView = ({ name, picture, navigation }) => {
+
     return (
         <View style={styles.item}>
-            <TouchableWithoutFeedback onPress={() => alert('coffee')}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('Order', { selectedShop: name })}>
                 <ImageBackground
                     source={picture}
                     resizeMode="cover"
@@ -44,4 +47,4 @@ const styles = {
     },
 };
 
-export default ShopView;
+export default withNavigation(ShopView);
