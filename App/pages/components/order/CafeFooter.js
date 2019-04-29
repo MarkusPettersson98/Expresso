@@ -1,20 +1,24 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import CafeCart from './CafeCart';
+import CafeCartIcon from './CafeCartIcon';
 import CafeCheckoutButton from './CafeCheckoutButton';
+
+/**
+ * @file This is the bottom part of the order view, containing information about the current
+ * order and a way to proceed to checkout. OrderFooter.js does not render any data on it's own,
+ * it's just a component hosting a set of child components.
+ *
+ * @param cart The current cart object in redux.
+ *
+ */
+
 
 const CafeFooter = ({ cart }) => {
     return (
         <View style={styles.footer}>
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}
-            >
-                <CafeCart cart={cart} />
+            <View style={styles.footerRow}>
+                <CafeCartIcon cart={cart} />
 
                 <CafeCheckoutButton />
             </View>
@@ -27,6 +31,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#57454B',
         maxHeight: 100,
+    },
+    footerRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     text: {
         fontWeight: 'bold',

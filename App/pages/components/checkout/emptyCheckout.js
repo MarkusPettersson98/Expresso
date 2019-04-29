@@ -2,7 +2,11 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-// returns the empty checkout view
+/** 
+ * This view shows the emptycart-icon and text, perhaps this view could benefit from recommending the customer a purchase
+ * that s/he has done before.
+ * This view does not have navigation, the navigation lies within the header folder.
+*/
 const EmptyCheckout = () => {
     return (
         <View style={styles.app}>

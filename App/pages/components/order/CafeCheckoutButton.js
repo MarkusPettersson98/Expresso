@@ -1,6 +1,16 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
+/**
+ * @file This is the order button inside of the order footer. This button is supposed to re-
+ * direct the user to the checkout.
+ *
+ * @todo This button currently does nothing else than logging. It should be passed down a
+ * navigation prop with a function that is able to redirect the user to the checkout. This
+ * function should be bound to the onPress event of the <TouchableOpacity>.
+ *
+ */
+
 const CafeCheckoutButton = () => {
     const clickAction = () =>
         console.log('CafeCheckoutButton: Klickade på betala');
