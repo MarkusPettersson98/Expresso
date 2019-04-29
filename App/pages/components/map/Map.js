@@ -7,8 +7,6 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import MapView from 'react-native-maps';
-import shops from '../dummy-data';
-import Cafe from '../order/Cafe';
 import { withNavigation } from 'react-navigation';
 
 const Map = props => {
@@ -22,7 +20,7 @@ const Map = props => {
                     latitude: shop.coordinates.latitude,
                     longitude: shop.coordinates.longitude,
                 }}
-                onCalloutPress={() => props.navigation.navigate('Order', { selectedShop: shop.name })}
+                onCalloutPress={() => props.navigation.navigate('Cafe', { selectedShop: shop.name })}
             />
         </View>
       ))

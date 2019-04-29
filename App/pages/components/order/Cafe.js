@@ -23,12 +23,12 @@ const Cafe = props => {
     const cart = props.cart;
 
     /* Debugging variables TODO: replace with API calls */
-    const Biblioteket = shops.find(shop => shop.name === 'Biblioteket');
+    const shop = shops.find(shop => shop.name === props.navigation.state.params.selectedShop);
 
     return (
         <View style={{ flex: 1 }}>
-            <CafeHeader picture={Biblioteket.picture} />
-            <CoffeeList selectedShop={Biblioteket.name} />
+            <CafeHeader picture={shop.picture} />
+            <CoffeeList selectedShop={shop.name} />
             <CafeFooter cart={cart} />
         </View>
     );
