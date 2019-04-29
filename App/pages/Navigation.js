@@ -38,22 +38,6 @@ const tabIconStyling = {
     inactive: '#9C9497',
 };
 
-export const Homepage_Stack = createStackNavigator(
-    {
-        Homepage: {
-            screen: Homepage,
-        },
-        Cafe: {
-            screen: Cafe,
-        },
-    },
-    {
-        // in order to have stacknavigator inside of tabnavigator.
-        headerMode: 'none',
-    },
-);
-
-
 export const Tabs = createBottomTabNavigator(
     {
         Lista: {
@@ -172,9 +156,16 @@ export const RootStack = createStackNavigator(
                 ...headerStyling,
             }),
         },
+        Cafe: {
+            screen: Cafe,
+            navigationOptions: ({ navigation }) => ({
+                title: 'Café',
+                ...headerStyling,
+            }),
+        },
     },
     {
-        mode: 'modal',
+        mode: 'card',
     },
 );
 
