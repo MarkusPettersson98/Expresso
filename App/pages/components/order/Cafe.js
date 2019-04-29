@@ -27,8 +27,8 @@ const Cafe = props => {
 
     return (
         <View style={{ flex: 1 }}>
-            <CafeHeader picture={Biblioteket.picture} />
-            <CoffeeList selectedShop={Biblioteket.name} />
+            <CafeHeader picture={shop.picture} />
+            <CoffeeList selectedShop={shop.name} />
             <CafeFooter cart={cart} />
         </View>
     );
