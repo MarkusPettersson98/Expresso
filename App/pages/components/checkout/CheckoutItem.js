@@ -30,7 +30,6 @@ const CheckoutItem = props => {
                 [
                     {
                         text: 'Avbryt',
-                        //onPress: () => console.log('Cancel Pressed'),
                         style: 'cancel',
                     },
                     {
