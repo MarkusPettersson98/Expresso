@@ -120,14 +120,18 @@ export const Tabs = createBottomTabNavigator(
     },
     {
         tabBarOptions: {
-            activeTintColor: '#362D30',
+            // om bakgrunden
             activeBackgroundColor: '#eee',
+            backgroundColor: 'white',
+            
+            // Om label
             labelStyle: {
-                fontSize: 12,
+                fontSize: 12,   
             },
-            style: {
-                backgroundColor: 'white',
-            },
+            // om textens färg
+            activeTintColor: '#362D30',
+            inactiveTintColor: '#9C9497',
+            
         },
     },
 );
