@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 import Topcomp from './components/homePage/Topcomp';
 import Maincomp from './components/homePage/Maincomp';
-import Blockcomp from './components/homePage/Blockcomp';
 import Mapcomp from './components/homePage/Mapcomp';
 
 export default class Homepage extends Component {
@@ -10,7 +9,6 @@ export default class Homepage extends Component {
         toggle: 'LV',
     };
     _pressLV = () => this.setState({ toggle: 'LV' });
-    _pressBV = () => this.setState({ toggle: 'BV' });
     _pressMV = () => this.setState({ toggle: 'MV' });
 
     render() {
@@ -20,7 +18,6 @@ export default class Homepage extends Component {
 
                 <View style={styles.comps}>
                     {this.state.toggle == 'LV' && <Maincomp />}
-                    {this.state.toggle == 'BV' && <Blockcomp />}
                     {this.state.toggle == 'MV' && <Mapcomp />}
 
                     <View style={styles.butcontainer}>
@@ -28,12 +25,6 @@ export default class Homepage extends Component {
                             title="List"
                             style={styles.item}
                             onPress={this._pressLV}
-                            color="black"
-                        />
-                        <Button
-                            title="Block"
-                            style={styles.item}
-                            onPress={this._pressBV}
                             color="black"
                         />
                         <Button
