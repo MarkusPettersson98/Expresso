@@ -12,10 +12,7 @@ import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import ExitCheckout from './components/header/ExitCheckout';
-import {
-    Feather,
-    FontAwesome,
-} from '@expo/vector-icons';
+import { Feather, FontAwesome } from '@expo/vector-icons';
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -40,13 +37,32 @@ const tabIconStyling = {
 export const Tabs = createBottomTabNavigator(
     {
         Lista: {
-            screen: Homepage,
+            screen: () => <Homepage presentationMode={"List"}/>,
             navigationOptions: {
                 tabBarLabel: 'Lista',
                 tabBarIcon: ({ focused, tintColor }) => {
                     return (
                         <Feather
                             name={'list'}
+                            color={
+                                focused
+                                    ? tabIconStyling.selected
+                                    : tabIconStyling.inactive
+                            }
+                            size={tabIconStyling.size}
+                        />
+                    );
+                },
+            },
+        },
+        Karta: {
+            screen: () => <Homepage presentationMode={"Map"}/>,
+            navigationOptions: {
+                tabBarLabel: 'Karta',
+                tabBarIcon: ({ focused, tintColor }) => {
+                    return (
+                        <Feather
+                            name={'map'}
                             color={
                                 focused
                                     ? tabIconStyling.selected

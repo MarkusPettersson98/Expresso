@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Topcomp from './components/homePage/Topcomp';
 import Maincomp from './components/homePage/Maincomp';
 import Mapcomp from './components/homePage/Mapcomp';
 
 export default class Homepage extends Component {
     state = {
-        toggle: 'LV',
+        toggle: this.props.presentationMode,
     };
-    _pressLV = () => this.setState({ toggle: 'LV' });
-    _pressMV = () => this.setState({ toggle: 'MV' });
 
     render() {
         return (
@@ -17,23 +15,8 @@ export default class Homepage extends Component {
                 <Topcomp />
 
                 <View style={styles.comps}>
-                    {this.state.toggle == 'LV' && <Maincomp />}
-                    {this.state.toggle == 'MV' && <Mapcomp />}
-
-                    <View style={styles.butcontainer}>
-                        <Button
-                            title="List"
-                            style={styles.item}
-                            onPress={this._pressLV}
-                            color="black"
-                        />
-                        <Button
-                            title="Map"
-                            style={styles.item}
-                            onPress={this._pressMV}
-                            color="black"
-                        />
-                    </View>
+                    {this.state.toggle == 'List' && <Maincomp />}
+                    {this.state.toggle == 'Map' && <Mapcomp />}
                 </View>
             </View>
         );
