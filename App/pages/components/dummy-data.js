@@ -89,7 +89,7 @@ export const coffee = [
         coffees: [{ name: 'Bryggkaffe', price: 12 }],
     },
     {
-        shop: 'Vera café',
+        shop: 'Veras café',
         coffees: [{ name: 'Cappucino', price: 15 }],
     },
     {
