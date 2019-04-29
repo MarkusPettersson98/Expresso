@@ -12,7 +12,7 @@ import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import ExitCheckout from './components/header/ExitCheckout';
-import Cafe from './components/order/Cafe';
+import Cafe from './components/cafe/Cafe';
 import {
     Feather,
     MaterialIcons,
