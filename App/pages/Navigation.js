@@ -12,8 +12,11 @@ import Checkoutpage from './Checkout';
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import ExitCheckout from './components/header/ExitCheckout';
-import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
-
+import Cafe from './components/order/Cafe';
+import {
+    Feather,
+    MaterialIcons,
+} from '@expo/vector-icons';
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -34,6 +37,22 @@ const tabIconStyling = {
     selected: '#362D30',
     inactive: '#9C9497',
 };
+
+export const Homepage_Stack = createStackNavigator(
+    {
+        Homepage: {
+            screen: Homepage,
+        },
+        Cafe: {
+            screen: Cafe,
+        },
+    },
+    {
+        // in order to have stacknavigator inside of tabnavigator.
+        headerMode: 'none',
+    },
+);
+
 
 export const Tabs = createBottomTabNavigator(
     {
