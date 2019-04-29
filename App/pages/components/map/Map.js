@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 import shops from '../dummy-data';
-import Order from '../order/Order';
+import Cafe from '../order/Cafe';
 import { withNavigation } from 'react-navigation';
 
 const Map = props => {

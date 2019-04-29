@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import OrderCart from './OrderCart';
-import OrderCheckoutButton from './OrderCheckoutButton';
+import CafeCart from './CafeCart';
+import CafeCheckoutButton from './CafeCheckoutButton';
 
-const OrderFooter = ({ cart }) => {
+const CafeFooter = ({ cart }) => {
     return (
         <View style={styles.footer}>
             <View
@@ -14,9 +14,9 @@ const OrderFooter = ({ cart }) => {
                     alignItems: 'center',
                 }}
             >
-                <OrderCart cart={cart} />
+                <CafeCart cart={cart} />
 
-                <OrderCheckoutButton />
+                <CafeCheckoutButton />
             </View>
         </View>
     );
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default OrderFooter;
+export default CafeFooter;

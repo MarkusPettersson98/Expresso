@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const OrderCartIcon = ({ cartAmount }) => {
+const CafeCartIcon = ({ cartAmount }) => {
     return (
         <View style={styles.cartIcon}>
             <Ionicons name="ios-cart" size={40} color={'white'} />
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default OrderCartIcon;
+export default CafeCartIcon;
