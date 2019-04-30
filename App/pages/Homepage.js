@@ -26,6 +26,7 @@ export default class Homepage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#F0F7F4',
     },
     comps: {
         flex: 1,
