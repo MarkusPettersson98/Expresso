@@ -14,7 +14,6 @@ const ClearCheckout = ({ cart, dispatch }) => {
             [
                 {
                     text: 'Avbryt',
-                    //onPress: () => console.log('Cancel Pressed'),
                     style: 'cancel',
                 },
                 { text: 'OK', onPress: () => dispatch(clearCart()) },

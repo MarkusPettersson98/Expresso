@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Topcomp from './components/homePage/Topcomp';
 import Maincomp from './components/homePage/Maincomp';
-import Blockcomp from './components/homePage/Blockcomp';
 import Mapcomp from './components/homePage/Mapcomp';
 
 export default class Homepage extends Component {
     state = {
-        toggle: 'LV',
+        toggle: this.props.presentationMode,
     };
-    _pressLV = () => this.setState({ toggle: 'LV' });
-    _pressBV = () => this.setState({ toggle: 'BV' });
-    _pressMV = () => this.setState({ toggle: 'MV' });
 
     render() {
         return (
@@ -19,30 +15,8 @@ export default class Homepage extends Component {
                 <Topcomp />
 
                 <View style={styles.comps}>
-                    {this.state.toggle == 'LV' && <Maincomp />}
-                    {this.state.toggle == 'BV' && <Blockcomp />}
-                    {this.state.toggle == 'MV' && <Mapcomp />}
-
-                    <View style={styles.butcontainer}>
-                        <Button
-                            title="List"
-                            style={styles.item}
-                            onPress={this._pressLV}
-                            color="black"
-                        />
-                        <Button
-                            title="Block"
-                            style={styles.item}
-                            onPress={this._pressBV}
-                            color="black"
-                        />
-                        <Button
-                            title="Map"
-                            style={styles.item}
-                            onPress={this._pressMV}
-                            color="black"
-                        />
-                    </View>
+                    {this.state.toggle == 'List' && <Maincomp />}
+                    {this.state.toggle == 'Map' && <Mapcomp />}
                 </View>
             </View>
         );
@@ -52,6 +26,7 @@ export default class Homepage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#F0F7F4',
     },
     comps: {
         flex: 1,
