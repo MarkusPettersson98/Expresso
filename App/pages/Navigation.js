@@ -112,7 +112,7 @@ export const Tabs = createBottomTabNavigator(
     },
 );
 
-export const RootStack = createStackNavigator(
+export default createStackNavigator(
     {
         Main: {
             screen: Tabs,
@@ -142,4 +142,4 @@ export const RootStack = createStackNavigator(
     },
 );
 
-export default createAppContainer(RootStack);
+//export default createAppContainer(RootStack);
