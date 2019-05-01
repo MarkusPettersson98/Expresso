@@ -1,31 +1,28 @@
 export const brewed_coffee = {
-    name: "Brewed Coffee",
+    name: 'Brewed Coffee',
     price: 12,
     volume: 330,
     id: 123,
-}
+};
 
 export const cappuccino = {
-    name: "Cappuccino",
+    name: 'Cappuccino',
     price: 28,
     volume: 500,
     id: 124,
-}
+};
 
 export const latte = {
-    name: "Caffee Latte",
+    name: 'Caffee Latte',
     price: 28,
     volume: 500,
     id: 125,
-}
-
-
+};
 
 export const biblioteket = {
     name: 'Biblioteket',
     picture: require('../pages/components/resources/biblan.jpg'),
-    coordinates:
-    {
+    coordinates: {
         latitude: 57.690382,
         longitude: 11.978556,
     },
@@ -33,17 +30,13 @@ export const biblioteket = {
         brewed_coffee,
         latte,
         cappuccino,
-
     },
-
-}
+};
 
 export const bulten = {
-
     name: 'Bulten',
     picture: require('../pages/components/resources/bulten.jpg'),
-    coordinates:
-    {
+    coordinates: {
         latitude: 57.689008,
         longitude: 11.978538,
     },
@@ -52,14 +45,12 @@ export const bulten = {
         cappuccino,
         latte,
     },
-}
+};
 
 export const linsen = {
-
     name: 'Linsen',
     picture: require('../pages/components/resources/linsen.jpg'),
-    coordinates:
-    {
+    coordinates: {
         latitude: 57.687962,
         longitude: 11.978813,
     },
@@ -68,14 +59,12 @@ export const linsen = {
         cappuccino,
         latte,
     },
-}
+};
 
 export const veras_cafe = {
-
     name: 'Veras Café',
     picture: require('../pages/components/resources/vera.jpg'),
-    coordinates:
-    {
+    coordinates: {
         latitude: 57.693158,
         longitude: 11.975036,
     },
@@ -84,14 +73,12 @@ export const veras_cafe = {
         cappuccino,
         latte,
     },
-}
+};
 
 export const wijkanders = {
-
     name: 'Wijkanders',
     picture: require('../pages/components/resources/wijkanders.jpg'),
-    coordinates:
-    {
+    coordinates: {
         latitude: 57.692538,
         longitude: 11.97539,
     },
@@ -99,41 +86,52 @@ export const wijkanders = {
         brewed_coffee,
         latte,
     },
-}
+};
 
+export const nopictures = {
+    name: 'nopictures',
+    coordinates: {
+        latitude: 57.692538,
+        longitude: 11.97539,
+    },
+    drinkList: {
+        brewed_coffee,
+        latte,
+    },
+};
 
 export const shops = [
     {
-        ...biblioteket
+        ...biblioteket,
     },
     {
-        ...bulten
+        ...bulten,
     },
     {
-        ...linsen
+        ...linsen,
     },
     {
-        ...veras_cafe
+        ...veras_cafe,
     },
     {
-        ...wijkanders
+        ...wijkanders,
     },
+    { ...nopictures },
 ];
 
 export const coffeeSorts = [
     {
-        ...brewed_coffee
+        ...brewed_coffee,
     },
     {
-        ...cappuccino
+        ...cappuccino,
     },
     {
-        ...latte
+        ...latte,
     },
-]
+];
 
-export default allData = {
+export default (allData = {
     shops: shops,
     coffeeSorts: coffeeSorts,
-}
-
+});
