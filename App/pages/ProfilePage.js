@@ -1,30 +1,34 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import * as firebase from "firebase/app";
-import "firebase/auth";
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default class ProfilePage extends Component {
-    handleLogout = () => {
-      firebase.auth().signOut().then(() => {
+  handleLogout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
         // Sign-out successful.
-      }).catch(error => {
+      })
+      .catch(error => {
         // An error happened.
       });
-    }
+  };
 
-    render() {
-        return (
-            <View>
-                <Text>Profile</Text>
-                <TouchableOpacity
-                  style={styles.logOut}
-                  onPress={this.handleLogout}
-                >
-                  <Text style={styles.logOutText}>LOGGA UT</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+  render() {
+    const user = firebase.auth().currentUser;
+    return (
+      <View>
+        <Text>Profile</Text>
+        <Text>Display name: {user.displayName}</Text>
+        <Text>Email: {user.email}</Text>
+        <TouchableOpacity style={styles.logOut} onPress={this.handleLogout}>
+          <Text style={styles.logOutText}>LOGGA UT</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

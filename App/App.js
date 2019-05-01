@@ -4,6 +4,7 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 import Navigation from './pages/Navigation';
 import Login from './pages/Login'
 import Loading from './pages/Loading'
+import SignUp from './pages/SignUp'
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import expressoApp from './pages/components/redux/reducers';
@@ -18,6 +19,7 @@ const SwitchRouteConfig = {
   Loading: Loading,
   Homepage: Navigation,
   Login: Login,
+  SignUp: SignUp,
 }
 
 const SwitchConfig = {
