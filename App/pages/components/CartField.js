@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
+import {
+    calculateCartPrice,
+    calculateCartAmount,
+} from './redux/cartFunctions';
 
-const props = 0;
-
-const Field = (props) =>{
-    if(props == 0){
+const CartField = props =>{
+    
+    const total = calculateCartPrice(props.cart);
+    const amount = calculateCartAmount(props.cart);
+    if(total == 0){
         return(
-            <View style = {styles.container}> 
-                <View style = {styles.item}>
-                    <Text style = {styles.text}>
-                        This is the cart field
-                    </Text>
-                </View>
+        <View style = {styles.container}> 
+            <View style = {styles.item}>
+                <Text style = {styles.text}>
+                    This is the cart field
+                </Text>
             </View>
+        </View>
         );
     }
     return (
@@ -21,15 +26,13 @@ const Field = (props) =>{
             else this happens
         </Text>
     );
+    
+    
 }
 
-class CartField extends Component{
-    render() {
-        return(
-            Field(props)
-        );
-    }
-} 
+const mapStateToProps = state => {
+    return { cart: state.cart };
+};
 
 const styles = StyleSheet.create({
     container:{
@@ -38,15 +41,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute', 
-        marginTop: 470,
-
+        bottom: 0,
     },
     item: {
         height: '80%',
-        width: '80%',
-        borderRadius: 20,
+        width: '98%',
+        borderRadius: 6,
         backgroundColor: "red",
-        opacity: 0.5,
+        opacity: 0.8,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -57,4 +59,5 @@ const styles = StyleSheet.create({
     }
 
 })
-export default connect()(CartField);
+
+export default connect(mapStateToProps)(CartField);
