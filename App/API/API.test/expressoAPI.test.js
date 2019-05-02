@@ -1,5 +1,4 @@
 import {
-    getAllShopInfo,
     getAllShopNames,
     getShop,
     getAllCoffeeFromAShop,
@@ -10,71 +9,22 @@ import defaultPic from '../../pages/components/resources/ExpressoTransp.png';
 import bultenPic from '../../pages/components/resources/bulten.jpg';
 import wikkan from '../../pages/components/resources/wijkanders.jpg';
 
-describe('Testing if getAllShopInfo outputs all the shop info about all the shops', () => {
-    it('Should output the coordinates and names of all the avaible shops', () => {
-        expect(getAllShopInfo()).toEqual([
-            {
-                coordinates: {
-                    latitude: 57.690382,
-                    longitude: 11.978556,
-                },
-                namn: 'Biblioteket',
-            },
-            {
-                coordinates: {
-                    latitude: 57.689008,
-                    longitude: 11.978538,
-                },
-                namn: 'Bulten',
-            },
-            {
-                coordinates: {
-                    latitude: 57.687962,
-                    longitude: 11.978813,
-                },
-                namn: 'Linsen',
-            },
-            {
-                coordinates: {
-                    latitude: 57.693158,
-                    longitude: 11.975036,
-                },
-                namn: 'Veras Café',
-            },
-            {
-                coordinates: {
-                    latitude: 57.692538,
-                    longitude: 11.97539,
-                },
-                namn: 'Wijkanders',
-            },
-            {
-                coordinates: {
-                    latitude: 57.692538,
-                    longitude: 11.97539,
-                },
-                namn: 'nopictures',
-            },
-        ]);
-    });
-});
-
 describe('Testing if getAllShopNames output all the names', () => {
     it('Should output only the names of all the avaible shops', () => {
-        expect(getAllShopNames()).toEqual([
+        return getAllShopNames().then(data => expect(data).toEqual([
             'Biblioteket',
             'Bulten',
             'Linsen',
             'Veras Café',
             'Wijkanders',
             'nopictures',
-        ]);
+        ]));
     });
 });
 
 describe('Testing if all the coffeesorts from a shop is printed out ', () => {
     it('Should print out the drinkList for a shop i.e. all the avaible coffee from a specific shop', () => {
-        expect(getAllCoffeeFromAShop('Bulten')).toEqual({
+        return getAllCoffeeFromAShop('Bulten').then(data => expect(data).toEqual({
             brewed_coffee: {
                 id: 123,
                 name: 'Brewed Coffee',
@@ -93,11 +43,11 @@ describe('Testing if all the coffeesorts from a shop is printed out ', () => {
                 price: 28,
                 volume: 500,
             },
-        });
+        }));
     });
 
     it('Case insensitive check of above', () => {
-        expect(getAllCoffeeFromAShop('buLteN')).toEqual({
+        return getAllCoffeeFromAShop('buLteN').then(data => expect(data).toEqual({
             brewed_coffee: {
                 id: 123,
                 name: 'Brewed Coffee',
@@ -116,11 +66,11 @@ describe('Testing if all the coffeesorts from a shop is printed out ', () => {
                 price: 28,
                 volume: 500,
             },
-        });
+        }));
     });
 
     it('Checking other restaurants, list for Wijkanders expected', () => {
-        expect(getAllCoffeeFromAShop('Wijkanders')).toEqual({
+        return getAllCoffeeFromAShop('Wijkanders').then(data => expect(data).toEqual({
             brewed_coffee: {
                 id: 123,
                 name: 'Brewed Coffee',
@@ -133,13 +83,13 @@ describe('Testing if all the coffeesorts from a shop is printed out ', () => {
                 price: 28,
                 volume: 500,
             },
-        });
+        }));
     });
 });
 
 describe('Testing if getShop returns the right shop', () => {
     it('Should output Bulten store', () => {
-        expect(getShop('Bulten')).toEqual({
+        return getShop('Bulten').then(data => expect(data).toEqual({
             coordinates: {
                 latitude: 57.689008,
                 longitude: 11.978538,
@@ -165,11 +115,11 @@ describe('Testing if getShop returns the right shop', () => {
                 },
             },
             name: 'Bulten',
-        });
+        }));
     });
 
     it('Case sensitivity check', () => {
-        expect(getShop('buLtEn')).toEqual({
+        return getShop('buLtEn').then(data => expect(data).toEqual({
             coordinates: {
                 latitude: 57.689008,
                 longitude: 11.978538,
@@ -195,11 +145,11 @@ describe('Testing if getShop returns the right shop', () => {
                 },
             },
             name: 'Bulten',
-        });
+        }));
     });
 
     it('Should output Wijkanders store, checking if other restaurants work too', () => {
-        expect(getShop('Wijkanders')).toEqual({
+        return getShop('Wijkanders').then(data => expect(data).toEqual({
             coordinates: {
                 latitude: 57.692538,
                 longitude: 11.97539,
@@ -219,19 +169,19 @@ describe('Testing if getShop returns the right shop', () => {
                 },
             },
             name: 'Wijkanders',
-        });
+        }));
     });
 });
 
 describe('Testing if getShopPicture returns picture of requested shop', () => {
     it('Should return a picture', () => {
-        expect(getShopPicture('nopictures')).toEqual(defaultPic);
+       return getShopPicture('nopictures').then(data => expect(data).toEqual(defaultPic));
     });
     it('Should return a picture', () => {
-        expect(getShopPicture('bulTen')).toEqual(bultenPic);
+        return getShopPicture('bulTen').then(data => expect(data).toEqual(bultenPic));
     });
 
     it('Should return a picture', () => {
-        expect(getShopPicture('wijkanders')).toEqual(wikkan);
+        return getShopPicture('wijkanders').then(data => expect(data).toEqual(wikkan));
     });
 });

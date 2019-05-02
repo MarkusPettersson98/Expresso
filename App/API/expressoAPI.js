@@ -13,17 +13,17 @@ export const getAllShopNames = async () => {
 
 /**
  * Returns all the information of a all the shops in the database
- * This includes the names and the coordinates
+ * This includes the names, the coordinates and their drinklist
  */
-export const getShop = async () => {
+export const getShop = async wantedShop => {
     const getInformation = shop => {
-        return ({
-            namn: shop.name,
+        return {
+            name: shop.name,
             coordinates: shop.coordinates,
             drinkList: shop.drinkList,
-        });
+        };
     };
-    return getShopsBackend().then(shops => shops.map(getInformation));
+    return getShopBackend(wantedShop).then(shop => getInformation(shop));
 };
 
 /**
@@ -50,7 +50,7 @@ export const getShopPicture = async wantedShop => {
  * This includes name, coordinates and the drinkList of the shop
  * @param wantedShop  The name of the wanted shop
  */
-export const getShopBackend = async wantedShop => {
+const getShopBackend = async wantedShop => {
     // TODO replace allData.shops with actual call to API
     const foundShop = allData.shops.find(shop => {
         return shop.name.toUpperCase() == wantedShop.toUpperCase();
