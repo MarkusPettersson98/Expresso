@@ -4,47 +4,34 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
  * Returns all the names of all the shops in the database
  * This only inlcudes the names of the shops
  */
-export const getAllShopNames = () => {
+export const getAllShopNames = async () => {
     const getName = shop => {
         return shop.name;
     };
-    return allData.shops.map(getName);
+    return getShopsBackend().then(shops => shops.map(getName));
 };
 
 /**
  * Returns all the information of a all the shops in the database
  * This includes the names and the coordinates
  */
-export const getAllShopInfo = () => {
-    const getInformation = info => {
-        return {
-            namn: info.name,
-            coordinates: info.coordinates,
-        };
+export const getShop = async () => {
+    const getInformation = shop => {
+        return ({
+            namn: shop.name,
+            coordinates: shop.coordinates,
+            drinkList: shop.drinkList,
+        });
     };
-    return allData.shops.map(getInformation);
+    return getShopsBackend().then(shops => shops.map(getInformation));
 };
 
 /**
- * Returns all the coffesorts in a specific shop
+ * Returns a promise which if resolved contains all the coffesorts in a specific shop
  * @param wantedShop  The name of the wanted shop
  */
-export const getAllCoffeeFromAShop = wantedShop => {
-    return findShop(wantedShop).drinkList;
-};
-
-/**
- * Returns all the information about a specific shop
- * This includes name, coordinates and the drinkList of the shop
- * @param wantedShop  The name of the wanted shop
- */
-export const getShop = wantedShop => {
-    const foundShop = findShop(wantedShop); 
-    return {
-        name: foundShop.name,
-        coordinates: foundShop.coordinates,
-        drinkList: foundShop.drinkList,
-    };
+export const getAllCoffeeFromAShop = async wantedShop => {
+    return getShopBackend(wantedShop).then(shop => shop.drinkList);
 };
 
 /**
@@ -52,22 +39,32 @@ export const getShop = wantedShop => {
  * This only includes the picture of the requested shop
  * @param wantedShop  The name of the wanted shop
  */
-export const getShopPicture = wantedShop => {
-    const foundShop = findShop(wantedShop); 
-    return foundShop.picture
-        ? foundShop.picture
-        : defaultPic;
+export const getShopPicture = async wantedShop => {
+    return getShopBackend(wantedShop).then(shop => {
+        return shop.picture ? shop.picture : defaultPic;
+    });
 };
 
 /**
- * Returns a shop
- * This is the shop object itself
+ * Returns all the information about a specific shop
+ * This includes name, coordinates and the drinkList of the shop
  * @param wantedShop  The name of the wanted shop
  */
-export const findShop = wantedShop => {
-    const foundShop = allData.shops.find(function(shop) {
+export const getShopBackend = async wantedShop => {
+    // TODO replace allData.shops with actual call to API
+    const foundShop = allData.shops.find(shop => {
         return shop.name.toUpperCase() == wantedShop.toUpperCase();
     });
 
     return foundShop;
+};
+
+/**
+ * Query the backend API which returns a shop.
+ * Return a promise object with resolved API call
+ * @param wantedShop  The name of the wanted shop
+ */
+const getShopsBackend = async () => {
+    // TODO replace allData.shops with actual call to API
+    return allData.shops;
 };
