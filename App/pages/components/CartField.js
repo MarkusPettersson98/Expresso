@@ -5,8 +5,7 @@ import {
     calculateCartPrice,
     calculateCartAmount,
 } from './redux/cartFunctions';
-import CafeCartIcon from './cafe/CafeCartIcon';
-import CafeCheckoutButton from './cafe/CafeCheckoutButton';
+import { withNavigation } from 'react-navigation';
 
 const CartField = props =>{
     
@@ -16,7 +15,11 @@ const CartField = props =>{
         return(
             <View style = {styles.container}> 
                 <View style = {styles.item}>
-                    
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Checkout')}
+                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                    >
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -59,4 +62,6 @@ const styles = StyleSheet.create({
 
 })
 
-export default connect(mapStateToProps)(CartField);
+export default withNavigation(connect(
+    mapStateToProps
+)(CartField));
