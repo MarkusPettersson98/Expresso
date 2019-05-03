@@ -3,7 +3,6 @@ node_js:
     - node
 before_install:
     - npm update
-    - npm install -g grpc@1.20.2
 script:
     - make install
     - cd Frontend
