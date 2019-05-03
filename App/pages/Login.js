@@ -5,6 +5,7 @@ import {
   TextInput,
   Text,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
@@ -24,18 +25,19 @@ class loginPage extends React.Component {
         var errorCode = error.code;
         var errorMessage = error.message;
         this.setState({ errorMessage, loading: false });
-        // ...
+        return Alert.alert('Error', errorMessage, [
+          {
+            text: 'OK',
+          },
+        ]);
       });
   };
 
   render() {
     return (
       <View style={styles.container}>
-        {this.state.loading && (<LoadingOverlay />)}
+        {this.state.loading && <LoadingOverlay />}
 
-        {this.state.errorMessage && (
-          <Text style={{ color: 'red' }}>{this.state.errorMessage}</Text>
-        )}
         <TextInput
           style={styles.input}
           textContentType="emailAddress"
