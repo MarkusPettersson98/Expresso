@@ -11,13 +11,15 @@ export const getAllShopNames = async () => {
         return shop.name;
     };
 
+    console.log('expressoAPI: Call on getAllShopNames')
     const myData = await fetch(URL + 'getAllShops/')
         .then(res => res.json())
         .then(response => {
-            console.log('mapped data', response.map(getName));
             return response.map(getName);
         })
         .catch(error => {console.log('error', error); return []});
+
+        console.log('expressoAPI: Recieved by getAllShopNames', myData);
 
     return myData;
 };
@@ -28,15 +30,23 @@ export const getAllShopNames = async () => {
  */
 
 export const getShop = async wantedShop => {
-    const getInformation = shop => {
+    /*const getInformation = shop => {
         return {
             name: shop.name,
             coordinates: shop.coordinates,
             drinkList: shop.drinkList,
         };
-    };
+    };*/
+    console.log('expressoAPI: call on getShop with:', wantedShop);
+    const allInformation = await fetch(URL + 'getShop/' + wantedShop)
+                .then(res => res.json())
+                .then(response => {
+                    return response
+                })
+                .catch(error=> []);
 
-    return getShopBackend(wantedShop).then(shop => {getInformation(shop);});
+    console.log('expressoAPI: getShop with:' , wantedShop , 'recieved information:', allInformation);
+    return allInformation;
 };
 
 /**
@@ -44,12 +54,16 @@ export const getShop = async wantedShop => {
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
-    console.log('getCoffee from :', wantedShop);
+    console.log('expressoAPI: call on getAllCoffeeFromAShop with:', wantedShop);
     
-
-
-
-    return getShopBackend(wantedShop).then(shop => shop.drinkList);
+    const drinkList = await fetch(URL + 'getShop/' + wantedShop)
+        .then(res => res.json())
+        .then(response => {
+            return response.drinkList;
+        })
+        .catch(error => {return []});
+    console.log('expressoAPI: getAllCoffeeFromAShop: Recieved with:', wantedShop, 'Drinklist: ' , drinkList);
+    return drinkList;
 };
 
 /**

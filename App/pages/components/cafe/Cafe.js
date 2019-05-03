@@ -7,7 +7,7 @@ import CafeFooter from './CafeFooter';
 import CafeHeader from './CafeHeader';
 
 import { shops } from '../dummy-data';
-import { getAllCoffeeFromAShop } from '../../../API/expressoAPI';
+import { getAllCoffeeFromAShop, getShop } from '../../../API/expressoAPI';
 
 /**
  * @file This is the order page entry point. When a user selects a shop they are sent here.
@@ -28,6 +28,7 @@ const Cafe = props => {
 
     // this is temporarily just to activate the api-call.
     getAllCoffeeFromAShop(props.navigation.state.params.selectedShop);
+    getShop(props.navigation.state.params.selectedShop);
 
 
     return (
