@@ -35,6 +35,8 @@ class loginPage extends React.Component {
         <TextInput
           style={styles.input}
           textContentType="emailAddress"
+          keyboardType="email-address"
+          autoCapitalize="none"
           placeholder="Email"
           onChangeText={email => this.setState({ email })}
         />
