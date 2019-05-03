@@ -45,6 +45,10 @@ export const getShop = async wantedShop => {
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
     console.log('getCoffee from :', wantedShop);
+    
+
+
+
     return getShopBackend(wantedShop).then(shop => shop.drinkList);
 };
 

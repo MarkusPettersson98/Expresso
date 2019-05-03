@@ -1,6 +1,6 @@
 /* Function definitions for handling API requests */
 
-const { shops, assortment } = require("../Database/data.js");
+const { shops } = require("../Database/newData");
 
 const getAllShops = (req, res) => {
     /*
@@ -18,7 +18,7 @@ const getCoffee = (req, res) => {
     return detailsFromShop(lookUpCoffee, req, res);
 };
 
-const lookUpShop = (requestedShop) => {
+const lookUpShop = requestedShop => {
     /*
       Return all available information about requested shop
     */
@@ -27,13 +27,13 @@ const lookUpShop = (requestedShop) => {
     return foundShop ? foundShop : false;
 };
 
-const lookUpCoffee = (requestedShop) => {
+const lookUpCoffee = requestedShop => {
     /*
       Return all coffee products from requested shop
     */
-    const lookup = location => location.shop === requestedShop;
-    const foundShop = assortment.find(lookup);
-    return foundShop ? foundShop.coffees : false;
+    const lookup = location => location.name === requestedShop;
+    const foundShop = shops.find(lookup);
+    return foundShop ? foundShop.drinkList : false;
 };
 
 const detailsFromShop = (lookUp, req, res) => {
@@ -59,10 +59,10 @@ module.exports = {
     api: {
         getAllShops: getAllShops,
         getShop: getShop,
-        getCoffee: getCoffee,
+        getCoffee: getCoffee
     },
     testable: {
         lookUpShop: lookUpShop,
-        lookUpCoffee: lookUpCoffee,
-    },
+        lookUpCoffee: lookUpCoffee
+    }
 };
