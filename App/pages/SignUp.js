@@ -6,13 +6,15 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 class signUpPage extends React.Component {
-  state = { name: '', email: '', password: '', errorMessage: null };
+  state = { name: '', email: '', password: '', errorMessage: null, loading: false };
 
   handleRegister = () => {
+    this.setState({ loading: true, errorMessage: null });
     const { email, password } = this.state;
     firebase
       .auth()
@@ -34,7 +36,7 @@ class signUpPage extends React.Component {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        this.setState({ errorMessage });
+        this.setState({ errorMessage, loading: false });
         // ...
       });
   };
@@ -42,6 +44,8 @@ class signUpPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.loading && (<LoadingOverlay />)}
+
         {this.state.errorMessage && (
           <Text style={{ color: 'red' }}>{this.state.errorMessage}</Text>
         )}

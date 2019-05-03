@@ -6,13 +6,15 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 class ForgotPasswordPage extends React.Component {
-  state = { email: '', errorMessage: null };
+  state = { email: '', errorMessage: null, loading: false };
 
   handleReset = () => {
+    this.setState({ loading: true, errorMessage: null });
     const { email } = this.state;
     firebase
       .auth()
@@ -25,7 +27,7 @@ class ForgotPasswordPage extends React.Component {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        this.setState({ errorMessage });
+        this.setState({ errorMessage, loading: false });
         // ...
       });
   };
@@ -33,6 +35,8 @@ class ForgotPasswordPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.loading && (<LoadingOverlay />)}
+
         {this.state.errorMessage && (
           <Text style={{ color: 'red' }}>{this.state.errorMessage}</Text>
         )}
