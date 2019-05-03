@@ -26,6 +26,38 @@ export const getAllShopNames = async () => {
 
     return myData;
 };
+/**
+ * Function to get the current date, useful for when creating reciepts
+ */
+const getCurrentDate = () => {
+    let today = new Date();
+    let time =
+        today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+    let date;
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    date = mm + '/' + dd + '/' + yyyy;
+
+    let dateTime = date + ' ' + time;
+    console.log('expressoAPI: getCurrentDate: TODAY', today);
+    console.log('expressoAPI: getCurrentDate: DATE', date);
+    console.log('expreesoAPI: getCurrentDate: TIME', time);
+    console.log('expreesoAPI: getCurrentDate: dateTime', dateTime);
+
+    return [today, time];
+};
+
+const getCurrentTime = () => {};
 
 /**
  * Returns all the information of a all the shops in the database
