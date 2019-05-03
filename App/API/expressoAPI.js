@@ -1,5 +1,7 @@
 import allData from './dummy-data';
 import defaultPic from '../pages/components/resources/ExpressoTransp.png';
+
+const URL = 'https://expressobackend.herokuapp.com/api/';
 /**
  * Returns all the names of all the shops in the database
  * This only inlcudes the names of the shops
@@ -8,13 +10,23 @@ export const getAllShopNames = async () => {
     const getName = shop => {
         return shop.name;
     };
-    return getShopsBackend().then(shops => shops.map(getName));
+
+    const myData = await fetch(URL + 'getAllShops/')
+        .then(res => res.json())
+        .then(response => {
+            console.log('mapped data', response.map(getName));
+            return response.map(getName);
+        })
+        .catch(error => {console.log('error', error); return []});
+
+    return myData;
 };
 
 /**
  * Returns all the information of a all the shops in the database
  * This includes the names, the coordinates and their drinklist
  */
+
 export const getShop = async wantedShop => {
     const getInformation = shop => {
         return {
@@ -23,7 +35,8 @@ export const getShop = async wantedShop => {
             drinkList: shop.drinkList,
         };
     };
-    return getShopBackend(wantedShop).then(shop => getInformation(shop));
+
+    return getShopBackend(wantedShop).then(shop => {getInformation(shop);});
 };
 
 /**
@@ -31,6 +44,7 @@ export const getShop = async wantedShop => {
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
+    console.log('getCoffee from :', wantedShop);
     return getShopBackend(wantedShop).then(shop => shop.drinkList);
 };
 
@@ -52,6 +66,7 @@ export const getShopPicture = async wantedShop => {
  */
 const getShopBackend = async wantedShop => {
     // TODO replace allData.shops with actual call to API
+
     const foundShop = allData.shops.find(shop => {
         return shop.name.toUpperCase() == wantedShop.toUpperCase();
     });
