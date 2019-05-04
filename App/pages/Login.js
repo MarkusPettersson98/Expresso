@@ -8,6 +8,7 @@ import {
   Alert,
   Image,
   KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
@@ -17,6 +18,7 @@ class loginPage extends React.Component {
   state = { email: '', password: '', errorMessage: null, loading: false };
 
   handleLogin = () => {
+    Keyboard.dismiss();
     this.setState({ loading: true, errorMessage: null });
     const { email, password } = this.state;
     firebase
@@ -41,9 +43,9 @@ class loginPage extends React.Component {
         {this.state.loading && <LoadingOverlay />}
 
         <Image
-            style={{ height: 30, width: '100%', marginVertical: 50 }}
-            source={require('./components/resources/ExpressoLogoLight.png')}
-            resizeMode="contain"
+          style={{ height: 30, width: '100%', marginVertical: 50 }}
+          source={require('./components/resources/ExpressoLogoLight.png')}
+          resizeMode="contain"
         />
 
         <TextInput
@@ -68,13 +70,11 @@ class loginPage extends React.Component {
         </TouchableOpacity>
 
         <View style={styles.textButtonView}>
-          <Text style={{color: 'white'}}>Har du inget konto? </Text>
+          <Text style={{ color: 'white' }}>Har du inget konto? </Text>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('SignUp')}
           >
-            <Text style={{ color: '#5AA3B7' }}>
-              Registrera dig
-            </Text>
+            <Text style={{ color: '#5AA3B7' }}>Registrera dig</Text>
           </TouchableOpacity>
         </View>
 
@@ -82,9 +82,7 @@ class loginPage extends React.Component {
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Forgot')}
           >
-            <Text style={{ color: '#5AA3B7' }}>
-              Glömt lösenordet?
-            </Text>
+            <Text style={{ color: '#5AA3B7' }}>Glömt lösenordet?</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

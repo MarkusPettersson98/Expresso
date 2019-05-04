@@ -8,6 +8,7 @@ import {
   Alert,
   Image,
   KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
@@ -17,6 +18,7 @@ class ForgotPasswordPage extends React.Component {
   state = { email: '', errorMessage: null, loading: false };
 
   handleReset = () => {
+    Keyboard.dismiss();
     this.setState({ loading: true, errorMessage: null });
     const { email } = this.state;
     firebase
@@ -42,12 +44,12 @@ class ForgotPasswordPage extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-        {this.state.loading && (<LoadingOverlay />)}
+        {this.state.loading && <LoadingOverlay />}
 
         <Image
-            style={{ height: 30, width: '100%', marginVertical: 50 }}
-            source={require('./components/resources/ExpressoLogoLight.png')}
-            resizeMode="contain"
+          style={{ height: 30, width: '100%', marginVertical: 50 }}
+          source={require('./components/resources/ExpressoLogoLight.png')}
+          resizeMode="contain"
         />
 
         <TextInput
