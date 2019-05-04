@@ -24,9 +24,9 @@ var id = 1;
 
 
 
-const CafeCheckoutButton = ({ props, selectedShop }) => {
+const CafeCheckoutButton = ({ cart, selectedShop }) => {
 
-    console.log("Props: ", props);
+    console.log("Props: ", cart);
 
     /* let orderItems = Object.values(props.cart);
     let total = calculateCartPrice(orderItems); */
