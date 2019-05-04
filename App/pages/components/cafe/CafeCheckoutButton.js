@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
+import {sendOrder} from '../../../API/expressoAPI';
 /**
  * @file This is the order button inside of the order footer. This button is supposed to re-
  * direct the user to the checkout.
@@ -12,13 +13,13 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
  */
 
 const CafeCheckoutButton = () => {
-    const clickAction = () =>
-        console.log('CafeCheckoutButton: Klickade på betala');
-
+    clickedPayButton = () => {
+        sendOrder(1, 'Brunt kaffe', 'Bulten', 12 );
+    };
     return (
         <View style={styles.CafeButton}>
             <TouchableOpacity
-                onPress={clickAction}
+                onPress={clickedPayButton}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
                 <Text style={styles.CafeButtonText}>BETALA ></Text>

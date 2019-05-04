@@ -1,5 +1,8 @@
 import allData from './dummy-data';
 import defaultPic from '../pages/components/resources/ExpressoTransp.png';
+
+var postURL = 'https://share-places-1555452472826.firebaseio.com/kvitton.json';
+
 /**
  * Returns all the names of all the shops in the database
  * This only inlcudes the names of the shops
@@ -67,4 +70,24 @@ const getShopBackend = async wantedShop => {
 const getShopsBackend = async () => {
     // TODO replace allData.shops with actual call to API
     return allData.shops;
+};
+
+export const sendOrder = (id, coffee, shop, price) => {
+    console.log('betalade');
+
+    fetch(postURL, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: id,
+            coffee: coffee,
+            shop: shop,
+            price: price,
+        }),
+    })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
 };
