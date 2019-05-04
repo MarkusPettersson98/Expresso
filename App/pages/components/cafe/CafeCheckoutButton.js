@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
+import { connect } from 'react-redux';
+
+
 import { sendOrder } from '../../../API/expressoAPI';
+import { calculateCartPrice } from '../redux/cartFunctions';
+
 
 
 /* id: Current tracker for #of orders 
@@ -17,8 +22,16 @@ var id = 1;
  *
  */
 
-const CafeCheckoutButton = ({ selectedShop }) => {
 
+
+const CafeCheckoutButton = ({ props, selectedShop }) => {
+
+    console.log("Props: ", props);
+
+    /* let orderItems = Object.values(props.cart);
+    let total = calculateCartPrice(orderItems); */
+
+    console.log("Räknare:" , 12) ;  
 
 
     clickedPayButton = () => {
@@ -52,4 +65,8 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CafeCheckoutButton;
+const mapStateToProps = state => {
+    return { cart: state.cart };
+};
+
+export default connect(mapStateToProps)(CafeCheckoutButton);
