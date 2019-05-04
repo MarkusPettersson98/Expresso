@@ -59,21 +59,26 @@ class loginPage extends React.Component {
           <Text style={styles.logInText}>LOGGA IN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('SignUp')}
-        >
-          <Text style={{ color: '#5AA3B7', marginTop: 10 }}>
-            Registrera dig
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.textButtonView}>
+          <Text style={{color: 'white'}}>Har du inget konto? </Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('SignUp')}
+          >
+            <Text style={{ color: '#5AA3B7' }}>
+              Registrera dig
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('Forgot')}
-        >
-          <Text style={{ color: '#5AA3B7', marginTop: 10 }}>
-            Glömt lösenord
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.textButtonView}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Forgot')}
+          >
+            <Text style={{ color: '#5AA3B7' }}>
+              Glömt lösenordet?
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -100,11 +105,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 40,
+    marginBottom: 20,
   },
   logInText: {
     color: 'white',
     fontWeight: '700',
     letterSpacing: 2,
+  },
+  textButtonView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15,
   },
 });
 
