@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   Alert,
+  Image,
 } from 'react-native';
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
@@ -41,6 +42,12 @@ class ForgotPasswordPage extends React.Component {
     return (
       <View style={styles.container}>
         {this.state.loading && (<LoadingOverlay />)}
+
+        <Image
+            style={{ height: 30, width: '100%', marginBottom: 50 }}
+            source={require('./components/resources/ExpressoLogoLight.png')}
+            resizeMode="contain"
+        />
 
         <TextInput
           style={styles.input}
