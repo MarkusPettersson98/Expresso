@@ -20,16 +20,8 @@ var id = 1;
  */
 
 const CafeCheckoutButton = ({ cart, selectedShop }) => {
-    let orderItems = Object.values(cart);
-    let total = calculateCartPrice(orderItems);
-    let coffees = {};
-
-    orderItems.forEach(orderItem => {
-        coffees[orderItem.coffee.name] = orderItem.amount; 
-    });
-
     clickedPayButton = () => {
-        sendOrder(id, coffees, selectedShop, total);
+        sendOrder(id, cart, selectedShop);
         id++;
     };
 

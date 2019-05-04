@@ -3,6 +3,9 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 var postURL = 'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
+import { connect } from 'react-redux';
+import { calculateCartPrice } from '../pages/components/redux/cartFunctions';
+
 /**
  * Returns all the names of all the shops in the database
  * This only inlcudes the names of the shops
@@ -72,7 +75,15 @@ const getShopsBackend = async () => {
     return allData.shops;
 };
 
-export const sendOrder = async (id, coffee, selectedShop, price) => {
+export const sendOrder = async (id, cart, selectedShop) => {
+    let orderItems = Object.values(cart);
+    let total = calculateCartPrice(orderItems);
+    let coffees = {};
+
+    orderItems.forEach(orderItem => {
+        coffees[orderItem.coffee.name] = orderItem.amount;
+    });
+
     fetch(postURL, {
         method: 'POST',
         headers: {
@@ -81,11 +92,17 @@ export const sendOrder = async (id, coffee, selectedShop, price) => {
         },
         body: JSON.stringify({
             id: id,
-            coffee: coffee,
+            coffee: coffees,
             shop: selectedShop,
-            price: price,
+            price: total,
         }),
     })
         .then(res => console.log())
         .catch(err => console.log(err));
 };
+
+const mapStateToProps = state => {
+    return { cart: state.cart };
+};
+
+export default connect(mapStateToProps)(sendOrder);
