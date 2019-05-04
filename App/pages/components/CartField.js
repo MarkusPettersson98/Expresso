@@ -15,7 +15,9 @@ const CartField = props =>{
     if(totalAmount > 0){
         return( 
             <View style = {styles.container}> 
-                <OrderCartIconCounter cartAmount={totalAmount} style = {styles.cart}/>
+                <View style = {styles.cartContainer}>
+                    <OrderCartIconCounter cartAmount={totalAmount} />
+                </View> 
                 <Text style={styles.cartPriceText}>{`${totalPrice} kr`}</Text>
                 <TouchableOpacity
                     onPress={() => props.navigation.navigate('Checkout')}
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 6,
         backgroundColor: "#57454B",
         opacity: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
         position: 'absolute', 
@@ -58,18 +60,25 @@ const styles = StyleSheet.create({
     text:{
         color: "white",
         fontSize: 24,
-        
-    },
-    cartPriceText: {
-        fontSize: 30,
-        color: 'white',
-        marginLeft: 30,
-        marginRight: 40,
+        marginLeft: 0,
+        fontWeight: 'bold',
 
     },
-    cart:{
+    cartPriceText: {
+        fontSize: 24,
+        color: 'white',
+        marginLeft: 20,
+        marginRight: 70,
+        fontWeight: 'bold',
+
+
+    },
+    cartContainer:{
+        justifyContent: 'center',
+        alignItems: 'center',
         marginTop: 0,
-        marginLeft: 10
+        marginLeft: 20
+
     },
 
 })
