@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-import {sendOrder} from '../../../API/expressoAPI';
+import { sendOrder } from '../../../API/expressoAPI';
+
+
+/* id: Current tracker for #of orders 
+Todo: make this a global variable that is connected to the actual number of orders done overall */
+var id = 1;
 /**
  * @file This is the order button inside of the order footer. This button is supposed to re-
  * direct the user to the checkout.
@@ -12,10 +17,15 @@ import {sendOrder} from '../../../API/expressoAPI';
  *
  */
 
-const CafeCheckoutButton = () => {
+const CafeCheckoutButton = ({ selectedShop }) => {
+
+
+
     clickedPayButton = () => {
-        sendOrder(1, 'Brunt kaffe', 'Bulten', 12 );
+        sendOrder(id, 'Brunt kaffe', selectedShop, 12);
+        id++;
     };
+
     return (
         <View style={styles.CafeButton}>
             <TouchableOpacity

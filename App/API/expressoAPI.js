@@ -72,7 +72,7 @@ const getShopsBackend = async () => {
     return allData.shops;
 };
 
-export const sendOrder = (id, coffee, shop, price) => {
+export const sendOrder = (id, coffee, selectedShop, price) => {
     console.log('betalade');
 
     fetch(postURL, {
@@ -84,10 +84,10 @@ export const sendOrder = (id, coffee, shop, price) => {
         body: JSON.stringify({
             id: id,
             coffee: coffee,
-            shop: shop,
+            shop: selectedShop,
             price: price,
         }),
     })
-        .then(res => console.log(res))
+        .then(res => console.log())
         .catch(err => console.log(err));
 };
