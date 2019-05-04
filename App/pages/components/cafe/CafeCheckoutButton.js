@@ -22,18 +22,14 @@ var id = 1;
 const CafeCheckoutButton = ({ cart, selectedShop }) => {
     let orderItems = Object.values(cart);
     let total = calculateCartPrice(orderItems);
-    let list = []; 
+    let coffees = {};
 
-                        orderItems.forEach(orderItem => {
-                            list += orderItem.amount + orderItem.coffee.name;
-                            
-                        });
-                        
-
-
+    orderItems.forEach(orderItem => {
+        coffees[orderItem.coffee.name] = orderItem.amount; 
+    });
 
     clickedPayButton = () => {
-        sendOrder(id, list, selectedShop, total);
+        sendOrder(id, coffees, selectedShop, total);
         id++;
     };
 

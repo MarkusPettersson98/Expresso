@@ -72,9 +72,7 @@ const getShopsBackend = async () => {
     return allData.shops;
 };
 
-export const sendOrder = (id, coffee, selectedShop, price) => {
-    console.log('betalade');
-
+export const sendOrder = async (id, coffee, selectedShop, price) => {
     fetch(postURL, {
         method: 'POST',
         headers: {
