@@ -6,25 +6,27 @@ import {
     calculateCartAmount,
 } from './redux/cartFunctions';
 import { withNavigation } from 'react-navigation';
+import OrderCartIconCounter from './cafe/OrderCartIconCounter';
+
 
 const CartField = props =>{
-    
     const totalPrice = calculateCartPrice(props.cart);
     const totalAmount = calculateCartAmount(props.cart);
     if(totalAmount > 0){
-        return(
+        return( 
             <View style = {styles.container}> 
-                <View style = {styles.item}>
-                    <TouchableOpacity
-                        onPress={() => props.navigation.navigate('Checkout')}
-                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    >
-                    </TouchableOpacity>
-                </View>
+                <OrderCartIconCounter cartAmount={totalAmount} style = {styles.cart}/>
+                <Text style={styles.cartPriceText}>{`${totalPrice} kr`}</Text>
+                <TouchableOpacity
+                    onPress={() => props.navigation.navigate('Checkout')}
+                    hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                    style = {styles.opacity}
+                >
+                    <Text style = {styles.text}> Checkout ></Text>
+                </TouchableOpacity>
             </View>
         );
     }
-
     return(
         null
     );
@@ -37,28 +39,38 @@ const mapStateToProps = state => {
 
 const styles = StyleSheet.create({
     container:{
-        height: 40,
+        height: 60,
         width: '100%',
+        borderTopRightRadius: 6,
+        borderTopLeftRadius: 6,
+        backgroundColor: "#57454B",
+        opacity: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'row',
         position: 'absolute', 
         bottom: 0,
     },
-    item: {
-        height: '100%',
-        width: '93%',
-        borderTopRightRadius: 6,
-        borderTopLeftRadius: 6,
-        backgroundColor: "green",
-        opacity: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+
+    opacity: {
+        flex: 1,   
     },
     text:{
         color: "white",
-        fontSize: 14,
-        opacity: 1,
-    }
+        fontSize: 24,
+        
+    },
+    cartPriceText: {
+        fontSize: 30,
+        color: 'white',
+        marginLeft: 30,
+        marginRight: 40,
+
+    },
+    cart:{
+        marginTop: 0,
+        marginLeft: 10
+    },
 
 })
 

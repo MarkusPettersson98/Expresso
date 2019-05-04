@@ -28,7 +28,7 @@ const CafeCartIcon = ({ cart }) => {
             <Text style={styles.cartPriceText}>{`${total} kr`}</Text>
         </View>
     );
-};
+}; 
 
 const styles = StyleSheet.create({
     cartPriceText: {

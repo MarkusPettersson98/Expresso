@@ -24,7 +24,7 @@ const CafeFooter = ({ cart }) => {
             </View>
         </View>
     );
-};
+}; 
 
 const styles = StyleSheet.create({
     footer: {
