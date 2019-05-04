@@ -3,11 +3,8 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import { connect } from 'react-redux';
 
-
 import { sendOrder } from '../../../API/expressoAPI';
 import { calculateCartPrice } from '../redux/cartFunctions';
-
-
 
 /* id: Current tracker for #of orders 
 Todo: make this a global variable that is connected to the actual number of orders done overall */
@@ -22,20 +19,21 @@ var id = 1;
  *
  */
 
-
-
 const CafeCheckoutButton = ({ cart, selectedShop }) => {
+    let orderItems = Object.values(cart);
+    let total = calculateCartPrice(orderItems);
+    let list = []; 
 
-    console.log("Props: ", cart);
+                        orderItems.forEach(orderItem => {
+                            list += orderItem.amount + orderItem.coffee.name;
+                            
+                        });
+                        
 
-    /* let orderItems = Object.values(props.cart);
-    let total = calculateCartPrice(orderItems); */
-
-    console.log("Räknare:" , 12) ;  
 
 
     clickedPayButton = () => {
-        sendOrder(id, 'Brunt kaffe', selectedShop, 12);
+        sendOrder(id, list, selectedShop, total);
         id++;
     };
 
