@@ -16,7 +16,6 @@ import { coffee } from '../dummy-data';
  */
 
 export default (CoffeeList = ({ selectedShop }) => {
-
     // TODO: Remove this function call, render passed down objects instead
     const shop = coffee.find(allShops => {
         return allShops.shop == selectedShop;
@@ -33,7 +32,6 @@ export default (CoffeeList = ({ selectedShop }) => {
         </ScrollView>
     );
 });
-
 
 const styles = StyleSheet.create({
     container: {

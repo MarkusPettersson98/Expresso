@@ -21,21 +21,28 @@ import { getAllCoffeeFromAShop, getShop } from '../../../API/expressoAPI';
  */
 
 const Cafe = props => {
+    /* Debugging variables TODO: replace with API calls */
+    const shop = shops.find(
+        shop => shop.name === props.navigation.state.params.selectedShop,
+    );
+
     const cart = props.cart;
 
-    /* Debugging variables TODO: replace with API calls */
-    const shop = shops.find(shop => shop.name === props.navigation.state.params.selectedShop);
+    const orderInfo = {
+        shop: shop.name,
+        cart: cart,
+    };
 
-    // this is temporarily just to activate the api-call.
-    getAllCoffeeFromAShop(props.navigation.state.params.selectedShop);
-    getShop(props.navigation.state.params.selectedShop);
+    // this to activate the api-call.
+    /*getAllCoffeeFromAShop(props.navigation.state.params.selectedShop);
+    getShop(props.navigation.state.params.selectedShop);*/
 
 
     return (
         <View style={{ flex: 1 }}>
             <CafeHeader picture={shop.picture} />
             <CoffeeList selectedShop={shop.name} />
-            <CafeFooter cart={cart} />
+            <CafeFooter orderInfo={orderInfo} />
         </View>
     );
 };

@@ -1,6 +1,14 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
+import { connect } from 'react-redux';
+
+import { sendOrder } from '../../../API/expressoAPI';
+import { calculateCartPrice } from '../redux/cartFunctions';
+
+/* id: Current tracker for #of orders 
+Todo: make this a global variable that is connected to the actual number of orders done overall */
+var id = 1;
 /**
  * @file This is the order button inside of the order footer. This button is supposed to re-
  * direct the user to the checkout.
@@ -11,14 +19,16 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
  *
  */
 
-const CafeCheckoutButton = () => {
-    const clickAction = () =>
-        console.log('CafeCheckoutButton: Klickade på betala');
+const CafeCheckoutButton = ({ cart, selectedShop }) => {
+    clickedPayButton = () => {
+        sendOrder(id, cart, selectedShop);
+        id++;
+    };
 
     return (
         <View style={styles.CafeButton}>
             <TouchableOpacity
-                onPress={clickAction}
+                onPress={clickedPayButton}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
                 <Text style={styles.CafeButtonText}>BETALA ></Text>
@@ -41,4 +51,8 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CafeCheckoutButton;
+const mapStateToProps = state => {
+    return { cart: state.cart };
+};
+
+export default connect(mapStateToProps)(CafeCheckoutButton);
