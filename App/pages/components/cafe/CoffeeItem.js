@@ -32,9 +32,19 @@ const styles = StyleSheet.create({
     },
 });
 
-const CoffeeItem = props => {
-    const coffee = props.coffee;
+class CoffeeItem extends React.Component {
+    constructor(props) {
+        super(props);
+        //console.log(props);
+        this.state = {
+            visible: false,
+        };
+    }
 
+
+    
+    coffee = this.props.coffee;
+    /*
     //State som används för ModalComp - om den ska vara synlig eller inte
     //För att testa knappen "Lägg till" i Modal samt att hideModal anropas,
     //ändra värde till true så kommer Modal dyka upp såfort man går in
@@ -47,10 +57,10 @@ const CoffeeItem = props => {
     this.setState = val => {
         this.state.visible = val;
     };
-
+*/
     //Ändrar state till true och (ska) visa ModalComp
     showModal = () => {
-        this.setState(true);
+        this.setState({ visible: true });
         console.log(
             'showModal anropas -  state.visible: ' + this.state.visible,
         );
@@ -58,73 +68,77 @@ const CoffeeItem = props => {
 
     //Ändrar state till false och (ska) dölja ModalComp
     hideModal = () => {
-        this.setState(false);
+        this.setState({ visible: false });
         console.log('hideModal anropas - state.visible: ' + this.state.visible);
     };
 
     //Vad som utförs när man klickar på ett godtyckligt CoffeeItem
     handleClick = () => {
-        showModal();
-        props.onAddCoffee(coffee);
+        this.showModal();
+        this.props.onAddCoffee(this.coffee);
     };
 
-    return (
-        <View
-            style={{
-                height: 100,
-                width: '100%',
-            }}
-        >
-            <ModalComp
-                //state visible skickas in som en props till ModalComp
-                isVisible={this.state.visible}
-                //Funktionen hideModal skickas in som en props för att kunna ändra state visible från ModalComp
-                hideModal={this.hideModal}
-                //Kommer även skicka med en funktion som kan ta tillbaka värdet på knappens ownMug
-                //tillbaka hit
-            />
-            <TouchableOpacity
-                onPress={this.handleClick}
+    render() {
+        return (
+            <View
                 style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 24,
-                    marginTop: 16,
-                    marginBottom: 10,
-                    borderBottomColor: '#D7D7D7',
-                    borderBottomWidth: 1,
-                    paddingBottom: 20,
+                    height: 100,
+                    width: '100%',
                 }}
             >
-                <View
+                <ModalComp
+                    //state visible skickas in som en props till ModalComp
+                    isVisible={this.state.visible}
+                    //Funktionen hideModal skickas in som en props för att kunna ändra state visible från ModalComp
+                    hideModal={ () => this.hideModal()}
+                    //Kommer även skicka med en funktion som kan ta tillbaka värdet på knappens ownMug
+                    //tillbaka hit
+                />
+                <TouchableOpacity
+                    onPress={ () => this.handleClick()}
                     style={{
-                        flex: 4,
+                        flex: 1,
                         flexDirection: 'row',
-                        justifyContent: 'flex-start',
+                        justifyContent: 'space-between',
+                        marginHorizontal: 24,
+                        marginTop: 16,
+                        marginBottom: 10,
+                        borderBottomColor: '#D7D7D7',
+                        borderBottomWidth: 1,
+                        paddingBottom: 20,
                     }}
                 >
-                    <SimpleLineIcons name="cup" size={20} color="#5AA3B7" />
                     <View
                         style={{
                             flex: 4,
-                            flexDirection: 'column',
-                            paddingLeft: 10,
+                            flexDirection: 'row',
+                            justifyContent: 'flex-start',
                         }}
                     >
-                        <Text style={styles.titleText}>{coffee.name}</Text>
-                        <Text style={styles.descText}>
-                            {coffee.description}
-                        </Text>
+                        <SimpleLineIcons name="cup" size={20} color="#5AA3B7" />
+                        <View
+                            style={{
+                                flex: 4,
+                                flexDirection: 'column',
+                                paddingLeft: 10,
+                            }}
+                        >
+                            <Text style={styles.titleText}>{this.coffee.name}</Text>
+                            <Text style={styles.descText}>
+                                {this.coffee.description}
+                            </Text>
+                        </View>
                     </View>
-                </View>
-                <View>
-                    <Text style={styles.priceText}>{`${coffee.price} kr`}</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
-    );
-};
+                    <View>
+                        <Text style={styles.priceText}>{`${
+                            this.coffee.price
+                        } kr`}</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+}
 
 const mapStateToProps = state => {
     return { cart: state.cart };
