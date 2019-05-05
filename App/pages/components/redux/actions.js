@@ -22,8 +22,8 @@ export function decrementCoffee(coffee) {
     return { type: ITEM_DECREMENT, coffee };
 }
 
-export function addCoffee(coffee) {
-    return { type: CART_ADD_COFFEE, coffee };
+export function addCoffee(coffee, ownMug) {
+    return { type: CART_ADD_COFFEE, coffee, ownMug };
 }
 
 export function clearCart() {
