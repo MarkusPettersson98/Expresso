@@ -14,16 +14,15 @@ import CartField from './../CartField';
  *
  */
 
-
 const CafeFooter = ({ cart }) => {
     return (
         <View style={styles.footer}>
             <View style={styles.footerRow}>
-                <CartField cart={cart}/>
+                <CartField cart={cart} />
             </View>
         </View>
     );
-}; 
+};
 
 const styles = StyleSheet.create({
     footer: {

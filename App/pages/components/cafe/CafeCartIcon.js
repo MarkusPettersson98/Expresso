@@ -27,7 +27,7 @@ const CafeCartIcon = ({ cart }) => {
             <OrderCartIconCounter cartAmount={amount} />
         </View>
     );
-}; 
+};
 
 const styles = StyleSheet.create({
     cartPriceText: {

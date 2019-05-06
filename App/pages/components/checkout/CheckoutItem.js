@@ -19,7 +19,6 @@ import { incrementCoffee, decrementCoffee } from '../redux/actions';
  * 
  */
 
-
 const CheckoutItem = props => {
     const orderItem = props.orderItem;
     const checkDecrementCoffee = orderItem => {
