@@ -12,7 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const OrderCartIconCounter = ({ cartAmount }) => {
     return (
-        <View style={styles.cartIcon}>
+        <View>
             <Ionicons name="ios-cart" size={25} color={'white'} />
             <Text style={styles.cartIconText}>{cartAmount}</Text>
         </View>
@@ -20,10 +20,6 @@ const OrderCartIconCounter = ({ cartAmount }) => {
 };
 
 const styles = StyleSheet.create({
-    cartIcon: {
-        marginTop: 0,
-        marginLeft: 10,
-    },
     cartIconText: {
         position: 'absolute',
         backgroundColor: '#ff4e4e',
