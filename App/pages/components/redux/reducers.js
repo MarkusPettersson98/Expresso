@@ -6,6 +6,8 @@ import {
     ITEM_INCREMENT,
 } from './actions';
 
+import {calculateCartAmount, calculateCartPrice} from './cartFunctions';
+
 /*
   INITIAL_STATE
   An object with key: coffeeId and value is an object that contains
@@ -31,26 +33,26 @@ import {
 //     ownMug: false,
 // };
 
-export const INITIAL_STATE = {};
 export const INITIAL_CART_STATE = {
     price: 0,
     amount: 0,
     orderItems: [],
 };
 
-export function cart(cart = INITIAL_CART_STATE, action) {
-    console.log('reducers', cart);
+export const cart = function(currentCart = INITIAL_CART_STATE, action) {
+    console.log('reducers', currentCart);
 
     switch (action.type) {
         case CART_ADD_COFFEE: {
             const coffee = action.coffee;
 
-            const existingOrderItem = cart.orderItems.find(
+            const existingOrderItem = currentCart.orderItems.find(
                 orderItem => orderItem.coffee.id === coffee.id,
             );
-            // If order item already exists, just return cart as is
+
+            // If order item already exists, call increment function instead
             if (existingOrderItem) {
-                return cart;
+                return cart(currentCart, { type: ITEM_INCREMENT, coffee });
             }
 
             // Create a new order item (add quantity to a coffee)
@@ -60,13 +62,13 @@ export function cart(cart = INITIAL_CART_STATE, action) {
             };
 
             // Copy old orderItems from cart and add the new orderItem
-            const newOrderItems = [...cart.orderItems, newOrderItem];
-            const newCartPrice = cart.price + newOrderItem.coffee.price;
-            const newCartAmount = cart.amount + 1;
+            const newOrderItems = [...currentCart.orderItems, newOrderItem];
+            const newCartPrice = calculateCartPrice(newOrderItems);
+            const newCartAmount = calculateCartAmount(newOrderItems);
 
             // Return the updated cart state
             return {
-                ...cart,
+                ...currentCart,
                 orderItems: newOrderItems,
                 price: newCartPrice,
                 amount: newCartAmount,
@@ -80,15 +82,19 @@ export function cart(cart = INITIAL_CART_STATE, action) {
             const match = orderItem => orderItem.coffee.id === coffee.id;
 
             const newOrderItems = mapSome(
-                cart.orderItems,
+                currentCart.orderItems,
                 match,
                 incrementAmount,
             );
+            const newCartPrice = calculateCartPrice(newOrderItems);
+            const newCartAmount = calculateCartAmount(newOrderItems);
 
-            // Return a new cart object with updated state
+            // Return the updated cart state
             return {
-                ...cart,
+                ...currentCart,
                 orderItems: newOrderItems,
+                price: newCartPrice,
+                amount: newCartAmount,
             };
         }
         case ITEM_DECREMENT: {
@@ -97,38 +103,53 @@ export function cart(cart = INITIAL_CART_STATE, action) {
             // Decrement amount of existing orderItem by one
             const match = orderItem => orderItem.coffee.id === coffee.id;
 
-            const newOrderItems = mapSome(
-                cart.orderItems,
+            let newOrderItems = mapSome(
+                currentCart.orderItems,
                 match,
                 decrementAmount,
             );
 
+            // Check if orderItem should be deleted
+            const newAmount = newOrderItems.find(match).amount;
+            if (newAmount <= 0) {
+                // Remove orderItem (since amount is none or negative)
+                newOrderItems = currentCart.orderItems.filter(orderItem => !match(orderItem));
+            }
+            const newCartPrice = calculateCartPrice(newOrderItems);
+            const newCartAmount = calculateCartAmount(newOrderItems);
+
+            // Return the updated cart state
             return {
-                ...cart,
+                ...currentCart,
                 orderItems: newOrderItems,
+                price: newCartPrice,
+                amount: newCartAmount,
             };
         }
         case CART_CLEAR: {
-            return {};
+            return INITIAL_CART_STATE;
         }
         default:
-            return cart;
+            return currentCart;
     }
 }
 
 // Increment amount of orderItem by one
 const incrementAmount = orderItem => {
+    const newAmount = orderItem.amount + 1;
     return {
         ...orderItem,
-        amount: orderItem.amount + 1,
+        amount: newAmount,
     };
 };
 
 // Decrement amount of orderItem by one
 const decrementAmount = orderItem => {
+    const newAmount = orderItem.amount - 1;
+    // Else, just decrement orderItem amount by one
     return {
         ...orderItem,
-        amount: orderItem.amount - 1,
+        amount: newAmount,
     };
 };
 
