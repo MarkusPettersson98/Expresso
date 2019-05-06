@@ -25,7 +25,7 @@ const CafeCartIcon = ({ cart }) => {
     return (
         <View style={styles.cartAlignItems}>
             <OrderCartIconCounter cartAmount={amount} />
-            <Text style={styles.cartPriceText}>{`${total} kr`}</Text>
+            {/*<Text style={styles.cartPriceText}>{`${total} kr`}</Text>*/}
         </View>
     );
 }; 
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'flex-end',
+        position: 'absolute',
     },
 });
 

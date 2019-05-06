@@ -6,29 +6,29 @@ import {
     calculateCartAmount,
 } from './redux/cartFunctions';
 import { withNavigation } from 'react-navigation';
-import OrderCartIconCounter from './cafe/OrderCartIconCounter';
-
+import CafeCartIcon from './cafe/CafeCartIcon';
 
 const CartField = props =>{
+    
     const totalPrice = calculateCartPrice(props.cart);
     const totalAmount = calculateCartAmount(props.cart);
     if(totalAmount > 0){
-        return( 
+        return(
             <View style = {styles.container}> 
-                <View style = {styles.cartContainer}>
-                    <OrderCartIconCounter cartAmount={totalAmount} />
-                </View> 
-                <Text style={styles.cartPriceText}>{`${totalPrice} kr`}</Text>
-                <TouchableOpacity
-                    onPress={() => props.navigation.navigate('Checkout')}
-                    hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    style = {styles.opacity}
-                >
-                    <Text style = {styles.text}> Checkout ></Text>
-                </TouchableOpacity>
+                <View style = {styles.item}>
+                    <TouchableOpacity style = {styles.to} 
+                        onPress={() => props.navigation.navigate('Checkout')}
+                        hitSlop={{ top: 20, bottom: 20, left: 200, right: 200 }}
+                    >
+                        <CafeCartIcon cart={props.cart} style={styles.cartIcon}/>
+                        <Text style={styles.cartText}>Till varukorgen</Text>
+                        <Text style={styles.sumText}>{totalPrice} kr</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
+
     return(
         null
     );
@@ -41,44 +41,36 @@ const mapStateToProps = state => {
 
 const styles = StyleSheet.create({
     container:{
-        height: 60,
+        height: 45,
         width: '100%',
-        borderTopRightRadius: 6,
-        borderTopLeftRadius: 6,
-        backgroundColor: "#57454B",
-        opacity: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row',
         position: 'absolute', 
         bottom: 0,
     },
-
-    opacity: {
-        flex: 1,   
-    },
-    text:{
-        color: "white",
-        fontSize: 24,
-        marginLeft: 0,
-        fontWeight: 'bold',
-
-    },
-    cartPriceText: {
-        fontSize: 24,
-        color: 'white',
-        marginLeft: 20,
-        marginRight: 70,
-        fontWeight: 'bold',
-
-
-    },
-    cartContainer:{
+    item: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: '#57454B',
+        opacity: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 0,
-        marginLeft: 20
-
+    },
+    to: {
+        width: '100%',
+    },
+    cartText:{
+        color: "white",
+        fontSize: 18,
+        opacity: 1,
+        textAlign: 'center',
+    },
+    sumText:{
+        color: "white",
+        fontSize: 17,
+        opacity: 1,
+        position: 'absolute',
+        right: 10,
     },
 
 })

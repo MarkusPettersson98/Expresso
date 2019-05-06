@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 import CafeCartIcon from './CafeCartIcon';
 import CafeCheckoutButton from './CafeCheckoutButton';
+import CartField from './../CartField';
 
 /**
  * @file This is the bottom part of the order view, containing information about the current
@@ -18,9 +19,7 @@ const CafeFooter = ({ cart }) => {
     return (
         <View style={styles.footer}>
             <View style={styles.footerRow}>
-                <CafeCartIcon cart={cart} />
-
-                <CafeCheckoutButton />
+                <CartField cart={cart}/>
             </View>
         </View>
     );
@@ -29,8 +28,7 @@ const CafeFooter = ({ cart }) => {
 const styles = StyleSheet.create({
     footer: {
         flex: 1,
-        backgroundColor: '#57454B',
-        maxHeight: 100,
+        maxHeight: 60,
     },
     footerRow: {
         flexDirection: 'row',
