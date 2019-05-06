@@ -9,7 +9,7 @@ export default (Maincomp = props => {
     });
 
     return (
-        <View style = {styles.tc}>
+        <View style={styles.tc}>
             <ScrollView contentContainerStyle={styles.container}>
                 {ShopViews}
             </ScrollView>
@@ -25,8 +25,8 @@ const styles = {
         justifyContent: 'center',
     },
     tc: {
-        flex: 1
-    }
+        flex: 1,
+    },
 };
 
 AppRegistry.registerComponent('Maincomp', Maincomp);

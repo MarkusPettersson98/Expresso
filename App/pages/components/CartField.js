@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import { connect } from 'react-redux';
 import {
-    calculateCartPrice,
-    calculateCartAmount,
-} from './redux/cartFunctions';
+    AppRegistry,
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+} from 'react-native';
+import { connect } from 'react-redux';
+import { calculateCartPrice, calculateCartAmount } from './redux/cartFunctions';
 import { withNavigation } from 'react-navigation';
 import CafeCartIcon from './cafe/CafeCartIcon';
 
-const CartField = props =>{
-    
+const CartField = props => {
     const totalPrice = calculateCartPrice(props.cart);
     const totalAmount = calculateCartAmount(props.cart);
-    if(totalAmount > 0){
-        return(
-            <View style = {styles.container}> 
-                <TouchableOpacity style = {styles.to} 
+    if (totalAmount > 0) {
+        return (
+            <View style={styles.container}>
+                <TouchableOpacity
+                    style={styles.to}
                     onPress={() => props.navigation.navigate('Checkout')}
                     hitSlop={{ top: 20, bottom: 20, left: 200, right: 200 }}
                 >
-                    <CafeCartIcon cart={props.cart} style={styles.cartIcon}/>
+                    <CafeCartIcon cart={props.cart} style={styles.cartIcon} />
                     <Text style={styles.cartText}>Till varukorgen</Text>
                     <Text style={styles.sumText}>{totalPrice} kr</Text>
                 </TouchableOpacity>
@@ -27,10 +30,7 @@ const CartField = props =>{
         );
     }
 
-    return(
-        null
-    );
-    
+    return null;
 };
 
 const mapStateToProps = state => {
@@ -38,11 +38,11 @@ const mapStateToProps = state => {
 };
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         backgroundColor: '#5AA3B7',
         height: 45,
         width: '100%',
-        position: 'absolute', 
+        position: 'absolute',
         bottom: 0,
         paddingHorizontal: 10,
     },
@@ -52,19 +52,16 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    cartText:{
-        color: "white",
+    cartText: {
+        color: 'white',
         fontSize: 18,
         opacity: 1,
     },
-    sumText:{
-        color: "white",
+    sumText: {
+        color: 'white',
         fontSize: 17,
         opacity: 1,
     },
+});
 
-})
-
-export default withNavigation(connect(
-    mapStateToProps
-)(CartField));
+export default withNavigation(connect(mapStateToProps)(CartField));
