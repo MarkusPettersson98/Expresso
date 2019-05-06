@@ -2,6 +2,7 @@ import allData from './dummy-data';
 import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 const herokuURL = 'https://expressobackend.herokuapp.com/api/';
+
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
@@ -32,7 +33,8 @@ export const getShop = async wantedShop => {
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
-    return await getShop(wantedShop).drinkList;
+    const drinkList = await getShop(wantedShop).drinkList;
+    return drinkList;
 };
 
 /**
@@ -44,7 +46,7 @@ export const getShopPicture = async wantedShop => {
     const foundShop = allData.shops.find(shop => {
         return shop.name.toUpperCase() == wantedShop.toUpperCase();
     });
-    return foundShop.picture;
+    return foundShop.picture ? foundShop.picture : defaultPic;
 };
 
 /**

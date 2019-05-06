@@ -29,7 +29,7 @@ const lookUpShop = requestedShop => {
     /*
       Return all available information about requested shop
     */
-    const lookup = shop => shop.name === requestedShop;
+    const lookup = shop => shop.name.toLowerCase() === requestedShop.toLowerCase();
     const foundShop = shops.find(lookup);
     return foundShop ? foundShop : false;
 };
@@ -38,7 +38,7 @@ const lookUpCoffee = requestedShop => {
     /*
       Return all coffee products from requested shop
     */
-    const lookup = location => location.name === requestedShop;
+    const lookup = location => location.name.toLowerCase() === requestedShop;
     const foundShop = shops.find(lookup);
     return foundShop ? foundShop.drinkList : false;
 };
@@ -53,7 +53,7 @@ const detailsFromShop = (lookUp, req, res) => {
     const shop = req.params.shop;
     if (shop === undefined) res.status(400).end();
 
-    const details = lookUp(shop);
+    const details = lookUp(shop.toLowerCase());
 
     // Shop was found, return OK
     if (details) return res.status(200).send(details);
