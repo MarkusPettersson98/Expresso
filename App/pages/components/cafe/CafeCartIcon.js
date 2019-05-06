@@ -25,7 +25,6 @@ const CafeCartIcon = ({ cart }) => {
     return (
         <View style={styles.cartAlignItems}>
             <OrderCartIconCounter cartAmount={amount} />
-            {/*<Text style={styles.cartPriceText}>{`${total} kr`}</Text>*/}
         </View>
     );
 }; 

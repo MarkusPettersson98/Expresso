@@ -28,7 +28,7 @@ const CafeFooter = ({ cart }) => {
 const styles = StyleSheet.create({
     footer: {
         flex: 1,
-        maxHeight: 60,
+        maxHeight: 30,
     },
     footerRow: {
         flexDirection: 'row',
