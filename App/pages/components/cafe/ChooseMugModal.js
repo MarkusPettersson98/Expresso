@@ -8,12 +8,6 @@ export default class ModalComp extends Component {
     constructor(props) {
         super(props);
     }
-    /*
-    //Visar rutan: Ändrar state till true
-    showModal = () => this.setState({ isModalVisible: true });
-    //Gömmer rutan: Ändrar state till false
-    hideModal = () => this.setState({ isModalVisible: false });
-    */
 
     //Valen egen eller lånad mugg är states
     //värdet på ownMug kommer sedan användas av reducern addCoffee
@@ -34,10 +28,11 @@ export default class ModalComp extends Component {
     //När man klickar på ett av valen (egen, låna) uppdateras state
     onPress = data => this.setState({ data });
 
-    //Vad som ska hända när Modal stängs
+    //Vad som ska hända när Modal stängs (skicka beställning till CoffeeItem)
     onClose = () => {
         selectedButton = this.state.data.find(e => e.selected == true);
-        console.log('Own mug-value: ' + selectedButton.ownMug);
+        console.log('ownMug: ' + selectedButton.ownMug);
+        this.props.orderCoffee();
         this.props.hideModal();
     };
 

@@ -35,46 +35,28 @@ const styles = StyleSheet.create({
 class CoffeeItem extends React.Component {
     constructor(props) {
         super(props);
-        //console.log(props);
+        //State som används för ModalComp - om den ska vara synlig eller inte
         this.state = {
             visible: false,
         };
     }
 
-
-    
     coffee = this.props.coffee;
-    /*
-    //State som används för ModalComp - om den ska vara synlig eller inte
-    //För att testa knappen "Lägg till" i Modal samt att hideModal anropas,
-    //ändra värde till true så kommer Modal dyka upp såfort man går in
-    //från ett café till kaffe-listan
-    this.state = {
-        visible: false,
-    };
 
-    //Ändrar state för visible till true eller false
-    this.setState = val => {
-        this.state.visible = val;
-    };
-*/
-    //Ändrar state till true och (ska) visa ModalComp
+    //Ändrar state till true och visar ModalComp
     showModal = () => {
         this.setState({ visible: true });
-        console.log(
-            'showModal anropas -  state.visible: ' + this.state.visible,
-        );
     };
 
-    //Ändrar state till false och (ska) dölja ModalComp
+    //Ändrar state till false och döljer ModalComp
     hideModal = () => {
         this.setState({ visible: false });
-        console.log('hideModal anropas - state.visible: ' + this.state.visible);
     };
 
-    //Vad som utförs när man klickar på ett godtyckligt CoffeeItem
-    handleClick = () => {
-        this.showModal();
+    //Funktion för att beställa kaffet när Modal stängs, skickas med som props till Modal
+    // todo: ska kunna ta med värde på ownMug för att skicka med, för att visa om egen eller
+    // lånad mugg ska användas
+    orderCoffee = () => {
         this.props.onAddCoffee(this.coffee);
     };
 
@@ -89,13 +71,13 @@ class CoffeeItem extends React.Component {
                 <ModalComp
                     //state visible skickas in som en props till ModalComp
                     isVisible={this.state.visible}
-                    //Funktionen hideModal skickas in som en props för att kunna ändra state visible från ModalComp
-                    hideModal={ () => this.hideModal()}
-                    //Kommer även skicka med en funktion som kan ta tillbaka värdet på knappens ownMug
-                    //tillbaka hit
+                    //Funktionen hideModal skickas in som en props för att kunna dölja Modal från ModalComp
+                    hideModal={() => this.hideModal()}
+                    //Funktion för att beställa kaffet från Modal
+                    orderCoffee={() => this.orderCoffee()}
                 />
                 <TouchableOpacity
-                    onPress={ () => this.handleClick()}
+                    onPress={this.showModal}
                     style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -123,7 +105,9 @@ class CoffeeItem extends React.Component {
                                 paddingLeft: 10,
                             }}
                         >
-                            <Text style={styles.titleText}>{this.coffee.name}</Text>
+                            <Text style={styles.titleText}>
+                                {this.coffee.name}
+                            </Text>
                             <Text style={styles.descText}>
                                 {this.coffee.description}
                             </Text>
