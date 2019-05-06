@@ -4,11 +4,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import { sendOrder } from '../../../API/expressoAPI';
-import { calculateCartPrice } from '../redux/cartFunctions';
 
-/* id: Current tracker for #of orders 
-Todo: make this a global variable that is connected to the actual number of orders done overall */
-var id = 1;
 /**
  * @file This is the order button inside of the order footer. This button is supposed to re-
  * direct the user to the checkout.
@@ -19,10 +15,9 @@ var id = 1;
  *
  */
 
-const CafeCheckoutButton = ({ cart, selectedShop }) => {
+const CafeCheckoutButton = ({ cart }) => {
     clickedPayButton = () => {
-        sendOrder(id, cart, selectedShop);
-        id++;
+        sendOrder(cart);
     };
 
     return (
