@@ -33,8 +33,10 @@ export const getShop = async wantedShop => {
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
-    const drinkList = await getShop(wantedShop).drinkList;
-    return drinkList;
+    let fixedString =
+        wantedShop.charAt(0).toUpperCase() + wantedShop.slice(1).toLowerCase();
+    const shop = await getShop(fixedString);
+    return shop.drinkList;
 };
 
 /**
@@ -64,7 +66,6 @@ const getAllShops = async () => {
             console.log('error', error);
             return [];
         });
-
     return myData;
 };
 
@@ -76,7 +77,7 @@ export const getAllShopNames = async () => {
     const getName = shop => {
         return shop.name;
     };
-    const shops = await getAllShops();
+    shops = await getAllShops();
     return shops.map(getName);
 };
 

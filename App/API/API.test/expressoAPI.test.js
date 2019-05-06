@@ -9,16 +9,12 @@ import 'isomorphic-fetch';
 import defaultPic from '../../pages/components/resources/ExpressoTransp.png';
 import bultenPic from '../../pages/components/resources/bulten.jpg';
 import wikkan from '../../pages/components/resources/wijkanders.jpg';
-import { nopictures } from '../dummy-data';
-test('adds 1 + 2 to equal 3', () => {
-    expect(1 + 2).toBe(3);
-});
 
 /**
  * @todo Mock files with jest, unable to currently...
  */
 
-/* describe('Testing if getAllShopNames output all the names', () => {
+describe('Testing if getAllShopNames output all the names', () => {
     it('Should output only the names of all the avaible shops', () => {
         return getAllShopNames().then(data =>
             expect(data).toEqual([
@@ -35,73 +31,61 @@ test('adds 1 + 2 to equal 3', () => {
 describe('Testing if all the coffeesorts from a shop is printed out ', () => {
     it('Should print out the drinkList for a shop i.e. all the avaible coffee from a specific shop', () => {
         return getAllCoffeeFromAShop('Bulten').then(data =>
-            expect(data).toEqual({
-                brewed_coffee: {
-                    id: 123,
+            expect(data).toEqual([
+                {
                     name: 'Brewed Coffee',
                     price: 12,
                     volume: 330,
+                    id: 123,
                 },
-                cappuccino: {
-                    id: 124,
+                {
                     name: 'Cappuccino',
                     price: 28,
                     volume: 500,
+                    id: 124,
                 },
-                latte: {
-                    id: 125,
-                    name: 'Caffee Latte',
-                    price: 28,
-                    volume: 500,
-                },
-            }),
+            ]),
         );
     });
 
     it('Case insensitive check of above', () => {
         return getAllCoffeeFromAShop('buLteN').then(data =>
-            expect(data).toEqual({
-                brewed_coffee: {
-                    id: 123,
+            expect(data).toEqual([
+                {
                     name: 'Brewed Coffee',
                     price: 12,
                     volume: 330,
+                    id: 123,
                 },
-                cappuccino: {
-                    id: 124,
+                {
                     name: 'Cappuccino',
                     price: 28,
                     volume: 500,
+                    id: 124,
                 },
-                latte: {
-                    id: 125,
-                    name: 'Caffee Latte',
-                    price: 28,
-                    volume: 500,
-                },
-            }),
+            ]),
         );
     });
 
     it('Checking other restaurants, list for Wijkanders expected', () => {
         return getAllCoffeeFromAShop('Wijkanders').then(data =>
-            expect(data).toEqual({
-                brewed_coffee: {
-                    id: 123,
+            expect(data).toEqual([
+                {
                     name: 'Brewed Coffee',
                     price: 12,
                     volume: 330,
+                    id: 123,
                 },
-                latte: {
-                    id: 125,
+                {
                     name: 'Caffee Latte',
                     price: 28,
                     volume: 500,
+                    id: 125,
                 },
-            }),
+            ]),
         );
     });
-}); */
+});
 
 describe('Testing if getShop returns the right shop', () => {
     it('Should output Bulten store', () => {
