@@ -1,6 +1,7 @@
 /* Function definitions for handling API requests */
 
 const { shops } = require("../Database/newData");
+const path = require('path');
 
 const getAllShops = (req, res) => {
     /*
@@ -12,6 +13,12 @@ const getAllShops = (req, res) => {
 
 const getShop = (req, res) => {
     return detailsFromShop(lookUpShop, req, res);
+};
+
+const getShopPicture = (req, res) => {
+    const shop = req.params.shop;
+    const picturePath = path.resolve('Database/resources');
+    return res.sendFile(shop.toLowerCase() + '.jpg', { root: picturePath });
 };
 
 const getCoffee = (req, res) => {
@@ -59,6 +66,7 @@ module.exports = {
     api: {
         getAllShops: getAllShops,
         getShop: getShop,
+        getShopPicture: getShopPicture,
         getCoffee: getCoffee
     },
     testable: {
