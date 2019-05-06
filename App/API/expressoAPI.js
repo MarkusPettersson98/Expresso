@@ -18,12 +18,15 @@ const getCurrentDate = () => {
  * This includes the names, the coordinates and their drinklist
  */
 export const getShop = async wantedShop => {
-    const allInformation = await fetch(herokuURL + 'getShop/' + wantedShop)
+    let fixedString =
+        wantedShop.charAt(0).toUpperCase() + wantedShop.slice(1).toLowerCase();
+
+    const allInformation = await fetch(herokuURL + 'getShop/' + fixedString)
         .then(res => res.json())
         .then(response => {
             return response;
         })
-        .catch(error => []);
+        .catch(error => {console.log('ERROR', error); return [];});
     return allInformation;
 };
 
@@ -33,9 +36,7 @@ export const getShop = async wantedShop => {
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
-    let fixedString =
-        wantedShop.charAt(0).toUpperCase() + wantedShop.slice(1).toLowerCase();
-    const shop = await getShop(fixedString);
+    const shop = await getShop(wantedShop);
     return shop.drinkList;
 };
 
