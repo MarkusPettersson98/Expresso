@@ -1,9 +1,7 @@
 import React from 'react';
 import { AppRegistry, ScrollView, View } from 'react-native';
-
 import { default as ShopView } from './ListShopView';
 import shops from '../dummy-data';
-import CartField from '../CartField';
 
 export default (Maincomp = props => {
     const ShopViews = shops.map((shop, index) => {
@@ -15,7 +13,6 @@ export default (Maincomp = props => {
             <ScrollView contentContainerStyle={styles.container}>
                 {ShopViews}
             </ScrollView>
-            <CartField />
         </View>
     );
 });

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     cartIconText: {
         position: 'absolute',
-        backgroundColor: '#5AA3B7',
+        backgroundColor: '#ff4e4e',
         overflow: 'hidden',
         fontSize: 15,
         color: 'white',
