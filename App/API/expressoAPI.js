@@ -39,6 +39,7 @@ export const getAllCoffeeFromAShop = async wantedShop => {
 /**
  * Returns the picture to a wanted shop
  * @param wantedShop  The name of the wanted shop
+ * @todo Fix so that this works with the images hosted at backend.
  */
 export const getShopPicture = async wantedShop => {
     const foundShop = allData.shops.find(shop => {
