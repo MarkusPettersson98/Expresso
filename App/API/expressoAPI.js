@@ -1,9 +1,8 @@
 import allData from './dummy-data';
-import {bulten} from './dummy-data';
 import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 const herokuURL = 'https://expressobackend.herokuapp.com/api/';
-const postURL =
+const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
 /**
@@ -18,28 +17,14 @@ const getCurrentDate = () => {
  * This includes the names, the coordinates and their drinklist
  */
 export const getShop = async wantedShop => {
-    console.log('expressoAPI: call on getShop with:', wantedShop);
     const allInformation = await fetch(herokuURL + 'getShop/' + wantedShop)
         .then(res => res.json())
         .then(response => {
             return response;
         })
         .catch(error => []);
-
-    console.log(
-        'expressoAPI: getShop with:',
-        wantedShop,
-        'recieved information:',
-        allInformation,
-    );
     return allInformation;
 };
-
-/**
- * Returns all the information about a specific shop using dummydata
- * This includes name, coordinates and the drinkList of the shop
- * @param wantedShop  The name of the wanted shop
- */
 
 /**
  * Returns a promise which if resolved contains all the coffesorts in a specific shop
@@ -47,31 +32,19 @@ export const getShop = async wantedShop => {
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
-    console.log('expressoAPI: call on getAllCoffeeFromAShop with:', wantedShop);
-
     const drinkList = await getShop(wantedShop).drinkList;
-    console.log(
-        'expressoAPI: getAllCoffeeFromAShop: Recieved with:',
-        wantedShop,
-        'Drinklist: ',
-        drinkList,
-    );
     return drinkList;
 };
 
 /**
- * Returns all the information about a specific shop
- * This only includes the picture of the requested shop
+ * Returns the picture to a wanted shop
  * @param wantedShop  The name of the wanted shop
  */
 export const getShopPicture = async wantedShop => {
-    //console.log('this is all data', allData.shops.name);
-    return bulten.picture;
-
-/*
-    return await getShopDummyData(wantedShop).then(shop => {
-        return shop.picture ? shop.picture : defaultPic;
-    });*/
+    const foundShop = allData.shops.find(shop => {
+        return shop.name.toUpperCase() == wantedShop.toUpperCase();
+    });
+    return foundShop.picture;
 };
 
 /**
@@ -80,7 +53,6 @@ export const getShopPicture = async wantedShop => {
  * @param wantedShop  The name of the wanted shop
  */
 const getAllShops = async () => {
-    console.log('expressoAPI: Call on getAllShops');
     const myData = await fetch(herokuURL + 'getAllShops/')
         .then(res => res.json())
         .then(response => {
@@ -91,7 +63,6 @@ const getAllShops = async () => {
             return [];
         });
 
-    console.log('expressoAPI: Recieved by getAllShops', myData);
     return myData;
 };
 
@@ -108,13 +79,11 @@ export const getAllShopNames = async () => {
 };
 
 /**
- *
- * @param id order ID, will be improved, currently restarts when rebooting app.
  * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
  * @param selectedShop The shop of which the order belongs to.
  */
 export const sendOrder = async cart => {
-    fetch(postURL, {
+    fetch(firebaseURL, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
