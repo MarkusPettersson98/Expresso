@@ -32,8 +32,7 @@ export const getShop = async wantedShop => {
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
-    const drinkList = await getShop(wantedShop).drinkList;
-    return drinkList;
+    return await getShop(wantedShop).drinkList;
 };
 
 /**
