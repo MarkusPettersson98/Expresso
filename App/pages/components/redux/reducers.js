@@ -8,31 +8,6 @@ import {
 
 import {calculateCartAmount, calculateCartPrice} from './cartFunctions';
 
-/*
-  INITIAL_STATE
-  An object with key: coffeeId and value is an object that contains
-  coffee type and amount.
-  {
-    123: {coffee: {...}, amount: 1},
-    124: {coffee: {...}, amount: 5},
-    ...
-  }
-*/
-
-// const cart = {
-//     quantity: 0,
-//     totalPrice: 0,
-//     items: [orderItems],
-// };
-
-// const orderItem = {
-//     id: 123,
-//     name: "bryggkaffe",
-//     price: 0,
-//     quantity: 0,
-//     ownMug: false,
-// };
-
 export const INITIAL_CART_STATE = {
     price: 0,
     amount: 0,
