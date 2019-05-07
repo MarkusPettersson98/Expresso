@@ -6,7 +6,7 @@ import {
     ITEM_INCREMENT,
 } from './actions';
 
-import {calculateCartAmount, calculateCartPrice} from './cartFunctions';
+import { calculateCartAmount, calculateCartPrice } from './cartFunctions';
 
 export const INITIAL_CART_STATE = {
     price: 0,
@@ -31,11 +31,12 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
     console.log('reducers', currentCart);
 
     const coffee = action.coffee;
-    const match = orderItem => orderItem.coffee.id === coffee.id && orderItem.coffee.ownMug === coffee.ownMug;
+    const match = orderItem =>
+        orderItem.coffee.id === coffee.id &&
+        orderItem.coffee.ownMug === coffee.ownMug;
 
     switch (action.type) {
         case CART_ADD_COFFEE: {
-
             const existingOrderItem = currentCart.orderItems.find(match);
 
             // If order item already exists, call increment function instead
@@ -93,7 +94,9 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
             const newAmount = newOrderItems.find(match).amount;
             if (newAmount <= 0) {
                 // Remove orderItem (since amount is none or negative)
-                newOrderItems = currentCart.orderItems.filter(orderItem => !match(orderItem));
+                newOrderItems = currentCart.orderItems.filter(
+                    orderItem => !match(orderItem),
+                );
             }
 
             const newCartPrice = calculateCartPrice(newOrderItems);
@@ -113,7 +116,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
         default:
             return currentCart;
     }
-}
+};
 
 // Increment amount of orderItem by one
 const incrementAmount = orderItem => {
