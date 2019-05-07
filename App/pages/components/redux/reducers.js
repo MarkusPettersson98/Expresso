@@ -11,6 +11,7 @@ import {calculateCartAmount, calculateCartPrice} from './cartFunctions';
 export const INITIAL_CART_STATE = {
     price: 0,
     amount: 0,
+    shop: '',
     orderItems: [],
 };
 
@@ -23,9 +24,6 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
     switch (action.type) {
         case CART_ADD_COFFEE: {
 
-            // const existingOrderItem = currentCart.orderItems.find(
-            //     orderItem => orderItem.coffee.id === coffee.id,
-            // );
             const existingOrderItem = currentCart.orderItems.find(match);
 
             // If order item already exists, call increment function instead
@@ -54,7 +52,6 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
         }
 
         case ITEM_INCREMENT: {
-
             // Increment amount of existing orderItem by one
             const newOrderItems = mapSome(
                 currentCart.orderItems,
@@ -86,6 +83,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
                 // Remove orderItem (since amount is none or negative)
                 newOrderItems = currentCart.orderItems.filter(orderItem => !match(orderItem));
             }
+
             const newCartPrice = calculateCartPrice(newOrderItems);
             const newCartAmount = calculateCartAmount(newOrderItems);
 
