@@ -108,6 +108,7 @@ export const latte = {
 export const brygg_kaffe_in_cart = {
     price: 12,
     amount: 1,
+    shop: '',
     orderItems: [
         {
             amount: 1,
@@ -121,6 +122,7 @@ export const brygg_kaffe_in_cart = {
 export const two_brygg_kaffe_in_cart = {
     price: 24,
     amount: 2,
+    shop: '',
     orderItems: [
         {
             amount: 2,
@@ -134,6 +136,7 @@ export const two_brygg_kaffe_in_cart = {
 export const two_brygg_kaffe_one_cappuchino_in_cart = {
     price: 52,
     amount: 3,
+    shop: '',
     orderItems: [
         {
             amount: 2,
@@ -153,6 +156,7 @@ export const two_brygg_kaffe_one_cappuchino_in_cart = {
 export const one_brygg_kaffe_one_cappuchino_in_cart = {
     price: 40,
     amount: 2,
+    shop: '',
     orderItems: [
         {
             amount: 1,

@@ -15,7 +15,9 @@ import {
 } from '../../dummy-data';
 
 test('add 1 (one) brygg_kaffe to an empty cart', () => {
-    expect(cart(INITIAL_CART_STATE, addCoffee(brygg_kaffe))).toEqual(brygg_kaffe_in_cart);
+    expect(cart(INITIAL_CART_STATE, addCoffee(brygg_kaffe))).toEqual(
+        brygg_kaffe_in_cart,
+    );
 });
 
 test('add a brygg_kaffe to a cart with 1 (one) brygg_kaffe in it', () => {
@@ -35,6 +37,7 @@ test('decrement brygg_kaffe to a cart with 2 (two) brygg_kaffe in it', () => {
         {
             price: 12,
             amount: 1,
+            shop: '',
             orderItems: [
                 {
                     amount: 1,
@@ -49,6 +52,7 @@ test('add 1 (one) cappuchino to a cart with 1 (one) brygg_kaffe in it', () => {
     expect(cart(brygg_kaffe_in_cart, addCoffee(cappuccino))).toEqual({
         price: 40,
         amount: 2,
+        shop: '',
         orderItems: [
             {
                 amount: 1,
@@ -71,6 +75,7 @@ test('decrement 1 (one) cappuchino from a cart with 2 (two) brygg_kaffe and 1 (o
     ).toEqual({
         price: 24,
         amount: 2,
+        shop: '',
         orderItems: [
             {
                 amount: 2,
@@ -89,6 +94,7 @@ test('decrement brygg_kaffe from a cart with 2 (two) brygg_kaffe and 1 (one) cap
     ).toEqual({
         price: 40,
         amount: 2,
+        shop: '',
         orderItems: [
             {
                 amount: 1,
