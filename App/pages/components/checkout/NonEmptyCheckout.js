@@ -8,24 +8,25 @@ import PickUpLocation from './pickUpPointView';
 import { calculateCartPrice } from '../redux/cartFunctions';
 
 
-/** 
+/**
  * The view that is being shown in Checkout.js when the cart is populated
- * 
+ *
  * This view contains:
- * 
+ *
  * CheckoutItem
  * PickUpPointView
  * OrderButton
- * 
+ *
  * And passes logic to them using props
- * 
- * @param {cart} props carries the redux state cart, which can be looked at in redux/reducers.js 
+ *
+ * @param {cart} props carries the redux state cart, which can be looked at in redux/reducers.js
  */
 
 
 const NonEmptyCheckoutPage = props => {
-    let orderItems = Object.values(props.cart);
-    let total = calculateCartPrice(orderItems);
+    const cart = props.cart;
+    const total = cart.price;
+    const orderItems = cart.orderItems;
 
     return (
         <View
