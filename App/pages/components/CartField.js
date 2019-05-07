@@ -21,6 +21,7 @@ const CartField = props => {
                     style={styles.to}
                     onPress={() => props.navigation.navigate('Checkout')}
                     hitSlop={{ top: 20, bottom: 20, left: 200, right: 200 }}
+                    activeOpacity={0.5}
                 >
                     <CafeCartIcon cart={props.cart} style={styles.cartIcon} />
                     <Text style={styles.cartText}>Till varukorgen</Text>
@@ -49,19 +50,26 @@ const styles = StyleSheet.create({
     to: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     cartText: {
         color: 'white',
         fontSize: 18,
         opacity: 1,
+        textAlign: 'center',
+        position: 'absolute',
+        marginHorizontal: 'auto',
     },
     sumText: {
         color: 'white',
         fontSize: 17,
         opacity: 1,
+        marginLeft: 'auto',
     },
+    cartIcon: {
+        marginRight: 'auto'
+    }
 });
 
 export default withNavigation(connect(mapStateToProps)(CartField));

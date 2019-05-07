@@ -44,3 +44,12 @@ export default class Maincomp extends React.Component {
         );
     }
 }
+
+const styles = {
+  container: {
+      width: '100%',
+      flexDirection: 'column',
+      backgroundColor: '#F0F7F4',
+      justifyContent: 'center',
+  },
+};
