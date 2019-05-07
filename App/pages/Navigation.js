@@ -13,10 +13,8 @@ import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import ExitCheckout from './components/header/ExitCheckout';
 import Cafe from './components/cafe/Cafe';
-import {
-    Feather,
-    MaterialIcons,
-} from '@expo/vector-icons';
+import ExpressoLogoHeader from './components/header/ExpressoLogo';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -41,7 +39,7 @@ const tabIconStyling = {
 export const Tabs = createBottomTabNavigator(
     {
         Lista: {
-            screen: () => <Homepage presentationMode={"List"}/>,
+            screen: () => <Homepage presentationMode={'List'} />,
             navigationOptions: {
                 tabBarLabel: 'Lista',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -60,7 +58,7 @@ export const Tabs = createBottomTabNavigator(
             },
         },
         Karta: {
-            screen: () => <Homepage presentationMode={"Map"}/>,
+            screen: () => <Homepage presentationMode={'Map'} />,
             navigationOptions: {
                 tabBarLabel: 'Karta',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -123,15 +121,14 @@ export const Tabs = createBottomTabNavigator(
             // om bakgrunden
             activeBackgroundColor: '#eee',
             backgroundColor: 'white',
-            
+
             // Om label
             labelStyle: {
-                fontSize: 12,   
+                fontSize: 12,
             },
             // om textens färg
             activeTintColor: '#362D30',
             inactiveTintColor: '#9C9497',
-            
         },
     },
 );
@@ -141,7 +138,7 @@ export const RootStack = createStackNavigator(
         Main: {
             screen: Tabs,
             navigationOptions: ({ navigation }) => ({
-                title: 'Main',
+                headerTitle: <ExpressoLogoHeader />,
                 headerRight: (
                     <CheckoutHeader
                         navigationProps={navigation}
@@ -154,7 +151,7 @@ export const RootStack = createStackNavigator(
         Checkout: {
             screen: Checkoutpage,
             navigationOptions: ({ navigation }) => ({
-                title: 'Varukorg',
+                headerTitle: <ExpressoLogoHeader />,
                 headerRight: <ClearCheckoutHeader />,
                 headerLeft: <ExitCheckout navigationProps={navigation} />,
                 ...headerStyling,
@@ -163,13 +160,14 @@ export const RootStack = createStackNavigator(
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
-                title: 'Café',
+                headerTitle: <ExpressoLogoHeader />,
                 ...headerStyling,
             }),
         },
     },
     {
         mode: 'card',
+        
     },
 );
 
