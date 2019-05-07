@@ -5,7 +5,6 @@ import CheckoutItem from './CheckoutItem';
 import OrderButton from './OrderButton';
 import TotalAmount from './TotalAmount';
 import PickUpLocation from './pickUpPointView';
-import { calculateCartPrice } from '../redux/cartFunctions';
 
 
 /**
