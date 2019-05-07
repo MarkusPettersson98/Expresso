@@ -17,13 +17,16 @@ export const INITIAL_CART_STATE = {
 export const cart = function(currentCart = INITIAL_CART_STATE, action) {
     console.log('reducers', currentCart);
 
+    const coffee = action.coffee;
+    const match = orderItem => orderItem.coffee.id === coffee.id;
+
     switch (action.type) {
         case CART_ADD_COFFEE: {
-            const coffee = action.coffee;
 
-            const existingOrderItem = currentCart.orderItems.find(
-                orderItem => orderItem.coffee.id === coffee.id,
-            );
+            // const existingOrderItem = currentCart.orderItems.find(
+            //     orderItem => orderItem.coffee.id === coffee.id,
+            // );
+            const existingOrderItem = currentCart.orderItems.find(match);
 
             // If order item already exists, call increment function instead
             if (existingOrderItem) {
@@ -51,11 +54,8 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
         }
 
         case ITEM_INCREMENT: {
-            const coffee = action.coffee;
 
             // Increment amount of existing orderItem by one
-            const match = orderItem => orderItem.coffee.id === coffee.id;
-
             const newOrderItems = mapSome(
                 currentCart.orderItems,
                 match,
@@ -73,11 +73,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
             };
         }
         case ITEM_DECREMENT: {
-            const coffee = action.coffee;
-
             // Decrement amount of existing orderItem by one
-            const match = orderItem => orderItem.coffee.id === coffee.id;
-
             let newOrderItems = mapSome(
                 currentCart.orderItems,
                 match,
