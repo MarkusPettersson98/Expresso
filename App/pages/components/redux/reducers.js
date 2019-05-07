@@ -15,11 +15,23 @@ export const INITIAL_CART_STATE = {
     orderItems: [],
 };
 
+/*
+orderItem: {
+    amount: number,
+    coffee: {
+        price: number,
+        id: number,
+        description: string,
+        ownMug: boolean
+    },
+};
+*/
+
 export const cart = function(currentCart = INITIAL_CART_STATE, action) {
     console.log('reducers', currentCart);
 
     const coffee = action.coffee;
-    const match = orderItem => orderItem.coffee.id === coffee.id;
+    const match = orderItem => orderItem.coffee.id === coffee.id && orderItem.coffee.ownMug === coffee.ownMug;
 
     switch (action.type) {
         case CART_ADD_COFFEE: {
