@@ -2,10 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import OrderCartIconCounter from './OrderCartIconCounter';
-import {
-    calculateCartPrice,
-    calculateCartAmount,
-} from '../redux/cartFunctions';
 
 /**
  * @file This is a presenetational view that shows the user the current state of the cart.
@@ -19,8 +15,8 @@ import {
  */
 
 const CafeCartIcon = ({ cart }) => {
-    const total = calculateCartPrice(cart);
-    const amount = calculateCartAmount(cart);
+    const total = cart.price;
+    const amount = cart.amount;
 
     return (
         <View>

@@ -1,62 +1,55 @@
 import allData from './dummy-data';
 import defaultPic from '../pages/components/resources/ExpressoTransp.png';
+
+const herokuURL = 'https://expressobackend.herokuapp.com/api/';
+
+const firebaseURL =
+    'https://share-places-1555452472826.firebaseio.com/kvitton.json';
+
 /**
- * Returns all the names of all the shops in the database
- * This only inlcudes the names of the shops
+ * Function to get the current date, useful for when creating reciepts
  */
-export const getAllShopNames = async () => {
-    const getName = shop => {
-        return shop.name;
-    };
-    return getShopsBackend().then(shops => shops.map(getName));
+const getCurrentDate = () => {
+    return Date.now();
 };
 
 /**
- * Returns all the information of a all the shops in the database
+ * Returns all the information of a all the shops in the database using heroku
  * This includes the names, the coordinates and their drinklist
  */
 export const getShop = async wantedShop => {
-    const getInformation = shop => {
-        return {
-            name: shop.name,
-            coordinates: shop.coordinates,
-            drinkList: shop.drinkList,
-        };
-    };
-    return getShopBackend(wantedShop).then(shop => getInformation(shop));
+    let fixedString =
+        wantedShop.charAt(0).toUpperCase() + wantedShop.slice(1).toLowerCase();
+
+    const allInformation = await fetch(herokuURL + 'getShop/' + fixedString)
+        .then(res => res.json())
+        .then(response => {
+            return response;
+        })
+        .catch(error => {console.log('ERROR', error); return [];});
+    return allInformation;
 };
 
 /**
  * Returns a promise which if resolved contains all the coffesorts in a specific shop
+ * from heroku
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
-    return getShopBackend(wantedShop).then(shop => shop.drinkList);
+    const shop = await getShop(wantedShop);
+    return shop.drinkList;
 };
 
 /**
- * Returns all the information about a specific shop
- * This only includes the picture of the requested shop
+ * Returns the picture to a wanted shop
  * @param wantedShop  The name of the wanted shop
+ * @todo Fix so that this works with the images hosted at backend.
  */
 export const getShopPicture = async wantedShop => {
-    return getShopBackend(wantedShop).then(shop => {
-        return shop.picture ? shop.picture : defaultPic;
-    });
-};
-
-/**
- * Returns all the information about a specific shop
- * This includes name, coordinates and the drinkList of the shop
- * @param wantedShop  The name of the wanted shop
- */
-const getShopBackend = async wantedShop => {
-    // TODO replace allData.shops with actual call to API
     const foundShop = allData.shops.find(shop => {
         return shop.name.toUpperCase() == wantedShop.toUpperCase();
     });
-
-    return foundShop;
+    return foundShop.picture ? foundShop.picture : defaultPic;
 };
 
 /**
@@ -64,7 +57,47 @@ const getShopBackend = async wantedShop => {
  * Return a promise object with resolved API call
  * @param wantedShop  The name of the wanted shop
  */
-const getShopsBackend = async () => {
-    // TODO replace allData.shops with actual call to API
-    return allData.shops;
+const getAllShops = async () => {
+    const myData = await fetch(herokuURL + 'getAllShops/')
+        .then(res => res.json())
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            console.log('error', error);
+            return [];
+        });
+    return myData;
+};
+
+/**
+ * Returns all the names of all the shops in the database hosted at heroku
+ * This only inlcudes the names of the shops
+ */
+export const getAllShopNames = async () => {
+    const getName = shop => {
+        return shop.name;
+    };
+    shops = await getAllShops();
+    return shops.map(getName);
+};
+
+/**
+ * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
+ * @param selectedShop The shop of which the order belongs to.
+ */
+export const sendOrder = async cart => {
+    fetch(firebaseURL, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            cart: cart,
+            date: getCurrentDate(),
+        }),
+    })
+        .then(res => console.log())
+        .catch(err => console.log(err));
 };

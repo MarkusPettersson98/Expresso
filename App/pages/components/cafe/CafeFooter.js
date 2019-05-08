@@ -14,11 +14,14 @@ import CartField from './../CartField';
  *
  */
 
-const CafeFooter = ({ cart }) => {
+
+const CafeFooter = ({ orderInfo }) => {
     return (
         <View style={styles.footer}>
             <View style={styles.footerRow}>
-                <CartField cart={cart} />
+                <CafeCartIcon cart={orderInfo.cart} />
+
+                <CafeCheckoutButton selectedShop={orderInfo.shop} />
             </View>
         </View>
     );
