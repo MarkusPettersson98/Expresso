@@ -20,6 +20,7 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 const headerStyling = {
     headerStyle: {
         backgroundColor: '#57454B',
+        height:60,
     },
     headerTintColor: '#fff',
 };
@@ -167,7 +168,6 @@ export const RootStack = createStackNavigator(
     },
     {
         mode: 'card',
-        
     },
 );
 

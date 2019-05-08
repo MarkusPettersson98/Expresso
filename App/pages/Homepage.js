@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Topcomp from './components/homePage/Topcomp';
 import Maincomp from './components/homePage/Maincomp';
 import Mapcomp from './components/homePage/Mapcomp';
-import { ExpressoLogoHeader } from './components/header/ExpressoLogo';
 
 export default class Homepage extends Component {
     state = {
