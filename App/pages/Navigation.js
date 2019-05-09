@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import {
     createBottomTabNavigator,
     createStackNavigator,
@@ -146,6 +147,7 @@ export const RootStack = createStackNavigator(
                         styling={headerIconStyling}
                     />
                 ),
+                headerLeft: <View />, // so the headerTitle is center
                 ...headerStyling,
             }),
         },
