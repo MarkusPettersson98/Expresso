@@ -48,7 +48,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
             const newOrderItem = {
                 coffee: coffee,
                 amount: 1,
-                ownMug: ownMug,
+                ownMug: coffee.ownMug,
                 //Reduce price with 2 kr if you have your own mug
                 price: ownMug ? (coffee.price -= 2) : coffee.price,
             };
