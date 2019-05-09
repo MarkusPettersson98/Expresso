@@ -106,51 +106,71 @@ export const latte = {
 };
 
 export const brygg_kaffe_in_cart = {
-    '123': {
-        amount: 1,
-        coffee: {
-            ...brygg_kaffe,
+    price: 12,
+    amount: 1,
+    shop: '',
+    orderItems: [
+        {
+            amount: 1,
+            coffee: {
+                ...brygg_kaffe,
+            },
         },
-    },
+    ],
 };
 
 export const two_brygg_kaffe_in_cart = {
-    '123': {
-        amount: 2,
-        coffee: {
-            ...brygg_kaffe,
+    price: 24,
+    amount: 2,
+    shop: '',
+    orderItems: [
+        {
+            amount: 2,
+            coffee: {
+                ...brygg_kaffe,
+            },
         },
-    },
+    ],
 };
 
 export const two_brygg_kaffe_one_cappuchino_in_cart = {
-    '123': {
-        amount: 2,
-        coffee: {
-            ...brygg_kaffe,
+    price: 52,
+    amount: 3,
+    shop: '',
+    orderItems: [
+        {
+            amount: 2,
+            coffee: {
+                ...brygg_kaffe,
+            },
         },
-    },
-    '124': {
-        amount: 1,
-        coffee: {
-            ...cappuccino,
+        {
+            amount: 1,
+            coffee: {
+                ...cappuccino,
+            },
         },
-    },
+    ],
 };
 
 export const one_brygg_kaffe_one_cappuchino_in_cart = {
-    '123': {
-        amount: 1,
-        coffee: {
-            ...brygg_kaffe,
+    price: 40,
+    amount: 2,
+    shop: '',
+    orderItems: [
+        {
+            amount: 1,
+            coffee: {
+                ...brygg_kaffe,
+            },
         },
-    },
-    '124': {
-        amount: 1,
-        coffee: {
-            ...cappuccino,
+        {
+            amount: 1,
+            coffee: {
+                ...cappuccino,
+            },
         },
-    },
+    ],
 };
 
 export default shops;

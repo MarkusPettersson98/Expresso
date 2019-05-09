@@ -13,14 +13,13 @@ import CafeCheckoutButton from './CafeCheckoutButton';
  *
  */
 
-
-const CafeFooter = ({ cart }) => {
+const CafeFooter = ({ orderInfo }) => {
     return (
         <View style={styles.footer}>
             <View style={styles.footerRow}>
-                <CafeCartIcon cart={cart} />
+                <CafeCartIcon cart={orderInfo.cart} />
 
-                <CafeCheckoutButton />
+                <CafeCheckoutButton selectedShop={orderInfo.shop} />
             </View>
         </View>
     );

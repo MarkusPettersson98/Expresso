@@ -5,8 +5,7 @@ export const calculateCartPrice = orderItems => {
     const totalOrderItemPrice = orderItem =>
         orderItem.coffee.price * orderItem.amount;
 
-    return Object.keys(orderItems).reduce((currentTotalPrice, key) => {
-        const orderItem = orderItems[key];
+    return orderItems.reduce((currentTotalPrice, orderItem) => {
         return currentTotalPrice + totalOrderItemPrice(orderItem);
     }, 0);
 };
@@ -17,8 +16,7 @@ export const calculateCartAmount = orderItems => {
 
     const totalOrderItemAmount = orderItem => orderItem.amount;
 
-    return Object.keys(orderItems).reduce((currentTotalAmount, key) => {
-        const orderItem = orderItems[key];
+    return orderItems.reduce((currentTotalAmount, orderItem) => {
         return currentTotalAmount + totalOrderItemAmount(orderItem);
     }, 0);
 };
