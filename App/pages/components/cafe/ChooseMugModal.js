@@ -31,8 +31,8 @@ export default class ModalComp extends Component {
     //Vad som ska hända när Modal stängs (skicka beställning till CoffeeItem)
     onClose = () => {
         selectedButton = this.state.data.find(e => e.selected == true);
-        console.log('ownMug: ' + selectedButton.ownMug);
-        this.props.orderCoffee();
+        ownMug = selectedButton.ownMug;
+        this.props.orderCoffee(ownMug);
         this.props.hideModal();
     };
 

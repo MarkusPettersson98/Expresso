@@ -19,7 +19,6 @@ import { incrementCoffee, decrementCoffee } from '../redux/actions';
  * 
  */
 
-
 const CheckoutItem = props => {
     const orderItem = props.orderItem;
     const checkDecrementCoffee = orderItem => {
@@ -68,7 +67,7 @@ const CheckoutItem = props => {
                 }}
             >
                 <Text style={styles.titleText}>{orderItem.coffee.name}</Text>
-                <Text style={styles.descText}>Egen mugg</Text>
+                <Text style={styles.descText}>{orderItem.coffee.ownMug}</Text>
                 <View
                     style={{
                         flexDirection: 'row',

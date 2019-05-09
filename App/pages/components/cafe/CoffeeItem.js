@@ -56,8 +56,9 @@ class CoffeeItem extends React.Component {
     //Funktion för att beställa kaffet när Modal stängs, skickas med som props till Modal
     // todo: ska kunna ta med värde på ownMug för att skicka med, för att visa om egen eller
     // lånad mugg ska användas
-    orderCoffee = () => {
-        this.props.onAddCoffee(this.coffee);
+    orderCoffee = ownMug => {
+        this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
+        console.log('ownMug: ' + ownMug);
     };
 
     render() {
@@ -74,7 +75,7 @@ class CoffeeItem extends React.Component {
                     //Funktionen hideModal skickas in som en props för att kunna dölja Modal från ModalComp
                     hideModal={() => this.hideModal()}
                     //Funktion för att beställa kaffet från Modal
-                    orderCoffee={() => this.orderCoffee()}
+                    orderCoffee={() => this.orderCoffee(ownMug)}
                 />
                 <TouchableOpacity
                     onPress={this.showModal}
