@@ -22,7 +22,7 @@ import NonEmptyCheckoutPage from './components/checkout/NonEmptyCheckout';
 const CheckoutPage = props => {
   /** checks if the cart is populated, 0 is 'falsy' and will be false when we decide to
    * conditionally render emptycheckout or nonemptycheckout. */
-  let isCartPopulated = Object.keys(props.cart).length;
+  let isCartPopulated = props.cart.amount;
 
   return (
     <View
