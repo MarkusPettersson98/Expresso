@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 class CoffeeItem extends React.Component {
     constructor(props) {
         super(props);
-        //State som används för ModalComp - om den ska vara synlig eller inte
+        //State for ModalComp - if it is visible or not
         this.state = {
             visible: false,
         };
@@ -43,22 +43,20 @@ class CoffeeItem extends React.Component {
 
     coffee = this.props.coffee;
 
-    //Ändrar state till true och visar ModalComp
+    //Changes state to true, making ModalComp visible
     showModal = () => {
         this.setState({ visible: true });
     };
 
-    //Ändrar state till false och döljer ModalComp
+    //Changes state to false, hiding ModalComp
     hideModal = () => {
         this.setState({ visible: false });
     };
 
-    //Funktion för att beställa kaffet när Modal stängs, skickas med som props till Modal
-    // todo: ska kunna ta med värde på ownMug för att skicka med, för att visa om egen eller
-    // lånad mugg ska användas
+    //Function to order coffee when ModalComp closes, is sent as props to ModalComp
+    //Takes value of ownMug-selection t/f
     orderCoffee = ownMug => {
         this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
-        console.log('ownMug: ' + ownMug);
     };
 
     render() {
@@ -70,11 +68,11 @@ class CoffeeItem extends React.Component {
                 }}
             >
                 <ModalComp
-                    //state visible skickas in som en props till ModalComp
+                    //state visible is sent as props to ModalComp
                     isVisible={this.state.visible}
-                    //Funktionen hideModal skickas in som en props för att kunna dölja Modal från ModalComp
+                    //Function hideModal is sent as props to be able to hide modal from ModalComp
                     hideModal={() => this.hideModal()}
-                    //Funktion för att beställa kaffet från Modal
+                    //Function to order coffee from ModalComp
                     orderCoffee={() => this.orderCoffee(ownMug)}
                 />
                 <TouchableOpacity

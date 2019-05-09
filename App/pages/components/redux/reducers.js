@@ -48,6 +48,9 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
             const newOrderItem = {
                 coffee: coffee,
                 amount: 1,
+                ownMug: ownMug,
+                //Reduce price with 2 kr if you have your own mug
+                price: ownMug ? (coffee.price -= 2) : coffee.price,
             };
 
             // Copy old orderItems from cart and add the new orderItem

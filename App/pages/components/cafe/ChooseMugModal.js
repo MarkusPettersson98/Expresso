@@ -9,12 +9,11 @@ export default class ModalComp extends Component {
         super(props);
     }
 
-    //Valen egen eller lånad mugg är states
-    //värdet på ownMug kommer sedan användas av reducern addCoffee
+    //States own or borrowed mug used for Modal
     state = {
         data: [
             {
-                label: 'Egen',
+                label: 'Egen (-2 kr)',
                 ownMug: true,
             },
             {
@@ -25,10 +24,10 @@ export default class ModalComp extends Component {
         ],
     };
 
-    //När man klickar på ett av valen (egen, låna) uppdateras state
+    //Updates state for Modal
     onPress = data => this.setState({ data });
 
-    //Vad som ska hända när Modal stängs (skicka beställning till CoffeeItem)
+    //On closing modal, sends order to parent component with value t/f of ownMug
     onClose = () => {
         selectedButton = this.state.data.find(e => e.selected == true);
         ownMug = selectedButton.ownMug;
@@ -37,13 +36,13 @@ export default class ModalComp extends Component {
     };
 
     render() {
-        //Raderna innan return säger bara till vilket val som är iklickat i början, alltså när rutan kommer upp
+        //Which option is selected when the modal opens
         let selectedButton = this.state.data.find(e => e.selected == true);
         selectedButton = selectedButton
             ? selectedButton.value
             : this.state.data[0].label;
         return (
-            //Modalen syns om state isVisible i props är true
+            //State of modal comes as props from parent component
             <Modal isVisible={this.props.isVisible}>
                 <View style={styles.modalContainer}>
                     <Text style={styles.valueText}>Välj mugg</Text>
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold',
         marginTop: 10,
-        paddingTop: 15,
+        paddingTop: 7,
         paddingBottom: 15,
         marginLeft: 30,
         marginRight: 30,

@@ -67,7 +67,9 @@ const CheckoutItem = props => {
                 }}
             >
                 <Text style={styles.titleText}>{orderItem.coffee.name}</Text>
-                <Text style={styles.descText}>{orderItem.coffee.ownMug}</Text>
+                <Text style={styles.descText}>
+                    {orderItem.coffee.ownMug ? 'Egen mugg' : 'Lånad mugg'}
+                </Text>
                 <View
                     style={{
                         flexDirection: 'row',
