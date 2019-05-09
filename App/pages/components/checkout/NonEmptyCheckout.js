@@ -5,6 +5,7 @@ import CheckoutItem from './CheckoutItem';
 import OrderButton from './OrderButton';
 import TotalAmount from './TotalAmount';
 import PickUpLocation from './pickUpPointView';
+import { withNavigation } from 'react-navigation';
 
 
 /**
@@ -74,17 +75,7 @@ const NonEmptyCheckoutPage = props => {
                 }}
             >
                 <OrderButton
-                    onPress={() => {
-                        console.log('Du beställde:');
-                        orderItems.forEach(orderItem => {
-                            console.log(
-                                orderItem.amount,
-                                ':',
-                                orderItem.coffee.name,
-                            );
-                        });
-                        console.log('Kostnad:', total);
-                    }}
+                    onPress={() => props.navigation.navigate('Payment')}
                 />
             </View>
         </View>
@@ -95,4 +86,4 @@ const mapStateToProps = state => {
     return { cart: state.cart };
 };
 
-export default connect(mapStateToProps)(NonEmptyCheckoutPage);
+export default withNavigation(connect(mapStateToProps)(NonEmptyCheckoutPage));

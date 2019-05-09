@@ -9,6 +9,7 @@ import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
+import PaymentPage from './PaymentPage'
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import ExitCheckout from './components/header/ExitCheckout';
@@ -157,6 +158,13 @@ export const RootStack = createStackNavigator(
                 headerLeft: <ExitCheckout navigationProps={navigation} />,
                 ...headerStyling,
             }),
+        },
+        Payment: {
+          screen: PaymentPage,
+          navigationOptions: ({ navigation }) => ({
+              headerTitle: 'Betalning',
+              ...headerStyling,
+          }),
         },
         Cafe: {
             screen: Cafe,
