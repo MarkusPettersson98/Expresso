@@ -76,6 +76,7 @@ const NonEmptyCheckoutPage = props => {
             >
                 <OrderButton
                     onPress={() => props.navigation.navigate('Payment')}
+                    buttonText="GÅ VIDARE"
                 />
             </View>
         </View>

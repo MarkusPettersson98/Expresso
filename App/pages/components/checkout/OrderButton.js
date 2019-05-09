@@ -9,10 +9,10 @@ import { Text, TouchableOpacity } from 'react-native';
  * adding some logic to this component.
  */
 
-const Button = ({ onPress }) => {
+const Button = ({ onPress, buttonText }) => {
     return (
         <TouchableOpacity style={container} onPress={onPress}>
-            <Text style={text}>GÅ VIDARE</Text>
+            <Text style={text}>{buttonText}</Text>
         </TouchableOpacity>
     );
 };
