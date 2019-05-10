@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Maincomp from './components/homePage/Maincomp';
 import Mapcomp from './components/homePage/Mapcomp';
+import CartField from './components/CartField';
 
 export default class Homepage extends Component {
     state = {
@@ -15,6 +16,7 @@ export default class Homepage extends Component {
                     {this.state.toggle == 'List' && <Maincomp />}
                     {this.state.toggle == 'Map' && <Mapcomp />}
                 </View>
+                <CartField />
             </View>
         );
     }
