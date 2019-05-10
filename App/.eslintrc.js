@@ -1,3 +1,4 @@
+
 const prettierOptions = require('./prettier.config');
 
 module.exports = {
@@ -58,3 +59,4 @@ module.exports = {
     },
   },
 };
+
