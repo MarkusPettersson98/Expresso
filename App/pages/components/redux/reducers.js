@@ -11,7 +11,7 @@ import { calculateCartAmount, calculateCartPrice } from './cartFunctions';
 export const INITIAL_CART_STATE = {
     price: 0,
     amount: 0,
-    shop: '',
+    shopId: null,
     orderItems: [],
 };
 
