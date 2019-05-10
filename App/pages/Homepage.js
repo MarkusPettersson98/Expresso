@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Topcomp from './components/homePage/Topcomp';
 import Maincomp from './components/homePage/Maincomp';
 import Mapcomp from './components/homePage/Mapcomp';
 
@@ -12,8 +11,6 @@ export default class Homepage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Topcomp />
-
                 <View style={styles.comps}>
                     {this.state.toggle == 'List' && <Maincomp />}
                     {this.state.toggle == 'Map' && <Mapcomp />}

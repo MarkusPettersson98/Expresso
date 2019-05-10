@@ -6,59 +6,143 @@ import {
     ITEM_INCREMENT,
 } from './actions';
 
-/*
-  INITIAL_STATE
-  An object with key: coffeeId and value is an object that contains
-  coffee type and amount.
-  {
-    123: {coffee: {...}, amount: 1},
-    124: {coffee: {...}, amount: 5},
-    ...
-  }
-*/
-export const INITIAL_STATE = {};
+import { calculateCartAmount, calculateCartPrice } from './cartFunctions';
 
-export function cart(orderItems = INITIAL_STATE, action) {
-    let id;
-    let existingItem;
+export const INITIAL_CART_STATE = {
+    price: 0,
+    amount: 0,
+    shop: '',
+    orderItems: [],
+};
+
+/*
+orderItem: {
+    amount: number,
+    coffee: {
+        price: number,
+        id: number,
+        description: string,
+        ownMug: boolean
+    },
+};
+*/
+
+export const cart = function(currentCart = INITIAL_CART_STATE, action) {
+    console.log('reducers', currentCart);
+
+    const coffee = action.coffee;
+    const match = orderItem =>
+        orderItem.coffee.id === coffee.id &&
+        orderItem.coffee.ownMug === coffee.ownMug;
 
     switch (action.type) {
-        case CART_ADD_COFFEE:
-        case ITEM_INCREMENT:
-            id = action.coffee.id;
-            existingItem = orderItems[id];
+        case CART_ADD_COFFEE: {
+            const existingOrderItem = currentCart.orderItems.find(match);
 
-            return {
-                ...orderItems,
-                [id]: {
-                    coffee: action.coffee,
-                    amount: existingItem ? existingItem.amount + 1 : 1,
-                },
-            };
-
-        case ITEM_DECREMENT:
-            id = action.coffee.id;
-            existingItem = orderItems[id];
-            if (existingItem.amount == 1) {
-                // Delete item
-                let newState = Object.assign({}, orderItems);
-                delete newState[id];
-                return newState;
-            } else {
-                return Object.assign({}, orderItems, {
-                    [id]: {
-                        coffee: action.coffee,
-                        amount: existingItem ? existingItem.amount - 1 : 1,
-                    },
-                });
+            // If order item already exists, call increment function instead
+            if (existingOrderItem) {
+                return cart(currentCart, { type: ITEM_INCREMENT, coffee });
             }
 
-        case CART_CLEAR:
-            return {};
+            // Create a new order item (add quantity to a coffee)
+            const newOrderItem = {
+                coffee: coffee,
+                amount: 1,
+            };
+
+            // Copy old orderItems from cart and add the new orderItem
+            const newOrderItems = [...currentCart.orderItems, newOrderItem];
+            const newCartPrice = calculateCartPrice(newOrderItems);
+            const newCartAmount = calculateCartAmount(newOrderItems);
+
+            // Return the updated cart state
+            return {
+                ...currentCart,
+                orderItems: newOrderItems,
+                price: newCartPrice,
+                amount: newCartAmount,
+            };
+        }
+
+        case ITEM_INCREMENT: {
+            // Increment amount of existing orderItem by one
+            const newOrderItems = mapSome(
+                currentCart.orderItems,
+                match,
+                incrementAmount,
+            );
+            const newCartPrice = calculateCartPrice(newOrderItems);
+            const newCartAmount = calculateCartAmount(newOrderItems);
+
+            // Return the updated cart state
+            return {
+                ...currentCart,
+                orderItems: newOrderItems,
+                price: newCartPrice,
+                amount: newCartAmount,
+            };
+        }
+        case ITEM_DECREMENT: {
+            // Decrement amount of existing orderItem by one
+            let newOrderItems = mapSome(
+                currentCart.orderItems,
+                match,
+                decrementAmount,
+            );
+
+            // Check if orderItem should be deleted
+            const newAmount = newOrderItems.find(match).amount;
+            if (newAmount <= 0) {
+                // Remove orderItem (since amount is none or negative)
+                newOrderItems = currentCart.orderItems.filter(
+                    orderItem => !match(orderItem),
+                );
+            }
+
+            const newCartPrice = calculateCartPrice(newOrderItems);
+            const newCartAmount = calculateCartAmount(newOrderItems);
+
+            // Return the updated cart state
+            return {
+                ...currentCart,
+                orderItems: newOrderItems,
+                price: newCartPrice,
+                amount: newCartAmount,
+            };
+        }
+        case CART_CLEAR: {
+            return INITIAL_CART_STATE;
+        }
         default:
-            return orderItems;
+            return currentCart;
     }
-}
+};
+
+// Increment amount of orderItem by one
+const incrementAmount = orderItem => {
+    const newAmount = orderItem.amount + 1;
+    return {
+        ...orderItem,
+        amount: newAmount,
+    };
+};
+
+// Decrement amount of orderItem by one
+const decrementAmount = orderItem => {
+    const newAmount = orderItem.amount - 1;
+    // Else, just decrement orderItem amount by one
+    return {
+        ...orderItem,
+        amount: newAmount,
+    };
+};
+
+// Selectively apply a function on items for which predicate is truthy
+const mapSome = (array, predicate, fun) => {
+    return array.map(item => {
+        return predicate(item) ? fun(item) : item;
+    });
+};
 
 const expressoApp = combineReducers({
     cart,
