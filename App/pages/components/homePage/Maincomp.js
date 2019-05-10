@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppRegistry, ScrollView } from 'react-native';
-
+import { AppRegistry, ScrollView, View } from 'react-native';
 import { default as ShopView } from './ListShopView';
+
 import { getAllShopNames, getShopPicture } from '../../../API/expressoAPI';
 
 export default class Maincomp extends React.Component {
@@ -46,12 +46,10 @@ export default class Maincomp extends React.Component {
 }
 
 const styles = {
-    container: {
-        width: '100%',
-        flexDirection: 'column',
-        backgroundColor: '#F0F7F4',
-        justifyContent: 'center',
-    },
+  container: {
+      width: '100%',
+      flexDirection: 'column',
+      backgroundColor: '#F0F7F4',
+      justifyContent: 'center',
+  },
 };
-
-AppRegistry.registerComponent('Maincomp', Maincomp);
