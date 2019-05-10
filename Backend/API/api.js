@@ -1,7 +1,11 @@
 /* Function definitions for handling API requests */
 
 const { shops } = require("../Database/newData");
-const path = require('path');
+const firebaseURL =
+    "https://share-places-1555452472826.firebaseio.com/kvitton.json";
+const path = require("path");
+
+const fetch = require("node-fetch");
 
 const getAllShops = (req, res) => {
     /*
@@ -17,8 +21,8 @@ const getShop = (req, res) => {
 
 const getShopPicture = (req, res) => {
     const shop = req.params.shop;
-    const picturePath = path.resolve('Database/resources');
-    return res.sendFile(shop.toLowerCase() + '.jpg', { root: picturePath });
+    const picturePath = path.resolve("Database/resources");
+    return res.sendFile(shop.toLowerCase() + ".jpg", { root: picturePath });
 };
 
 const getCoffee = (req, res) => {
@@ -29,7 +33,8 @@ const lookUpShop = requestedShop => {
     /*
       Return all available information about requested shop
     */
-    let lookup = shop => shop.name.toLowerCase() === requestedShop.toLowerCase();
+    let lookup = shop =>
+        shop.name.toLowerCase() === requestedShop.toLowerCase();
 
     const foundShop = shops.find(lookup);
     return foundShop ? foundShop : false;
@@ -40,7 +45,8 @@ const lookUpCoffee = requestedShop => {
       Return all coffee products from requested shop
     */
 
-    const lookup = location => location.name.toLowerCase() === requestedShop.toLowerCase();
+    const lookup = location =>
+        location.name.toLowerCase() === requestedShop.toLowerCase();
     const foundShop = shops.find(lookup);
     return foundShop ? foundShop.drinkList : false;
 };
@@ -64,12 +70,53 @@ const detailsFromShop = (lookUp, req, res) => {
     return res.status(400).end();
 };
 
+const getReceipt = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const receipts = await getAllReceipts();
+
+        // const receipt = receipts.filter(item => item); // TODO: filter on something
+
+        return res.status(200).send(receipts);
+    } catch (e) {
+        console.log(e);
+        return res.status(400).send(":(");
+    }
+};
+
+const getReceiptUser = async (req, res) => {
+    // User is a String (!)
+    const { user } = req.params;
+
+    try {
+        const receipts = await getAllReceipts();
+        const receipt = receipts.filter(item => item.user == user);
+
+        return res.status(200).send(receipt);
+    } catch (e) {
+        console.log(e);
+        return res.status(400).send(":(");
+    }
+};
+
+const getAllReceipts = async () => {
+    const receipts = await fetch(firebaseURL)
+        .then(res => res.json())
+        .then(res => Object.values(res))
+        .catch(err => console.log("Error!", err));
+
+    return receipts;
+};
+
 module.exports = {
     api: {
         getAllShops: getAllShops,
         getShop: getShop,
         getShopPicture: getShopPicture,
-        getCoffee: getCoffee
+        getCoffee: getCoffee,
+        getReceipt: getReceipt,
+        getReceiptUser: getReceiptUser
     },
     testable: {
         lookUpShop: lookUpShop,
