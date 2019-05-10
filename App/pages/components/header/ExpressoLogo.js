@@ -10,7 +10,7 @@ export default class ExpressoLogoHeader extends React.Component {
                         resizeMode: 'contain',
                         width: '100%',
                         height: '40%',
-                        marginTop: 5,
+                        marginTop: 7,
                     }}
                 />
         );

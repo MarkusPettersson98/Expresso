@@ -154,7 +154,6 @@ export const RootStack = createStackNavigator(
         Checkout: {
             screen: Checkoutpage,
             navigationOptions: ({ navigation }) => ({
-                headerTitle: <ExpressoLogoHeader />,
                 headerRight: <ClearCheckoutHeader />,
                 headerLeft: <ExitCheckout navigationProps={navigation} />,
                 ...headerStyling,
@@ -163,7 +162,6 @@ export const RootStack = createStackNavigator(
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
-                headerTitle: <ExpressoLogoHeader />,
                 ...headerStyling,
             }),
         },
