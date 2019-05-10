@@ -8,8 +8,9 @@ export default class ExpressoLogoHeader extends React.Component {
                     source={require('../resources/ExpressoWhite.png')}
                     style={{
                         resizeMode: 'contain',
-                        width: '80%',
-                        justifyContent: 'center',
+                        width: '100%',
+                        height: '40%',
+                        marginTop: 7,
                     }}
                 />
         );

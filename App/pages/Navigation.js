@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import {
     createBottomTabNavigator,
     createStackNavigator,
@@ -146,13 +147,13 @@ export const RootStack = createStackNavigator(
                         styling={headerIconStyling}
                     />
                 ),
+                headerLeft: <View />, // so the headerTitle is center
                 ...headerStyling,
             }),
         },
         Checkout: {
             screen: Checkoutpage,
             navigationOptions: ({ navigation }) => ({
-                headerTitle: <ExpressoLogoHeader />,
                 headerRight: <ClearCheckoutHeader />,
                 headerLeft: <ExitCheckout navigationProps={navigation} />,
                 ...headerStyling,
@@ -161,7 +162,6 @@ export const RootStack = createStackNavigator(
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
-                headerTitle: <ExpressoLogoHeader />,
                 ...headerStyling,
             }),
         },
