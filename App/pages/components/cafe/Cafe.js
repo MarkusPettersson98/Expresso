@@ -1,12 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import CoffeeList from './CoffeeList';
-import CafeFooter from './CafeFooter';
 import CafeHeader from './CafeHeader';
 
 import { shops } from '../dummy-data';
+
+import CartField from './../CartField';
 /**
  * @file This is the order page entry point. When a user selects a shop they are sent here.
  *
@@ -35,7 +36,9 @@ const Cafe = props => {
         <View style={{ flex: 1 }}>
             <CafeHeader picture={shop.picture} />
             <CoffeeList selectedShop={shop.name} />
-            <CafeFooter orderInfo={orderInfo} />
+            <View style={{ marginBottom: 30 }}>
+                <CartField />
+            </View>
         </View>
     );
 };

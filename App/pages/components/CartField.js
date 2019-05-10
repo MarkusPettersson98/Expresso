@@ -7,13 +7,12 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { calculateCartPrice, calculateCartAmount } from './redux/cartFunctions';
 import { withNavigation } from 'react-navigation';
 import CafeCartIcon from './cafe/CafeCartIcon';
 
 const CartField = props => {
-    const totalPrice = calculateCartPrice(props.cart);
-    const totalAmount = calculateCartAmount(props.cart);
+    const totalPrice = props.cart.price;
+    const totalAmount = props.cart.amount;
     if (totalAmount > 0) {
         return (
             <View style={styles.container}>
@@ -68,8 +67,8 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
     },
     cartIcon: {
-        marginRight: 'auto'
-    }
+        marginRight: 'auto',
+    },
 });
 
 export default withNavigation(connect(mapStateToProps)(CartField));
