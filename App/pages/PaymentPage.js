@@ -20,7 +20,8 @@ const PaymentPage = props => {
     <View style={{ flex: 1, backgroundColor: '#FAFAFA' }}>
       <ScrollView
         contentContainerStyle={{
-          flex: 1,
+          flexGrow: 1,
+          paddingBottom: 150,
         }}
       >
         {/* Varor */}
