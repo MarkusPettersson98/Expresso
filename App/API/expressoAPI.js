@@ -26,7 +26,10 @@ export const getShop = async wantedShop => {
         .then(response => {
             return response;
         })
-        .catch(error => {console.log('ERROR', error); return [];});
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
     return allInformation;
 };
 
@@ -87,16 +90,24 @@ export const getAllShopNames = async () => {
  * @param selectedShop The shop of which the order belongs to.
  */
 export const sendOrder = async cart => {
+    const { amount, price, shop, orderItems } = cart;
+
+    const reciept = {
+        totalAmount: amount,
+        totalPrice: price,
+        coffees: orderItems,
+        shop: shop,
+        date: getCurrentDate(),
+        user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
+    };
+
     fetch(firebaseURL, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
             'Content-type': 'application/json',
         },
-        body: JSON.stringify({
-            cart: cart,
-            date: getCurrentDate(),
-        }),
+        body: JSON.stringify(reciept),
     })
         .then(res => console.log())
         .catch(err => console.log(err));
