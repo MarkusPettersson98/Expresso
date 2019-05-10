@@ -13,7 +13,6 @@ import Checkoutpage from './Checkout';
 import PaymentPage from './PaymentPage'
 import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
-import ExitCheckout from './components/header/ExitCheckout';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
@@ -156,7 +155,6 @@ export const RootStack = createStackNavigator(
             screen: Checkoutpage,
             navigationOptions: ({ navigation }) => ({
                 headerRight: <ClearCheckoutHeader />,
-                headerLeft: <ExitCheckout navigationProps={navigation} />,
                 ...headerStyling,
             }),
         },
