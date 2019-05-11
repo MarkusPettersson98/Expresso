@@ -7,6 +7,7 @@ import {
     StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { sendOrder as sendOrderAPI } from '../API/expressoAPI';
 import PaymentItem from './components/checkout/PaymentItem';
 import OrderButton from './components/checkout/OrderButton';
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
@@ -119,8 +120,10 @@ const PaymentPage = props => {
                     onPress={() => {
                         console.log('BETALA');
                         props.navigation.navigate('Order');
-                        // TODO actually send order and generate stuff
+                        // TODO: Use Emils and Lucas solution to generate QR code.
 
+                        // also perhaps check if the user has credits.
+                        sendOrderAPI(props.cart);
                         // clear the cart
                         props.onClearCart();
                     }}
