@@ -12,12 +12,28 @@ import {
     brygg_kaffe_in_cart,
     two_brygg_kaffe_in_cart,
     two_brygg_kaffe_one_cappuchino_in_cart,
+    brygg_kaffe_ownmug_in_cart,
+    two_brygg_kaffe_ownmug_and_borrowed_in_cart
 } from '../../dummy-data';
+
+
 
 test('add 1 (one) brygg_kaffe to an empty cart', () => {
     expect(cart(INITIAL_CART_STATE, addCoffee(brygg_kaffe))).toEqual(
         brygg_kaffe_in_cart,
     );
+});
+
+test('add 1 (one) brygg_kaffe with OWN MUG to and empty cart', () => {
+    expect(
+        cart(INITIAL_CART_STATE, addCoffee({ ...brygg_kaffe, ownMug: true })),
+    ).toEqual(brygg_kaffe_ownmug_in_cart);
+});
+
+test('add 1 (one) brygg_kaffe without OWN MUG to cart with one (1) brygg_kaffe with OWN MUG', () => {
+    expect(
+        cart(brygg_kaffe_ownmug_in_cart, addCoffee({...brygg_kaffe, ownMug: false}))
+    ).toEqual(two_brygg_kaffe_ownmug_and_borrowed_in_cart);
 });
 
 test('add a brygg_kaffe to a cart with 1 (one) brygg_kaffe in it', () => {

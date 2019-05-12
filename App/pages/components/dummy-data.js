@@ -173,4 +173,32 @@ export const one_brygg_kaffe_one_cappuchino_in_cart = {
     ],
 };
 
+export const brygg_kaffe_ownmug_in_cart = {
+    price: 10,
+    amount: 1,
+    shop: '',
+    orderItems: [
+        {
+            amount: 1,
+            coffee: { ...brygg_kaffe, price: 10, ownMug: true },
+        },
+    ],
+};
+
+export const two_brygg_kaffe_ownmug_and_borrowed_in_cart = {
+    price: 22,
+    amount: 2,
+    shop: '',
+    orderItems: [
+        {
+            amount: 1,
+            coffee: { ...brygg_kaffe, price: 10, ownMug: true },
+        },
+        {
+            amount: 1,
+            coffee: { ...brygg_kaffe, price: 12, ownMug: false },
+        },
+    ],
+};
+
 export default shops;
