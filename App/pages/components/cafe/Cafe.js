@@ -21,7 +21,6 @@ import { getAllCoffeeFromAShop } from '../../../API/expressoAPI';
 class Cafe extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             shop: props.navigation.state.params.selectedShop,
             CoffeItems: [],
@@ -39,7 +38,9 @@ class Cafe extends React.Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <CafeHeader picture={this.props.navigation.state.params.picture} />
+                <CafeHeader
+                    picture={this.props.navigation.state.params.picture}
+                />
                 <CoffeeList coffeeItems={this.state.CoffeItems} />
                 <View style={{ marginBottom: 30 }}>
                     <CartField />

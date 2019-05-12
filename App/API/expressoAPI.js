@@ -26,7 +26,10 @@ export const getShop = async wantedShop => {
         .then(response => {
             return response;
         })
-        .catch(error => {console.log('ERROR', error); return [];});
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
     return allInformation;
 };
 
@@ -68,6 +71,17 @@ const getAllShops = async () => {
             return [];
         });
     return myData;
+};
+
+/** Gets all shops coordninates and their name.
+ * 
+ */
+const getAllShopsCoords = async () => {
+    const getNameCoords = shop => {
+        return { shop: shop.name, coordinates: shop.coordinates };
+    };
+    shops = await getAllShops();
+    return shops.map(getNameCoords);
 };
 
 /**
