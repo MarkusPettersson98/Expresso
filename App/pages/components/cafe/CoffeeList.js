@@ -2,7 +2,7 @@ import React from 'react';
 import { AppRegistry, ScrollView, StyleSheet } from 'react-native';
 
 import { default as CoffeeItem } from './CoffeeItem';
-import { getAllCoffeeFromAShop } from '../../../API/expressoAPI';
+import { coffee } from '../dummy-data';
 
 /**
  * @file This is the list responsible for rendering all different coffees from a shop.
@@ -15,35 +15,19 @@ import { getAllCoffeeFromAShop } from '../../../API/expressoAPI';
  *
  */
 
-export default class CoffeeList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            shop: props.selectedShop,
-            CoffeItems: [],
-        };
-    }
-
-    async componentDidMount() {
-        const allCoffees = await getAllCoffeeFromAShop(this.state.shop);
-
-        Promise.all(allCoffees).then(CoffeeList => {
-            const CoffeeItems = CoffeeList.map((coffee, index) => {
-                return <CoffeeItem key={index} coffee={coffee} />;
-            });
-            this.setState({ ...this.state, CoffeItems: CoffeeItems });
-        });
-    }
+export default (CoffeeList = ({ coffeeItems }) => {
 
     // Create a view for every available coffee
-    render() {
-        return (
-            <ScrollView contentContainerStyle={styles.container}>
-                {this.state.CoffeItems}
-            </ScrollView>
-        );
-    }
-}
+    const CoffeeItems = coffeeItems.map((coffee, index) => {
+        return <CoffeeItem key={index} coffee={coffee} />;
+    });
+
+    return (
+        <ScrollView contentContainerStyle={styles.container}>
+            {CoffeeItems}
+        </ScrollView>
+    );
+});
 
 const styles = StyleSheet.create({
     container: {

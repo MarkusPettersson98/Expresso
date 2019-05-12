@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
+import { View } from 'react-native';
 
 import CoffeeList from './CoffeeList';
 import CafeHeader from './CafeHeader';
 
-import { shops } from '../dummy-data';
-
 import CartField from './../CartField';
+import { getAllCoffeeFromAShop } from '../../../API/expressoAPI';
+
 /**
  * @file This is the order page entry point. When a user selects a shop they are sent here.
  *
@@ -19,32 +18,35 @@ import CartField from './../CartField';
  *
  */
 
-const Cafe = props => {
-    /* Debugging variables TODO: replace with API calls */
-    const shop = shops.find(
-        shop => shop.name === props.navigation.state.params.selectedShop,
-    );
+class Cafe extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+        this.state = {
+            shop: props.navigation.state.params.selectedShop,
+            CoffeItems: [],
+        };
+    }
 
-    const cart = props.cart;
+    async componentDidMount() {
+        const allCoffees = await getAllCoffeeFromAShop(this.state.shop);
 
-    const orderInfo = {
-        shop: shop.name,
-        cart: cart,
-    };
+        Promise.all(allCoffees).then(CoffeeList => {
+            this.setState({ ...this.state, CoffeItems: CoffeeList });
+        });
+    }
 
-    return (
-        <View style={{ flex: 1 }}>
-            <CafeHeader picture={shop.picture} />
-            <CoffeeList selectedShop={shop.name} />
-            <View style={{ marginBottom: 30 }}>
-                <CartField />
+    render() {
+        return (
+            <View style={{ flex: 1 }}>
+                <CafeHeader picture={this.props.navigation.state.params.picture} />
+                <CoffeeList coffeeItems={this.state.CoffeItems} />
+                <View style={{ marginBottom: 30 }}>
+                    <CartField />
+                </View>
             </View>
-        </View>
-    );
-};
+        );
+    }
+}
 
-const mapStateToProps = state => {
-    return { cart: state.cart };
-};
-
-export default connect(mapStateToProps)(Cafe);
+export default Cafe;
