@@ -26,6 +26,13 @@ class Cafe extends React.Component {
             CoffeItems: [],
         };
     }
+    
+    static navigationOptions = ({navigation}) => {
+        return {
+        title: navigation.state.params.selectedShop,
+      };
+    }
+
 
     async componentDidMount() {
         const allCoffees = await getAllCoffeeFromAShop(this.state.shop);
