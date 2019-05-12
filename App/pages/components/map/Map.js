@@ -3,6 +3,13 @@ import { StyleSheet, View } from 'react-native';
 import MapView from 'react-native-maps';
 import { withNavigation } from 'react-navigation';
 
+/**
+ *
+ * @param  region from Mapcomp, determines where to focus
+ * @param  shops from Mapcomp, an array with shops (names) and their coordinates
+ * @param  navigation from withNavigation
+ */
+
 const Map = ({ region, shops, navigation }) => {
     const renderMarkers = () => {
         return shops.map(({ shop, coordinates }, index) => {

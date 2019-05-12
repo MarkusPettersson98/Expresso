@@ -25,10 +25,10 @@ class Mapcomp extends Component {
     }
     // when mounted first time
     async componentDidMount() {
-      const fetchedPins = await getAllShopsCoords();
-      Promise.all(fetchedPins).then(pins => {
-          this.setState({ ...this.state, pins: pins });
-      });
+        const fetchedPins = await getAllShopsCoords();
+        Promise.all(fetchedPins).then(pins => {
+            this.setState({ ...this.state, pins: pins });
+        });
     }
     // continiously updating location.
     async ComponentWillMount() {
@@ -42,8 +42,10 @@ class Mapcomp extends Component {
     getLocationAsync = async () => {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
+            // set region to chalmers if denied permission
             this.setState({
-                errorMessage: 'Permission to access location was denied',
+                ...this.state,
+                region: defaultRegion,
             });
             return;
         }
