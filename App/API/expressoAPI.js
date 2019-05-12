@@ -76,7 +76,7 @@ const getAllShops = async () => {
 /** Gets all shops coordninates and their name.
  * 
  */
-const getAllShopsCoords = async () => {
+export const getAllShopsCoords = async () => {
     const getNameCoords = shop => {
         return { shop: shop.name, coordinates: shop.coordinates };
     };
