@@ -43,7 +43,7 @@ export default class ModalComp extends Component {
             : this.state.data[0].label;
         return (
             //State of modal comes as props from parent component
-            <Modal isVisible={this.props.isVisible}>
+            <Modal isVisible={this.props.isVisible} onBackdropPress={() => this.props.hideModal()}>
                 <View style={styles.modalContainer}>
                     <Text style={styles.valueText}>Välj mugg</Text>
                     <RadioGroup
