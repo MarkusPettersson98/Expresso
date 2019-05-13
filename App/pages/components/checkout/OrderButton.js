@@ -9,20 +9,22 @@ import { Text, TouchableOpacity } from 'react-native';
  * adding some logic to this component.
  */
 
-const Button = ({ onPress, buttonText }) => {
+const Button = ({ onPress, buttonText, disabled }) => {
   return (
-    <TouchableOpacity style={container} onPress={onPress}>
+    <TouchableOpacity style={container(disabled)} onPress={onPress} disabled={disabled}>
       <Text style={text}>{buttonText}</Text>
     </TouchableOpacity>
   );
 };
 
-const container = {
-  alignItems: 'center',
-  backgroundColor: '#5AA3B7',
-  width: '90%',
-  paddingVertical: 16,
-  borderRadius: 20,
+const container = disabled => {
+  return {
+    alignItems: 'center',
+    backgroundColor: disabled ? '#AAA' : '#5AA3B7',
+    width: '90%',
+    paddingVertical: 16,
+    borderRadius: 20,
+  }
 };
 
 const text = {
