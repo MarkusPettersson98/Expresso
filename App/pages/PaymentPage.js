@@ -135,13 +135,13 @@ class PaymentPage extends Component {
           <OrderButton
             onPress={() => {
                 console.log('BETALA');
-                props.navigation.navigate('Order');
+                this.props.navigation.navigate('Order');
                 // TODO: Use Emils and Lucas solution to generate QR code.
 
                 // also perhaps check if the user has credits.
-                sendOrderAPI(props.cart);
+                sendOrderAPI(this.props.cart);
                 // clear the cart
-                props.onClearCart();
+                this.props.onClearCart();
             }}
             buttonText="BETALA"
             disabled={this.state.paymentCard ? false : true}
