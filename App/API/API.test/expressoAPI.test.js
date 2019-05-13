@@ -48,7 +48,7 @@ describe('Testing if all the coffeesorts from a shop is printed out ', () => {
         );
     });
 
-    it('Case insensitive check of above', () => {
+   /* it('Case insensitive check of above', () => {
         return getAllCoffeeFromAShop('buLteN').then(data =>
             expect(data).toEqual([
                 {
@@ -65,7 +65,7 @@ describe('Testing if all the coffeesorts from a shop is printed out ', () => {
                 },
             ]),
         );
-    });
+    });*/
 
     it('Checking other restaurants, list for Wijkanders expected', () => {
         return getAllCoffeeFromAShop('Wijkanders').then(data =>
@@ -101,7 +101,7 @@ describe('Testing if getShop returns the right shop', () => {
         );
     });
 
-    it('Case sensitivity check', () => {
+    /*it('Case sensitivity check', () => {
         return getShop('buLtEn').then(data =>
             expect(data).toEqual({
                 name: 'Bulten',
@@ -112,7 +112,7 @@ describe('Testing if getShop returns the right shop', () => {
                 ],
             }),
         );
-    });
+    });*/
 
     it('Should output Wijkanders store, checking if other restaurants work too', () => {
         return getShop('Wijkanders').then(data =>
