@@ -62,7 +62,7 @@ const NonEmptyCheckoutPage = props => {
                     width: '100%',
                 }}
             >
-                <PickUpLocation />
+                <PickUpLocation shop={props.cart.shop} />
             </View>
 
             <TotalAmount total={total} />
