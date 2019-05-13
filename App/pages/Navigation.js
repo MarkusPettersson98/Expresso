@@ -11,7 +11,6 @@ import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
 import PaymentPage from './PaymentPage'
-import CheckoutHeader from './components/header/CheckoutIcon';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
@@ -21,7 +20,7 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 const headerStyling = {
     headerStyle: {
         backgroundColor: '#57454B',
-        height:60,
+        height: 60,
     },
     headerTintColor: '#fff',
 };
@@ -141,13 +140,6 @@ export const RootStack = createStackNavigator(
             screen: Tabs,
             navigationOptions: ({ navigation }) => ({
                 headerTitle: <ExpressoLogoHeader />,
-                headerRight: (
-                    <CheckoutHeader
-                        navigationProps={navigation}
-                        styling={headerIconStyling}
-                    />
-                ),
-                headerLeft: <View />, // so the headerTitle is center
                 ...headerStyling,
             }),
         },
