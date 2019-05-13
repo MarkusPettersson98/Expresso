@@ -1,7 +1,7 @@
 /* Function definitions for handling API requests */
 
 const { shops } = require("../Database/newData");
-const path = require('path');
+const path = require("path");
 
 const getAllShops = (req, res) => {
     /*
@@ -22,6 +22,24 @@ const getShopPicture = (req, res) => {
     return res.sendFile(decodedShop.toLowerCase() + '.jpg', { root: picturePath });
 };
 
+const getShopById = (req, res) => {
+    /*
+      Return all available information about requested shop
+    */
+    // Try to parse shop name from request
+    const shopId = req.params.shopId;
+    if (shopId === undefined) res.status(400).end();
+
+    let lookup = shop => shop.id == shopId;
+    const foundShop = shops.find(lookup);
+
+    // Shop was found, return OK
+    if (foundShop) return res.status(200).send(foundShop);
+
+    // Shop was not found, return error
+    return res.status(400).end();
+};
+
 const getCoffee = (req, res) => {
     return detailsFromShop(lookUpCoffee, req, res);
 };
@@ -30,7 +48,8 @@ const lookUpShop = requestedShop => {
     /*
       Return all available information about requested shop
     */
-    let lookup = shop => shop.name.toLowerCase() === requestedShop.toLowerCase();
+    let lookup = shop =>
+        shop.name.toLowerCase() === requestedShop.toLowerCase();
 
     const foundShop = shops.find(lookup);
     return foundShop ? foundShop : false;
@@ -41,7 +60,8 @@ const lookUpCoffee = requestedShop => {
       Return all coffee products from requested shop
     */
 
-    const lookup = location => location.name.toLowerCase() === requestedShop.toLowerCase();
+    const lookup = location =>
+        location.name.toLowerCase() === requestedShop.toLowerCase();
     const foundShop = shops.find(lookup);
     return foundShop ? foundShop.drinkList : false;
 };
@@ -72,7 +92,8 @@ module.exports = {
         getAllShops: getAllShops,
         getShop: getShop,
         getShopPicture: getShopPicture,
-        getCoffee: getCoffee
+        getCoffee: getCoffee,
+        getShopById: getShopById
     },
     testable: {
         lookUpShop: lookUpShop,
