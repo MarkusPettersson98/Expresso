@@ -38,15 +38,7 @@ class PaymentPage extends Component {
   };
 
   onCardTextChange = text => {
-    let newText = text;
-    let newTextTrim = text.replace(/\s/g, ''); // Without whitespace
-    if (
-      newText.length > 0 &&
-      newText.length < 16 &&
-      newTextTrim.length % 4 == 0
-    )
-      newText += ' ';
-    this.setState({ paymentCardTemp: newText, cardErrorText: '' });
+    this.setState({ paymentCardTemp: text, cardErrorText: '' });
   };
 
   render() {
@@ -114,7 +106,7 @@ class PaymentPage extends Component {
 
               <Text style={{ color: '#57454B', fontSize: 14 }}>
                 {this.state.paymentCard
-                  ? `**** **** **** ${this.state.paymentCard.substring(this.state.paymentCard.length-4, this.state.paymentCard.length)}`
+                  ? `**** **** **** ${this.state.paymentCard.substring(12, 16)}`
                   : 'Inget kort tillagt!'}
               </Text>
 
@@ -165,7 +157,7 @@ class PaymentPage extends Component {
                 placeholder="XXXX XXXX XXXX XXXX"
                 onChangeText={text => this.onCardTextChange(text)}
                 value={this.state.paymentCardTemp}
-                maxLength={19} // 16 numbers + 3 spaces
+                maxLength={16}
               />
               <TouchableOpacity
                 style={styles.addCardBtn}
