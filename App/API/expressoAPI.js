@@ -19,8 +19,7 @@ const getCurrentDate = () => {
  * @param shop A name of a shop, like Veras Café or Bulten.
  */
 const fixShopString = shop => {
-    let fixedString = shop.replace(' ', '%20');
-    fixedString = fixedString.charAt(0).toUpperCase() + shop.slice(1);
+    const fixedString = encodeURIComponent(shop);
     return fixedString;
 }
 /**
