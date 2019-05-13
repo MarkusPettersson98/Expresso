@@ -10,6 +10,7 @@ import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
+import PaymentPage from './PaymentPage'
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
@@ -148,6 +149,13 @@ export const RootStack = createStackNavigator(
                 headerRight: <ClearCheckoutHeader />,
                 ...headerStyling,
             }),
+        },
+        Payment: {
+          screen: PaymentPage,
+          navigationOptions: ({ navigation }) => ({
+              headerTitle: 'Betalning',
+              ...headerStyling,
+          }),
         },
         Cafe: {
             screen: Cafe,

@@ -47,18 +47,18 @@ const CheckoutPage = props => {
 };
 
 const mapStateToProps = state => {
-    return { cart: state.cart };
+  return { cart: state.cart };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onAddItem: coffee => {
-            dispatch(addCoffee(coffee));
-        },
-    };
+  return {
+    onAddItem: coffee => {
+      dispatch(addCoffee(coffee));
+    },
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(CheckoutPage);
