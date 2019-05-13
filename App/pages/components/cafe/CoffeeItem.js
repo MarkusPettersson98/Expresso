@@ -1,9 +1,9 @@
 import React from 'react';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 import { connect } from 'react-redux';
-import { addCoffee } from '../redux/actions';
+import { addCoffee, clearCart } from '../redux/actions';
 import ModalComp from './ChooseMugModal';
 
 const styles = StyleSheet.create({
@@ -56,7 +56,28 @@ class CoffeeItem extends React.Component {
     //Function to order coffee when ModalComp closes, is sent as props to ModalComp
     //Takes value of ownMug-selection t/f
     orderCoffee = ownMug => {
-        this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
+        if (this.props.cart.shopId != this.coffee.shopId && this.props.cart.shopId != null) {
+          // If cart contains coffee from another café
+          return Alert.alert(
+              'Varning',
+              'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
+              [
+                  {
+                      text: 'Avbryt',
+                      style: 'cancel',
+                  },
+                  {
+                      text: 'Rensa',
+                      onPress: () => {
+                        this.props.onClearCart();
+                        this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
+                      },
+                  },
+              ],
+          );
+        } else {
+          this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
+        }
     };
 
     render() {
@@ -131,6 +152,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onAddCoffee: coffee => {
             dispatch(addCoffee(coffee));
+        },
+        onClearCart: () => {
+          dispatch(clearCart());
         },
     };
 };
