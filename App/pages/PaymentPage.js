@@ -8,9 +8,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { sendOrder as sendOrderAPI } from '../API/expressoAPI';
 import PaymentItem from './components/checkout/PaymentItem';
 import OrderButton from './components/checkout/OrderButton';
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
+import { clearCart } from './components/redux/actions';
 import Modal from 'react-native-modal';
 
 class PaymentPage extends Component {
@@ -130,7 +133,16 @@ class PaymentPage extends Component {
             <Text style={styles.totalText}>{total} kr</Text>
           </View>
           <OrderButton
-            onPress={() => console.log('BETALA')}
+            onPress={() => {
+                console.log('BETALA');
+                props.navigation.navigate('Order');
+                // TODO: Use Emils and Lucas solution to generate QR code.
+
+                // also perhaps check if the user has credits.
+                sendOrderAPI(props.cart);
+                // clear the cart
+                props.onClearCart();
+            }}
             buttonText="BETALA"
             disabled={this.state.paymentCard ? false : true}
           />
@@ -243,8 +255,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => {
-  return { cart: state.cart };
+const mapDispatchToProps = dispatch => {
+    return {
+        onClearCart: () => {
+            dispatch(clearCart());
+        },
+    };
 };
 
-export default connect(mapStateToProps)(PaymentPage);
+const mapStateToProps = state => {
+    return { cart: state.cart };
+};
+
+export default withNavigation(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    )(PaymentPage),
+);
