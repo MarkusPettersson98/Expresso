@@ -17,8 +17,9 @@ const getShop = (req, res) => {
 
 const getShopPicture = (req, res) => {
     const shop = req.params.shop;
+    const decodedShop = decodeURIComponent(shop);
     const picturePath = path.resolve('Database/resources');
-    return res.sendFile(shop.toLowerCase() + '.jpg', { root: picturePath });
+    return res.sendFile(decodedShop.toLowerCase() + '.jpg', { root: picturePath });
 };
 
 const getCoffee = (req, res) => {
@@ -53,9 +54,11 @@ const detailsFromShop = (lookUp, req, res) => {
 
     // Try to parse shop name from request
     const shop = req.params.shop;
-    if (shop === undefined) res.status(400).end();
 
-    const details = lookUp(shop.toLowerCase());
+    const decodedShop = decodeURIComponent(shop);
+    if (decodedShop === undefined) res.status(400).end();
+
+    const details = lookUp(decodedShop.toLowerCase());
 
     // Shop was found, return OK
     if (details) return res.status(200).send(details);
