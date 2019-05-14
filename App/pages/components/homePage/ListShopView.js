@@ -13,7 +13,7 @@ const ShopView = ({ name, picture, navigation }) => {
     return (
         <View style={styles.item}>
             <TouchableWithoutFeedback onPress={() => {
-                navigation.navigate('Cafe', { selectedShop: name })}
+                navigation.navigate('Cafe', { selectedShop: name, picture: picture })}
             }>
                 <ImageBackground
                     source={picture}
