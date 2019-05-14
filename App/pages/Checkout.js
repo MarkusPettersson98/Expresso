@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { brygg_kaffe, cappuccino, latte } from './components/dummy-data';
 import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
@@ -61,18 +60,18 @@ class CheckoutPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { cart: state.cart };
+  return { cart: state.cart };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onAddItem: coffee => {
-            dispatch(addCoffee(coffee));
-        },
-    };
+  return {
+    onAddItem: coffee => {
+      dispatch(addCoffee(coffee));
+    },
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(CheckoutPage);
