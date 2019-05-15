@@ -76,9 +76,9 @@ const getReceipt = async (req, res) => {
     try {
         const receipts = await getAllReceipts();
 
-        // const receipt = receipts.filter(item => item); // TODO: filter on something
+        const receipt = receipts.filter(item => item.id === id); // TODO: filter on something
 
-        return res.status(200).send(receipts);
+        return res.status(200).send(receipt);
     } catch (e) {
         console.log(e);
         return res.status(400).send(":(");
