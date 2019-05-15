@@ -5,27 +5,28 @@ import CheckoutItem from './CheckoutItem';
 import OrderButton from './OrderButton';
 import TotalAmount from './TotalAmount';
 import PickUpLocation from './pickUpPointView';
-import { calculateCartPrice } from '../redux/cartFunctions';
+import { withNavigation } from 'react-navigation';
 
 
-/** 
+/**
  * The view that is being shown in Checkout.js when the cart is populated
- * 
+ *
  * This view contains:
- * 
+ *
  * CheckoutItem
  * PickUpPointView
  * OrderButton
- * 
+ *
  * And passes logic to them using props
- * 
- * @param {cart} props carries the redux state cart, which can be looked at in redux/reducers.js 
+ *
+ * @param {cart} props carries the redux state cart, which can be looked at in redux/reducers.js
  */
 
 
 const NonEmptyCheckoutPage = props => {
-    let orderItems = Object.values(props.cart);
-    let total = calculateCartPrice(orderItems);
+    const cart = props.cart;
+    const total = cart.price;
+    const orderItems = cart.orderItems;
 
     return (
         <View
@@ -61,7 +62,7 @@ const NonEmptyCheckoutPage = props => {
                     width: '100%',
                 }}
             >
-                <PickUpLocation />
+                <PickUpLocation shop={props.cart.shop} />
             </View>
 
             <TotalAmount total={total} />
@@ -74,17 +75,8 @@ const NonEmptyCheckoutPage = props => {
                 }}
             >
                 <OrderButton
-                    onPress={() => {
-                        console.log('Du beställde:');
-                        orderItems.forEach(orderItem => {
-                            console.log(
-                                orderItem.amount,
-                                ':',
-                                orderItem.coffee.name,
-                            );
-                        });
-                        console.log('Kostnad:', total);
-                    }}
+                    onPress={() => props.navigation.navigate('Payment')}
+                    buttonText="GÅ VIDARE"
                 />
             </View>
         </View>
@@ -95,4 +87,4 @@ const mapStateToProps = state => {
     return { cart: state.cart };
 };
 
-export default connect(mapStateToProps)(NonEmptyCheckoutPage);
+export default withNavigation(connect(mapStateToProps)(NonEmptyCheckoutPage));

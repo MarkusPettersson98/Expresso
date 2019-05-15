@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import {
     createBottomTabNavigator,
     createStackNavigator,
@@ -9,19 +10,17 @@ import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
-import CheckoutHeader from './components/header/CheckoutIcon';
+import PaymentPage from './PaymentPage'
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
-import ExitCheckout from './components/header/ExitCheckout';
 import Cafe from './components/cafe/Cafe';
-import {
-    Feather,
-    MaterialIcons,
-} from '@expo/vector-icons';
+import ExpressoLogoHeader from './components/header/ExpressoLogo';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
     headerStyle: {
         backgroundColor: '#57454B',
+        height: 60,
     },
     headerTintColor: '#fff',
 };
@@ -41,7 +40,7 @@ const tabIconStyling = {
 export const Tabs = createBottomTabNavigator(
     {
         Lista: {
-            screen: () => <Homepage presentationMode={"List"}/>,
+            screen: () => <Homepage presentationMode={'List'} />,
             navigationOptions: {
                 tabBarLabel: 'Lista',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -60,7 +59,7 @@ export const Tabs = createBottomTabNavigator(
             },
         },
         Karta: {
-            screen: () => <Homepage presentationMode={"Map"}/>,
+            screen: () => <Homepage presentationMode={'Map'} />,
             navigationOptions: {
                 tabBarLabel: 'Karta',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -123,15 +122,14 @@ export const Tabs = createBottomTabNavigator(
             // om bakgrunden
             activeBackgroundColor: '#eee',
             backgroundColor: 'white',
-            
+
             // Om label
             labelStyle: {
-                fontSize: 12,   
+                fontSize: 12,
             },
             // om textens färg
             activeTintColor: '#362D30',
             inactiveTintColor: '#9C9497',
-            
         },
     },
 );
@@ -141,29 +139,27 @@ export default createStackNavigator(
         Main: {
             screen: Tabs,
             navigationOptions: ({ navigation }) => ({
-                title: 'Main',
-                headerRight: (
-                    <CheckoutHeader
-                        navigationProps={navigation}
-                        styling={headerIconStyling}
-                    />
-                ),
+                headerTitle: <ExpressoLogoHeader />,
                 ...headerStyling,
             }),
         },
         Checkout: {
             screen: Checkoutpage,
             navigationOptions: ({ navigation }) => ({
-                title: 'Varukorg',
                 headerRight: <ClearCheckoutHeader />,
-                headerLeft: <ExitCheckout navigationProps={navigation} />,
                 ...headerStyling,
             }),
+        },
+        Payment: {
+          screen: PaymentPage,
+          navigationOptions: ({ navigation }) => ({
+              headerTitle: 'Betalning',
+              ...headerStyling,
+          }),
         },
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
-                title: 'Café',
                 ...headerStyling,
             }),
         },

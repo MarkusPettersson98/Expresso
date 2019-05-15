@@ -6,7 +6,7 @@ import { clearCart } from '../redux/actions';
 
 const ClearCheckout = ({ cart, dispatch }) => {
     // checks if the cart is emtpy using the length of keys, 0 being 'falsy'
-    const emptyCart = !Object.keys(cart).length;
+    const emptyCart = !cart.amount;
     const checkClearCart = () => {
         return Alert.alert(
             'Varning',

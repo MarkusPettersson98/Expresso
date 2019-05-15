@@ -12,8 +12,11 @@
     "expo": "^32.0.0",
     "firebase": "^5.11.0",
     "react": "16.5.0",
+    "node-fetch": "^2.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-maps": "^0.23.0",
+    "react-native-modal": "^10.0.0",
+    "react-native-radio-buttons-group": "^1.0.7",
     "react-navigation": "^3.8.1",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1"

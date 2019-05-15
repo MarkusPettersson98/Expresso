@@ -1,43 +1,48 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import MapView from 'react-native-maps';
 import { withNavigation } from 'react-navigation';
 
-const Map = props => {
-  const renderMarkers = () => {
-    return props.shops.map((shop, index) => (
-      <View key={index}>
-        <MapView.Marker
-          key={index}
-          title={shop.name}
-          coordinate={{
-            latitude: shop.coordinates.latitude,
-            longitude: shop.coordinates.longitude,
-          }}
-          onCalloutPress={() =>
-            props.navigation.navigate('Order', { selectedShop: shop.name })
-          }
-        />
-      </View>
-    ));
-  };
+/**
+ *
+ * @param  region from Mapcomp, determines where to focus
+ * @param  shops from Mapcomp, an array with shops (names) and their coordinates
+ * @param  navigation from withNavigation
+ */
 
-  return (
-    <MapView
-      style={styles.map}
-      region={props.region}
-      showsUserLocation
-      showsMyLocationButton
-    >
-      {renderMarkers()}
-    </MapView>
-  );
+const Map = ({ region, shops, navigation }) => {
+    const renderMarkers = () => {
+        return shops.map(({ shop, coordinates }, index) => {
+            return (
+                <View key={index}>
+                    <MapView.Marker
+                        key={index}
+                        title={shop}
+                        coordinate={{
+                            latitude: coordinates.latitude,
+                            longitude: coordinates.longitude,
+                        }}
+                        onCalloutPress={() =>
+                            navigation.navigate('Cafe', {
+                                selectedShop: shop,
+                            })
+                        }
+                    />
+                </View>
+            );
+        });
+    };
+
+    return (
+        <MapView
+            style={styles.map}
+            region={region}
+            showsUserLocation
+            showsMyLocationButton
+        >
+            {renderMarkers()}
+        </MapView>
+    );
 };
 const styles = StyleSheet.create({
   map: {
