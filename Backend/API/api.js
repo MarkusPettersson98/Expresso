@@ -103,7 +103,17 @@ const getReceiptUser = async (req, res) => {
 const getAllReceipts = async () => {
     const receipts = await fetch(firebaseURL)
         .then(res => res.json())
-        .then(res => Object.values(res))
+        .then(res => {
+            const keys = Object.keys(res);
+            const receipts = keys.map(key => {
+                const values = res[key];
+                return {
+                    ...values,
+                    id: key
+                };
+            });
+            return receipts;
+        })
         .catch(err => console.log("Error!", err));
 
     return receipts;
