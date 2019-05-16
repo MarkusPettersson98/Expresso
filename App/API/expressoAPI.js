@@ -85,6 +85,13 @@ export const getAllShopNames = async () => {
     return shops.map(getName);
 };
 
+/*
+    Given an ID of a receipt, create a link to that receipt
+*/
+export const getReceiptLink = id => {
+    return herokuURL + 'getReceipt/' + id;
+};
+
 /**
  * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
  * @param selectedShop The shop of which the order belongs to.
