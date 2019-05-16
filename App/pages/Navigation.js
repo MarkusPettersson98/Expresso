@@ -10,7 +10,8 @@ import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
-import PaymentPage from './PaymentPage'
+import PaymentPage from './PaymentPage';
+import Receipts from './components/profilePage/Receipts'
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
@@ -163,7 +164,15 @@ export const RootStack = createStackNavigator(
                 ...headerStyling,
             }),
         },
+        Receipts: {
+            screen: Receipts,
+            navigationOptions: ({ navigation }) => ({
+                headerTitle: 'Kvitton',
+                ...headerStyling,
+            }),
+        },
     },
+
     {
         mode: 'card',
     },

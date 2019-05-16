@@ -12,32 +12,30 @@ TODO:
 - Ska man kunna ändra sina uppgifter. Isf lägga till knapp som tar en till en sida där uppgifter kan ändras.
 */
 
-export default class ProfilePage extends Component {
-    render() {
-        return (
-            <View style = {styles.container}>
-                <View style = {styles.personView}>
-                    <Text style = {styles.personHeader}>User Profile</Text>
-                    <Text style= {styles.text}>{this.props.firstname} {this.props.lastname}</Text>
-                    <Text style= {styles.text}>{this.props.dateOfBirth}</Text>
-                    <Text style= {styles.text}>{this.props.city}, {this.props.country}</Text>
-                    <TouchableOpacity
-                        style = {styles.to}
-                        onPress={console.log('rec')}
-                    >
-                        <Text style= {styles.reText}>Receipts ></Text>
-                    </TouchableOpacity>
-                </View> 
+const Profile = props => {
+    return (
+        <View style = {styles.container}>
+            <View style = {styles.personView}>
+                <Text style = {styles.personHeader}>User Profile</Text>
+                <Text style= {styles.text}>{props.firstname} {props.lastname}</Text>
+                <Text style= {styles.text}>{props.dateOfBirth}</Text>
+                <Text style= {styles.text}>{props.city}, {props.country}</Text>
+                <TouchableOpacity
+                    style = {styles.to}
+                    onPress={() => props.navigation.navigate('Receipts')}
+                >
+                    <Text style= {styles.reText}>Receipts ></Text>
+                </TouchableOpacity>
+            </View> 
 
-                <View style = {styles.paymentInfoView}>
-                    <Text style = {styles.paymentHeader}>Payment Method</Text>
-                    <Text style= {styles.text}>{this.props.paymentMethod}</Text>
-                    <Text style= {styles.text}>{this.props.paymentInformation}</Text>
-                </View>
+            <View style = {styles.paymentInfoView}>
+                <Text style = {styles.paymentHeader}>Payment Method</Text>
+                <Text style= {styles.text}>{props.paymentMethod}</Text>
+                <Text style= {styles.text}>{props.paymentInformation}</Text>
             </View>
-        ); 
-    }
-} 
+        </View>
+    ); 
+}; 
 
 const styles = StyleSheet.create({
     container: {
@@ -93,3 +91,5 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 }); 
+
+export default withNavigation(Profile);
