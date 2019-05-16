@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import CafeCartIcon from './cafe/CafeCartIcon';
-
+ 
 const CartField = props => {
     const totalPrice = props.cart.price;
     const totalAmount = props.cart.amount;
