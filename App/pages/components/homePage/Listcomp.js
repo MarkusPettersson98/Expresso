@@ -1,15 +1,15 @@
 import React from 'react';
-import { AppRegistry, ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { default as ShopView } from './ListShopView';
+import { ShopSearchBar } from './searchbar/ShopSearchbar';
 
 import { getAllShopNames, getShopPicture } from '../../../API/expressoAPI';
 
 export default class Maincomp extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = { ShopViews: [] };
-    };
+    }
 
     async componentDidMount() {
         // Request all shops names
@@ -34,22 +34,27 @@ export default class Maincomp extends React.Component {
                 ShopViews: shopViews,
             });
         });
-    };
+    }
 
     render() {
         return (
-            <ScrollView contentContainerStyle={styles.container}>
-                {this.state.ShopViews}
-            </ScrollView>
+            <View>
+                <ShopSearchBar
+                    onChange={() => console.log('Testing ShopSearchBar ')}
+                />
+                <ScrollView contentContainerStyle={styles.container}>
+                    {this.state.ShopViews}
+                </ScrollView>
+            </View>
         );
     }
 }
 
 const styles = {
-  container: {
-      width: '100%',
-      flexDirection: 'column',
-      backgroundColor: '#F0F7F4',
-      justifyContent: 'center',
-  },
+    container: {
+        width: '100%',
+        flexDirection: 'column',
+        backgroundColor: '#F0F7F4',
+        justifyContent: 'center',
+    },
 };

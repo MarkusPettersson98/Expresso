@@ -1,66 +1,66 @@
 import allData from './dummy-data';
 import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
-const herokuURL = 'https://expressobackend.herokuapp.com/api/';
-
-const firebaseURL =
-    'https://share-places-1555452472826.firebaseio.com/kvitton.json';
+const apiEndpoint = "http://expressobackend.herokuapp.com/api";
 
 /**
- * Function to get the current date, useful for when creating reciepts
+ * Returns all the names of all the shops in the database
+ * This only inlcudes the names of the shops
  */
-const getCurrentDate = () => {
-    return Date.now();
+export const getAllShopNames = async () => {
+    const getName = shop => {
+        return shop.name;
+    };
+    return getShopsBackend().then(shops => shops.map(getName));
 };
 
-
-/** Fixes a shop in order to work well with API-request
- * 
- * @param shop A name of a shop, like Veras Café or Bulten.
- */
-const fixShopString = shop => {
-    const fixedString = encodeURIComponent(shop);
-    return fixedString;
-}
 /**
- * Returns all the information of a all the shops in the database using heroku
+ * Returns all the information of a all the shops in the database
  * This includes the names, the coordinates and their drinklist
  */
 export const getShop = async wantedShop => {
-    let fixedString = fixShopString(wantedShop);
-
-    const allInformation = await fetch(herokuURL + 'getShop/' + fixedString)
-        .then(res => res.json())
-        .then(response => {
-            return response;
-        })
-        .catch(error => {
-            console.log('ERROR', error);
-            return [];
-        });
-    return allInformation;
+    const getInformation = shop => {
+        return {
+            name: shop.name,
+            coordinates: shop.coordinates,
+            drinkList: shop.drinkList,
+        };
+    };
+    return getShopBackend(wantedShop).then(shop => getInformation(shop));
 };
 
 /**
  * Returns a promise which if resolved contains all the coffesorts in a specific shop
- * from heroku
  * @param wantedShop  The name of the wanted shop
  */
 export const getAllCoffeeFromAShop = async wantedShop => {
-    const shop = await getShop(wantedShop);
-    return shop.drinkList;
+    return getShopBackend(wantedShop).then(shop => shop.drinkList);
 };
 
 /**
- * Returns the picture to a wanted shop
+ * Returns all the information about a specific shop
+ * This only includes the picture of the requested shop
  * @param wantedShop  The name of the wanted shop
- * @todo Fix so that this works with the images hosted at backend.
  */
 export const getShopPicture = async wantedShop => {
+    return getShopBackend(wantedShop).then(shop => {
+        return shop.picture ? shop.picture : defaultPic;
+    });
+};
+
+/**
+ * Returns all the information about a specific shop
+ * This includes name, coordinates and the drinkList of the shop
+ * @param wantedShop  The name of the wanted shop
+ */
+const getShopBackend = async wantedShop => {
+    const something = await fetch("apiEndpoint");
+    // TODO replace allData.shops with actual call to API
     const foundShop = allData.shops.find(shop => {
         return shop.name.toUpperCase() == wantedShop.toUpperCase();
     });
-    return foundShop.picture ? foundShop.picture : defaultPic;
+
+    return foundShop;
 };
 
 /**
@@ -68,58 +68,7 @@ export const getShopPicture = async wantedShop => {
  * Return a promise object with resolved API call
  * @param wantedShop  The name of the wanted shop
  */
-const getAllShops = async () => {
-    const myData = await fetch(herokuURL + 'getAllShops/')
-        .then(res => res.json())
-        .then(response => {
-            return response;
-        })
-        .catch(error => {
-            console.log('error', error);
-            return [];
-        });
-    return myData;
-};
-
-/** Gets all shops coordninates and their name.
- * 
- */
-export const getAllShopsCoords = async () => {
-    const getNameCoords = shop => {
-        return { shop: shop.name, coordinates: shop.coordinates };
-    };
-    shops = await getAllShops();
-    return shops.map(getNameCoords);
-};
-
-/**
- * Returns all the names of all the shops in the database hosted at heroku
- * This only inlcudes the names of the shops
- */
-export const getAllShopNames = async () => {
-    const getName = shop => {
-        return shop.name;
-    };
-    shops = await getAllShops();
-    return shops.map(getName);
-};
-
-/**
- * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
- * @param selectedShop The shop of which the order belongs to.
- */
-export const sendOrder = async cart => {
-    fetch(firebaseURL, {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            cart: cart,
-            date: getCurrentDate(),
-        }),
-    })
-        .then(res => console.log())
-        .catch(err => console.log(err));
+const getShopsBackend = async () => {
+    // TODO replace allData.shops with actual call to API
+    return allData.shops;
 };
