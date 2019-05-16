@@ -24,5 +24,12 @@
     "codecov": "^3.3.0",
     "jest": "^24.7.1",
     "nodemon": "^1.18.10"
-  }
+  },
+  "engines": {
+    "node": "8.16.0"
+  },
+  "keywords": [
+    "example",
+    "heroku"
+  ]
 }

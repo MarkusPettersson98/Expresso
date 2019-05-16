@@ -1,63 +1,79 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View } from 'react-native';
-import MapView from 'react-native-maps';
+import { StyleSheet, View } from 'react-native';
+import { Location, Permissions } from 'expo';
+import { getAllShopsCoords } from '../../../API/expressoAPI';
+import Map from '../map/Map';
 
-export default class Mapcomp extends Component {
-    constructor({ shops }) {
+const defaultDeltas = {
+    latitudeDelta: 0.02,
+    longitudeDelta: 0.02,
+};
+
+const defaultRegion = {
+    latitude: 57.689388,
+    longitude: 11.977315,
+    ...defaultDeltas,
+};
+
+class Mapcomp extends Component {
+    constructor() {
         super();
         this.state = {
-            markers: shops.map((shop, index) => {
-                return (
-                    <MapView.Marker
-                        key={index}
-                        title={shop.name}
-                        coordinate={{
-                            latitude: shop.coordinates.latitude,
-                            longitude: shop.coordinates.longitude,
-                        }}
-                    />
-                );
-            }),
+            region: defaultRegion,
+            pins: [],
         };
     }
+    // when mounted first time
+    async componentDidMount() {
+        const fetchedPins = await getAllShopsCoords();
+        Promise.all(fetchedPins).then(pins => {
+            this.setState({ ...this.state, pins: pins });
+        });
+    }
+    // continiously updating location.
+    async ComponentWillMount() {
+        this.getLocationAsync();
+    }
+
+    /*
+    Example from https://blog.expo.io/building-a-coffee-map-with-react-native-and-expo-a00b8f60a4c6
+    Gets the user location async if allowed by user, otherwise default region is set.
+  */
+    getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            // set region to chalmers if denied permission
+            this.setState({
+                ...this.state,
+                region: defaultRegion,
+            });
+            return;
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        const region = {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            ...defaultDeltas,
+        };
+        await this.setState({ ...this.state, region: region });
+    };
 
     render() {
         return (
             <View style={styles.container}>
-                <MapView
-                    style={styles.map}
-                    region={{
-                        latitude: 57.689388,
-                        longitude: 11.977315,
-                        latitudeDelta: 0.1,
-                        longitudeDelta: 0.1,
-                    }}
-                >
-                    {this.state.markers}
-                </MapView>
+                <Map region={this.state.region} shops={this.state.pins} />
             </View>
         );
     }
 }
+
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: '85%',
-        //borderTopWidth: 5,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
+        flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
-    map: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-    },
 });
 
-AppRegistry.registerComponent('Mapcomp', () => Mapcomp);
+export default Mapcomp;

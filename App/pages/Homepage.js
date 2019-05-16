@@ -1,59 +1,24 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View, TextInput } from 'react-native';
-import Topcomp from './components/homePage/Topcomp';
-import Listcomp from './components/homePage/Listcomp';
-import Blockcomp from './components/homePage/Blockcomp';
+import { StyleSheet, View } from 'react-native';
+import Maincomp from './components/homePage/Maincomp';
 import Mapcomp from './components/homePage/Mapcomp';
-import ShopSearchbar from './components/homePage/searchbar/ShopSearchbar';
+import CartField from './components/CartField';
 
-import shops from './components/dummy-data';
 
 export default class Homepage extends Component {
 
     state = {
-        toggle: 'LV',
-        shops: shops,
+        toggle: this.props.presentationMode,
     };
-
-    // Apply callback to shops, updating current shops
-    updateShops = (callback) => this.setState({ shops: callback(shops) });
-
-    _pressLV = () => this.setState({ toggle: 'LV' });
-    _pressBV = () => this.setState({ toggle: 'BV' });
-    _pressMV = () => this.setState({ toggle: 'MV' });
 
     render() {
         return (
             <View style={styles.container}>
-                <Topcomp />
-                <View style={styles.butcontainer}>
-                    <Button
-                        title="List"
-                        style={styles.item}
-                        onPress={this._pressLV}
-                        color="black"
-                    />
-                    <Button
-                        title="Block"
-                        style={styles.item}
-                        onPress={this._pressBV}
-                        color="black"
-                    />
-                    <Button
-                        title="Map"
-                        style={styles.item}
-                        onPress={this._pressMV}
-                        color="black"
-                    />
+                <View style={styles.comps}>
+                    {this.state.toggle == 'List' && <Maincomp />}
+                    {this.state.toggle == 'Map' && <Mapcomp />}
                 </View>
-
-                <ShopSearchbar
-                    onChange={this.updateShops}
-                />
-
-                {this.state.toggle == 'LV' && <Listcomp shops={this.state.shops} />}
-                {this.state.toggle == 'BV' && <Blockcomp shops={this.state.shops} />}
-                {this.state.toggle == 'MV' && <Mapcomp shops={this.state.shops} />}
+                <CartField />
             </View>
         );
     }
@@ -62,14 +27,22 @@ export default class Homepage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#F0F7F4',
+    },
+    comps: {
+        flex: 1,
     },
     butcontainer: {
-        height: '5%',
+        height: '10%',
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         backgroundColor: '#F0F7F4',
         borderBottomWidth: 5,
+        bottom: 0,
+    },
+    contentContainer: {
+      flex: 20,
     },
     item: {
         width: '33%',

@@ -1,20 +1,27 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { brygg_kaffe, cappuccino } from './components/dummy-data';
 import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { addCoffee } from './components/redux/actions';
-import CheckoutItem from './components/checkout/CheckoutItem';
 import EmptycheckoutPage from './components/checkout/emptyCheckout';
-import OrderButton from './components/checkout/OrderButton';
-import TotalAmount from './components/checkout/TotalAmount';
+import NonEmptyCheckoutPage from './components/checkout/NonEmptyCheckout';
+
+/**
+ * This is the view that is being shown when navigating to checkout.
+ * This view has the ability to show
+ * NonEmptyCheckoutPage
+ * or
+ * EmptyCheckoutPage
+ * and does so depending on the boolean isCartPopulated.
+ *
+ * The TouchableOpacities are remnants of when we wanted to have the ability to add items directly from the checkout-view
+ * and will be removed in stable versions.
+ */
 
 const CheckoutPage = props => {
+    /** checks if the cart is populated, 0 is 'falsy' and will be false when we decide to
+     * conditionally render emptycheckout or nonemptycheckout. */
     let isCartPopulated = Object.keys(props.cart).length;
-    let total = 0;
-    Object.values(props.cart).forEach((orderItem) => {
-        total = total + orderItem.coffee.price * orderItem.amount;
-    });
 
     return (
         <View
@@ -24,53 +31,15 @@ const CheckoutPage = props => {
         >
             <View
                 style={{
-                    flex: 1,
-                    flexDirection: 'row',
+                    flex: 5,
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    width: '100%',
                 }}
             >
-                <TouchableOpacity onPress={() => props.onAddItem(brygg_kaffe)}>
-                    <AntDesign name="pluscircle" size={32} color="#57454B" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => props.onAddItem(cappuccino)}>
-                    <AntDesign name="pluscircle" size={32} color="#57454B" />
-                </TouchableOpacity>
-            </View>
-
-            <View
-                style={{
-                    flex: 7,
-                    alignItems: 'center',
-                }}
-            >
-                {!isCartPopulated && <EmptycheckoutPage />}
-                {Object.values(props.cart).map((orderItem, i) => (
-                    <CheckoutItem key={i} orderItem={orderItem} />
-                ))}
-            </View>
-            {!isCartPopulated || <TotalAmount total={total} />}
-            <View
-                style={{
-                    flex: 1.5,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                {!isCartPopulated || (
-                    <OrderButton
-                        onPress={() => {
-                            console.log('Du beställde:');
-                            Object.values(props.cart).forEach((orderItem) => {
-                                console.log(
-                                    orderItem.amount,
-                                    ':',
-                                    orderItem.coffee.name,
-                                );
-                            });
-                            console.log('Kostnad:', total)
-                        }}
-                    />
+                {!isCartPopulated ? (
+                    <EmptycheckoutPage />
+                ) : (
+                    <NonEmptyCheckoutPage />
                 )}
             </View>
         </View>
@@ -78,18 +47,18 @@ const CheckoutPage = props => {
 };
 
 const mapStateToProps = state => {
-    return { cart: state.cart };
+  return { cart: state.cart };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onAddItem: coffee => {
-            dispatch(addCoffee(coffee));
-        },
-    };
+  return {
+    onAddItem: coffee => {
+      dispatch(addCoffee(coffee));
+    },
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(CheckoutPage);

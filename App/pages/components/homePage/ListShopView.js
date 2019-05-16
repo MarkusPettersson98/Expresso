@@ -1,16 +1,28 @@
 import React from 'react';
-import { ImageBackground, Text, View } from 'react-native';
+import {
+    ImageBackground,
+    Text,
+    View,
+    TouchableWithoutFeedback,
+} from 'react-native';
 
-const ShopView = ({ name, picture }) => {
+import { withNavigation } from 'react-navigation';
+
+const ShopView = ({ name, picture, navigation }) => {
+
     return (
         <View style={styles.item}>
-            <ImageBackground
-                source={picture}
-                resizeMode="cover"
-                style={styles.image}
-            >
-                <Text style={styles.text}>{name}</Text>
-            </ImageBackground>
+            <TouchableWithoutFeedback onPress={() => {
+                navigation.navigate('Cafe', { selectedShop: name, picture: picture })}
+            }>
+                <ImageBackground
+                    source={picture}
+                    resizeMode="cover"
+                    style={styles.image}
+                >
+                    <Text style={styles.text}>{name}</Text>
+                </ImageBackground>
+            </TouchableWithoutFeedback>
         </View>
     );
 };
@@ -37,4 +49,4 @@ const styles = {
     },
 };
 
-export default ShopView;
+export default withNavigation(ShopView);
