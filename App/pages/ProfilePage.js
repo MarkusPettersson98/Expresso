@@ -4,10 +4,18 @@ import Login from './components/profilePage/Login'
 import Profile from './components/profilePage/Profile'
 
  
+/*
+Handles if the user is logged in or not and displays user information or login screen.
+
+TODO: 
+- ersätta props gör loggedIn mot att läsa av ett state i Redux
+- Ta in login/register page
+*/
+
 function HandleLoggedIn(props){
     const loggedIn = props.loggedIn;
     if(loggedIn == true){
-       return(<Profile firstname = {'Emil'} lastname = {'Svensson'} dateOfBirth = {'1997-01-14'} city={'Göteborg'} paymentInformation = {'**** **** **** 1234'} />);
+       return(<Profile firstname = {'Emil'} lastname = {'Svensson'} dateOfBirth = {'1997-01-14'} city={'Göteborg'} country={'Sweden'} paymentMethod = {'Visa'} paymentInformation = {'**** **** **** 1234'} />);
     }
     if(loggedIn == false){
        return(<Login />);
