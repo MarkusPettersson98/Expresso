@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { getReceiptLink } from '../../../API/expressoAPI';
+import { getReceiptLink, getReceipt } from '../../../API/expressoAPI';
 import QRCode from 'react-native-qrcode';
 
 import ReceiptView from './ReceiptView';
@@ -12,25 +12,51 @@ import ReceiptView from './ReceiptView';
  * rätt attribut som ska visas som information om köpet för användaren.
  */
 
-const Purchases = props => {
-    return (
-        <View style={styles.container}>
-            <View style={styles.innerContainer}>
-                <View style={styles.qr}>
-                    <QRCode
-                        value={getReceiptLink(0)} // Link to the receipt TODO: replace 0 with receipt id
-                        size={260}
-                        bgColor="black"
-                        fgColor="white"
-                    />
+export default class Purchases extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { ReceiptView: [] };
+    }
+
+    async componentDidMount() {
+        const receipt = await getReceipt();
+
+        Promise.all(receipt).then(receipt => {
+            const receiptView = <ReceiptView receipt={receipt} />;
+
+            this.setState({
+                ReceiptView: receiptView,
+            });
+        });
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.innerContainer}>
+                    <View style={styles.qr}>
+                        <QRCode
+                            value={getReceiptLink(0)} // Link to the receipt TODO: replace 0 with receipt id
+                            size={260}
+                            bgColor="black"
+                            fgColor="white"
+                        />
+                    </View>
                 </View>
+                {this.state.ReceiptView}
             </View>
+<<<<<<< Updated upstream
             <View style={styles.tc}>
                 <Text style={styles.text}>Information about pur.</Text>
             </View>
         </View>
     );
 };
+=======
+        );
+    }
+}
+>>>>>>> Stashed changes
 
 const styles = StyleSheet.create({
     container: {
@@ -67,5 +93,3 @@ const styles = StyleSheet.create({
         color: 'white',
     },
 });
-
-export default Purchases;

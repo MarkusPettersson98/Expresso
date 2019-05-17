@@ -7,8 +7,8 @@ const herokuURL = 'http://localhost:8000/API/';
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
-export const getReceipt = () => {
-    const receipt = fetch(herokuURL + 'getReceiptUser/5')
+export const getReceipt = async () => {
+    const receipt = await fetch(herokuURL + 'getReceiptUser/5')
         .then(res => res.json())
         .then(response => {
             return response;
