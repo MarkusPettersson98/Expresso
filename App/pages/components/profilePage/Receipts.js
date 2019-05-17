@@ -19,6 +19,7 @@ const list = [
         shop: 'Linsen',
         total: '50'
     },
+
 ]
 
 

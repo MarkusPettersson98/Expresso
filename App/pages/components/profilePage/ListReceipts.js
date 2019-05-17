@@ -1,31 +1,56 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView  } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 const listReceipts = ({receiptList}) => {
     return(
-        <View style = {styles.container}>
+        <ScrollView contentContainerStyle = {styles.container}>
             {receiptList.map((item,i) => (
-                <Text key = {i} style = {styles.text}>
-                    {item.total}
-                </Text> 
+                <TouchableOpacity
+                    key = {i} 
+                    style = {styles.receiptItem}
+                    onPress={() => console.log(item)}
+                >
+                    <Text style = {styles.text}>
+                        {item.date}
+                    </Text>
+                    <Text style = {styles.text}>
+                        {item.shop}
+                    </Text> 
+                    <Text style = {styles.text}>
+                        Totalt: {item.total}kr
+                    </Text>
+                </TouchableOpacity> 
+
             ))}
 
             {console.log(receiptList)}
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+    },
+    receiptItem: {
+        flexDirection: 'row',
+        height: '10%',
+        width: '90%',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        borderWidth: 5,
+        borderRadius: 10,
+        backgroundColor: 'brown',
+        marginTop: 10,
+        marginBottom: 10,
     },
     text: {
         fontSize: 14,
-        color: 'black',
+        color: 'white',
     },
 }); 
 
-export default listReceipts
+export default withNavigation(listReceipts);
