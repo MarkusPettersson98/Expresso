@@ -37,12 +37,14 @@ describe('Testing if all the coffeesorts from a shop is printed out ', () => {
                     price: 12,
                     volume: 330,
                     id: 123,
+                    shopId: 1,
                 },
                 {
                     name: 'Cappuccino',
                     price: 28,
                     volume: 500,
                     id: 124,
+                    shopId: 1,
                 },
             ]),
         );
@@ -56,12 +58,14 @@ describe('Testing if all the coffeesorts from a shop is printed out ', () => {
                     price: 12,
                     volume: 330,
                     id: 123,
+                    shopId: 1,
                 },
                 {
                     name: 'Cappuccino',
                     price: 28,
                     volume: 500,
                     id: 124,
+                    shopId: 1,
                 },
             ]),
         );
@@ -75,12 +79,14 @@ describe('Testing if all the coffeesorts from a shop is printed out ', () => {
                     price: 12,
                     volume: 330,
                     id: 123,
+                    shopId: 4,
                 },
                 {
                     name: 'Caffee Latte',
                     price: 28,
                     volume: 500,
                     id: 125,
+                    shopId: 4,
                 },
             ]),
         );
@@ -92,10 +98,23 @@ describe('Testing if getShop returns the right shop', () => {
         return getShop('Bulten').then(data =>
             expect(data).toEqual({
                 name: 'Bulten',
+                id: 1,
                 coordinates: { latitude: 57.689008, longitude: 11.978538 },
                 drinkList: [
-                    { name: 'Brewed Coffee', price: 12, volume: 330, id: 123 },
-                    { name: 'Cappuccino', price: 28, volume: 500, id: 124 },
+                    {
+                        name: 'Brewed Coffee',
+                        price: 12,
+                        volume: 330,
+                        id: 123,
+                        shopId: 1,
+                    },
+                    {
+                        name: 'Cappuccino',
+                        price: 28,
+                        volume: 500,
+                        id: 124,
+                        shopId: 1,
+                    },
                 ],
             }),
         );
@@ -105,10 +124,23 @@ describe('Testing if getShop returns the right shop', () => {
         return getShop('buLtEn').then(data =>
             expect(data).toEqual({
                 name: 'Bulten',
+                id: 1,
                 coordinates: { latitude: 57.689008, longitude: 11.978538 },
                 drinkList: [
-                    { name: 'Brewed Coffee', price: 12, volume: 330, id: 123 },
-                    { name: 'Cappuccino', price: 28, volume: 500, id: 124 },
+                    {
+                        name: 'Brewed Coffee',
+                        price: 12,
+                        volume: 330,
+                        id: 123,
+                        shopId: 1,
+                    },
+                    {
+                        name: 'Cappuccino',
+                        price: 28,
+                        volume: 500,
+                        id: 124,
+                        shopId: 1,
+                    },
                 ],
             }),
         );
@@ -118,10 +150,23 @@ describe('Testing if getShop returns the right shop', () => {
         return getShop('Wijkanders').then(data =>
             expect(data).toEqual({
                 name: 'Wijkanders',
+                id: 4,
                 coordinates: { latitude: 57.692538, longitude: 11.97539 },
                 drinkList: [
-                    { name: 'Brewed Coffee', price: 12, volume: 330, id: 123 },
-                    { name: 'Caffee Latte', price: 28, volume: 500, id: 125 },
+                    {
+                        name: 'Brewed Coffee',
+                        price: 12,
+                        volume: 330,
+                        id: 123,
+                        shopId: 4,
+                    },
+                    {
+                        name: 'Caffee Latte',
+                        price: 28,
+                        volume: 500,
+                        id: 125,
+                        shopId: 4,
+                    },
                 ],
             }),
         );

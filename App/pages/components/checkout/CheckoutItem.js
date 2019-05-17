@@ -7,9 +7,9 @@ import { incrementCoffee, decrementCoffee } from '../redux/actions';
 /**
  * This class represents an item in the checkout, it has the ability to increment and decrement the it's amount and will remove
  * itself if it reaches below 0 in amount.
- * 
- * @param {orderItem} props is what is being sent from NonEmptyCheckout.js, 
- * 
+ *
+ * @param {orderItem} props is what is being sent from NonEmptyCheckout.js,
+ *
  *      currently looks like this (26/04/19):
  *                  {orderItems.map((orderItem, i) => (
                                 <CheckoutItem key={i} orderItem={orderItem} />
