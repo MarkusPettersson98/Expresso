@@ -30,6 +30,8 @@ orderItem: {
 export const cart = function(currentCart = INITIAL_CART_STATE, action) {
   console.log('reducers', currentCart);
 
+  const ownMugDiscount = 2;
+
   const coffee = action.coffee;
   const match = orderItem =>
     orderItem.coffee.id === coffee.id &&
@@ -54,7 +56,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
         coffee: {
           ...coffee,
           ownMug: ownMugOption,
-          price: ownMugOption ? (coffee.price -= 2) : coffee.price,
+          price: ownMugOption ? (coffee.price - ownMugDiscount) : coffee.price,
         },
         amount: 1,
       };
