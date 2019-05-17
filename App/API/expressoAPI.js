@@ -135,6 +135,7 @@ export const sendOrder = async cart => {
         },
         body: JSON.stringify(reciept),
     })
-        .then(res => console.log())
+        .then(res => res.json())
+        .then(res => console.log("Receipt id", res))
         .catch(err => console.log(err));
 };
