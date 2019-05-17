@@ -7,16 +7,16 @@ class componentName extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.rubrik}>
-                    Det här är ditt kvitto för din beställning!
-                </Text>
+                <Text style={styles.rubrik}>Tack för din beställning!</Text>
                 <View style={styles.infoBox}>
+                    <Text style={styles.underrubrik}>Varor</Text>
                     <Text style={styles.text}>
-                        {Data.receipt.coffees[0].coffee[0].name}:
+                        {Data.receipt.coffees[0].coffee[0].name}:{' '}
                         {Data.receipt.coffees[0].amount} {'\n'}
                     </Text>
+                    <Text style={styles.underrubrik}>Upphämtningsställe</Text>
                     <Text style={styles.text}>
-                        Affär: {Data.receipt.shop} {'\n'}
+                        {Data.receipt.shop} {'\n'}
                     </Text>
                     <Text style={styles.text}>
                         Totalpris: {Data.receipt.totalPrice} {'\n'}
@@ -33,7 +33,7 @@ export default componentName;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#362D30',
+        backgroundColor: '#57454B',
         width: '100%',
         height: '30%',
         bottom: 0,
@@ -47,14 +47,20 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
     infoBox: {
-        fontSize: 12,
-        width: '100%',
+        width: '95%',
         height: '100%',
-        top: 30,
+        top: 20,
         textAlign: 'left',
+        paddingBottom: 20,
+    },
+    underrubrik: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white',
+        textDecorationLine: 'underline',
     },
     text: {
-        top: 0, 
+        top: 0,
         color: 'white',
     },
 });
