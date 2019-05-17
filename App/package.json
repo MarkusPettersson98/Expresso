@@ -14,6 +14,7 @@
     "node-fetch": "^2.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-maps": "^0.23.0",
+    "react-native-qrcode": "^0.2.7",
     "react-native-modal": "^10.0.0",
     "react-native-radio-buttons-group": "^1.0.7",
     "react-navigation": "^3.8.1",
@@ -23,22 +24,12 @@
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
     "codecov": "^3.3.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.2.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "jest": "^24.7.1",
-    "prettier": "^1.17.0"
+    "jest": "^24.7.1"
   },
   "jest": {
     "preset": "react-native",
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
   },
-  "private": true,
-  "name": "App",
-  "version": "1.0.0",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "private": true
 }

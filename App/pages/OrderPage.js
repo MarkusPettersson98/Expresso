@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import Purchases from './components/purchases/Purchases';
 
 export default class orderpage extends Component {
     render() {
         return (
-            <View>
-                <Text>Order</Text>
-            </View>
+            <Purchases />
         );
     }
 }
