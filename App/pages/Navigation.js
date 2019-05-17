@@ -11,6 +11,9 @@ import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
 import PaymentPage from './PaymentPage';
+import Login from './Login';
+import SignUp from './SignUp';
+import ForgotPassword from './ForgotPassword';
 import Receipts from './components/profilePage/Receipts'
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
@@ -98,7 +101,7 @@ export const Tabs = createBottomTabNavigator(
                 },
             },
         },
-        profile: {
+        Profile: {
             screen: Profilepage,
             navigationOptions: {
                 tabBarLabel: 'Profil',
@@ -135,7 +138,7 @@ export const Tabs = createBottomTabNavigator(
     },
 );
 
-export const RootStack = createStackNavigator(
+const RootStack = createStackNavigator(
     {
         Main: {
             screen: Tabs,
@@ -171,6 +174,9 @@ export const RootStack = createStackNavigator(
                 ...headerStyling,
             }),
         },
+        Login: Login,
+        SignUp: SignUp,
+        Forgot: ForgotPassword,
     },
 
     {
