@@ -38,18 +38,18 @@ const styles = StyleSheet.create({
     receiptItem: {
         flexDirection: 'row',
         height: '10%',
-        width: '90%',
+        width: '95%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        borderWidth: 5,
+        borderWidth: 3,
         borderRadius: 10,
-        backgroundColor: 'brown',
+        backgroundColor: '#d2d8d5',
         marginTop: 10,
         marginBottom: 10,
     },
     text: {
-        fontSize: 14,
-        color: 'white',
+        fontSize: 18,
+        color: 'black',
     },
 }); 
 
