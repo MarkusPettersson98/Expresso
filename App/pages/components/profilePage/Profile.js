@@ -44,15 +44,15 @@ class Profile extends React.Component {
           <Text style={styles.personHeader}>
             User Profile
           </Text>
-          
+
           <Text style={styles.text}>
-            {this.props.name} 
+            {this.props.name}
           </Text>
 
-          <Text style={styles.text}> 
-            {this.props.email} 
+          <Text style={styles.text}>
+            {this.props.email}
           </Text>
- 
+
           <TouchableOpacity
             style={styles.to}
             onPress={() => this.props.navigation.navigate('Receipts')}

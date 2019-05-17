@@ -13,6 +13,7 @@ import {
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { withNavigation } from 'react-navigation';
 
 class signUpPage extends React.Component {
   state = {
@@ -37,6 +38,7 @@ class signUpPage extends React.Component {
           .then(() => {
             // Update successful.
             console.log(`display name set to ${this.state.name}`);
+            this.props.navigation.navigate('Main');
           })
           .catch(error => {
             // An error happened.
@@ -134,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default signUpPage;
+export default withNavigation(signUpPage);

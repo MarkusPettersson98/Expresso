@@ -4,6 +4,7 @@ import Login from './components/profilePage/Login'
 import Profile from './components/profilePage/Profile'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { NavigationEvents } from 'react-navigation';
 
 
 /*
@@ -28,6 +29,10 @@ export default class ProfilePage extends Component {
 
       return (
           <View style = {styles.container}>
+          <NavigationEvents
+            onDidFocus={payload => this.setState({ user: firebase.auth().currentUser })}
+          />
+
               {user ? <Profile name = {user.displayName} email = {user.email}/> : <Login />}
           </View>
       );
