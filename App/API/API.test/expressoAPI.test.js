@@ -45,6 +45,12 @@ describe('Testing if getShop returns the right shop', () => {
             expect(data.name).toEqual('Wijkanders'),
         );
     });
+
+    it('Should output nothing', () => {
+        return getShop('abc123').then(data =>
+            expect(data).toEqual([]),
+        );
+    });
 });
 
 describe('Testing if all the coffeesorts from a shop is printed out ', () => {
