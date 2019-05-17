@@ -1,10 +1,24 @@
 import allData from './dummy-data';
 import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
-const herokuURL = 'https://expressobackend.herokuapp.com/api/';
+const herokuURL = 'http://localhost:8000/API/';
+//'https://expressobackend.herokuapp.com/api/';
 
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
+
+export const getReceipt = () => {
+    const receipt = fetch(herokuURL + 'getReceiptUser/5')
+        .then(res => res.json())
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
+    return receipt;
+};
 
 /**
  * Function to get the current date, useful for when creating reciepts

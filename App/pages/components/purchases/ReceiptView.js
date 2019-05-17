@@ -3,8 +3,15 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import Data from './dummy-receipt';
 
+import { getReceipt, getShop } from '../../../API/expressoAPI';
+
 class componentName extends Component {
     render() {
+        receipt = getReceipt();
+        console.log(...receipt);
+
+        shop = getShop('Bulten');
+        console.log(shop);
         return (
             <View style={styles.container}>
                 <Text style={styles.rubrik}>Tack för din beställning!</Text>
