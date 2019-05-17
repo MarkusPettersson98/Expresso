@@ -10,39 +10,18 @@ import {
 import { connect } from 'react-redux';
 import { sendOrder as sendOrderAPI } from '../API/expressoAPI';
 import PaymentItem from './components/checkout/PaymentItem';
+import PaymentMethod from './components/payment/paymentMethod';
 import OrderButton from './components/checkout/OrderButton';
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { clearCart } from './components/redux/actions';
-import Modal from 'react-native-modal';
 
 class PaymentPage extends Component {
-  state = {
-    paymentCard: '',
-    paymentCardTemp: '',
-    showPaymentCardModal: false,
-    cardErrorText: '',
-  };
+  state = { paymentCard: null }
 
-  onAddCard = () => {
-    const regExp = /^[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4}$/; // "XXXX XXXX XXXX XXXX" or "XXXXXXXXXXXXXXXX"
-    const paymentCardTemp = this.state.paymentCardTemp;
-    if (regExp.test(paymentCardTemp)) {
-      // "Valid" card
-      this.setState({
-        paymentCard: this.state.paymentCardTemp,
-        paymentCardTemp: '',
-        showPaymentCardModal: false,
-        cardErrorText: '',
-      });
-    } else {
-      this.setState({ cardErrorText: 'Not a valid card number!' });
-    }
-  };
-
-  onCardTextChange = text => {
-    this.setState({ paymentCardTemp: text, cardErrorText: '' });
-  };
+  setPaymentCard = paymentCard => {
+    this.setState({ paymentCard });
+  }
 
   render() {
     const cart = this.props.cart;
@@ -95,34 +74,7 @@ class PaymentPage extends Component {
           {/* Betalningsmetod */}
           <View style={styles.viewBlock}>
             <Text style={styles.viewBlockTitle}>Betalningsmetod</Text>
-            <View
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                paddingHorizontal: 24,
-                marginTop: 10,
-              }}
-            >
-              <View style={{ marginRight: 20 }}>
-                <AntDesign name="creditcard" size={16} color="#5AA3B7" />
-              </View>
-
-              <Text style={{ color: '#57454B', fontSize: 14 }}>
-                {this.state.paymentCard
-                  ? `**** **** **** ${this.state.paymentCard.substring(12, 16)}`
-                  : 'Inget kort tillagt!'}
-              </Text>
-
-              <TouchableOpacity
-                style={{ marginLeft: 'auto' }}
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                onPress={() => this.setState({ showPaymentCardModal: true })}
-              >
-                <Text style={{ color: '#5AA3B7', fontSize: 12 }}>
-                  {this.state.paymentCard ? 'Ändra' : 'Lägg till'}
-                </Text>
-              </TouchableOpacity>
-            </View>
+            <PaymentMethod setPaymentCard={this.setPaymentCard} />
           </View>
         </ScrollView>
 
@@ -147,62 +99,12 @@ class PaymentPage extends Component {
             disabled={this.state.paymentCard ? false : true}
           />
         </View>
-
-        <Modal
-          isVisible={this.state.showPaymentCardModal}
-          onBackdropPress={() => this.setState({ showPaymentCardModal: false })}
-        >
-          <View style={styles.modalContainer}>
-            <Text style={styles.viewBlockTitle}>Lägg till kort</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginHorizontal: 24,
-                marginVertical: 5,
-              }}
-            >
-              <TextInput
-                style={styles.cardInput}
-                textContentType="creditCardNumber"
-                keyboardType="numeric"
-                placeholder="XXXX XXXX XXXX XXXX"
-                onChangeText={text => this.onCardTextChange(text)}
-                value={this.state.paymentCardTemp}
-                maxLength={16}
-              />
-              <TouchableOpacity
-                style={styles.addCardBtn}
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                onPress={this.onAddCard}
-              >
-                <Text style={{ color: '#fff', fontSize: 12 }}>Lägg till</Text>
-              </TouchableOpacity>
-            </View>
-            <Text
-              style={{
-                color: 'red',
-                fontSize: 12,
-                marginHorizontal: 24,
-                marginTop: 6,
-              }}
-            >
-              {this.state.cardErrorText}
-            </Text>
-          </View>
-        </Modal>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    width: '100%',
-    height: 150,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-  },
   viewBlock: {
     borderBottomColor: '#D7D7D7',
     borderBottomWidth: 1,
@@ -238,20 +140,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
-  },
-  cardInput: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 0,
-    borderBottomWidth: 2,
-    color: '#57454B',
-    marginRight: 24,
-  },
-  addCardBtn: {
-    backgroundColor: '#5AA3B7',
-    paddingHorizontal: 15,
-    borderRadius: 5,
-    justifyContent: 'center',
   },
 });
 
