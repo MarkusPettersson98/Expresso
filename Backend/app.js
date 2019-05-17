@@ -32,6 +32,15 @@ app.get("/api/getShopPicture/:shop", api.getShopPicture);
 // Get all coffee products from one shop
 app.get("/api/getCoffee/:shop", api.getCoffee);
 
+// Get a receipt by id
+app.get("/api/getReceipt/:id", api.getReceipt);
+
+// Get all receipts from a user
+app.get("/api/getReceiptUser/:user", api.getReceiptUser);
+
+// Endpoint for placing an order
+app.post("/api/postOrder", api.postOrder);
+
 app.listen(port, () => {
     console.log(`Listening on port ${port}..`);
 });

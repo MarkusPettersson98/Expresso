@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { getReceiptLink } from '../../../API/expressoAPI';
 import QRCode from 'react-native-qrcode';
 
 import ReceiptView from './ReceiptView';
@@ -17,7 +18,7 @@ const Purchases = props => {
             <View style={styles.innerContainer}>
                 <View style={styles.qr}>
                     <QRCode
-                        value={'This is the QR-value'}
+                        value={getReceiptLink(0)} // Link to the receipt TODO: replace 0 with receipt id
                         size={260}
                         bgColor="black"
                         fgColor="white"
