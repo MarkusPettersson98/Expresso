@@ -6,9 +6,13 @@ import {
   Text,
   TextInput,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 class PaymentMethod extends React.Component {
   state = {
@@ -16,7 +20,29 @@ class PaymentMethod extends React.Component {
     paymentCardTemp: '',
     showPaymentCardModal: false,
     cardErrorText: '',
+    firebaseLoading: true,
   };
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        var userDataRef = firebase.database().ref('users/' + user.uid);
+        userDataRef.on('value', snapshot => {
+          const paymentCard =
+            (snapshot.val() && snapshot.val().paymentCard) || '';
+          this.setState({
+            paymentCard,
+            firebaseLoading: false,
+          });
+          if (this.props.setPaymentCard) {
+            this.props.setPaymentCard(paymentCard);
+          }
+        });
+      } else {
+        this.setState({ firebaseLoading: false });
+      }
+    });
+  }
 
   onAddCard = () => {
     const regExp = /^[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4}$/; // "XXXX XXXX XXXX XXXX" or "XXXXXXXXXXXXXXXX"
@@ -30,6 +56,16 @@ class PaymentMethod extends React.Component {
         cardErrorText: '',
       });
       this.props.setPaymentCard(paymentCardTemp);
+
+      const user = firebase.auth().currentUser;
+      if (user) {
+        firebase
+          .database()
+          .ref('users/' + user.uid)
+          .set({
+            paymentCard: paymentCardTemp,
+          });
+      }
     } else {
       this.setState({ cardErrorText: 'Not a valid card number!' });
     }
@@ -46,7 +82,6 @@ class PaymentMethod extends React.Component {
           style={{
             width: '100%',
             flexDirection: 'row',
-            paddingHorizontal: 24,
             marginTop: 10,
           }}
         >
@@ -54,11 +89,15 @@ class PaymentMethod extends React.Component {
             <AntDesign name="creditcard" size={16} color="#5AA3B7" />
           </View>
 
-          <Text style={{ color: '#57454B', fontSize: 14 }}>
-            {this.state.paymentCard
-              ? `**** **** **** ${this.state.paymentCard.substring(12, 16)}`
-              : 'Inget kort tillagt!'}
-          </Text>
+          {this.state.firebaseLoading ? (
+            <ActivityIndicator color="#5AA3B7" />
+          ) : (
+            <Text style={{ color: '#57454B', fontSize: 14 }}>
+              {this.state.paymentCard
+                ? `**** **** **** ${this.state.paymentCard.substring(12, 16)}`
+                : 'Inget kort tillagt!'}
+            </Text>
+          )}
 
           <TouchableOpacity
             style={{ marginLeft: 'auto' }}
@@ -115,7 +154,7 @@ class PaymentMethod extends React.Component {
           </View>
         </Modal>
       </View>
-    )
+    );
   }
 }
 

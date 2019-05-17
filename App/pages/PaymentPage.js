@@ -72,8 +72,8 @@ class PaymentPage extends Component {
           </View>
 
           {/* Betalningsmetod */}
-          <View style={styles.viewBlock}>
-            <Text style={styles.viewBlockTitle}>Betalningsmetod</Text>
+          <View style={{...styles.viewBlock, paddingHorizontal: 24}}>
+            <Text style={{...styles.viewBlockTitle, marginHorizontal: 0}}>Betalningsmetod</Text>
             <PaymentMethod setPaymentCard={this.setPaymentCard} />
           </View>
         </ScrollView>

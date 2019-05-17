@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import LoadingOverlay from '../loading/loadingOverlay';
+import PaymentMethod from '../payment/paymentMethod';
 import { withNavigation } from 'react-navigation';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -16,7 +17,6 @@ TODO:
 Har lagt till navigering till en kvittosida för att visa alla tidigare köp men den kan lika väl användas för att navigera till att ändra
 uppgifter.
 */
-
 class Profile extends React.Component {
   state = { loading: false };
 
@@ -41,25 +41,17 @@ class Profile extends React.Component {
         {this.state.loading && <LoadingOverlay />}
 
         <View style={styles.personView}>
-          <Text style={styles.personHeader}>
-            User Profile
-          </Text>
+          <Text style={styles.personHeader}>User Profile</Text>
 
-          <Text style={styles.text}>
-            {this.props.name}
-          </Text>
+          <Text style={styles.text}>{this.props.name}</Text>
 
-          <Text style={styles.text}>
-            {this.props.email}
-          </Text>
+          <Text style={styles.text}>{this.props.email}</Text>
 
           <TouchableOpacity
             style={styles.to}
             onPress={() => this.props.navigation.navigate('Receipts')}
           >
-            <Text style={styles.reText}>
-              Receipts >
-            </Text>
+            <Text style={styles.reText}>Receipts ></Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.logOut} onPress={this.handleLogout}>
@@ -67,20 +59,16 @@ class Profile extends React.Component {
           </TouchableOpacity>
         </View>
 
-        <View style = {styles.paymentTopView}>
-            <View style={styles.paymentInfoView}>
-            <Text style={styles.paymentHeader}>
-                Payment Method
-            </Text>
-            {/*
-                Add component to add or view payment method
-            */}
-            </View>
+        <View style={styles.paymentTopView}>
+          <View style={styles.paymentInfoView}>
+            <Text style={styles.paymentHeader}>Payment Method</Text>
+            <PaymentMethod />
+          </View>
         </View>
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -96,10 +84,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   paymentTopView: {
-      height: '37%',
-      width: '100%',
-      justifyContent: 'center',
-      alignItems: 'center'
+    height: '37%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   paymentInfoView: {
     height: '90%',
@@ -109,7 +97,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderColor: 'white',
     borderWidth: 5,
-    bottom: 5
+    bottom: 5,
   },
   paymentHeader: {
     fontSize: 20,

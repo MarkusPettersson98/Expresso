@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Login from './components/profilePage/Login'
-import Profile from './components/profilePage/Profile'
+import Login from './components/profilePage/Login';
+import Profile from './components/profilePage/Profile';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 import { NavigationEvents } from 'react-navigation';
-
 
 /*
 Handles if the user is logged in or not and displays user information or login screen.
@@ -16,33 +16,39 @@ TODO:
 */
 
 export default class ProfilePage extends Component {
-  state = { user: null }
+  state = { user: null };
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user: user })
+      this.setState({ user: user });
     });
   }
 
-    render() {
-      const user = this.state.user;
+  render() {
+    const { user } = this.state;
 
-      return (
-          <View style = {styles.container}>
-          <NavigationEvents
-            onDidFocus={payload => this.setState({ user: firebase.auth().currentUser })}
-          />
+    return (
+      <View style={styles.container}>
+        <NavigationEvents
+          onDidFocus={payload =>
+            this.setState({ user: firebase.auth().currentUser })
+          }
+        />
 
-              {user ? <Profile name = {user.displayName} email = {user.email}/> : <Login />}
-          </View>
-      );
-    }
+        {user ? (
+          <Profile name={user.displayName} email={user.email} />
+        ) : (
+          <Login />
+        )}
+      </View>
+    );
+  }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F0F7F4',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#F0F7F4',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
