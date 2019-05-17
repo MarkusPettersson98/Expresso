@@ -18,33 +18,46 @@ import NonEmptyCheckoutPage from './components/checkout/NonEmptyCheckout';
  * and will be removed in stable versions.
  */
 
-const CheckoutPage = props => {
-    /** checks if the cart is populated, 0 is 'falsy' and will be false when we decide to
-     * conditionally render emptycheckout or nonemptycheckout. */
-    let isCartPopulated = Object.keys(props.cart).length;
+class CheckoutPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { isCartPopulated: props.cart.amount };
+    }
 
-    return (
-        <View
-            style={{
-                flex: 1,
-            }}
-        >
+    // Intended effect:  If props is updated this function is called, we check if cart is empty, if empty, update the component (re-render)
+    shouldComponentUpdate(nextProps) {
+        // if and ONLY if newCart is empty AND the current cart is NOT empty: we update state and rerender.
+        if (this.state.isCartPopulated !== 0 && nextProps.cart.amount === 0) {
+            this.setState({ isCartPopulated: nextProps.cart.amount });
+            return true;
+        }
+        return false;
+    }
+
+    render() {
+        return (
             <View
                 style={{
-                    flex: 5,
-                    alignItems: 'center',
-                    width: '100%',
+                    flex: 1,
                 }}
             >
-                {!isCartPopulated ? (
-                    <EmptycheckoutPage />
-                ) : (
-                    <NonEmptyCheckoutPage />
-                )}
+                <View
+                    style={{
+                        flex: 5,
+                        alignItems: 'center',
+                        width: '100%',
+                    }}
+                >
+                    {!this.state.isCartPopulated ? (
+                        <EmptycheckoutPage />
+                    ) : (
+                        <NonEmptyCheckoutPage />
+                    )}
+                </View>
             </View>
-        </View>
-    );
-};
+        );
+    }
+}
 
 const mapStateToProps = state => {
   return { cart: state.cart };

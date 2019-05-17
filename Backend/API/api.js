@@ -155,9 +155,15 @@ const postOrder = async (req, res) => {
         body: JSON.stringify(order)
     })
         .then(res => res.json())
-        .then(res => {
-            console.log("Receipt id: ", res);
-            const receiptId = res.name;
+        .then(response => {
+            console.log("Receipt id: ", response);
+            const receiptId = response.name;
+            res.set("Content-Type", "application/json");
+            res.end(
+                JSON.stringify({
+                    id: receiptId
+                })
+            );
         })
         .catch(err => console.log(err));
 };

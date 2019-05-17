@@ -25,7 +25,9 @@ const Purchases = props => {
                     />
                 </View>
             </View>
-            <ReceiptView/> 
+            <View style={styles.tc}>
+                <Text style={styles.text}>Information about pur.</Text>
+            </View>
         </View>
     );
 };
