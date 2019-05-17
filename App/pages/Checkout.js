@@ -27,7 +27,7 @@ class CheckoutPage extends React.Component {
     // Intended effect:  If props is updated this function is called, we check if cart is empty, if empty, update the component (re-render)
     shouldComponentUpdate(nextProps) {
         // if and ONLY if newCart is empty AND the current cart is NOT empty: we update state and rerender.
-        if (nextProps.cart.amount === 0 && this.state.isCartPopulated !== 0) {
+        if (this.state.isCartPopulated !== 0 && nextProps.cart.amount === 0) {
             this.setState({ isCartPopulated: nextProps.cart.amount });
             return true;
         }
