@@ -126,8 +126,7 @@ export const sendOrder = async cart => {
         user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
     };
 
-    //fetch(herokuURL, {
-    fetch('http://localhost:8000/api/postOrder', {
+    fetch(herokuURL, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -136,6 +135,9 @@ export const sendOrder = async cart => {
         body: JSON.stringify(reciept),
     })
         .then(res => res.json())
-        .then(res => console.log("Receipt id", res))
+        .then(res => {
+            console.log('Receipt id', res);
+            console.log("Receipt link: ", getReceiptLink(res.id))
+        })
         .catch(err => console.log(err));
 };
