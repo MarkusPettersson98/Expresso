@@ -1,5 +1,5 @@
 export const receipt = {
-    totalAmount: 2,
+    
     coffees: [
         {
             amount: 2,
@@ -15,8 +15,10 @@ export const receipt = {
         {},
     ],
     date: 20190510,
-    totalPrice: 28,
     shop: 'Bulten',
+    totalAmount: 2,
+    totalPrice: 28,
+    
 };
 
 export default (allData = {
