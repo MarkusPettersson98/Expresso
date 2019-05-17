@@ -38,6 +38,9 @@ app.get("/api/getReceipt/:id", api.getReceipt);
 // Get all receipts from a user
 app.get("/api/getReceiptUser/:user", api.getReceiptUser);
 
+// Endpoint for placing an order
+app.post("/api/postOrder", api.postOrder);
+
 app.listen(port, () => {
     console.log(`Listening on port ${port}..`);
 });

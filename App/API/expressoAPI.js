@@ -13,15 +13,14 @@ const getCurrentDate = () => {
     return Date.now();
 };
 
-
 /** Fixes a shop in order to work well with API-request
- * 
+ *
  * @param shop A name of a shop, like Veras Café or Bulten.
  */
 const fixShopString = shop => {
     const fixedString = encodeURIComponent(shop);
     return fixedString;
-}
+};
 /**
  * Returns all the information of a all the shops in the database using heroku
  * This includes the names, the coordinates and their drinklist
@@ -82,7 +81,7 @@ const getAllShops = async () => {
 };
 
 /** Gets all shops coordninates and their name.
- * 
+ *
  */
 export const getAllShopsCoords = async () => {
     const getNameCoords = shop => {
@@ -127,7 +126,8 @@ export const sendOrder = async cart => {
         user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
     };
 
-    fetch(firebaseURL, {
+    //fetch(herokuURL, {
+    fetch('http://localhost:8000/api/postOrder', {
         method: 'POST',
         headers: {
             Accept: 'application/json',

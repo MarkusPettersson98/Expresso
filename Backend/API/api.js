@@ -22,8 +22,10 @@ const getShop = (req, res) => {
 const getShopPicture = (req, res) => {
     const shop = req.params.shop;
     const decodedShop = decodeURIComponent(shop);
-    const picturePath = path.resolve('Database/resources');
-    return res.sendFile(decodedShop.toLowerCase() + '.jpg', { root: picturePath });
+    const picturePath = path.resolve("Database/resources");
+    return res.sendFile(decodedShop.toLowerCase() + ".jpg", {
+        root: picturePath
+    });
 };
 
 const getShopById = (req, res) => {
@@ -97,7 +99,7 @@ const getReceipt = async (req, res) => {
     try {
         const receipts = await getAllReceipts();
 
-        const receipt = receipts.filter(item => item.id === id); // TODO: filter on something
+        const receipt = receipts.filter(item => item.id === id);
 
         return res.status(200).send(receipt);
     } catch (e) {
@@ -140,6 +142,22 @@ const getAllReceipts = async () => {
     return receipts;
 };
 
+const postOrder = async (req, res) => {
+    const order = req.body;
+    console.log("Post order", order);
+    
+    fetch(firebaseURL, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(order)
+    })
+        .then(res => console.log("Firebase: ", res))
+        .catch(err => console.log(err));
+};
+
 module.exports = {
     api: {
         getAllShops: getAllShops,
@@ -148,7 +166,8 @@ module.exports = {
         getCoffee: getCoffee,
         getReceipt: getReceipt,
         getReceiptUser: getReceiptUser,
-        getShopById: getShopById
+        getShopById: getShopById,
+        postOrder: postOrder
     },
     testable: {
         lookUpShop: lookUpShop,
