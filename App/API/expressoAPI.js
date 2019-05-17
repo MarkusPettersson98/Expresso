@@ -4,12 +4,11 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 const herokuURL = 'http://localhost:8000/API/';
 //'https://expressobackend.herokuapp.com/api/';
 
-
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
 export const getReceipt = async () => {
-    const receipt = await fetch(herokuURL + 'getReceiptUser/5')
+    const receipt = await fetch(herokuURL + 'getReceiptUser/0')
         .then(res => res.json())
         .then(response => {
             return response;
@@ -141,7 +140,7 @@ export const sendOrder = async cart => {
         user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
     };
 
-    const sendOrderUrl = herokuURL + "postOrder/"
+    const sendOrderUrl = herokuURL + 'postOrder/';
 
     fetch(sendOrderUrl, {
         method: 'POST',

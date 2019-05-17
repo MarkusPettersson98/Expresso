@@ -8,7 +8,6 @@ import {
 
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
-import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
 import PaymentPage from './PaymentPage';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
@@ -16,6 +15,7 @@ import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CartField from './components/CartField';
+import Purchases from './components/purchases/Purchases';
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -93,7 +93,7 @@ export const Tabs = createBottomTabNavigator(
         Order: {
             screen: () => (
                 <View style={{ flex: 1 }}>
-                    <OrderPage />
+                    <Purchases />
                     <CartField />
                 </View>
             ),

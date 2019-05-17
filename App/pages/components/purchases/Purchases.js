@@ -54,12 +54,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
+        backgroundColor: '#57454B',
     },
     innerContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: '70%',
-        width: '100%',
+        width: 320,
+        height: 320,
+        backgroundColor: 'white',
+        borderRadius: 40,
+        top: 20,
     },
     qr: {
         width: 300,
@@ -79,7 +83,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-
     text: {
         color: 'white',
     },
