@@ -41,29 +41,39 @@ class Profile extends React.Component {
         {this.state.loading && <LoadingOverlay />}
 
         <View style={styles.personView}>
-          <Text style={styles.personHeader}>User Profile</Text>
-          <Text style={styles.text}>
-            {this.props.firstname} {this.props.lastname}
+          <Text style={styles.personHeader}>
+            User Profile
           </Text>
-          <Text style={styles.text}>{this.props.dateOfBirth}</Text>
+          
           <Text style={styles.text}>
-            {this.props.city}, {this.props.country}
+            {this.props.name} 
           </Text>
+
+          <Text style={styles.text}> 
+            {this.props.email} 
+          </Text>
+ 
           <TouchableOpacity
             style={styles.to}
             onPress={() => this.props.navigation.navigate('Receipts')}
           >
-            <Text style={styles.reText}>Receipts ></Text>
+            <Text style={styles.reText}>
+              Receipts >
+            </Text>
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.logOut} onPress={this.handleLogout}>
             <Text style={styles.logOutText}>LOGGA UT</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.paymentInfoView}>
-          <Text style={styles.paymentHeader}>Payment Method</Text>
-          <Text style={styles.text}>{this.props.paymentMethod}</Text>
-          <Text style={styles.text}>{this.props.paymentInformation}</Text>
+          <Text style={styles.paymentHeader}>
+            Payment Method
+          </Text>
+          {/*
+            Add component to add or view payment method
+          */}
         </View>
       </View>
     );

@@ -14,16 +14,6 @@ TODO:
 - Ta in login/register page
 */
 
-function HandleLoggedIn(props){
-    const loggedIn = props.loggedIn;
-    if(loggedIn == true){
-       return(<Profile firstname = {'Emil'} lastname = {'Svensson'} dateOfBirth = {'1997-01-14'} city={'Göteborg'} country={'Sweden'} paymentMethod = {'Visa'} paymentInformation = {'**** **** **** 1234'} />);
-    }
-    if(loggedIn == false){
-       return(<Login />);
-    }
-}
-
 export default class ProfilePage extends Component {
   state = { user: null }
 
@@ -38,7 +28,7 @@ export default class ProfilePage extends Component {
 
       return (
           <View style = {styles.container}>
-              {user ? <Profile /> : <Login />}
+              {user ? <Profile name = {user.displayName} email = {user.email}/> : <Login />}
           </View>
       );
     }
