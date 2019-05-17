@@ -10,11 +10,12 @@ import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
-import PaymentPage from './PaymentPage'
+import PaymentPage from './PaymentPage';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
+import CartField from './components/CartField';
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -40,7 +41,12 @@ const tabIconStyling = {
 export const Tabs = createBottomTabNavigator(
     {
         Lista: {
-            screen: () => <Homepage presentationMode={'List'} />,
+            screen: () => (
+                <View style={{ flex: 1 }}>
+                    <Homepage presentationMode={'List'} />
+                    <CartField />
+                </View>
+            ),
             navigationOptions: {
                 tabBarLabel: 'Lista',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -59,7 +65,13 @@ export const Tabs = createBottomTabNavigator(
             },
         },
         Karta: {
-            screen: () => <Homepage presentationMode={'Map'} />,
+            screen: () => (
+                <View style={{ flex: 1 }}>
+                    <Homepage presentationMode={'Map'} />
+                    <CartField />
+                </View>
+            ),
+
             navigationOptions: {
                 tabBarLabel: 'Karta',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -79,7 +91,13 @@ export const Tabs = createBottomTabNavigator(
         },
 
         Order: {
-            screen: OrderPage,
+            screen: () => (
+                <View style={{ flex: 1 }}>
+                    <OrderPage />
+                    <CartField />
+                </View>
+            ),
+
             navigationOptions: {
                 tabBarLabel: 'Köp',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -98,7 +116,13 @@ export const Tabs = createBottomTabNavigator(
             },
         },
         profile: {
-            screen: Profilepage,
+            screen: () => (
+                <View style={{ flex: 1 }}>
+                    <Profilepage />
+                    <CartField />
+                </View>
+            ),
+
             navigationOptions: {
                 tabBarLabel: 'Profil',
                 tabBarIcon: ({ focused, tintColor }) => {
@@ -151,11 +175,11 @@ export const RootStack = createStackNavigator(
             }),
         },
         Payment: {
-          screen: PaymentPage,
-          navigationOptions: ({ navigation }) => ({
-              headerTitle: 'Betalning',
-              ...headerStyling,
-          }),
+            screen: PaymentPage,
+            navigationOptions: ({ navigation }) => ({
+                headerTitle: 'Betalning',
+                ...headerStyling,
+            }),
         },
         Cafe: {
             screen: Cafe,
