@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import QRCode from 'react-native-qrcode';
 
+import ReceiptView from './ReceiptView';
+
 /**
  * Här ser jag att vi 'kör igång' vår page och hämtar in objektet från backend för att sedan styra komponenterna.
  * I props tar vi in userID genom mapStateToProps och skickar sedan vidare uniqueID för att få en QR kod och
@@ -22,9 +24,7 @@ const Purchases = props => {
                     />
                 </View>
             </View>
-            <View style={styles.tc}>
-                <Text style={styles.text}>Information about pur.</Text>
-            </View>
+            <ReceiptView/> 
         </View>
     );
 };
