@@ -1,8 +1,7 @@
 import allData from './dummy-data';
 import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
-const herokuURL = 'http://localhost:8000/API/';
-//'https://expressobackend.herokuapp.com/api/';
+const herokuURL = 'https://expressobackend.herokuapp.com/api/';
 
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
