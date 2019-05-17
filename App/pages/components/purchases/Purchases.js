@@ -45,18 +45,9 @@ export default class Purchases extends React.Component {
                 </View>
                 {this.state.ReceiptView}
             </View>
-<<<<<<< Updated upstream
-            <View style={styles.tc}>
-                <Text style={styles.text}>Information about pur.</Text>
-            </View>
-        </View>
-    );
-};
-=======
         );
     }
 }
->>>>>>> Stashed changes
 
 const styles = StyleSheet.create({
     container: {
