@@ -11,7 +11,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
  */
 
 
-export default (pickUpPoint = () => {
+export default (pickUpPoint = ({shop}) => {
     return (
         <View
             style={{
@@ -56,7 +56,7 @@ export default (pickUpPoint = () => {
                             flexDirection: 'column',
                         }}
                     >
-                        <Text style={styles.cafeText}>Bulten</Text>
+                        <Text style={styles.cafeText}>{shop==="" ? 'Good Default Café' : shop }</Text>
                         <Text style={styles.locationText}>
                             Hörsalsvägen 7, Johanneberg
                         </Text>

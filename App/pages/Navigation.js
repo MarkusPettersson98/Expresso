@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import {
     createBottomTabNavigator,
     createStackNavigator,
@@ -9,9 +10,8 @@ import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
 import Checkoutpage from './Checkout';
-import CheckoutHeader from './components/header/CheckoutIcon';
+import PaymentPage from './PaymentPage'
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
-import ExitCheckout from './components/header/ExitCheckout';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
@@ -20,7 +20,7 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 const headerStyling = {
     headerStyle: {
         backgroundColor: '#57454B',
-        height:60,
+        height: 60,
     },
     headerTintColor: '#fff',
 };
@@ -140,28 +140,26 @@ export const RootStack = createStackNavigator(
             screen: Tabs,
             navigationOptions: ({ navigation }) => ({
                 headerTitle: <ExpressoLogoHeader />,
-                headerRight: (
-                    <CheckoutHeader
-                        navigationProps={navigation}
-                        styling={headerIconStyling}
-                    />
-                ),
                 ...headerStyling,
             }),
         },
         Checkout: {
             screen: Checkoutpage,
             navigationOptions: ({ navigation }) => ({
-                headerTitle: <ExpressoLogoHeader />,
                 headerRight: <ClearCheckoutHeader />,
-                headerLeft: <ExitCheckout navigationProps={navigation} />,
                 ...headerStyling,
             }),
+        },
+        Payment: {
+          screen: PaymentPage,
+          navigationOptions: ({ navigation }) => ({
+              headerTitle: 'Betalning',
+              ...headerStyling,
+          }),
         },
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
-                headerTitle: <ExpressoLogoHeader />,
                 ...headerStyling,
             }),
         },

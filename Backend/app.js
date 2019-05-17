@@ -24,6 +24,9 @@ app.get("/api/getAllShops", api.getAllShops);
 app.get("/api/getShop/:shop", api.getShop);
 
 // Get information about one shop
+app.get("/api/getShopById/:shopId", api.getShopById);
+
+// Get information about one shop
 app.get("/api/getShopPicture/:shop", api.getShopPicture);
 
 // Get all coffee products from one shop

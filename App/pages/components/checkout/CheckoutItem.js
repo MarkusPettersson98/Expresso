@@ -7,9 +7,9 @@ import { incrementCoffee, decrementCoffee } from '../redux/actions';
 /**
  * This class represents an item in the checkout, it has the ability to increment and decrement the it's amount and will remove
  * itself if it reaches below 0 in amount.
- * 
- * @param {orderItem} props is what is being sent from NonEmptyCheckout.js, 
- * 
+ *
+ * @param {orderItem} props is what is being sent from NonEmptyCheckout.js,
+ *
  *      currently looks like this (26/04/19):
  *                  {orderItems.map((orderItem, i) => (
                                 <CheckoutItem key={i} orderItem={orderItem} />
@@ -18,7 +18,6 @@ import { incrementCoffee, decrementCoffee } from '../redux/actions';
  *  an orderItem is an object with amount and coffee. look in reducer.js for a more detailed example.
  * 
  */
-
 
 const CheckoutItem = props => {
     const orderItem = props.orderItem;
@@ -68,7 +67,9 @@ const CheckoutItem = props => {
                 }}
             >
                 <Text style={styles.titleText}>{orderItem.coffee.name}</Text>
-                <Text style={styles.descText}>Egen mugg</Text>
+                <Text style={styles.descText}>
+                    {orderItem.coffee.ownMug ? 'Egen mugg' : 'Lånad mugg'}
+                </Text>
                 <View
                     style={{
                         flexDirection: 'row',

@@ -13,20 +13,31 @@ const getCurrentDate = () => {
     return Date.now();
 };
 
+
+/** Fixes a shop in order to work well with API-request
+ * 
+ * @param shop A name of a shop, like Veras Café or Bulten.
+ */
+const fixShopString = shop => {
+    const fixedString = encodeURIComponent(shop);
+    return fixedString;
+}
 /**
  * Returns all the information of a all the shops in the database using heroku
  * This includes the names, the coordinates and their drinklist
  */
 export const getShop = async wantedShop => {
-    let fixedString =
-        wantedShop.charAt(0).toUpperCase() + wantedShop.slice(1).toLowerCase();
+    let fixedString = fixShopString(wantedShop);
 
     const allInformation = await fetch(herokuURL + 'getShop/' + fixedString)
         .then(res => res.json())
         .then(response => {
             return response;
         })
-        .catch(error => {console.log('ERROR', error); return [];});
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
     return allInformation;
 };
 
@@ -68,6 +79,17 @@ const getAllShops = async () => {
             return [];
         });
     return myData;
+};
+
+/** Gets all shops coordninates and their name.
+ * 
+ */
+export const getAllShopsCoords = async () => {
+    const getNameCoords = shop => {
+        return { shop: shop.name, coordinates: shop.coordinates };
+    };
+    shops = await getAllShops();
+    return shops.map(getNameCoords);
 };
 
 /**
