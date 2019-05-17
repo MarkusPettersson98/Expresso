@@ -145,7 +145,7 @@ const getAllReceipts = async () => {
 const postOrder = async (req, res) => {
     const order = req.body;
     console.log("Post order", order);
-    
+
     fetch(firebaseURL, {
         method: "POST",
         headers: {
@@ -154,7 +154,11 @@ const postOrder = async (req, res) => {
         },
         body: JSON.stringify(order)
     })
-        .then(res => console.log("Firebase: ", res))
+        .then(res => res.json())
+        .then(res => {
+            console.log("Receipt id: ", res);
+            const receiptId = res.name;
+        })
         .catch(err => console.log(err));
 };
 
