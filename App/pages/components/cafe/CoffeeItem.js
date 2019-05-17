@@ -53,31 +53,39 @@ class CoffeeItem extends React.Component {
         this.setState({ visible: false });
     };
 
+    handleClick = () => {
+        if (
+            this.props.cart.shopId != this.coffee.shopId &&
+            this.props.cart.shopId != null
+        ) {
+            this.hideModal();
+                // If cart contains coffee from another café
+                Alert.alert(
+                    'Varning',
+                    'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
+                    [
+                        {
+                            text: 'Avbryt',
+                            style: 'cancel',
+                        },
+                        {
+                            text: 'Rensa',
+                            onPress: () => {
+                                this.props.onClearCart();
+                                this.showModal();
+                            },
+                        },
+                    ],
+                );
+        } else {
+            this.showModal();
+        }
+    };
+
     //Function to order coffee when ModalComp closes, is sent as props to ModalComp
     //Takes value of ownMug-selection t/f
     orderCoffee = ownMug => {
-        if (this.props.cart.shopId != this.coffee.shopId && this.props.cart.shopId != null) {
-          // If cart contains coffee from another café
-          return Alert.alert(
-              'Varning',
-              'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
-              [
-                  {
-                      text: 'Avbryt',
-                      style: 'cancel',
-                  },
-                  {
-                      text: 'Rensa',
-                      onPress: () => {
-                        this.props.onClearCart();
-                        this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
-                      },
-                  },
-              ],
-          );
-        } else {
-          this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
-        }
+        this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
     };
 
     render() {
@@ -97,7 +105,7 @@ class CoffeeItem extends React.Component {
                     orderCoffee={() => this.orderCoffee(ownMug)}
                 />
                 <TouchableOpacity
-                    onPress={this.showModal}
+                    onPress={this.handleClick}
                     style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -154,7 +162,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(addCoffee(coffee));
         },
         onClearCart: () => {
-          dispatch(clearCart());
+            dispatch(clearCart());
         },
     };
 };
