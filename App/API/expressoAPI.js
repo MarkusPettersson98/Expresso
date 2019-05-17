@@ -3,6 +3,7 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 const herokuURL = 'https://expressobackend.herokuapp.com/api/';
 
+
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
@@ -126,7 +127,9 @@ export const sendOrder = async cart => {
         user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
     };
 
-    fetch(herokuURL, {
+    const sendOrderUrl = herokuURL + "postOrder/"
+
+    fetch(sendOrderUrl, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
