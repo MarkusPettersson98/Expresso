@@ -66,7 +66,7 @@ class PaymentPage extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: '#FAFAFA' }}>
-        <ScrollView
+        <View
           contentContainerStyle={{
             flexGrow: 1,
             paddingBottom: 150,
@@ -141,7 +141,7 @@ class PaymentPage extends Component {
               </TouchableOpacity>
             </View>
           </View>
-        </ScrollView>
+        </View>
 
         {/* Nedre betalningsruta */}
         <View style={styles.bottomPayBlock}>
