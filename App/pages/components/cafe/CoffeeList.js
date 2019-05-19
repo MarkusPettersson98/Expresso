@@ -9,10 +9,10 @@ import { default as CoffeeItem } from './CoffeeItem';
  *
  */
 
-export default (CoffeeList = ({ coffeeItems }) => {
+export default (CoffeeList = ({ coffeeItems, shopName }) => {
     // Create a view for every available coffee
     const CoffeeItems = coffeeItems.map((coffee, index) => {
-        return <CoffeeItem key={index} coffee={coffee} />;
+        return <CoffeeItem key={index} coffee={coffee} shopName={shopName}/>;
     });
 
     return (

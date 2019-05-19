@@ -38,6 +38,7 @@ class CoffeeItem extends React.Component {
         //State for ModalComp - if it is visible or not
         this.state = {
             visible: false,
+            shop: 'ett annat Café',
         };
     }
 
@@ -53,6 +54,7 @@ class CoffeeItem extends React.Component {
         this.setState({ visible: false });
     };
 
+
     handleClick = () => {
         if (
             this.props.cart.shopId != this.coffee.shopId &&
@@ -62,14 +64,14 @@ class CoffeeItem extends React.Component {
                 // If cart contains coffee from another café
                 Alert.alert(
                     'Varning',
-                    'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
+                    `Varukorgen innehåller kaffe från ${this.state.shop}. Vill du rensa varukorgen och lägga till en ${this.coffee.name} från ${this.props.shopName} istället?`,
                     [
                         {
                             text: 'Avbryt',
                             style: 'cancel',
                         },
                         {
-                            text: 'Rensa',
+                            text: 'Ja',
                             onPress: () => {
                                 this.props.onClearCart();
                                 this.showModal();

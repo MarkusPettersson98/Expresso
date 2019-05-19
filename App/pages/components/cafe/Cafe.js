@@ -57,7 +57,7 @@ class Cafe extends React.Component {
         return (
             <View style={{ flex: 1 }}>
                 <CafeHeader picture={this.state.shopPicture} />
-                <CoffeeList coffeeItems={this.state.CoffeItems} />
+                <CoffeeList coffeeItems={this.state.CoffeItems} shopName={this.state.shop} />
                 <View style={{ marginBottom: 30 }}>
                     <CartField />
                 </View>
