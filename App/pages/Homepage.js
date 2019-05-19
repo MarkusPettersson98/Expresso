@@ -16,7 +16,6 @@ export default class Homepage extends Component {
                     {this.state.toggle == 'List' && <Maincomp />}
                     {this.state.toggle == 'Map' && <Mapcomp />}
                 </View>
-                <CartField />
             </View>
         );
     }

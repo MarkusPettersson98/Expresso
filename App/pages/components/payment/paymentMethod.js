@@ -55,7 +55,9 @@ class PaymentMethod extends React.Component {
         showPaymentCardModal: false,
         cardErrorText: '',
       });
-      this.props.setPaymentCard(paymentCardTemp);
+      if (this.props.setPaymentCard) {
+        this.props.setPaymentCard(paymentCardTemp);
+      }
 
       const user = firebase.auth().currentUser;
       if (user) {
