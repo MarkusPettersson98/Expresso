@@ -6,7 +6,12 @@ const herokuURL = 'https://expressobackend.herokuapp.com/api/';
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
-export const getReceipt = async () => {
+/**Returns all the receipts of a specified user - currently only customer '0' //TODO:add id as param
+ *
+ * @param id the id of the sought out customer
+ */
+
+export const getReceiptUser = async () => {
     const receipt = await fetch(herokuURL + 'getReceiptUser/0')
         .then(res => res.json())
         .then(response => {

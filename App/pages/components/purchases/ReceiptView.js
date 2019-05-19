@@ -5,6 +5,8 @@ import CoffeeDisplay from './CoffeeDisplay';
 
 class componentName extends Component {
     render() {
+        const customer = this.props.receipt[6];
+
         return (
             <View style={styles.container}>
                 <Text style={styles.textRubrik}>Tack för din beställning!</Text>
@@ -36,9 +38,7 @@ class componentName extends Component {
                     </View>
 
                     <ScrollView>
-                        <CoffeeDisplay
-                            coffees={this.props.receipt[0].coffees}
-                        />
+                        <CoffeeDisplay coffees={customer.coffees} />
                     </ScrollView>
 
                     <View style={{ flex: 7 }}>
@@ -46,13 +46,13 @@ class componentName extends Component {
                             Upphämtningsställe
                         </Text>
                         <Text style={styles.text}>
-                            {this.props.receipt[0].shop} {'\n'}
+                            {customer.shop} {'\n'}
                         </Text>
                         <Text style={styles.text}>
-                            Totalpris: {this.props.receipt[0].totalPrice} {'\n'}
+                            Totalpris: {customer.totalPrice} {'\n'}
                         </Text>
                         <Text style={styles.text}>
-                            Datum: {this.props.receipt[0].date} {'\n'}
+                            Datum: {customer.date} {'\n'}
                         </Text>
                     </View>
                 </View>

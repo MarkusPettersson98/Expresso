@@ -7,7 +7,7 @@ const CoffeeDisplay = ({ coffees }) => {
         let antal = amount;
         let namn = coffee.name;
         let pris = coffee.price;
-        let mugg = coffee.ownMug ? 'Har egen mugg ' : ' Dödar miljön ';
+        let mugg = coffee.ownMug ? 'Har egen mugg' : 'Dödar miljön';
         return (
             <View style={styles.spaceing}>
                 <Text
