@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    ScrollView,
+    TouchableOpacity,
+} from 'react-native';
+
+import { withNavigation } from 'react-navigation';
 
 import CoffeeDisplay from './CoffeeDisplay';
+import Mapcomp from '../homePage/Mapcomp';
 
-class componentName extends Component {
+class ReceiptView extends Component {
     render() {
         const customer = this.props.receipt[6];
 
@@ -56,11 +65,18 @@ class componentName extends Component {
                         </Text>
                     </View>
                 </View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Karta')}> 
+                <Text style={styles.knapp}> Gå till karta </Text>
+                </TouchableOpacity>
+                <View style={styles.map}>
+                    <Mapcomp />
+                </View>
+
+            
             </View>
         );
     }
 }
-export default componentName;
 
 const styles = StyleSheet.create({
     container: {
@@ -100,7 +116,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
     text: {
-        top: 0,
+        top: 10,
         color: 'white',
     },
     boldtext: {
@@ -113,4 +129,18 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         flexDirection: 'row',
     },
+    map: {
+        width: '47%',
+        height: '50%',
+        alignSelf: 'flex-end',
+    },
+    knapp: {
+        color: 'white',
+        fontWeight: 'bold',
+        width: 140,
+        fontSize:14, 
+        alignSelf: 'flex-end',
+    },
 });
+
+export default withNavigation(ReceiptView);
