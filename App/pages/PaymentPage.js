@@ -16,13 +16,28 @@ import { withNavigation } from 'react-navigation';
 import { clearCart } from './components/redux/actions';
 import Modal from 'react-native-modal';
 
+import { getShopById } from '../API/expressoAPI';
+
 class PaymentPage extends Component {
   state = {
     paymentCard: '',
     paymentCardTemp: '',
     showPaymentCardModal: false,
     cardErrorText: '',
+    shop: {
+      name: '',
+    },
   };
+
+  // when mounted first time
+  async componentDidMount() {
+    // Fetch data about which shop we are purchasing coffee from
+    const requestedShop = await getShopById(this.props.cart.shopId);
+    // This is a whole shop object, which carries more data than just name, e.g. street, coordinates ..
+    this.setState({
+      shop: requestedShop,
+    });
+  }
 
   onAddCard = () => {
     const regExp = /^[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4}$/; // "XXXX XXXX XXXX XXXX" or "XXXXXXXXXXXXXXXX"
@@ -84,9 +99,11 @@ class PaymentPage extends Component {
               </View>
 
               <View>
-                <Text style={{ color: '#57454B', fontSize: 14 }}>Bulten</Text>
+                <Text style={{ color: '#57454B', fontSize: 14 }}>
+                  {this.state.shop.name}
+                </Text>
                 <Text style={{ color: '#57454B', fontSize: 12, marginTop: 3 }}>
-                  Hörsalsvägen 7, Johanneberg
+                  {this.state.shop.street}
                 </Text>
               </View>
             </View>
@@ -134,14 +151,14 @@ class PaymentPage extends Component {
           </View>
           <OrderButton
             onPress={() => {
-                console.log('BETALA');
-                this.props.navigation.navigate('Order');
-                // TODO: Use Emils and Lucas solution to generate QR code.
+              console.log('BETALA');
+              this.props.navigation.navigate('Order');
+              // TODO: Use Emils and Lucas solution to generate QR code.
 
-                // also perhaps check if the user has credits.
-                sendOrderAPI(this.props.cart);
-                // clear the cart
-                this.props.onClearCart();
+              // also perhaps check if the user has credits.
+              sendOrderAPI(this.props.cart);
+              // clear the cart
+              this.props.onClearCart();
             }}
             buttonText="BETALA"
             disabled={this.state.paymentCard ? false : true}
@@ -256,20 +273,20 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onClearCart: () => {
-            dispatch(clearCart());
-        },
-    };
+  return {
+    onClearCart: () => {
+      dispatch(clearCart());
+    },
+  };
 };
 
 const mapStateToProps = state => {
-    return { cart: state.cart };
+  return { cart: state.cart };
 };
 
 export default withNavigation(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps,
-    )(PaymentPage),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(PaymentPage),
 );
