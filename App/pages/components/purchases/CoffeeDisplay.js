@@ -10,10 +10,26 @@ const CoffeeDisplay = ({ coffees }) => {
         let mugg = coffee.ownMug ? 'Har egen mugg ' : ' Dödar miljön ';
         return (
             <View style={styles.spaceing}>
-                <Text style={styles.text}>{antal}</Text>
+                <Text
+                    style={{
+                        color: 'white',
+                        fontWeight: 'bold',
+                        width: 40,
+                    }}
+                >
+                    {antal}
+                </Text>
                 <Text style={styles.text}>{namn}</Text>
                 <Text style={styles.text}>{mugg}</Text>
-                <Text style={styles.text}>{pris}</Text>
+                <Text
+                    style={{
+                        color: 'white',
+                        fontWeight: 'bold',
+                        width: 35,
+                    }}
+                >
+                    {pris}
+                </Text>
             </View>
         );
     });
@@ -23,12 +39,15 @@ const CoffeeDisplay = ({ coffees }) => {
 export default CoffeeDisplay;
 
 const styles = StyleSheet.create({
-    text: {
-        color: 'white',
-        width: 20,
-        flex: 1,
-    },
     spaceing: {
+        alignself: 'stretch',
+        width: '100%',
+        justifyContent: 'space-between',
         flexDirection: 'row',
+    },
+    text: {
+        alignself: 'stretch',
+        color: 'white',
+        width: 140,
     },
 });

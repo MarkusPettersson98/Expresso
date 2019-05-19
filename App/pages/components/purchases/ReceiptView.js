@@ -7,22 +7,42 @@ class componentName extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.rubrik}>Tack för din beställning!</Text>
+                <Text style={styles.textRubrik}>Tack för din beställning!</Text>
+
                 <View style={styles.infoBox}>
-                    <Text style={styles.underrubrik}>Varor</Text>
-                    <View style={styles.spaceing}>
-                        <Text style={styles.boldtext}>Antal</Text>
+                    <Text style={styles.textUnderrubrik1}>Varor</Text>
+
+                    <View style={styles.varorTable}>
+                        <Text
+                            style={{
+                                color: 'white',
+                                fontWeight: 'bold',
+                                width: 40,
+                            }}
+                        >
+                            Antal
+                        </Text>
                         <Text style={styles.boldtext}>Kaffesort</Text>
                         <Text style={styles.boldtext}>Muggtyp</Text>
-                        <Text style={styles.boldtext}>Pris</Text>
+                        <Text
+                            style={{
+                                color: 'white',
+                                fontWeight: 'bold',
+                                width: 35,
+                            }}
+                        >
+                            Pris
+                        </Text>
                     </View>
-                    <ScrollView style={{ flex: 8 }}>
+
+                    <ScrollView>
                         <CoffeeDisplay
                             coffees={this.props.receipt[0].coffees}
                         />
                     </ScrollView>
+
                     <View style={{ flex: 7 }}>
-                        <Text style={styles.underrubrik2}>
+                        <Text style={styles.textUnderrubrik2}>
                             Upphämtningsställe
                         </Text>
                         <Text style={styles.text}>
@@ -44,38 +64,35 @@ export default componentName;
 
 const styles = StyleSheet.create({
     container: {
-        top: 40,
         flex: 1,
-        backgroundColor: '#57454B',
+        top: 20,
         width: '100%',
-        height: '50%',
-        bottom: 0,
-        alignItems: 'center',
+        backgroundColor: '#57454B',
     },
-    rubrik: {
+    textRubrik: {
         top: 10,
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold',
         textDecorationLine: 'underline',
+        alignSelf: 'center',
     },
     infoBox: {
-        width: '95%',
-        height: '100%',
+        flex: 1,
         top: 20,
-        textAlign: 'left',
     },
-    spaceing: {
+    varorTable: {
+        width: '100%',
         justifyContent: 'space-between',
         flexDirection: 'row',
     },
-    underrubrik: {
+    textUnderrubrik1: {
         fontSize: 16,
         fontWeight: 'bold',
         color: 'white',
         textDecorationLine: 'underline',
     },
-    underrubrik2: {
+    textUnderrubrik2: {
         top: 10,
         fontSize: 16,
         fontWeight: 'bold',
@@ -87,9 +104,13 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     boldtext: {
-        top: 0,
         color: 'white',
         fontWeight: 'bold',
-        justifyContent: 'space-between',
+        width: 140,
+    },
+    table: {
+        flex: 1,
+        alignSelf: 'stretch',
+        flexDirection: 'row',
     },
 });
