@@ -162,11 +162,62 @@ const postOrder = async (req, res) => {
             console.log("Receipt id: ", response);
             const receiptId = response.name;
             res.set("Content-Type", "application/json");
-            res.end(JSON.stringify({
-                id: receiptId,
-            }));
+            res.end(
+                JSON.stringify({
+                    id: receiptId
+                })
+            );
         })
         .catch(err => console.log(err));
+};
+
+const invalidateReceipt = (req, res) => {
+    // This endpoint is used for invalidating an active receipt.
+    // E.g. after a receipt has been scanned it should be marked
+    // as no longer active
+    const { id } = req.params;
+
+    console.log("ID", id);
+
+    // Firebase is expecting to receive an object with all the properties 
+    // That should be updated. To update a specific data object, the property
+    // should contain the unique identifier followed by a slash and the property
+    // that should be updated
+
+    // E.g.
+    /*
+    {
+        -LfKye-hFPSWEbTBchsr/active: false
+    }
+    */
+
+    const active = id + '/active';
+
+    const receiptUpdate = {
+        [active]: false
+    };
+
+    firebase("PATCH", receiptUpdate).then(res =>
+        console.log("Firebase: updated object status: ", res)
+    );
+
+    return res.status(200).send("Ok");
+};
+
+const firebase = async (action, data) => {
+    // Action = GET, POST, PUT or DELETE
+    // Data = JSON object to send as data to firebase
+    return fetch(firebaseURL, {
+        method: action,
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => console.log('Firebase error: ', err));
 };
 
 module.exports = {
@@ -178,7 +229,8 @@ module.exports = {
         getReceipt: getReceipt,
         getReceiptUser: getReceiptUser,
         getShopById: getShopById,
-        postOrder: postOrder
+        postOrder: postOrder,
+        invalidateReceipt: invalidateReceipt
     },
     testable: {
         lookUpShop: lookUpShop,
