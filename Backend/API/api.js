@@ -93,7 +93,9 @@ const detailsFromShop = (lookUp, req, res) => {
     return res.status(400).end();
 };
 
-const getReceipt = async (req, res) => {
+const scanReceipt = async (req, res) => {
+    // scanReceipt 'simulates' scanning a receipt, e.g.
+    // invalidating it and returning it.
     const { id } = req.params;
 
     try {
@@ -102,6 +104,19 @@ const getReceipt = async (req, res) => {
         // Note: getReceiptWith returns an array !
         const receiptId = receipt[0].id;
         invalidateReceiptWithId(receiptId);
+
+        return res.status(200).send(receipt);
+    } catch (e) {
+        console.log(e);
+        return res.status(400).send(":(");
+    }
+};
+
+const getReceipt = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const receipt = await getReceiptWith("id", id);
 
         return res.status(200).send(receipt);
     } catch (e) {
@@ -241,7 +256,8 @@ module.exports = {
         getReceiptUser: getReceiptUser,
         getShopById: getShopById,
         postOrder: postOrder,
-        invalidateReceipt: invalidateReceipt
+        invalidateReceipt: invalidateReceipt,
+        scanReceipt: scanReceipt
     },
     testable: {
         lookUpShop: lookUpShop,
