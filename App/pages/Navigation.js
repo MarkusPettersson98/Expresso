@@ -6,6 +6,7 @@ import {
     createAppContainer,
 } from 'react-navigation';
 
+
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
@@ -13,6 +14,7 @@ import Checkout from './Checkout';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
+import BackArrow from './components/header/BackArrow'
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CartField from './components/CartField';
 
@@ -29,6 +31,7 @@ const headerStyling = {
 const headerIconStyling = {
     size: 32,
     color: '#F0F7F4',
+    margin: 5,
 };
 
 const tabIconStyling = {
@@ -163,14 +166,15 @@ export const RootStack = createStackNavigator(
             screen: Tabs,
             navigationOptions: ({ navigation }) => ({
                 headerTitle: <ExpressoLogoHeader />,
-                title: 'Startsida',
+                title: ' ',
                 ...headerStyling,
             }),
         },
         Checkout: {
           screen: Checkout,
           navigationOptions: ({ navigation }) => ({
-              headerRight: <ClearCheckoutHeader />,
+              headerRight: <ClearCheckoutHeader styling={headerIconStyling}/>,
+              headerLeft: <BackArrow styling={headerIconStyling}/>,
               title: 'Betalning',
               ...headerStyling,
           }),
@@ -178,6 +182,7 @@ export const RootStack = createStackNavigator(
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
+                headerLeft: <BackArrow styling={headerIconStyling}/>,
                 ...headerStyling,
             }),
         },
