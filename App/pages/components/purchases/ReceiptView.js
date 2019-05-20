@@ -10,10 +10,15 @@ import {
 import { withNavigation } from 'react-navigation';
 
 import CoffeeDisplay from './CoffeeDisplay';
-import Mapcomp from '../homePage/Mapcomp';
 
 class ReceiptView extends Component {
     render() {
+        /*Kvittot som hämtas sparas bak i customer för att minska kodduplicering
+        
+        Är just nu hårdkodat både här, man hämtar endast kvitto #7, även kunden 
+        hämtas hårdkodat genom funktionen getReceiptUser i Purchases.js detta borde
+        göras dynamiskt istället.
+        */
         const customer = this.props.receipt[6];
 
         return (
@@ -55,6 +60,9 @@ class ReceiptView extends Component {
                         <Text style={styles.text}>
                             {customer.shop} {'\n'}
                         </Text>
+
+                        {/* Klickar nu endast vidare till kartan, borde visa vilket affär
+                            med någon typ av markering */}
                         <TouchableOpacity
                             onPress={() =>
                                 this.props.navigation.navigate('Karta')
