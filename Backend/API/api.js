@@ -143,21 +143,14 @@ const getAllReceipts = async () => {
 };
 
 const postOrder = async (req, res) => {
+    // Function for adding an order to firebase
     const order = req.body;
 
     // Set order as active
     order.active = true;
     console.log("Post order", order);
 
-    fetch(firebaseURL, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(order)
-    })
-        .then(res => res.json())
+    firebase("POST", order)
         .then(response => {
             console.log("Receipt id: ", response);
             const receiptId = response.name;
@@ -167,8 +160,7 @@ const postOrder = async (req, res) => {
                     id: receiptId
                 })
             );
-        })
-        .catch(err => console.log(err));
+        });
 };
 
 const invalidateReceipt = (req, res) => {
@@ -179,7 +171,7 @@ const invalidateReceipt = (req, res) => {
 
     console.log("ID", id);
 
-    // Firebase is expecting to receive an object with all the properties 
+    // Firebase is expecting to receive an object with all the properties
     // That should be updated. To update a specific data object, the property
     // should contain the unique identifier followed by a slash and the property
     // that should be updated
@@ -191,7 +183,7 @@ const invalidateReceipt = (req, res) => {
     }
     */
 
-    const active = id + '/active';
+    const active = id + "/active";
 
     const receiptUpdate = {
         [active]: false
@@ -217,7 +209,7 @@ const firebase = async (action, data) => {
     })
         .then(res => res.json())
         .then(res => res)
-        .catch(err => console.log('Firebase error: ', err));
+        .catch(err => console.log("Firebase error: ", err));
 };
 
 module.exports = {
