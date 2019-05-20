@@ -157,7 +157,7 @@ const postOrder = async (req, res) => {
     console.log("Post order", order);
 
     firebase("POST", order).then(response => {
-        console.log("Receipt id: ", response);
+        console.log("Firebase new receipt id: ", response);
         const receiptId = response.name;
         res.set("Content-Type", "application/json");
         res.end(
