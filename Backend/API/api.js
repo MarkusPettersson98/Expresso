@@ -100,10 +100,15 @@ const scanReceipt = async (req, res) => {
 
     try {
         const receipt = await getReceiptWith("id", id);
+        // Check if scanned receipt is valid!
+        if (receipt[0].active) {
+            console.log("Scanned receipt is valid!");
+        } else {
+            console.log("Error! Scanned receipt has already been used");
+        }
         // Ivalidate fetched receipt
         // Note: getReceiptWith returns an array !
-        const receiptId = receipt[0].id;
-        invalidateReceiptWithId(receiptId);
+        invalidateReceiptWithId(id);
 
         return res.status(200).send(receipt);
     } catch (e) {
