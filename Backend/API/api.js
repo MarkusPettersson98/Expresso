@@ -175,9 +175,12 @@ const invalidateReceipt = async (req, res) => {
     const { id } = req.params;
 
     // Check if object is existing
-    // if()
-
-    console.log("ID", id);
+    const existingReceipt = await getReceiptWith("id", id);
+    if (existingReceipt.length == 0) {
+        // Receipt do not already exists, do not update anything in firebase
+        // return error
+        return res.status(400).end();
+    }
 
     // Firebase is expecting to receive an object with all the properties
     // That should be updated. To update a specific data object, the property
