@@ -83,6 +83,21 @@ class CoffeeItem extends React.Component {
         }
     };
 
+    resolveShop = shopId => {
+        console.log('CoffeeItem: Adding shop to cart .. ', shopId);
+        getShopById(shopId)
+            .then(shop => {
+                // Add shop to cart state
+                // But remove drink list first and id ;))
+                const { id, drinkList, ...wantedProperties } = shop;
+
+                this.props.onAddShop(wantedProperties);
+            })
+            .catch(err => {
+                console.log('CoffeeItem: Could not resolve shop, ', err);
+            });
+    };
+
     //Function to order coffee when ModalComp closes, is sent as props to ModalComp
     //Takes value of ownMug-selection t/f
     orderCoffee = ownMug => {
@@ -95,18 +110,7 @@ class CoffeeItem extends React.Component {
 
         const currentShop = this.props.cart.shop;
         if (Object.keys(currentShop).length == 0) {
-            console.log('CoffeeItem: Adding shop to cart .. ', shopId);
-            getShopById(shopId)
-                .then(shop => {
-                    // Add shop to cart state
-                    // But remove drink list first and id ;))
-                    const { id, drinkList, ...wantedProperties } = shop;
-
-                    this.props.onAddShop(wantedProperties);
-                })
-                .catch(err => {
-                    console.log('CoffeeItem: Could not resolve shop, ', err);
-                });
+            this.resolveShop(shopId);
         }
     };
 
