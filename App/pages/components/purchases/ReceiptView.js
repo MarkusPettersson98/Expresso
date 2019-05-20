@@ -45,11 +45,9 @@ class ReceiptView extends Component {
                             Pris
                         </Text>
                     </View>
-
                     <ScrollView>
                         <CoffeeDisplay coffees={customer.coffees} />
                     </ScrollView>
-
                     <View style={{ flex: 7 }}>
                         <Text style={styles.textUnderrubrik2}>
                             Upphämtningsställe
@@ -57,6 +55,13 @@ class ReceiptView extends Component {
                         <Text style={styles.text}>
                             {customer.shop} {'\n'}
                         </Text>
+                        <TouchableOpacity
+                            onPress={() =>
+                                this.props.navigation.navigate('Karta')
+                            }
+                        >
+                            <Text style={styles.knapp}>Gå till karta</Text>
+                        </TouchableOpacity>
                         <Text style={styles.text}>
                             Totalpris: {customer.totalPrice} {'\n'}
                         </Text>
@@ -65,14 +70,6 @@ class ReceiptView extends Component {
                         </Text>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Karta')}> 
-                <Text style={styles.knapp}> Gå till karta </Text>
-                </TouchableOpacity>
-                <View style={styles.map}>
-                    <Mapcomp />
-                </View>
-
-            
             </View>
         );
     }
@@ -84,6 +81,8 @@ const styles = StyleSheet.create({
         top: 20,
         width: '100%',
         backgroundColor: '#57454B',
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     textRubrik: {
         top: 10,
@@ -137,9 +136,7 @@ const styles = StyleSheet.create({
     knapp: {
         color: 'white',
         fontWeight: 'bold',
-        width: 140,
-        fontSize:14, 
-        alignSelf: 'flex-end',
+        fontSize: 14,
     },
 });
 
