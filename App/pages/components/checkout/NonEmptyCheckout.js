@@ -7,7 +7,6 @@ import TotalAmount from './TotalAmount';
 import PickUpLocation from './pickUpPointView';
 import { withNavigation } from 'react-navigation';
 
-
 /**
  * The view that is being shown in Checkout.js when the cart is populated
  *
@@ -22,69 +21,68 @@ import { withNavigation } from 'react-navigation';
  * @param {cart} props carries the redux state cart, which can be looked at in redux/reducers.js
  */
 
-
 const NonEmptyCheckoutPage = props => {
-    const cart = props.cart;
-    const total = cart.price;
-    const orderItems = cart.orderItems;
+  const cart = props.cart;
+  const total = cart.price;
+  const orderItems = cart.orderItems;
 
-    return (
-        <View
-            style={{
-                flex: 1,
-                width: '100%',
-            }}
+  return (
+    <View
+      style={{
+        flex: 1,
+        width: '100%',
+      }}
+    >
+      <View
+        style={{
+          flex: 5,
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 7,
+            alignItems: 'center',
+            width: '100%',
+          }}
         >
-            <View
-                style={{
-                    flex: 5,
-                    alignItems: 'center',
-                    width: '100%',
-                }}
-            >
-                <ScrollView
-                    contentContainerStyle={{
-                        flexGrow: 7,
-                        alignItems: 'center',
-                        width: '100%',
-                    }}
-                >
-                    {orderItems.map((orderItem, i) => (
-                        <CheckoutItem key={i} orderItem={orderItem} />
-                    ))}
-                </ScrollView>
-            </View>
+          {orderItems.map((orderItem, i) => (
+            <CheckoutItem key={i} orderItem={orderItem} />
+          ))}
+        </ScrollView>
+      </View>
 
-            <View
-                style={{
-                    flex: 2,
-                    alignItems: 'center',
-                    width: '100%',
-                }}
-            >
-                <PickUpLocation shop={props.cart.shop} />
-            </View>
+      <View
+        style={{
+          flex: 2,
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <PickUpLocation shopId={cart.shopId} />
+      </View>
 
-            <TotalAmount total={total} />
+      <TotalAmount total={total} />
 
-            <View
-                style={{
-                    flex: 1.5,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                <OrderButton
-                    onPress={() => props.navigation.navigate('Payment')}
-                    buttonText="GÅ VIDARE"
-                />
-            </View>
-        </View>
-    );
+      <View
+        style={{
+          flex: 1.5,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <OrderButton
+          onPress={() => props.navigation.navigate('Payment')}
+          buttonText="GÅ VIDARE"
+        />
+      </View>
+    </View>
+  );
 };
 
 const mapStateToProps = state => {
-    return { cart: state.cart };
+  return { cart: state.cart };
 };
 
 export default withNavigation(connect(mapStateToProps)(NonEmptyCheckoutPage));

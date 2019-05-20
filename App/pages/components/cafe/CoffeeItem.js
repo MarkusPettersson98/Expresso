@@ -1,9 +1,9 @@
 import React from 'react';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 import { connect } from 'react-redux';
-import { addCoffee } from '../redux/actions';
+import { addCoffee, clearCart } from '../redux/actions';
 import ModalComp from './ChooseMugModal';
 
 const styles = StyleSheet.create({
@@ -53,6 +53,35 @@ class CoffeeItem extends React.Component {
         this.setState({ visible: false });
     };
 
+    handleClick = () => {
+        if (
+            this.props.cart.shopId != this.coffee.shopId &&
+            this.props.cart.shopId != null
+        ) {
+            this.hideModal();
+                // If cart contains coffee from another café
+                Alert.alert(
+                    'Varning',
+                    'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
+                    [
+                        {
+                            text: 'Avbryt',
+                            style: 'cancel',
+                        },
+                        {
+                            text: 'Rensa',
+                            onPress: () => {
+                                this.props.onClearCart();
+                                this.showModal();
+                            },
+                        },
+                    ],
+                );
+        } else {
+            this.showModal();
+        }
+    };
+
     //Function to order coffee when ModalComp closes, is sent as props to ModalComp
     //Takes value of ownMug-selection t/f
     orderCoffee = ownMug => {
@@ -76,7 +105,7 @@ class CoffeeItem extends React.Component {
                     orderCoffee={() => this.orderCoffee(ownMug)}
                 />
                 <TouchableOpacity
-                    onPress={this.showModal}
+                    onPress={this.handleClick}
                     style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -131,6 +160,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onAddCoffee: coffee => {
             dispatch(addCoffee(coffee));
+        },
+        onClearCart: () => {
+            dispatch(clearCart());
         },
     };
 };

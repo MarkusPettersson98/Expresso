@@ -59,6 +59,21 @@ export const getShop = async wantedShop => {
 };
 
 /**
+ * Returns all the information of a all the shops by id
+ * This includes the names, the coordinates and their drinklist
+ * @param wantedShopId number representing the id of wanted shop
+ */
+export const getShopById = async wantedShopId => {
+    const allInformation = await fetch(herokuURL + 'getShopById/' + wantedShopId)
+        .then(res => res.json())
+        .then(response => {
+            return response;
+        })
+        .catch(error => {console.log('ERROR', error); return [];});
+    return allInformation;
+};
+
+/**
  * Returns a promise which if resolved contains all the coffesorts in a specific shop
  * from heroku
  * @param wantedShop  The name of the wanted shop
