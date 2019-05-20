@@ -97,10 +97,7 @@ const getReceipt = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const receipts = await getAllReceipts();
-
-        const receipt = receipts.filter(item => item.id === id);
-
+        const receipt = await getReceiptWith("id", id);
         return res.status(200).send(receipt);
     } catch (e) {
         console.log(e);
@@ -113,13 +110,22 @@ const getReceiptUser = async (req, res) => {
     const { user } = req.params;
 
     try {
-        const receipts = await getAllReceipts();
-        const receipt = receipts.filter(item => item.user == user);
-
+        const receipt = await getReceiptWith("user", user);
         return res.status(200).send(receipt);
     } catch (e) {
         console.log(e);
         return res.status(400).send(":(");
+    }
+};
+
+const getReceiptWith = async (key, value) => {
+    // Generic function for getting a set of receipts
+    // key = the propertry of the receipt to compare value with
+    try {
+        const receipts = await getAllReceipts();
+        return receipts.filter(item => item[key] == value);
+    } catch (e) {
+        return e;
     }
 };
 
@@ -150,24 +156,26 @@ const postOrder = async (req, res) => {
     order.active = true;
     console.log("Post order", order);
 
-    firebase("POST", order)
-        .then(response => {
-            console.log("Receipt id: ", response);
-            const receiptId = response.name;
-            res.set("Content-Type", "application/json");
-            res.end(
-                JSON.stringify({
-                    id: receiptId
-                })
-            );
-        });
+    firebase("POST", order).then(response => {
+        console.log("Receipt id: ", response);
+        const receiptId = response.name;
+        res.set("Content-Type", "application/json");
+        res.end(
+            JSON.stringify({
+                id: receiptId
+            })
+        );
+    });
 };
 
-const invalidateReceipt = (req, res) => {
+const invalidateReceipt = async (req, res) => {
     // This endpoint is used for invalidating an active receipt.
     // E.g. after a receipt has been scanned it should be marked
     // as no longer active
     const { id } = req.params;
+
+    // Check if object is existing
+    // if()
 
     console.log("ID", id);
 
