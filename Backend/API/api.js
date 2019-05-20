@@ -98,6 +98,11 @@ const getReceipt = async (req, res) => {
 
     try {
         const receipt = await getReceiptWith("id", id);
+        // Ivalidate fetched receipt
+        // Note: getReceiptWith returns an array !
+        const receiptId = receipt[0].id;
+        invalidateReceiptWithId(receiptId);
+
         return res.status(200).send(receipt);
     } catch (e) {
         console.log(e);
@@ -169,9 +174,6 @@ const postOrder = async (req, res) => {
 };
 
 const invalidateReceipt = async (req, res) => {
-    // This endpoint is used for invalidating an active receipt.
-    // E.g. after a receipt has been scanned it should be marked
-    // as no longer active
     const { id } = req.params;
 
     // Check if object is existing
@@ -181,6 +183,14 @@ const invalidateReceipt = async (req, res) => {
         // return error
         return res.status(400).end();
     }
+
+    const status = await invalidateReceiptWithId(id);
+    return res.status(200).send(status);
+};
+const invalidateReceiptWithId = async id => {
+    // This endpoint is used for invalidating an active receipt.
+    // E.g. after a receipt has been scanned it should be marked
+    // as no longer active
 
     // Firebase is expecting to receive an object with all the properties
     // That should be updated. To update a specific data object, the property
@@ -200,11 +210,9 @@ const invalidateReceipt = async (req, res) => {
         [active]: false
     };
 
-    firebase("PATCH", receiptUpdate).then(res =>
+    return firebase("PATCH", receiptUpdate).then(res =>
         console.log("Firebase: updated object status: ", res)
     );
-
-    return res.status(200).send("Ok");
 };
 
 const firebase = async (action, data) => {
