@@ -155,7 +155,8 @@ export const sendOrder = async cart => {
         .then(res => res.json())
         .then(res => {
             console.log('Receipt id', res);
-            console.log("Receipt link: ", getReceiptLink(res.id))
+            console.log("Receipt link: ", getReceiptLink(res.id)) 
+            return res; 
         })
         .catch(err => console.log(err));
 };
