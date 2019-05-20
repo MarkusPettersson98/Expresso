@@ -95,6 +95,12 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
       };
     }
     case ITEM_DECREMENT: {
+
+      if(currentCart.amount === 1) {
+        // If we decrement now, we will basically clear the cart.
+        return cart(currentCart, { type: CART_CLEAR });
+      };
+
       // Decrement amount of existing orderItem by one
       let newOrderItems = mapSome(
         currentCart.orderItems,

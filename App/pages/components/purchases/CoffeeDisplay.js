@@ -9,7 +9,7 @@ const CoffeeDisplay = ({ coffees }) => {
         let pris = coffee.price;
         let mugg = coffee.ownMug ? 'Har egen mugg' : 'Dödar miljön';
         return (
-            <View style={styles.spaceing}>
+            <View style={styles.spaceing} key={antal+namn+pris+mugg} >
                 <Text
                     style={{
                         color: 'white',
@@ -40,13 +40,13 @@ export default CoffeeDisplay;
 
 const styles = StyleSheet.create({
     spaceing: {
-        alignself: 'stretch',
+        alignSelf: 'stretch',
         width: '100%',
         justifyContent: 'space-between',
         flexDirection: 'row',
     },
     text: {
-        alignself: 'stretch',
+        alignSelf: 'stretch',
         color: 'white',
         width: 140,
     },
