@@ -6,10 +6,6 @@ import {
 } from '../expressoAPI';
 import 'isomorphic-fetch';
 
-import defaultPic from '../../pages/components/resources/ExpressoTransp.png';
-import bultenPic from '../../pages/components/resources/bulten.jpg';
-import wikkan from '../../pages/components/resources/wijkanders.jpg';
-
 /**
  * @todo Mock files with jest, unable to currently...
  */
@@ -28,166 +24,103 @@ describe('Testing if getAllShopNames output all the names', () => {
     });
 });
 
-describe('Testing if all the coffeesorts from a shop is printed out ', () => {
-    it('Should print out the drinkList for a shop i.e. all the avaible coffee from a specific shop', () => {
-        return getAllCoffeeFromAShop('Bulten').then(data =>
-            expect(data).toEqual([
-                {
-                    name: 'Brewed Coffee',
-                    price: 12,
-                    volume: 330,
-                    id: 123,
-                    shopId: 1,
-                },
-                {
-                    name: 'Cappuccino',
-                    price: 28,
-                    volume: 500,
-                    id: 124,
-                    shopId: 1,
-                },
-            ]),
-        );
-    });
-
-    it('Case insensitive check of above', () => {
-        return getAllCoffeeFromAShop('buLteN').then(data =>
-            expect(data).toEqual([
-                {
-                    name: 'Brewed Coffee',
-                    price: 12,
-                    volume: 330,
-                    id: 123,
-                    shopId: 1,
-                },
-                {
-                    name: 'Cappuccino',
-                    price: 28,
-                    volume: 500,
-                    id: 124,
-                    shopId: 1,
-                },
-            ]),
-        );
-    });
-
-    it('Checking other restaurants, list for Wijkanders expected', () => {
-        return getAllCoffeeFromAShop('Wijkanders').then(data =>
-            expect(data).toEqual([
-                {
-                    name: 'Brewed Coffee',
-                    price: 12,
-                    volume: 330,
-                    id: 123,
-                    shopId: 4,
-                },
-                {
-                    name: 'Caffee Latte',
-                    price: 28,
-                    volume: 500,
-                    id: 125,
-                    shopId: 4,
-                },
-            ]),
-        );
-    });
-});
-
 describe('Testing if getShop returns the right shop', () => {
     it('Should output Bulten store', () => {
-        return getShop('Bulten').then(data =>
-            expect(data).toEqual({
-                name: 'Bulten',
-                id: 1,
-                coordinates: { latitude: 57.689008, longitude: 11.978538 },
-                drinkList: [
-                    {
-                        name: 'Brewed Coffee',
-                        price: 12,
-                        volume: 330,
-                        id: 123,
-                        shopId: 1,
-                    },
-                    {
-                        name: 'Cappuccino',
-                        price: 28,
-                        volume: 500,
-                        id: 124,
-                        shopId: 1,
-                    },
-                ],
-            }),
-        );
+        return getShop('Bulten').then(data => {
+            const { name, id } = data;
+
+            expect(name).toBe('Bulten');
+            expect(id).toBe(1);
+        });
     });
 
     it('Case sensitivity check', () => {
         return getShop('buLtEn').then(data =>
-            expect(data).toEqual({
-                name: 'Bulten',
-                id: 1,
-                coordinates: { latitude: 57.689008, longitude: 11.978538 },
-                drinkList: [
-                    {
-                        name: 'Brewed Coffee',
-                        price: 12,
-                        volume: 330,
-                        id: 123,
-                        shopId: 1,
-                    },
-                    {
-                        name: 'Cappuccino',
-                        price: 28,
-                        volume: 500,
-                        id: 124,
-                        shopId: 1,
-                    },
-                ],
-            }),
+            expect(data.name).toEqual('Bulten'),
         );
     });
 
     it('Should output Wijkanders store, checking if other restaurants work too', () => {
         return getShop('Wijkanders').then(data =>
-            expect(data).toEqual({
-                name: 'Wijkanders',
-                id: 4,
-                coordinates: { latitude: 57.692538, longitude: 11.97539 },
-                drinkList: [
-                    {
-                        name: 'Brewed Coffee',
-                        price: 12,
-                        volume: 330,
-                        id: 123,
-                        shopId: 4,
-                    },
-                    {
-                        name: 'Caffee Latte',
-                        price: 28,
-                        volume: 500,
-                        id: 125,
-                        shopId: 4,
-                    },
-                ],
-            }),
+            expect(data.name).toEqual('Wijkanders'),
         );
+    });
+
+    it('Should output nothing', () => {
+        return getShop('abc123').then(data =>
+            expect(data).toEqual([]),
+        );
+    });
+});
+
+describe('Testing if all the coffeesorts from a shop is printed out ', () => {
+    it('Should print out the drinkList for a shop i.e. all the avaible coffee from a specific shop', () => {
+        return getShop('Bulten').then(shop => {
+            return getAllCoffeeFromAShop(shop.name).then(drinkList => {
+                // Check thet the number of drinks is the expected amount
+                expect(drinkList.length).toBe(2);
+                // Check that all the coffees belong to Bulten
+                const bultenId = shop.id;
+                // Every checks if all elements in a list against a boolean epression
+                const checkedCoffees = drinkList.every(
+                    coffee => coffee.shopId === bultenId,
+                );
+
+                expect(checkedCoffees).toBeTruthy();
+            });
+        });
+    });
+
+    it('Case insensitive check of above', () => {
+        return getShop('buLteN').then(shop => {
+            return getAllCoffeeFromAShop(shop.name).then(drinkList => {
+                // Check thet the number of drinks is the expected amount
+                expect(drinkList.length).toBe(2);
+                // Check that all the coffees belong to Bulten
+                const bultenId = shop.id;
+                // Every checks if all elements in a list against a boolean epression
+                const checkedCoffees = drinkList.every(
+                    coffee => coffee.shopId === bultenId,
+                );
+
+                expect(checkedCoffees).toBeTruthy();
+            });
+        });
+    });
+
+    it('Checking other restaurants, list for Wijkanders expected', () => {
+        return getShop('Wijkanders').then(shop => {
+            return getAllCoffeeFromAShop(shop.name).then(drinkList => {
+                // Check thet the number of drinks is the expected amount
+                expect(drinkList.length).toBe(2);
+                // Check that all the coffees belong to Wijkanders
+                const wijkandersId = shop.id;
+                // Every checks if all elements in a list against a boolean epression
+                const checkedCoffees = drinkList.every(
+                    coffee => coffee.shopId === wijkandersId,
+                );
+
+                expect(checkedCoffees).toBeTruthy();
+            });
+        });
     });
 });
 
 describe('Testing if getShopPicture returns picture of requested shop', () => {
     it('Should return a picture', () => {
         return getShopPicture('nopictures').then(data =>
-            expect(data).toBe(defaultPic),
+            expect(data).toBeDefined(),
         );
     });
     it('Should return a picture', () => {
         return getShopPicture('buLTen').then(data =>
-            expect(data).toBe(bultenPic),
+            expect(data).toBeDefined(),
         );
     });
 
     it('Should return a picture', () => {
         return getShopPicture('wijkanders').then(data =>
-            expect(data).toEqual(wikkan),
+            expect(data).toBeDefined(),
         );
     });
 });

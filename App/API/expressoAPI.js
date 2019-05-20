@@ -3,6 +3,7 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 const herokuURL = 'https://expressobackend.herokuapp.com/api/';
 
+
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
@@ -13,15 +14,14 @@ const getCurrentDate = () => {
     return Date.now();
 };
 
-
 /** Fixes a shop in order to work well with API-request
- * 
+ *
  * @param shop A name of a shop, like Veras Café or Bulten.
  */
 const fixShopString = shop => {
     const fixedString = encodeURIComponent(shop);
     return fixedString;
-}
+};
 /**
  * Returns all the information of a all the shops in the database using heroku
  * This includes the names, the coordinates and their drinklist
@@ -38,6 +38,21 @@ export const getShop = async wantedShop => {
             console.log('ERROR', error);
             return [];
         });
+    return allInformation;
+};
+
+/**
+ * Returns all the information of a all the shops by id
+ * This includes the names, the coordinates and their drinklist
+ * @param wantedShopId number representing the id of wanted shop
+ */
+export const getShopById = async wantedShopId => {
+    const allInformation = await fetch(herokuURL + 'getShopById/' + wantedShopId)
+        .then(res => res.json())
+        .then(response => {
+            return response;
+        })
+        .catch(error => {console.log('ERROR', error); return [];});
     return allInformation;
 };
 
@@ -82,7 +97,7 @@ const getAllShops = async () => {
 };
 
 /** Gets all shops coordninates and their name.
- * 
+ *
  */
 export const getAllShopsCoords = async () => {
     const getNameCoords = shop => {
@@ -104,22 +119,43 @@ export const getAllShopNames = async () => {
     return shops.map(getName);
 };
 
+/*
+    Given an ID of a receipt, create a link to that receipt
+*/
+export const getReceiptLink = id => {
+    return herokuURL + 'getReceipt/' + id;
+};
+
 /**
  * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
  * @param selectedShop The shop of which the order belongs to.
  */
 export const sendOrder = async cart => {
-    fetch(firebaseURL, {
+    const { amount, price, shop, orderItems } = cart;
+
+    const reciept = {
+        totalAmount: amount,
+        totalPrice: price,
+        coffees: orderItems,
+        shop: shop,
+        date: getCurrentDate(),
+        user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
+    };
+
+    const sendOrderUrl = herokuURL + "postOrder/"
+
+    fetch(sendOrderUrl, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
             'Content-type': 'application/json',
         },
-        body: JSON.stringify({
-            cart: cart,
-            date: getCurrentDate(),
-        }),
+        body: JSON.stringify(reciept),
     })
-        .then(res => console.log())
+        .then(res => res.json())
+        .then(res => {
+            console.log('Receipt id', res);
+            console.log("Receipt link: ", getReceiptLink(res.id))
+        })
         .catch(err => console.log(err));
 };
