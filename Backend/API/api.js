@@ -144,6 +144,9 @@ const getAllReceipts = async () => {
 
 const postOrder = async (req, res) => {
     const order = req.body;
+
+    // Set order as active
+    order.active = true;
     console.log("Post order", order);
 
     fetch(firebaseURL, {
