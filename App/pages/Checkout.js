@@ -40,9 +40,10 @@ class Checkout extends Component {
         });
     }
 
-     sendTheOrder = async () => {
+    sendTheOrder = async () => {
         const res = await sendOrderAPI(this.props.cart);
-        console.log('För robert baratheon',res ); 
+
+        return res;
     };
 
     onAddCard = () => {
@@ -211,13 +212,10 @@ class Checkout extends Component {
                                 <Text style={styles.totalText}>{total} kr</Text>
                             </View>
                             <OrderButton
-                                onPress={() => {
-                                    console.log('BETALA');
-                                    this.props.navigation.navigate('Order');
-                                    // TODO: Use Emils and Lucas solution to generate QR code.
-
-                                    // also perhaps check if the user has credits.
-                                    this.sendTheOrder();
+                                onPress={async () => {
+                                    this.props.navigation.navigate('Order', {
+                                        orderID: await this.sendTheOrder(),
+                                    });
 
                                     // clear the cart
                                     this.props.onClearCart();

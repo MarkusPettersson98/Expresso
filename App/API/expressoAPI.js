@@ -3,7 +3,6 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 const herokuURL = 'https://expressobackend.herokuapp.com/api/';
 
-
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
@@ -47,12 +46,17 @@ export const getShop = async wantedShop => {
  * @param wantedShopId number representing the id of wanted shop
  */
 export const getShopById = async wantedShopId => {
-    const allInformation = await fetch(herokuURL + 'getShopById/' + wantedShopId)
+    const allInformation = await fetch(
+        herokuURL + 'getShopById/' + wantedShopId,
+    )
         .then(res => res.json())
         .then(response => {
             return response;
         })
-        .catch(error => {console.log('ERROR', error); return [];});
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
     return allInformation;
 };
 
@@ -142,9 +146,9 @@ export const sendOrder = async cart => {
         user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
     };
 
-    const sendOrderUrl = herokuURL + "postOrder/"
+    const sendOrderUrl = herokuURL + 'postOrder/';
 
-    fetch(sendOrderUrl, {
+    return fetch(sendOrderUrl, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -154,9 +158,7 @@ export const sendOrder = async cart => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log('Receipt id', res);
-            console.log("Receipt link: ", getReceiptLink(res.id)) 
-            return res; 
+            return getReceiptLink(res.id);
         })
         .catch(err => console.log(err));
 };
