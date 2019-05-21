@@ -67,17 +67,6 @@ export const getAllCoffeeFromAShop = async wantedShop => {
 };
 
 /**
- * Returns the street of a wanted shop.
- * 
- * @param wantedShop  The name of the wanted shop
- */
-
-export const getShopStreet = async wantedShop => {
-    const shop = await getShop(wantedShop);
-    return shop.street;
-};
-
-/**
  * Returns the picture to a wanted shop
  * @param wantedShop  The name of the wanted shop
  * @todo Fix so that this works with the images hosted at backend.
@@ -94,7 +83,7 @@ export const getShopPicture = async wantedShop => {
  * Return a promise object with resolved API call
  * @param wantedShop  The name of the wanted shop
  */
-const getAllShops = async () => {
+export const getAllShops = async () => {
     const myData = await fetch(herokuURL + 'getAllShops/')
         .then(res => res.json())
         .then(response => {

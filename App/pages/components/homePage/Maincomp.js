@@ -2,7 +2,7 @@ import React from 'react';
 import { AppRegistry, ScrollView, View } from 'react-native';
 import { default as ShopView } from './ListShopView';
 
-import { getAllShopNames, getShopPicture, getShopStreet } from '../../../API/expressoAPI';
+import { getAllShops, getShopPicture } from '../../../API/expressoAPI';
 
 export default class Maincomp extends React.Component {
 
@@ -13,13 +13,14 @@ export default class Maincomp extends React.Component {
 
     async componentDidMount() {
         // Request all shops names
-        const shopNames = await getAllShopNames();
+        const allShops = await getAllShops();
 
-        const shopsWithPictures = await shopNames.map(async shopName => {
+        const shopsWithPictures = await allShops.map(async thisShop => {
             return {
-                name: shopName,
-                picture: await getShopPicture(shopName),
-                street: await getShopStreet(shopName),
+                name: thisShop.name,
+                picture: await getShopPicture(thisShop.name),
+                street: thisShop.street,
+                coffees: thisShop.drinkList.length,
             };
         });
 
@@ -27,7 +28,7 @@ export default class Maincomp extends React.Component {
         Promise.all(shopsWithPictures).then(shops => {
             // Create ShopView components to be rendered
             const shopViews = shops.map((shop, index) => (
-                <ShopView key={index} name={shop.name} picture={shop.picture} street={shop.street}/>
+                <ShopView key={index} name={shop.name} picture={shop.picture} street={shop.street} numcoffees={shop.coffees} />
             ));
 
             // Update state
