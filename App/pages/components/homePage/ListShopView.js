@@ -57,7 +57,7 @@ const ShopView = ({ name, picture, street, numcoffees, navigation }) => {
 
 const styles = {
     item: {
-        height: 240,
+        height: 260,
         marginVertical: 14,
         marginHorizontal: 24,
         borderRadius: 10,
@@ -70,13 +70,13 @@ const styles = {
     },
     bgcontainer: {
         width: '100%',
-        height: '72%',
+        height: '70%',
         position: 'absolute',
         top: 0,
     },
     infobox: {
         width: '100%',
-        height: '28%',
+        height: '30%',
         backgroundColor: '#FFF',
         flex: 1,
         flexDirection: 'row',
@@ -100,6 +100,7 @@ const styles = {
         color: '#57454B',
         opacity: 0.8,
         marginLeft: 15,
+        marginTop: 2,
     },
     cafecounter: {
         width: '20%',
