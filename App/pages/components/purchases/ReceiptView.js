@@ -19,7 +19,7 @@ class ReceiptView extends Component {
         hämtas hårdkodat genom funktionen getReceiptUser i Purchases.js detta borde
         göras dynamiskt istället.
         */
-        const customer = this.props.receipt[6];
+        const customer = this.props.receipt[0];
 
         return (
             <View style={styles.container}>
@@ -58,7 +58,7 @@ class ReceiptView extends Component {
                             Upphämtningsställe
                         </Text>
                         <Text style={styles.text}>
-                            {customer.shop} {'\n'}
+                            {customer.shop.name} {'\n'}
                         </Text>
 
                         {/* Klickar nu endast vidare till kartan, borde visa vilket affär
