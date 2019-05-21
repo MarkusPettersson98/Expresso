@@ -9,8 +9,7 @@ import {
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
-import Checkoutpage from './Checkout';
-import PaymentPage from './PaymentPage';
+import Checkout from './Checkout';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
@@ -169,16 +168,9 @@ export default createStackNavigator(
             }),
         },
         Checkout: {
-            screen: Checkoutpage,
-            navigationOptions: ({ navigation }) => ({
-                headerRight: <ClearCheckoutHeader />,
-                title: 'Varukorg',
-                ...headerStyling,
-            }),
-        },
-        Payment: {
-          screen: PaymentPage,
+          screen: Checkout,
           navigationOptions: ({ navigation }) => ({
+              headerRight: <ClearCheckoutHeader />,
               title: 'Betalning',
               ...headerStyling,
           }),
