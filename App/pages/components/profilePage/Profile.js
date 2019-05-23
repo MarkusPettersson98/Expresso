@@ -41,22 +41,29 @@ class Profile extends React.Component {
         {this.state.loading && <LoadingOverlay />}
 
         <View style={styles.personView}>
-          <Text style={styles.personHeader}>Användarprofil</Text>
+          <View style = {styles.topContainer}> 
+            
+            <View style = {styles.profileImage}></View>
 
-          <Text style={styles.text}>{this.props.name}</Text>
+            <TouchableOpacity style={styles.logOut} onPress={this.handleLogout}>
+              <Text style={styles.logOutText}>LOGGA UT</Text>
+            </TouchableOpacity>
 
-          <Text style={styles.text}>{this.props.email}</Text>
+          </View>
 
-          <TouchableOpacity
-            style={styles.to}
-            onPress={() => this.props.navigation.navigate('Receipts')}
-          >
-            <Text style={styles.reText}>Kvitton ></Text>
-          </TouchableOpacity>
+          <View style = {styles.botContainer}> 
 
-          <TouchableOpacity style={styles.logOut} onPress={this.handleLogout}>
-            <Text style={styles.logOutText}>LOGGA UT</Text>
-          </TouchableOpacity>
+            <Text style={styles.nameText}>{this.props.name}</Text>
+
+            <Text style={styles.emailText}>{this.props.email}</Text>
+
+            <TouchableOpacity
+              style={styles.to}
+              onPress={() => this.props.navigation.navigate('Receipts')}
+            >
+              <Text style={styles.reText}>Kvittohistorik ></Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.paymentTopView}>
@@ -108,27 +115,32 @@ const styles = StyleSheet.create({
     color: 'grey',
     marginTop: 40,
   },
-  text: {
+  nameText: {
     fontSize: 24,
     color: 'black',
     marginTop: 10,
     marginBottom: 10,
     left: 20,
   },
-  reText: {
-    fontSize: 24,
+  emailText: {
+    fontSize: 18,
     color: 'black',
+    marginTop: 10,
+    marginBottom: 10,
+    left: 20,
+  },
+  reText: {
+    fontSize: 14,
+    color: '#5AA3B7',
   },
   to: {
-    left: 20,
-    marginTop: 20,
-    borderRadius: 20,
-    borderColor: 'black',
-    borderWidth: 5,
-    padding: 5,
-    width: '50%',
-    justifyContent: 'center',
+    width: '35%',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    left: 20,
   },
   logOut: {
     backgroundColor: '#5AA3B7',
@@ -136,11 +148,32 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 40,
+    
   },
   logOutText: {
     color: 'white',
     fontWeight: '700',
     letterSpacing: 2,
+  },
+  profileImage: {
+    backgroundColor: 'blue',
+    borderRadius: 1000,
+    borderWidth: 5,
+    borderColor: 'black',
+    width: 150,
+    height: 150,
+    marginTop: 5,
+    marginLeft: 5,
+    marginBottom: 20
+  },
+  topContainer:{
+    height: '40%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
+  botContainer: {
+    height: '60%',
   },
 });
 
