@@ -1,8 +1,11 @@
 /* Function definitions for handling API requests */
 
 const { shops } = require("../Database/newData");
-const firebaseURL =
+const redundantFirebaseURL =
     "https://share-places-1555452472826.firebaseio.com/kvitton.json";
+
+const userFirebaseURL = "https://togepi-c62a3.firebaseio.com/users.json";
+
 const path = require("path");
 
 const fetch = require("node-fetch");
@@ -99,7 +102,7 @@ const scanReceipt = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const receipt = await getReceiptWith("id", id);
+        const receipt = await getReceiptById(id);
         // Check if scanned receipt is valid!
         if (receipt[0].active) {
             console.log("Scanned receipt is valid!");
@@ -147,7 +150,7 @@ const getReceiptById = async id => {
     try {
         console.log("Trying to fetch single receipt by id! ", id);
         const receipt = await fetch(
-            firebaseURL + `?orderBy=%22$key%22&equalTo=%22${id}%22`
+            redundantFirebaseURL + `?orderBy=%22$key%22&equalTo=%22${id}%22`
         )
             .then(res => res.json())
             .then(res => firebaseObjectToArray(res))
@@ -165,7 +168,7 @@ const getReceiptByUser = async user => {
     try {
         console.log("Trying to fetch user receipts! ", user);
         const receipt = await fetch(
-            firebaseURL + `?orderBy=%22user%22&equalTo=%22${user}%22`
+            redundantFirebaseURL + `?orderBy=%22user%22&equalTo=%22${user}%22`
         )
             .then(res => res.json())
             .then(res => firebaseObjectToArray(res))
@@ -205,7 +208,7 @@ const getReceiptWith = async (key, value) => {
 };
 
 const getAllReceipts = async () => {
-    const receipts = await fetch(firebaseURL)
+    const receipts = await fetch(redundantFirebaseURL)
         .then(res => res.json())
         .then(res => {
             const keys = Object.keys(res);
@@ -241,6 +244,34 @@ const postOrder = async (req, res) => {
             })
         );
     });
+
+    // Mirror new receipts to user database (Update user with new receipt)
+    mirrorOrder(order);
+};
+
+const mirrorOrder = order => {
+    const { user } = order;
+    console.log("!Mirroring! Firebase new receipt id: ");
+
+    const active = user + "/active";
+
+    const receiptUpdate = {
+        [active]: order
+    };
+
+    console.log("Receipt udapte!", receiptUpdate);
+
+    fetch(userFirebaseURL, {
+        method: "PATCH",
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(receiptUpdate)
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => console.log("Firebase error: ", err));
 };
 
 const invalidateReceipt = async (req, res) => {
@@ -255,8 +286,36 @@ const invalidateReceipt = async (req, res) => {
     }
 
     const status = await invalidateReceiptWithId(id);
+
     return res.status(200).send(status);
 };
+
+const invalidateMirrorReceipt = async id => {
+    // Find user with the active receipt id
+    console.log("Trying to invalidate id ", id);
+    const receipt = await getReceiptById(id);
+    const {user} = receipt[0]; // Firebase LUL
+    console.log("Trying to invalidate active receipt of user ", user);
+    // overwrite current active receipt of user with empty object
+    const active = user + "/active";
+
+    const receiptUpdate = {
+        [active]: {}
+    };
+
+    return fetch(userFirebaseURL, {
+        method: "PATCH",
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(receiptUpdate)
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => console.log("Firebase error: ", err));
+};
+
 const invalidateReceiptWithId = async id => {
     // This endpoint is used for invalidating an active receipt.
     // E.g. after a receipt has been scanned it should be marked
@@ -274,6 +333,9 @@ const invalidateReceiptWithId = async id => {
     }
     */
 
+    // Also, invalidate mirror receipt
+    invalidateMirrorReceipt(id);
+
     const active = id + "/active";
 
     const receiptUpdate = {
@@ -288,7 +350,7 @@ const invalidateReceiptWithId = async id => {
 const firebase = async (action, data) => {
     // Action = GET, POST, PUT or DELETE
     // Data = JSON object to send as data to firebase
-    return fetch(firebaseURL, {
+    return fetch(redundantFirebaseURL, {
         method: action,
         headers: {
             Accept: "application/json",
