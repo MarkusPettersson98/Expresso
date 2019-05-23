@@ -123,6 +123,8 @@ class Checkout extends Component {
                                         style={{
                                             marginRight: 20,
                                             marginTop: 5,
+                                            height: 20,
+                                            width: 20,
                                         }}
                                     >
                                         <SimpleLineIcons
@@ -167,7 +169,13 @@ class Checkout extends Component {
                                         marginTop: 10,
                                     }}
                                 >
-                                    <View style={{ marginRight: 20 }}>
+                                    <View
+                                        style={{
+                                            marginRight: 20,
+                                            height: 16,
+                                            width: 16,
+                                        }}
+                                    >
                                         <AntDesign
                                             name="creditcard"
                                             size={16}
