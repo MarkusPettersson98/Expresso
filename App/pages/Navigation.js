@@ -175,10 +175,10 @@ export const RootStack = createStackNavigator(
     Cafe: {
       screen: Cafe,
       navigationOptions: ({ navigation }) => ({
-        headerLeft: <BackArrow styling={headerIconStyling} />,
-        ...headerStyling,
+          header: null,
+          ...headerStyling,
       }),
-    },
+  },
     Receipts: {
       screen: Receipts,
       navigationOptions: ({ navigation }) => ({
@@ -210,5 +210,14 @@ export const RootStack = createStackNavigator(
     mode: 'card',
   },
 );
+
+const styles = {
+    backarrow: {
+        marginLeft: 13,
+    },
+    clearcheckout: {
+        marginRight: 10,
+    },
+};
 
 export default createAppContainer(RootStack);

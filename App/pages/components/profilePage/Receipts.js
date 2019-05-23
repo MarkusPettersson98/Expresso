@@ -41,7 +41,7 @@ export default class Receipts extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F0F7F4',
+        backgroundColor: '#FAFAFA',
         alignItems: 'center',
         justifyContent: 'center',
     },

@@ -17,6 +17,7 @@ const ShopView = ({ name, picture, street, numcoffees, navigation }) => {
                     navigation.navigate('Cafe', {
                         selectedShop: name,
                         picture: picture,
+                        street: street,
                     });
                 }}
             >
@@ -46,7 +47,7 @@ const ShopView = ({ name, picture, street, numcoffees, navigation }) => {
                                 <Ionicons
                                     name="ios-cafe"
                                     size={20}
-                                    color={'black'}
+                                    color={'#57454B'}
                                 />
                             </View>
                         </View>
