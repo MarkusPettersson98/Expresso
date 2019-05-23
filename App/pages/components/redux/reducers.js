@@ -4,6 +4,7 @@ import {
   CART_CLEAR,
   ITEM_DECREMENT,
   ITEM_INCREMENT,
+  ADD_SHOP,
 } from './actions';
 
 import { calculateCartAmount, calculateCartPrice } from './cartFunctions';
@@ -12,6 +13,7 @@ export const INITIAL_CART_STATE = {
   price: 0,
   amount: 0,
   shopId: null,
+  shop: {},
   orderItems: [],
 };
 
@@ -130,6 +132,15 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
     }
     case CART_CLEAR: {
       return INITIAL_CART_STATE;
+    }
+    case ADD_SHOP: {
+      // A simple function for adding a shop to the cart
+      const shop = action.shop;
+      return {
+        ...currentCart,
+        shop: shop,
+      };
+      
     }
     default:
       return currentCart;

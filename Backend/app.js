@@ -38,6 +38,12 @@ app.get("/api/getReceipt/:id", api.getReceipt);
 // Get all receipts from a user
 app.get("/api/getReceiptUser/:user", api.getReceiptUser);
 
+// 'Scan' a receipt (invalidate and show)
+app.get("/api/scanReceipt/:id", api.scanReceipt);
+
+// Invalidate a receipt by id
+app.patch("/api/invalidateReceipt/:id", api.invalidateReceipt);
+
 // Endpoint for placing an order
 app.post("/api/postOrder", api.postOrder);
 

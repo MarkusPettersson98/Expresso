@@ -93,13 +93,35 @@ const detailsFromShop = (lookUp, req, res) => {
     return res.status(400).end();
 };
 
+const scanReceipt = async (req, res) => {
+    // scanReceipt 'simulates' scanning a receipt, e.g.
+    // invalidating it and returning it.
+    const { id } = req.params;
+
+    try {
+        const receipt = await getReceiptWith("id", id);
+        // Check if scanned receipt is valid!
+        if (receipt[0].active) {
+            console.log("Scanned receipt is valid!");
+        } else {
+            console.log("Error! Scanned receipt has already been used");
+        }
+        // Ivalidate fetched receipt
+        // Note: getReceiptWith returns an array !
+        invalidateReceiptWithId(id);
+
+        return res.status(200).send(receipt);
+    } catch (e) {
+        console.log(e);
+        return res.status(400).send(":(");
+    }
+};
+
 const getReceipt = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const receipts = await getAllReceipts();
-
-        const receipt = receipts.filter(item => item.id === id);
+        const receipt = await getReceiptWith("id", id);
 
         return res.status(200).send(receipt);
     } catch (e) {
@@ -113,13 +135,22 @@ const getReceiptUser = async (req, res) => {
     const { user } = req.params;
 
     try {
-        const receipts = await getAllReceipts();
-        const receipt = receipts.filter(item => item.user == user);
-
+        const receipt = await getReceiptWith("user", user);
         return res.status(200).send(receipt);
     } catch (e) {
         console.log(e);
         return res.status(400).send(":(");
+    }
+};
+
+const getReceiptWith = async (key, value) => {
+    // Generic function for getting a set of receipts
+    // key = the propertry of the receipt to compare value with
+    try {
+        const receipts = await getAllReceipts();
+        return receipts.filter(item => item[key] == value);
+    } catch (e) {
+        return e;
     }
 };
 
@@ -143,29 +174,81 @@ const getAllReceipts = async () => {
 };
 
 const postOrder = async (req, res) => {
+    // Function for adding an order to firebase
     const order = req.body;
+
+    // Set order as active
+    order.active = true;
     console.log("Post order", order);
 
-    fetch(firebaseURL, {
-        method: "POST",
+    firebase("POST", order).then(response => {
+        console.log("Firebase new receipt id: ", response);
+        const receiptId = response.name;
+        res.set("Content-Type", "application/json");
+        res.end(
+            JSON.stringify({
+                id: receiptId
+            })
+        );
+    });
+};
+
+const invalidateReceipt = async (req, res) => {
+    const { id } = req.params;
+
+    // Check if object is existing
+    const existingReceipt = await getReceiptWith("id", id);
+    if (existingReceipt.length == 0) {
+        // Receipt do not already exists, do not update anything in firebase
+        // return error
+        return res.status(400).end();
+    }
+
+    const status = await invalidateReceiptWithId(id);
+    return res.status(200).send(status);
+};
+const invalidateReceiptWithId = async id => {
+    // This endpoint is used for invalidating an active receipt.
+    // E.g. after a receipt has been scanned it should be marked
+    // as no longer active
+
+    // Firebase is expecting to receive an object with all the properties
+    // That should be updated. To update a specific data object, the property
+    // should contain the unique identifier followed by a slash and the property
+    // that should be updated
+
+    // E.g.
+    /*
+    {
+        -LfKye-hFPSWEbTBchsr/active: false
+    }
+    */
+
+    const active = id + "/active";
+
+    const receiptUpdate = {
+        [active]: false
+    };
+
+    return firebase("PATCH", receiptUpdate).then(res =>
+        console.log("Firebase: updated object status: ", res)
+    );
+};
+
+const firebase = async (action, data) => {
+    // Action = GET, POST, PUT or DELETE
+    // Data = JSON object to send as data to firebase
+    return fetch(firebaseURL, {
+        method: action,
         headers: {
             Accept: "application/json",
             "Content-type": "application/json"
         },
-        body: JSON.stringify(order)
+        body: JSON.stringify(data)
     })
         .then(res => res.json())
-        .then(response => {
-            console.log("Receipt id: ", response);
-            const receiptId = response.name;
-            res.set("Content-Type", "application/json");
-            res.end(
-                JSON.stringify({
-                    id: receiptId
-                })
-            );
-        })
-        .catch(err => console.log(err));
+        .then(res => res)
+        .catch(err => console.log("Firebase error: ", err));
 };
 
 module.exports = {
@@ -177,7 +260,9 @@ module.exports = {
         getReceipt: getReceipt,
         getReceiptUser: getReceiptUser,
         getShopById: getShopById,
-        postOrder: postOrder
+        postOrder: postOrder,
+        invalidateReceipt: invalidateReceipt,
+        scanReceipt: scanReceipt
     },
     testable: {
         lookUpShop: lookUpShop,

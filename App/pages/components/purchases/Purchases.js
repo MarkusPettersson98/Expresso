@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { getReceiptLink, getReceipt } from '../../../API/expressoAPI';
+import { getReceipt, getScanReceiptLink } from '../../../API/expressoAPI';
 import QRCode from 'react-native-qrcode';
 
 import ReceiptView from './ReceiptView';
@@ -15,11 +15,19 @@ import ReceiptView from './ReceiptView';
 export default class Purchases extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { ReceiptView: [] };
+        console.log("PURCHASES ", props.navigation.state.params.orderID);
+        this.state = {
+            ReceiptView: [],
+            receiptId: props.navigation.state.params.orderID,
+        };
     }
 
     async componentDidMount() {
-        const receipt = await getReceipt('-LfYMIYIpnqfHjs3Lxdw'); //TODO: Get receipt id dynamically
+        const receiptId = this.state.receiptId;
+        console.log('RECEIPT ID ', receiptId);
+
+        // const receipt = await getReceipt('-LfYMIYIpnqfHjs3Lxdw'); //TODO: Get receipt id dynamically
+        const receipt = await getReceipt(receiptId); //TODO: Get receipt id dynamically
         const receiptView = <ReceiptView receipt={receipt} />;
 
         this.setState({
@@ -33,7 +41,7 @@ export default class Purchases extends React.Component {
                 <View style={styles.innerContainer}>
                     <View style={styles.qr}>
                         <QRCode
-                            value={getReceiptLink(0)} // Link to the receipt TODO: replace 0 with receipt id
+                            value={getScanReceiptLink(this.state.receiptId)} //Ska vara en länk till den beställning som man gjort
                             size={260}
                             bgColor="black"
                             fgColor="white"
