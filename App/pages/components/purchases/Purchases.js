@@ -1,7 +1,8 @@
 import React from 'react';
 import NoQRPage from './NoQRPage';
-
 import QRPage from './QRPage';
+
+import { View } from 'react-native';
 
 /**
  * Här ser jag att vi 'kör igång' vår page och hämtar in objektet från backend för att sedan styra komponenterna.
@@ -9,15 +10,16 @@ import QRPage from './QRPage';
  * rätt attribut som ska visas som information om köpet för användaren.
  */
 
-export default class Purchases extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const Purchases = props => {
+    const { params } = props.navigation.state;
+    // If there is an orderID, render QR code.
+    return (
+        <View style={{
+            flex: 1
+        }}>
+            {params ? (<QRPage receiptId={params.orderID} />) : (<NoQRPage />)}
+        </View>
+    );
+};
 
-    render() {
-        // If there is an orderID, render QR code.
-        const { params } = this.props.navigation.state;
-
-        return params ? <QRPage receiptId={params.orderID} /> : <NoQRPage />;
-    }
-}
+export default Purchases;

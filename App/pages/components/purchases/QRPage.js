@@ -23,7 +23,7 @@ const QRPage = ({ receiptId }) => {
                     />
                 </View>
             </View>
-            {/* <ReceiptView receiptId={receiptId} /> */}
+            <ReceiptView receiptId={receiptId} />
         </View>
     );
 };
