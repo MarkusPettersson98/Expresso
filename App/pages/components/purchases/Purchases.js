@@ -1,6 +1,9 @@
 import React from 'react';
 import NoQRPage from './NoQRPage';
 import QRPage from './QRPage';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 import { View } from 'react-native';
 
@@ -10,16 +13,64 @@ import { View } from 'react-native';
  * rätt attribut som ska visas som information om köpet för användaren.
  */
 
-const Purchases = props => {
-    const { params } = props.navigation.state;
+class Purchases extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            activeReceipt: undefined,
+            firebaseLoading: false,
+        };
+    }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                const fbUserId = firebase.database().ref('users/' + user.uid);
+                fbUserId.on('value', snapshot => {
+                    // fbUserId.on('child_changed', snapshot => {
+                    const activeReceipt =
+                        (snapshot.val() && snapshot.val().active) || '';
+                    console.log('Purchases: active receipt', activeReceipt);
+                    this.setState({
+                        activeReceipt,
+                        firebaseLoading: false,
+                    });
+                });
+
+                // Add event listener
+                fbUserId.on('child_changed', snapshot => {
+                    const activeReceipt =
+                        (snapshot.val() && snapshot.val().active) || '';
+                    console.log('Purchases: active receipt', activeReceipt);
+                    this.setState({
+                        activeReceipt,
+                        firebaseLoading: false,
+                    });
+                });
+            } else {
+                this.setState({ firebaseLoading: false });
+            }
+        });
+    }
+
+    // const { params } = props.navigation.state;
     // If there is an orderID, render QR code.
-    return (
-        <View style={{
-            flex: 1
-        }}>
-            {params ? (<QRPage receiptId={params.orderID} />) : (<NoQRPage />)}
-        </View>
-    );
-};
+    render() {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                }}
+            >
+                {this.state.activeReceipt ? (
+                    <QRPage receipt={this.state.activeReceipt} />
+                ) : (
+                    <NoQRPage />
+                )}
+            </View>
+        );
+    }
+}
 
 export default Purchases;
