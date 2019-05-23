@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ListReceipts from './ListReceipts';
+import Loading from '../loading/loadingScreen';
 import { getReceiptsUser } from '../../../API/expressoAPI'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 export default class ProfilePage extends Component {
-  state = { userReceipts: [] };
+  state = { userReceipts: [], loading: true, };
 
   componentDidMount() {
     // load current user
@@ -20,18 +21,21 @@ export default class ProfilePage extends Component {
           // Update state
           this.setState({
               userReceipts: receipts,
+              loading: false,
           });
         });
       }
     });
-    
+
       //console.log({receipts})
   };
 
     render() {
         return (
             <View style = {styles.container}>
-                <ListReceipts receiptList = {this.state.userReceipts} />
+              {this.state.loading && <Loading />}
+
+              <ListReceipts receiptList = {this.state.userReceipts} />
             </View>
         );
     }

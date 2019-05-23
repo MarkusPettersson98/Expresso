@@ -59,11 +59,9 @@ class Profile extends React.Component {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.paymentTopView}>
-          <View style={styles.paymentInfoView}>
-            <Text style={styles.paymentHeader}>Betalningsmetod</Text>
-            <PaymentMethod />
-          </View>
+        <View style={styles.paymentInfoView}>
+          <Text style={styles.paymentHeader}>Betalningsmetod</Text>
+          <PaymentMethod />
         </View>
       </View>
     );
@@ -83,25 +81,18 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 20,
   },
-  paymentTopView: {
-    height: '37%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   paymentInfoView: {
-    height: '90%',
-    backgroundColor: '#d2d8d5',
     width: '100%',
-    borderRadius: 20,
-    padding: 20,
-    borderColor: 'white',
-    borderWidth: 5,
-    bottom: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 25,
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    borderColor: '#D7D7D7',
   },
   paymentHeader: {
-    fontSize: 20,
-    color: 'grey',
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#57454B',
   },
   personHeader: {
     fontSize: 20,
