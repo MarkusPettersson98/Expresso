@@ -59,24 +59,24 @@ class CoffeeItem extends React.Component {
             this.props.cart.shopId != null
         ) {
             this.hideModal();
-                // If cart contains coffee from another café
-                Alert.alert(
-                    'Varning',
-                    'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
-                    [
-                        {
-                            text: 'Avbryt',
-                            style: 'cancel',
+            // If cart contains coffee from another café
+            Alert.alert(
+                'Varning',
+                'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
+                [
+                    {
+                        text: 'Avbryt',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'Rensa',
+                        onPress: () => {
+                            this.props.onClearCart();
+                            this.showModal();
                         },
-                        {
-                            text: 'Rensa',
-                            onPress: () => {
-                                this.props.onClearCart();
-                                this.showModal();
-                            },
-                        },
-                    ],
-                );
+                    },
+                ],
+            );
         } else {
             this.showModal();
         }
@@ -125,7 +125,13 @@ class CoffeeItem extends React.Component {
                             justifyContent: 'flex-start',
                         }}
                     >
-                        <SimpleLineIcons name="cup" size={20} color="#5AA3B7" />
+                        <View style={{ height: 20, width: 20 }}>
+                            <SimpleLineIcons
+                                name="cup"
+                                size={20}
+                                color="#5AA3B7"
+                            />
+                        </View>
                         <View
                             style={{
                                 flex: 4,
