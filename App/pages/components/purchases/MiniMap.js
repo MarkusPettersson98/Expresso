@@ -11,8 +11,8 @@ import MapView from 'react-native-maps';
  MiniMap = ({ shop }) => {
 
     const defaultDeltas = {
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
     };
 
     const region = {
@@ -25,7 +25,7 @@ import MapView from 'react-native-maps';
         return (
             <View >
                 <MapView.Marker
-                    title={shop.name}
+                    title={shop.street}
                     coordinate={{
                         latitude: region.latitude,
                         longitude: region.longitude,
