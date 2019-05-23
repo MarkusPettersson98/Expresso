@@ -16,7 +16,7 @@ import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { clearCart } from './components/redux/actions';
 import Modal from 'react-native-modal';
-import ModalComp from './components/checkout/orderPlacedModal';
+import ModalComp from './components/checkout/OrderPlacedModal';
 
 import { getShopById } from '../API/expressoAPI';
 

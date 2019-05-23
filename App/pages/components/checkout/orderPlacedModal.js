@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-    Button,
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
 
-export default class RNF extends Component {
+export default class OrderPlacedModal extends Component {
     constructor(props) {
         super(props);
     }
@@ -22,10 +15,7 @@ export default class RNF extends Component {
 
     render() {
         return (
-            <Modal
-                isVisible={this.props.isVisible}
-                onBackdropPress={() => this.props.hideModal()}
-            >
+            <Modal isVisible={this.props.isVisible}>
                 <View style={styles.modalContainer}>
                     <Text style={styles.thank_you}>Tack för ditt köp!</Text>
                     <Text style={styles.press_text}>
