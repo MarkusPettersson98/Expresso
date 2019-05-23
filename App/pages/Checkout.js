@@ -17,6 +17,8 @@ import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { clearCart } from './components/redux/actions';
 import Modal from 'react-native-modal';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 import { getShopById } from '../API/expressoAPI';
 
@@ -29,10 +31,14 @@ class Checkout extends Component {
     shop: {
       name: '',
     },
+    user: null,
   };
 
   // when mounted first time
   async componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user: user });
+    });
     // Fetch data about which shop we are purchasing coffee from
     const requestedShop = await getShopById(this.props.cart.shopId);
     // This is a whole shop object, which carries more data than just name, e.g. street, coordinates ..
@@ -42,7 +48,8 @@ class Checkout extends Component {
   }
 
   sendTheOrder = async () => {
-    const res = await sendOrderAPI(this.props.cart);
+    const uid = this.state.user.uid || 0;
+    const res = await sendOrderAPI(this.props.cart, uid);
 
     return res;
   };
