@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
-        opacity: 0.8,
+        opacity: 0.75,
     },
     arrowcontainer: {
         width: "100%",
@@ -69,11 +69,15 @@ const styles = StyleSheet.create({
     },
     cafename: {
         color: 'white',
-        fontSize: 40,
+        fontSize: 36,
+        fontWeight: 'bold',
     },
     cafeaddress: {
         color: 'white',
         fontSize: 20,
+        fontWeight: '400',
+        opacity: 0.9,
+
     }
 });
 

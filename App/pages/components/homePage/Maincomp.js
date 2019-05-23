@@ -1,11 +1,10 @@
 import React from 'react';
 import { AppRegistry, ScrollView, View } from 'react-native';
-import { default as ShopView } from './ListShopView';
+import ShopView from './ListShopView';
 
 import { getAllShops, getShopPicture } from '../../../API/expressoAPI';
 
 export default class Maincomp extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = { ShopViews: [] };

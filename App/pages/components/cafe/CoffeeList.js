@@ -28,8 +28,9 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        marginTop: 20,
+        // marginTop: 20,
         alignItems: 'center',
+        backgroundColor: '#F0F7F4',
     },
 });
 

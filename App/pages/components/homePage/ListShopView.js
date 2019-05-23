@@ -17,6 +17,7 @@ const ShopView = ({ name, picture, street, numcoffees, navigation }) => {
                     navigation.navigate('Cafe', {
                         selectedShop: name,
                         picture: picture,
+                        street: street,
                     });
                 }}
             >

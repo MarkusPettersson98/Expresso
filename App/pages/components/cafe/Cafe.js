@@ -28,6 +28,7 @@ class Cafe extends React.Component {
             shopName: props.navigation.state.params.selectedShop,
             CoffeItems: [],
             shopPicture: props.navigation.state.params.picture,
+            street: props.navigation.state.params.street,
         };
     }
 
@@ -50,7 +51,7 @@ class Cafe extends React.Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <CafeHeader picture={this.state.shopPicture} name={this.state.shopName} />
+                <CafeHeader picture={this.state.shopPicture} name={this.state.shopName} address={this.state.street} />
                 <CoffeeList coffeeItems={this.state.CoffeItems} />
                 <View style={{ marginBottom: 30 }}>
                     <CartField />
