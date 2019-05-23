@@ -11,6 +11,10 @@ const BackArrow = props => {
                     props.navigation.goBack();
                 }}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                style={{
+                    width: props.styling.size,
+                    height: props.styling.size,
+                }}
             >
                 {/*Donute Button Image */}
                 <Ionicons

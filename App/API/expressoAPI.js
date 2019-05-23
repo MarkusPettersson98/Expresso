@@ -84,7 +84,7 @@ export const getShopPicture = async wantedShop => {
  * Return a promise object with resolved API call
  * @param wantedShop  The name of the wanted shop
  */
-const getAllShops = async () => {
+export const getAllShops = async () => {
     const myData = await fetch(herokuURL + 'getAllShops/')
         .then(res => res.json())
         .then(response => {
