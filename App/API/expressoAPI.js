@@ -12,10 +12,10 @@ const getCurrentDate = () => {
 
 /** Fixes a shop in order to work well with API-request
  *
- * @param shop A name of a shop, like Veras Café or Bulten.
+ * @param urlArgument A name of a shop, like Veras Café or Bulten.
  */
-const fixShopString = shop => {
-    const fixedString = encodeURIComponent(shop);
+const fixString = urlArgument => {
+    const fixedString = encodeURIComponent(urlArgument);
     return fixedString;
 };
 /**
@@ -23,7 +23,7 @@ const fixShopString = shop => {
  * This includes the names, the coordinates and their drinklist
  */
 export const getShop = async wantedShop => {
-    let fixedString = fixShopString(wantedShop);
+    let fixedString = fixString(wantedShop);
 
     const allInformation = await fetch(herokuURL + 'getShop/' + fixedString)
         .then(res => res.json())
@@ -191,21 +191,13 @@ export const sendOrder = async (cart, uid = 0) => {
           return err;
         });
 };
-/** Fixes a user in order to work well with API-request
- *
- * @param user An id of a user
- */
-const fixUserString = user => {
-    const fixedString = encodeURIComponent(user);
-    return fixedString;
-};
 
 /**
  * Returns all receipts for one user database using heroku
  *
  */
 export const getReceiptsUser = async user => {
-    let fixedString = fixUserString(user);
+    let fixedString = fixString(user);
 
     const allInformation = await fetch(herokuURL + 'getReceiptUser/' + fixedString)
         .then(res => res.json())
