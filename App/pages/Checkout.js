@@ -16,6 +16,7 @@ import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { clearCart } from './components/redux/actions';
 import Modal from 'react-native-modal';
+import ModalComp from './components/checkout/orderPlacedModal';
 
 import { getShopById } from '../API/expressoAPI';
 
@@ -28,6 +29,8 @@ class Checkout extends Component {
         shop: {
             name: '',
         },
+        modalVisible: false,
+        receiptId: '',
     };
 
     // when mounted first time
@@ -44,6 +47,16 @@ class Checkout extends Component {
         const res = await sendOrderAPI(this.props.cart);
 
         return res;
+    };
+
+    //Changes modalVisible-state to true, making ModalComp visible
+    showModal = () => {
+        this.setState({ modalVisible: true });
+    };
+
+    //Changes state to false, hiding ModalComp
+    hideModal = () => {
+        this.setState({ modalVisible: false });
     };
 
     onAddCard = () => {
@@ -213,17 +226,26 @@ class Checkout extends Component {
                             </View>
                             <OrderButton
                                 onPress={async () => {
-                                    this.props.navigation.navigate('Order', {
-                                        orderID: await this.sendTheOrder(),
-                                    });
-
-                                    // clear the cart
-                                    this.props.onClearCart();
+                                    const newReceiptId = await this.sendTheOrder();
+                                    this.setState({ receiptId: newReceiptId });
+                                    this.showModal();
                                 }}
                                 buttonText="BETALA"
                                 disabled={this.state.paymentCard ? false : true}
                             />
                         </View>
+
+                        <ModalComp
+                            isVisible={this.state.modalVisible}
+                            hideModal={() => this.hideModal()}
+                            navFunc={() =>
+                                this.props.navigation.navigate(
+                                    'Order',
+                                    this.state.receiptId,
+                                )
+                            }
+                            clearCart={() => this.props.onClearCart()}
+                        />
 
                         <Modal
                             isVisible={this.state.showPaymentCardModal}
