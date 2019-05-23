@@ -8,11 +8,14 @@ const herokuURL = 'https://expressobackend.herokuapp.com/api/';
  * @param id the id of the sought out customer
  */
 
-export const getReceiptUser = async () => {
-    const receipt = await fetch(herokuURL + 'getReceiptUser/0')
+export const getReceipt = async id => {
+    const receipt = await fetch(herokuURL + 'getReceipt/' + id)
         .then(res => res.json())
         .then(response => {
-            return response;
+            if(response.length) {
+                return response[0]; //Since backend returns a list of receipts
+            }
+            throw 'No receipt found!';
         })
         .catch(error => {
             console.log('ERROR', error);
