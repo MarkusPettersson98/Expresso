@@ -16,149 +16,138 @@ import { incrementCoffee, decrementCoffee } from '../redux/actions';
                      ))}
 
  *  an orderItem is an object with amount and coffee. look in reducer.js for a more detailed example.
- * 
+ *
  */
 
 const CheckoutItem = props => {
-    const orderItem = props.orderItem;
-    const checkDecrementCoffee = orderItem => {
-        if (props.orderItem.amount == 1) {
-            return Alert.alert(
-                'Varning',
-                'Är du säker på att du vill ta bort varan?',
-                [
-                    {
-                        text: 'Avbryt',
-                        style: 'cancel',
-                    },
-                    {
-                        text: 'OK',
-                        onPress: () =>
-                            props.onDecrementCoffee(orderItem.coffee),
-                    },
-                ],
-            );
-        }
-        return props.onDecrementCoffee(orderItem.coffee);
-    };
+  const orderItem = props.orderItem;
+  const checkDecrementCoffee = orderItem => {
+    if (props.orderItem.amount == 1) {
+      return Alert.alert(
+        'Varning',
+        'Är du säker på att du vill ta bort varan?',
+        [
+          {
+            text: 'Avbryt',
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: () => props.onDecrementCoffee(orderItem.coffee),
+          },
+        ],
+      );
+    }
+    return props.onDecrementCoffee(orderItem.coffee);
+  };
 
-    return (
+  return (
+    <View style={styles.container}>
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <SimpleLineIcons name="cup" size={20} color="#5AA3B7" />
+      </View>
+      <View
+        style={{
+          flex: 6,
+        }}
+      >
+        <Text style={styles.titleText}>{orderItem.coffee.name}</Text>
+        <Text style={styles.descText}>
+          {orderItem.coffee.ownMug ? 'Egen mugg' : 'Låna'}
+        </Text>
         <View
-            style={{
-                flexDirection: 'row',
-                marginHorizontal: 24,
-                marginTop: 16,
-                marginBottom: 10,
-                borderBottomColor: '#D7D7D7',
-                borderBottomWidth: 1,
-                paddingBottom: 20,
-            }}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: 15,
+          }}
         >
-            <View
-                style={{
-                    flex: 1,
-                }}
-            >
-                <SimpleLineIcons name="cup" size={20} color="#57454B" />
-            </View>
-            <View
-                style={{
-                    flex: 4,
-                }}
-            >
-                <Text style={styles.titleText}>{orderItem.coffee.name}</Text>
-                <Text style={styles.descText}>
-                    {orderItem.coffee.ownMug ? 'Egen mugg' : 'Lånad mugg'}
-                </Text>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        marginTop: 15,
-                    }}
-                >
-                    <TouchableOpacity
-                        onPress={() => checkDecrementCoffee(orderItem)}
-                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    >
-                        <AntDesign
-                            name="minuscircleo"
-                            size={20}
-                            color="#5AA3B7"
-                        />
-                    </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => checkDecrementCoffee(orderItem)}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <AntDesign name="minuscircleo" size={20} color="#5AA3B7" />
+          </TouchableOpacity>
 
-                    <Text style={styles.numberText}>{orderItem.amount}</Text>
+          <Text style={styles.numberText}>{orderItem.amount}</Text>
 
-                    <TouchableOpacity
-                        onPress={() =>
-                            props.onIncrementCoffee(orderItem.coffee)
-                        }
-                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    >
-                        <AntDesign
-                            name="pluscircleo"
-                            size={20}
-                            color="#5AA3B7"
-                        />
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View
-                style={{
-                    flex: 1,
-                    alignItems: 'flex-end',
-                }}
-            >
-                <Text style={styles.priceText}>{`${
-                    orderItem.amount < 0
-                        ? 0
-                        : orderItem.amount * orderItem.coffee.price
-                } kr`}</Text>
-            </View>
+          <TouchableOpacity
+            onPress={() => props.onIncrementCoffee(orderItem.coffee)}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <AntDesign name="pluscircleo" size={20} color="#5AA3B7" />
+          </TouchableOpacity>
         </View>
-    );
+      </View>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'flex-end',
+        }}
+      >
+        <Text style={styles.priceText}>{`${
+          orderItem.amount < 0 ? 0 : orderItem.amount * orderItem.coffee.price
+        } kr`}</Text>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    titleText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#57454B',
-    },
-    priceText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#57454B',
-    },
-    descText: {
-        fontSize: 14,
-        fontWeight: '400',
-        color: '#7C6A70',
-        marginTop: 6,
-    },
-    numberText: {
-        fontSize: 16,
-        marginHorizontal: 15,
-    },
+  container: {
+    flexDirection: 'row',
+    marginHorizontal: 24,
+    marginTop: 16,
+    marginBottom: 4,
+  },
+  titleText: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#57454B',
+  },
+  titleTextAmount: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#9C9497',
+    letterSpacing: 2,
+  },
+  priceText: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#57454B',
+  },
+  descText: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: '#7C6A70',
+    marginTop: 3,
+  },
+  numberText: {
+    fontSize: 16,
+    marginHorizontal: 15,
+  },
 });
 
 const mapStateToProps = state => {
-    return { cart: state.cart };
+  return { cart: state.cart };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onIncrementCoffee: coffee => {
-            dispatch(incrementCoffee(coffee));
-        },
-        onDecrementCoffee: coffee => {
-            dispatch(decrementCoffee(coffee));
-        },
-    };
+  return {
+    onIncrementCoffee: coffee => {
+      dispatch(incrementCoffee(coffee));
+    },
+    onDecrementCoffee: coffee => {
+      dispatch(decrementCoffee(coffee));
+    },
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(CheckoutItem);
