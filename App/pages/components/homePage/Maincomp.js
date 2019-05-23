@@ -15,12 +15,12 @@ export default class Maincomp extends React.Component {
         // Request all shops names
         const allShops = await getAllShops();
 
-        const shopsWithPictures = await allShops.map(async thisShop => {
+        const shopsWithPictures = await allShops.map(async ({name, street, drinkList}) => {
             return {
-                name: thisShop.name,
-                picture: await getShopPicture(thisShop.name),
-                street: thisShop.street,
-                coffees: thisShop.drinkList.length,
+                name: name,
+                picture: await getShopPicture(name),
+                street: street,
+                coffees: drinkList.length,
             };
         });
 

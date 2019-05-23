@@ -42,11 +42,13 @@ const ShopView = ({ name, picture, street, numcoffees, navigation }) => {
                             <Text style={styles.coffeenumber}>
                                 {numcoffees}
                             </Text>
-                            <Ionicons
-                                name="ios-cafe"
-                                size={20}
-                                style={styles.cafeicon}
-                            />
+                            <View style={{ width: 20, height: 20 }}>
+                                <Ionicons
+                                    name="ios-cafe"
+                                    size={20}
+                                    color={'black'}
+                                />
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -116,7 +118,6 @@ const styles = {
         fontSize: 18,
         color: '#57454B',
         marginRight: 5,
-        top: -1,
     },
     image: {
         width: '100%',
