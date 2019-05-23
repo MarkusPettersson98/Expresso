@@ -2,16 +2,18 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-/** 
+/**
  * This view shows the emptycart-icon and text, perhaps this view could benefit from recommending the customer a purchase
  * that s/he has done before.
  * This view does not have navigation, the navigation lies within the header folder.
-*/
+ */
 const EmptyCheckout = () => {
     return (
         <View style={styles.app}>
             <View style={styles.content}>
-                <Feather name="shopping-bag" size={64} color="#57454B" />
+                <View style={{ width: 64, height: 64 }}>
+                    <Feather name="shopping-bag" size={64} color="#57454B" />
+                </View>
                 <Text style={styles.textTitle}>Här var det tomt.</Text>
                 <Text style={styles.textDesc}>Lägg till en vara först.</Text>
             </View>

@@ -3,9 +3,6 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 const herokuURL = 'https://expressobackend.herokuapp.com/api/';
 
-const firebaseURL =
-    'https://share-places-1555452472826.firebaseio.com/kvitton.json';
-
 /**
  * Function to get the current date, useful for when creating reciepts
  */
@@ -87,7 +84,7 @@ export const getShopPicture = async wantedShop => {
  * Return a promise object with resolved API call
  * @param wantedShop  The name of the wanted shop
  */
-const getAllShops = async () => {
+export const getAllShops = async () => {
     const myData = await fetch(herokuURL + 'getAllShops/')
         .then(res => res.json())
         .then(response => {
@@ -121,6 +118,27 @@ export const getAllShopNames = async () => {
     };
     shops = await getAllShops();
     return shops.map(getName);
+};
+
+/**Returns all the receipts of a specified user - currently only customer '0' //TODO:add id as param
+ *
+ * @param id the id of the sought out customer
+ */
+
+export const getReceipt = async id => {
+    const receipt = await fetch(herokuURL + 'getReceipt/' + id)
+        .then(res => res.json())
+        .then(response => {
+            if(response.length) {
+                return response[0]; //Since backend returns a list of receipts
+            }
+            throw 'No receipt found!';
+        })
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
+    return receipt;
 };
 
 /*
@@ -165,7 +183,7 @@ export const sendOrder = async (cart, uid = 0) => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log("Receipt link: ", getReceiptLink(res.id));
+            console.log('Receipt link: ', getReceiptLink(res.id));
             return res.id;
         })
         .catch(err => {
