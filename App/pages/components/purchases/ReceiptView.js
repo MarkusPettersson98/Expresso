@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: '#FAFAFA',
         top: 40,
-    },
+    }, 
     botContainer: {
         width: '100%',
         height: '100%',
