@@ -1,22 +1,20 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
 
-const Drawer = props => {
-    //Structure for the navigatin Drawer
-    const toggleDrawer = navigationProps => {
-        //Props to open/close the drawer
-        navigationProps.toggleDrawer();
-    };
+const BackArrow = props => {
     return (
-        <View style={{ flexDirection: 'row', margin: 5 }}>
+        <View style={{ flexDirection: 'row', margin: props.styling.margin }}>
             <TouchableOpacity
-                onPress={() => toggleDrawer(props.navigationProps)}
+                onPress={() => {
+                    props.navigation.goBack();
+                }}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
                 {/*Donute Button Image */}
                 <Ionicons
-                    name="ios-menu"
+                    name="ios-arrow-back"
                     size={props.styling.size}
                     color={props.styling.color}
                 />
@@ -25,4 +23,4 @@ const Drawer = props => {
     );
 };
 
-export default Drawer;
+export default withNavigation(BackArrow);

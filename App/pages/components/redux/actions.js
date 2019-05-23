@@ -5,6 +5,7 @@ export const CART_ADD_COFFEE = 'CART_ADD_COFFEE';
 export const CART_CLEAR = 'CART_CLEAR';
 export const ITEM_INCREMENT = 'ITEM_INCREMENT';
 export const ITEM_DECREMENT = 'ITEM_DECREMENT';
+export const ADD_SHOP = 'ADD_SHOP';
 
 /*
  * other constants
@@ -28,4 +29,8 @@ export function addCoffee(coffee, ownMug) {
 
 export function clearCart() {
     return { type: CART_CLEAR };
+}
+
+export function addShop(shop) {
+    return { type: ADD_SHOP, shop };
 }

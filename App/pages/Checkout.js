@@ -1,77 +1,372 @@
-import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import {
+    View,
+    ScrollView,
+    TouchableOpacity,
+    Text,
+    TextInput,
+    StyleSheet,
+} from 'react-native';
 import { connect } from 'react-redux';
-import { AntDesign } from '@expo/vector-icons';
-import { addCoffee } from './components/redux/actions';
+import { sendOrder as sendOrderAPI } from '../API/expressoAPI';
 import EmptycheckoutPage from './components/checkout/emptyCheckout';
-import NonEmptyCheckoutPage from './components/checkout/NonEmptyCheckout';
+import CheckoutItem from './components/checkout/CheckoutItem';
+import OrderButton from './components/checkout/OrderButton';
+import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
+import { clearCart } from './components/redux/actions';
+import Modal from 'react-native-modal';
 
-/**
- * This is the view that is being shown when navigating to checkout.
- * This view has the ability to show
- * NonEmptyCheckoutPage
- * or
- * EmptyCheckoutPage
- * and does so depending on the boolean isCartPopulated.
- *
- * The TouchableOpacities are remnants of when we wanted to have the ability to add items directly from the checkout-view
- * and will be removed in stable versions.
- */
+import { getShopById } from '../API/expressoAPI';
 
-class CheckoutPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { isCartPopulated: props.cart.amount };
+class Checkout extends Component {
+    state = {
+        paymentCard: '',
+        paymentCardTemp: '',
+        showPaymentCardModal: false,
+        cardErrorText: '',
+        shop: {
+            name: '',
+        },
+    };
+
+    // when mounted first time
+    async componentDidMount() {
+        // Fetch data about which shop we are purchasing coffee from
+        const requestedShop = await getShopById(this.props.cart.shopId);
+        // This is a whole shop object, which carries more data than just name, e.g. street, coordinates ..
+        this.setState({
+            shop: requestedShop,
+        });
     }
 
-    // Intended effect:  If props is updated this function is called, we check if cart is empty, if empty, update the component (re-render)
-    shouldComponentUpdate(nextProps) {
-        // if and ONLY if newCart is empty AND the current cart is NOT empty: we update state and rerender.
-        if (this.state.isCartPopulated !== 0 && nextProps.cart.amount === 0) {
-            this.setState({ isCartPopulated: nextProps.cart.amount });
-            return true;
+    sendTheOrder = async () => {
+        const res = await sendOrderAPI(this.props.cart);
+
+        return res;
+    };
+
+    onAddCard = () => {
+        const regExp = /^[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4}$/; // "XXXX XXXX XXXX XXXX" or "XXXXXXXXXXXXXXXX"
+        const paymentCardTemp = this.state.paymentCardTemp;
+        if (regExp.test(paymentCardTemp)) {
+            // "Valid" card
+            this.setState({
+                paymentCard: this.state.paymentCardTemp,
+                paymentCardTemp: '',
+                showPaymentCardModal: false,
+                cardErrorText: '',
+            });
+        } else {
+            this.setState({ cardErrorText: 'Not a valid card number!' });
         }
-        return false;
-    }
+    };
+
+    onCardTextChange = text => {
+        this.setState({ paymentCardTemp: text, cardErrorText: '' });
+    };
 
     render() {
+        const cart = this.props.cart;
+        const total = cart.price;
+        const orderItems = cart.orderItems;
+
         return (
-            <View
-                style={{
-                    flex: 1,
-                }}
-            >
-                <View
-                    style={{
-                        flex: 5,
-                        alignItems: 'center',
-                        width: '100%',
-                    }}
-                >
-                    {!this.state.isCartPopulated ? (
-                        <EmptycheckoutPage />
-                    ) : (
-                        <NonEmptyCheckoutPage />
-                    )}
-                </View>
+            <View style={{ flex: 1, backgroundColor: '#FFF' }}>
+                {!this.props.cart.amount ? (
+                    <EmptycheckoutPage />
+                ) : (
+                    <View style={{ flex: 1 }}>
+                        <ScrollView
+                            contentContainerStyle={{
+                                flexGrow: 1,
+                                paddingBottom: 150,
+                            }}
+                        >
+                            {/* Varor */}
+                            <View style={styles.viewBlock}>
+                                <Text style={styles.viewBlockTitle}>Varor</Text>
+                                {orderItems.map((orderItem, i) => (
+                                    <CheckoutItem
+                                        key={i}
+                                        orderItem={orderItem}
+                                    />
+                                ))}
+                            </View>
+
+                            {/* Uthämtning */}
+                            <View style={styles.viewBlock}>
+                                <Text style={styles.viewBlockTitle}>
+                                    Uthämtning
+                                </Text>
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        paddingHorizontal: 24,
+                                        marginTop: 10,
+                                    }}
+                                >
+                                    <View
+                                        style={{
+                                            marginRight: 20,
+                                            marginTop: 5,
+                                        }}
+                                    >
+                                        <SimpleLineIcons
+                                            name="location-pin"
+                                            size={20}
+                                            color="#5AA3B7"
+                                        />
+                                    </View>
+
+                                    <View>
+                                        <Text
+                                            style={{
+                                                color: '#57454B',
+                                                fontSize: 16,
+                                            }}
+                                        >
+                                            {this.state.shop.name}
+                                        </Text>
+                                        <Text
+                                            style={{
+                                                color: '#57454B',
+                                                fontSize: 14,
+                                                marginTop: 3,
+                                            }}
+                                        >
+                                            {this.state.shop.street}
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+
+                            {/* Betalningsmetod */}
+                            <View style={styles.viewBlock}>
+                                <Text style={styles.viewBlockTitle}>
+                                    Betalningsmetod
+                                </Text>
+                                <View
+                                    style={{
+                                        width: '100%',
+                                        flexDirection: 'row',
+                                        paddingHorizontal: 24,
+                                        marginTop: 10,
+                                    }}
+                                >
+                                    <View style={{ marginRight: 20 }}>
+                                        <AntDesign
+                                            name="creditcard"
+                                            size={16}
+                                            color="#5AA3B7"
+                                        />
+                                    </View>
+
+                                    <Text
+                                        style={{
+                                            color: '#57454B',
+                                            fontSize: 14,
+                                        }}
+                                    >
+                                        {this.state.paymentCard
+                                            ? `**** **** **** ${this.state.paymentCard.substring(
+                                                  12,
+                                                  16,
+                                              )}`
+                                            : 'Inget kort tillagt!'}
+                                    </Text>
+
+                                    <TouchableOpacity
+                                        style={{ marginLeft: 'auto' }}
+                                        hitSlop={{
+                                            top: 10,
+                                            bottom: 10,
+                                            left: 10,
+                                            right: 10,
+                                        }}
+                                        onPress={() =>
+                                            this.setState({
+                                                showPaymentCardModal: true,
+                                            })
+                                        }
+                                    >
+                                        <Text
+                                            style={{
+                                                color: '#5AA3B7',
+                                                fontSize: 12,
+                                            }}
+                                        >
+                                            {this.state.paymentCard
+                                                ? 'Ändra'
+                                                : 'Lägg till'}
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </ScrollView>
+
+                        {/* Nedre betalningsruta */}
+                        <View style={styles.bottomPayBlock}>
+                            <View style={styles.totalAmountContainer}>
+                                <Text style={styles.totalText}>Totalt</Text>
+                                <Text style={styles.totalText}>{total} kr</Text>
+                            </View>
+                            <OrderButton
+                                onPress={async () => {
+                                    this.props.navigation.navigate('Order', {
+                                        orderID: await this.sendTheOrder(),
+                                    });
+
+                                    // clear the cart
+                                    this.props.onClearCart();
+                                }}
+                                buttonText="BETALA"
+                                disabled={this.state.paymentCard ? false : true}
+                            />
+                        </View>
+
+                        <Modal
+                            isVisible={this.state.showPaymentCardModal}
+                            onBackdropPress={() =>
+                                this.setState({ showPaymentCardModal: false })
+                            }
+                        >
+                            <View style={styles.modalContainer}>
+                                <Text style={styles.viewBlockTitle}>
+                                    Lägg till kort
+                                </Text>
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                        marginHorizontal: 24,
+                                        marginVertical: 5,
+                                    }}
+                                >
+                                    <TextInput
+                                        style={styles.cardInput}
+                                        textContentType="creditCardNumber"
+                                        keyboardType="numeric"
+                                        placeholder="XXXX XXXX XXXX XXXX"
+                                        onChangeText={text =>
+                                            this.onCardTextChange(text)
+                                        }
+                                        value={this.state.paymentCardTemp}
+                                        maxLength={16}
+                                    />
+                                    <TouchableOpacity
+                                        style={styles.addCardBtn}
+                                        hitSlop={{
+                                            top: 10,
+                                            bottom: 10,
+                                            left: 10,
+                                            right: 10,
+                                        }}
+                                        onPress={this.onAddCard}
+                                    >
+                                        <Text
+                                            style={{
+                                                color: '#fff',
+                                                fontSize: 12,
+                                            }}
+                                        >
+                                            Lägg till
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <Text
+                                    style={{
+                                        color: 'red',
+                                        fontSize: 12,
+                                        marginHorizontal: 24,
+                                        marginTop: 6,
+                                    }}
+                                >
+                                    {this.state.cardErrorText}
+                                </Text>
+                            </View>
+                        </Modal>
+                    </View>
+                )}
             </View>
         );
     }
 }
 
-const mapStateToProps = state => {
-  return { cart: state.cart };
-};
+const styles = StyleSheet.create({
+    modalContainer: {
+        width: '100%',
+        height: 150,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+    },
+    viewBlock: {
+        borderBottomColor: '#D7D7D7',
+        borderBottomWidth: 1,
+        paddingBottom: 20,
+    },
+    viewBlockTitle: {
+        fontSize: 16,
+        fontWeight: '600',
+        marginBottom: 6,
+        color: '#57454B',
+        marginHorizontal: 24,
+        marginTop: 20,
+    },
+    bottomPayBlock: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        height: 140,
+        backgroundColor: '#57454B',
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    totalAmountContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 24,
+        marginBottom: 20,
+    },
+    totalText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+    },
+    cardInput: {
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 0,
+        borderBottomWidth: 2,
+        color: '#57454B',
+        marginRight: 24,
+    },
+    addCardBtn: {
+        backgroundColor: '#5AA3B7',
+        paddingHorizontal: 15,
+        borderRadius: 5,
+        justifyContent: 'center',
+    },
+});
 
 const mapDispatchToProps = dispatch => {
-  return {
-    onAddItem: coffee => {
-      dispatch(addCoffee(coffee));
-    },
-  };
+    return {
+        onClearCart: () => {
+            dispatch(clearCart());
+        },
+    };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CheckoutPage);
+const mapStateToProps = state => {
+    return { cart: state.cart };
+};
+
+export default withNavigation(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    )(Checkout),
+);
