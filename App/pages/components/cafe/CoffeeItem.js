@@ -63,8 +63,7 @@ class CoffeeItem extends React.Component {
             // If cart contains coffee from another café
             Alert.alert(
                 'Varning',
-                'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
-                [
+                `Varukorgen innehåller kaffe från ${this.props.cart.shop.name}. Vill du rensa varukorgen och lägga till en ${this.coffee.name} från ${this.props.shopName} istället?`,                [
                     {
                         text: 'Avbryt',
                         style: 'cancel',

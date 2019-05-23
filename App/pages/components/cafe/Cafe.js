@@ -57,7 +57,7 @@ class Cafe extends React.Component {
                     address={this.state.street}
                 />
                 <View style={styles.divisor}/>
-                <CoffeeList coffeeItems={this.state.CoffeItems} />
+                <CoffeeList coffeeItems={this.state.CoffeItems} shopName={this.state.shopName}/>
                 <View style={{ marginBottom: 30 }}>
                     <CartField />
                 </View>
