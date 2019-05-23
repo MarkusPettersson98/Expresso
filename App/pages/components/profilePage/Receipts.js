@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import ListReceipts from './ListReceipts';
 import Loading from '../loading/loadingScreen';
 import { getReceiptsUser } from '../../../API/expressoAPI'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-export default class ProfilePage extends Component {
+export default class Receipts extends Component {
   state = { userReceipts: [], loading: true, };
 
   componentDidMount() {
@@ -26,8 +26,6 @@ export default class ProfilePage extends Component {
         });
       }
     });
-
-      //console.log({receipts})
   };
 
     render() {

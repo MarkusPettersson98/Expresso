@@ -7,7 +7,7 @@ import ListCoffees from './ListCoffees';
 /*
 TODO: Hämta informationen på rätt sätt
 */
-class listReceipts extends React.Component {
+class ListReceipts extends React.Component {
   state = {
     activeSections: [],
   };
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default withNavigation(listReceipts);
+export default withNavigation(ListReceipts);

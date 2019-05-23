@@ -11,12 +11,6 @@ Page to show the userinformation.
 
 Gets called by ProfilePage.js
 
-TODO:
-- ersätta this.props mot data från firebase om användaren
-- utseende
-- Ska man kunna ändra sina uppgifter. Isf lägga till knapp som tar en till en sida där uppgifter kan ändras.
-Har lagt till navigering till en kvittosida för att visa alla tidigare köp men den kan lika väl användas för att navigera till att ändra
-uppgifter.
 */
 class Profile extends React.Component {
   state = { loading: false };
