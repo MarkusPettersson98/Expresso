@@ -194,9 +194,9 @@ class Checkout extends Component {
                 <Text style={styles.totalText}>{total} kr</Text>
               </View>
               <OrderButton
-                onPress={() => {
+                onPress={async () => {
                   this.setState({ loading: true });
-                  const newReceiptId = this.sendTheOrder();
+                  const newReceiptId = await this.sendTheOrder();
                   this.setState({ receiptId: newReceiptId });
                   this.showModal();
                 }}
