@@ -151,7 +151,13 @@ class CoffeeItem extends React.Component {
                             justifyContent: 'flex-start',
                         }}
                     >
-                        <SimpleLineIcons name="cup" size={20} color="#5AA3B7" />
+                        <View style={{ height: 20, width: 20 }}>
+                            <SimpleLineIcons
+                                name="cup"
+                                size={20}
+                                color="#5AA3B7"
+                            />
+                        </View>
                         <View
                             style={{
                                 flex: 4,
