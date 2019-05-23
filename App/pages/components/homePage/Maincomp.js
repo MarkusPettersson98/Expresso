@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
-import { default as ShopView } from './ListShopView';
+import { AppRegistry, ScrollView, View } from 'react-native';
+import ShopView from './ListShopView';
 
 import { getAllShops, getShopPicture } from '../../../API/expressoAPI';
 
@@ -55,10 +55,21 @@ export default class Maincomp extends React.Component {
 }
 
 const styles = {
-    container: {
-        width: '100%',
-        flexDirection: 'column',
-        backgroundColor: '#F0F7F4',
-        justifyContent: 'center',
-    },
+  container: {
+      width: '100%',
+      flexDirection: 'column',
+      backgroundColor: '#FAFAFA',
+      justifyContent: 'center',
+  },
+  cardcontainer: {
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+
+        elevation: 2,
+  }
 };
