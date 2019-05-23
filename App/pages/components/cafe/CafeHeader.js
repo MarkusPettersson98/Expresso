@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         fontWeight: '300',
         color: '#57454B',
         fontSize: 26,
-        letterSpacing: 2,
+        letterSpacing: 1,
     },
     image: {
         width: '100%',
