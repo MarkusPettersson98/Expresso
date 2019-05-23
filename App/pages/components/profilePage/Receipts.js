@@ -2,62 +2,32 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ListReceipts from './ListReceipts';
 import { getReceiptsUser } from '../../../API/expressoAPI'
-
-let userID = 0;
-
-
-
-const list = [
-    {
-      title: {
-        date: '2019-01-01',
-        shop: 'Bulten',
-        total: '40'
-      },
-      content: {
-
-      },
-    },
-    {
-      title: {
-        date: '2019-01-02',
-        shop: 'Bibblan',
-        total: '100'
-      },
-      content: {
-
-      },
-    },
-    {
-      title: {
-        date: '2019-01-03',
-        shop: 'Linsen',
-        total: '50'
-      },
-      content: {
-
-      },
-    },
-
-]
-
-
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default class ProfilePage extends Component {
   state = { userReceipts: [] };
 
-  async componentDidMount() {
-    // Request all recipts with userID that will be loaded from redux
-    const receipts = await getReceiptsUser(userID);
-    Promise.all(receipts).then(() => {
+  componentDidMount() {
+    // load current user
+    firebase.auth().onAuthStateChanged(async user => {
+      this.setState({ user: user });
+      if (user) {
+        // Request all recipts with userID that will be loaded from redux
+        const receipts = await getReceiptsUser(user.uid);
+        Promise.all(receipts).then(() => {
 
-      // Update state
-      this.setState({
-          userReceipts: receipts,
-      });
-      console.log({receipts})
-  });
-};
+          // Update state
+          this.setState({
+              userReceipts: receipts,
+          });
+        });
+      }
+    });
+    
+      //console.log({receipts})
+  };
+
     render() {
         return (
             <View style = {styles.container}>

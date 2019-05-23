@@ -130,7 +130,7 @@ export const getReceiptLink = id => {
  * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
  * @param selectedShop The shop of which the order belongs to.
  */
-export const sendOrder = async cart => {
+export const sendOrder = async (cart, uid = 0) => {
     const { amount, price, shop, orderItems } = cart;
 
     const reciept = {
@@ -139,7 +139,7 @@ export const sendOrder = async cart => {
         coffees: orderItems,
         shop: shop,
         date: getCurrentDate(),
-        user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
+        user: uid, // TODO: Replace with authenticated firebase user, this is only a mock
     };
 
     const sendOrderUrl = herokuURL + "postOrder/"
