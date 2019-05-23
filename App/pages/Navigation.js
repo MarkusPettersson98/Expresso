@@ -6,7 +6,6 @@ import {
     createAppContainer,
 } from 'react-navigation';
 
-
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
@@ -14,7 +13,7 @@ import Checkout from './Checkout';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
-import BackArrow from './components/header/BackArrow'
+import BackArrow from './components/header/BackArrow';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CartField from './components/CartField';
 
@@ -25,13 +24,6 @@ const headerStyling = {
         height: 60,
     },
     headerTintColor: '#fff',
-};
-
-// determines icon sizes and color, could possibly be moved to a 'styles'-file to avoid passing props.
-const headerIconStyling = {
-    size: 32,
-    color: '#F0F7F4',
-    margin: 5,
 };
 
 const tabIconStyling = {
@@ -171,18 +163,19 @@ export const RootStack = createStackNavigator(
             }),
         },
         Checkout: {
-          screen: Checkout,
-          navigationOptions: ({ navigation }) => ({
-              headerRight: <ClearCheckoutHeader styling={headerIconStyling}/>,
-              headerLeft: <BackArrow styling={headerIconStyling}/>,
-              title: 'Betalning',
-              ...headerStyling,
-          }),
+            screen: Checkout,
+            navigationOptions: ({ navigation }) => ({
+                headerRight: <View style={styles.clearcheckout}><ClearCheckoutHeader/></View>,
+                headerLeft: <View style={styles.backarrow}><BackArrow/></View>,
+                title: 'Betalning',
+                ...headerStyling,
+            }),
         },
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
                 header: null,
+                ...headerStyling,
             }),
         },
     },
@@ -190,5 +183,14 @@ export const RootStack = createStackNavigator(
         mode: 'card',
     },
 );
+
+const styles = {
+    backarrow: {
+        marginLeft: 13,
+    },
+    clearcheckout: {
+        marginRight: 10,
+    },
+};
 
 export default createAppContainer(RootStack);
