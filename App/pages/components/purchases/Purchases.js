@@ -16,7 +16,7 @@ const Purchases = props => {
             <View style={styles.innerContainer}>
                 <View style={styles.qr}>
                     <QRCode
-                        value={props.QR} //Ska vara en länk till den beställning som man gjort
+                        value={getReceiptLink(props.QR)} //Ska vara en länk till den beställning som man gjort
                         size={260}
                         bgColor="black"
                         fgColor="white"
