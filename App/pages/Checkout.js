@@ -51,7 +51,7 @@ class Checkout extends Component {
 
   sendTheOrder = async () => {
     this.setState({ loading: true });
-    const uid = this.state.user.uid || 0;
+    const uid = this.state.user ? this.state.user.uid : 0;
 
     sendOrderAPI(this.props.cart, uid)
       .then(res => {
