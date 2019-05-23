@@ -3,8 +3,6 @@ import Purchases from './components/purchases/Purchases';
 
 export default class orderpage extends Component {
     render() {
-        return (
-            <Purchases />
-        );
+        return <Purchases QR={this.props.navigation.state.params.orderID} />;
     }
 }

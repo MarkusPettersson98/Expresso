@@ -6,7 +6,6 @@ import {
     createAppContainer,
 } from 'react-navigation';
 
-
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
@@ -14,7 +13,7 @@ import Checkout from './Checkout';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
-import BackArrow from './components/header/BackArrow'
+import BackArrow from './components/header/BackArrow';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CartField from './components/CartField';
 
@@ -93,9 +92,9 @@ export const Tabs = createBottomTabNavigator(
         },
 
         Order: {
-            screen: () => (
+            screen: ({ navigation }) => (
                 <View style={{ flex: 1 }}>
-                    <OrderPage />
+                    <OrderPage navigation={navigation} />
                     <CartField />
                 </View>
             ),
@@ -166,23 +165,25 @@ export const RootStack = createStackNavigator(
             screen: Tabs,
             navigationOptions: ({ navigation }) => ({
                 headerTitle: <ExpressoLogoHeader />,
-                title: ' ',
                 ...headerStyling,
             }),
         },
         Checkout: {
-          screen: Checkout,
-          navigationOptions: ({ navigation }) => ({
-              headerRight: <ClearCheckoutHeader styling={headerIconStyling}/>,
-              headerLeft: <BackArrow styling={headerIconStyling}/>,
-              title: 'Betalning',
-              ...headerStyling,
-          }),
+            screen: Checkout,
+            navigationOptions: ({ navigation }) => ({
+                headerRight: (
+                    <ClearCheckoutHeader styling={headerIconStyling} />
+                ),
+                headerLeft: <BackArrow styling={headerIconStyling} />,
+                title: 'Betalning',
+                ...headerStyling,
+            }),
         },
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
-                header: null,
+                headerLeft: <BackArrow styling={headerIconStyling} />,
+                ...headerStyling,
             }),
         },
     },

@@ -40,6 +40,12 @@ class Checkout extends Component {
         });
     }
 
+    sendTheOrder = async () => {
+        const res = await sendOrderAPI(this.props.cart);
+
+        return res;
+    };
+
     onAddCard = () => {
         const regExp = /^[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4} {0,1}[0-9]{4}$/; // "XXXX XXXX XXXX XXXX" or "XXXXXXXXXXXXXXXX"
         const paymentCardTemp = this.state.paymentCardTemp;
@@ -105,7 +111,7 @@ class Checkout extends Component {
                                             marginRight: 20,
                                             marginTop: 5,
                                             height: 20,
-                                            widht: 20,
+                                            width: 20,
                                         }}
                                     >
                                         <SimpleLineIcons
@@ -153,8 +159,8 @@ class Checkout extends Component {
                                     <View
                                         style={{
                                             marginRight: 20,
-                                            width: 16,
                                             height: 16,
+                                            width: 16,
                                         }}
                                     >
                                         <AntDesign
@@ -214,13 +220,11 @@ class Checkout extends Component {
                                 <Text style={styles.totalText}>{total} kr</Text>
                             </View>
                             <OrderButton
-                                onPress={() => {
-                                    console.log('BETALA');
-                                    this.props.navigation.navigate('Order');
-                                    // TODO: Use Emils and Lucas solution to generate QR code.
+                                onPress={async () => {
+                                    this.props.navigation.navigate('Order', {
+                                        orderID: await this.sendTheOrder(),
+                                    });
 
-                                    // also perhaps check if the user has credits.
-                                    sendOrderAPI(this.props.cart);
                                     // clear the cart
                                     this.props.onClearCart();
                                 }}
