@@ -13,7 +13,9 @@ import { Ionicons } from '@expo/vector-icons';
 const OrderCartIconCounter = ({ cartAmount }) => {
     return (
         <View>
-            <Ionicons name="ios-cart" size={25} color={'white'} />
+            <View styles={{ width: 25, height: 25 }}>
+                <Ionicons name="ios-cart" size={25} color={'white'} />
+            </View>
             <Text style={styles.cartIconText}>{cartAmount}</Text>
         </View>
     );
