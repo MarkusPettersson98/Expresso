@@ -16,21 +16,24 @@ const CafeHeader = ({ picture, name, address }) => {
                 source={picture}
                 resizeMode="cover"
                 style={styles.image}
-            >
-                <View style={styles.backarrow}><BackArrow/></View>  
+            > 
                 
             </ImageBackground>
-            <View style={styles.textcontainer}>
+            <View style={styles.contentcontainer}>
+                <View style={styles.arrowcontainer}>
+                    <View style={styles.backarrow}><BackArrow/></View>
+                </View>
+                <View style={styles.textcontainer}>
                     <Text style={styles.cafename}>{name}</Text>
                     <Text style={styles.cafeaddress}>{address}</Text>
                 </View>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     item: {
-        justifyContent: 'flex-start',
         height: "35%",
         justifyContent: 'center',
         borderColor: '#F0F7F4',
@@ -39,23 +42,30 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
-        opacity: 0.9,
+        opacity: 0.8,
+    },
+    arrowcontainer: {
+        width: "100%",
+        height: "30%",
     },
     backarrow: {
         marginLeft: "5%",
         marginTop: "12%",
         width: 30,
         height: 30,
-        zIndex: 999,
     },
-    textcontainer: {
+    contentcontainer: {
         margin: 'auto',
-        alignItems: 'center',
-        justifyContent: 'center',
         width: "100%",
         height: "100%",
         position: 'absolute',
         top: 0,
+    },
+    textcontainer: {
+        height: "70%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: "20%",
     },
     cafename: {
         color: 'white',
