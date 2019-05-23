@@ -7,7 +7,7 @@ import ListCoffees from './ListCoffees';
 /*
 TODO: Hämta informationen på rätt sätt
 */
-class ListReceipts extends React.Component {
+class ListReceipts extends Component {
   state = {
     activeSections: [],
   };

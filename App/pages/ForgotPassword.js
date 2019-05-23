@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  View,
   TouchableOpacity,
   TextInput,
   Text,
@@ -30,7 +29,6 @@ class ForgotPasswordPage extends React.Component {
       })
       .catch(error => {
         // Handle Errors here.
-        const errorCode = error.code;
         const errorMessage = error.message;
         this.setState({ errorMessage, loading: false });
         return Alert.alert('Error', errorMessage, [

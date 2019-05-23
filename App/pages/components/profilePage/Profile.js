@@ -12,7 +12,7 @@ Page to show the userinformation.
 Gets called by ProfilePage.js
 
 */
-class Profile extends React.Component {
+class Profile extends Component {
   state = { loading: false };
 
   handleLogout = () => {
