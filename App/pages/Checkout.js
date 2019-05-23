@@ -13,6 +13,7 @@ import EmptycheckoutPage from './components/checkout/emptyCheckout';
 import CheckoutItem from './components/checkout/CheckoutItem';
 import OrderButton from './components/checkout/OrderButton';
 import PaymentMethod from './components/payment/paymentMethod';
+import LoadingOverlay from './components/loading/loadingOverlay';
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { clearCart } from './components/redux/actions';
@@ -32,6 +33,7 @@ class Checkout extends Component {
       name: '',
     },
     user: null,
+    loading: false,
   };
 
   // when mounted first time
@@ -48,10 +50,22 @@ class Checkout extends Component {
   }
 
   sendTheOrder = async () => {
+    this.setState({ loading: true });
     const uid = this.state.user.uid || 0;
-    const res = await sendOrderAPI(this.props.cart, uid);
 
-    return res;
+    sendOrderAPI(this.props.cart, uid)
+      .then(res => {
+        this.props.navigation.navigate('Order', {
+          orderID: res,
+        });
+        // clear the cart
+        this.props.onClearCart();
+        this.setState({ loading: false });
+      })
+      .catch(() => {
+        console.log("error!!");
+        this.setState({ loading: false });
+      })
   };
 
   onAddCard = () => {
@@ -85,6 +99,8 @@ class Checkout extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: '#FFF' }}>
+        {this.state.loading && <LoadingOverlay />}
+
         {!this.props.cart.amount ? (
           <EmptycheckoutPage />
         ) : (
@@ -164,14 +180,7 @@ class Checkout extends Component {
                 <Text style={styles.totalText}>{total} kr</Text>
               </View>
               <OrderButton
-                onPress={async () => {
-                  this.props.navigation.navigate('Order', {
-                    orderID: await this.sendTheOrder(),
-                  });
-
-                  // clear the cart
-                  this.props.onClearCart();
-                }}
+                onPress={async () => await this.sendTheOrder()}
                 buttonText="BETALA"
                 disabled={this.state.paymentCard ? false : true}
               />

@@ -3,13 +3,20 @@ import {
   View,
   ActivityIndicator,
   StyleSheet,
+  Modal,
 } from 'react-native';
 
 export default loadingOverlay = () => {
   return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color="#5AA3B7" />
-    </View>
+    <Modal
+      animationType='fade'
+      transparent={true}
+      visible={true}>
+
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#5AA3B7" />
+      </View>
+    </Modal>
   );
 };
 
