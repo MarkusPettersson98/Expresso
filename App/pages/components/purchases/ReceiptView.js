@@ -79,19 +79,18 @@ class ReceiptView extends Component {
                     <ScrollView>
                         <CoffeeDisplay coffees={this.state.receipt.coffees} />
                     </ScrollView>
-                    
-                    <View style={styles.botContainer}>
+                    <View
+                        style={{
+                            width: '90%',
+                            height: '1%',
+                            alignSelf: 'center',
+                            borderBottomWidth: 1,
+                            borderColor: 'black',
+                        }}
+                    />                   
+                     <View style={styles.botContainer}>
 
                         <View style={styles.bot}>
-                            <View
-                                style={{
-                                    width: '90%',
-                                    height: '1%',
-                                    alignSelf: 'center',
-                                    borderBottomWidth: 1,
-                                    borderColor: 'black',
-                                }}
-                             />
                             <Text style={styles.textUnderrubrik2}>
                                 Upphämtningsställe
                             </Text>
@@ -130,7 +129,7 @@ class ReceiptView extends Component {
                             </View>
                         </View>
 
-                        <View style={styles.bot}>
+                        <View style={styles.botMap}>
                             <MiniMap shop = {this.state.receipt.shop} style = {styles.map2}></MiniMap>
                         </View>
 
@@ -220,6 +219,28 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         width: '10%',
         height: '10%',
+    },
+    botContainer: {
+        width: '100%',
+        height: '100%',
+        flex: 7,
+        justifyContent: 'center',
+        flexDirection: 'row'
+
+    },
+    bot: {
+        width: '50%',
+        height: '100%',
+        justifyContent: 'center',
+
+    },
+    botMap: {
+        width: '50%',
+        height: '100%',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        opacity: 0.9,
+
     },
 });
 
