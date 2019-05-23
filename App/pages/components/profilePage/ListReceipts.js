@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView  } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Accordion from 'react-native-collapsible/Accordion';
+import ListCoffees from './ListCoffees';
 
 /*
 TODO: Hämta informationen på rätt sätt
@@ -18,7 +19,7 @@ class listReceipts extends React.Component {
           {(new Date(item.date)).toDateString()}
         </Text>
         <Text style = {styles.text}>
-            'item.shop.name'
+            {item.shop.name}
         </Text>
         <Text style = {styles.text}>
             Totalt: {item.totalPrice}kr
@@ -30,9 +31,7 @@ class listReceipts extends React.Component {
   _renderContent = item => {
     return (
       <View style={styles.receiptContent}>
-        <Text style = {styles.text}>
-            This is the content!!
-        </Text>
+        <ListCoffees item = {item.coffees} />
       </View>
     );
   };

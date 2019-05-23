@@ -41,7 +41,7 @@ class Profile extends React.Component {
         {this.state.loading && <LoadingOverlay />}
 
         <View style={styles.personView}>
-          <Text style={styles.personHeader}>User Profile</Text>
+          <Text style={styles.personHeader}>Användarprofil</Text>
 
           <Text style={styles.text}>{this.props.name}</Text>
 
@@ -51,7 +51,7 @@ class Profile extends React.Component {
             style={styles.to}
             onPress={() => this.props.navigation.navigate('Receipts')}
           >
-            <Text style={styles.reText}>Receipts ></Text>
+            <Text style={styles.reText}>Kvitton ></Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.logOut} onPress={this.handleLogout}>
@@ -61,7 +61,7 @@ class Profile extends React.Component {
 
         <View style={styles.paymentTopView}>
           <View style={styles.paymentInfoView}>
-            <Text style={styles.paymentHeader}>Payment Method</Text>
+            <Text style={styles.paymentHeader}>Betalningsmetod</Text>
             <PaymentMethod />
           </View>
         </View>
