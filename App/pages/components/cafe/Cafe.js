@@ -25,24 +25,19 @@ class Cafe extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            shop: props.navigation.state.params.selectedShop,
+            shopName: props.navigation.state.params.selectedShop,
             CoffeItems: [],
             shopPicture: props.navigation.state.params.picture,
+            street: props.navigation.state.params.street,
         };
     }
 
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: navigation.state.params.selectedShop,
-        };
-    };
-
     async componentDidMount() {
-        const allCoffees = await getAllCoffeeFromAShop(this.state.shop);
+        const allCoffees = await getAllCoffeeFromAShop(this.state.shopName);
         // Did component get passed a picture?  if so, use that, else, fetch that picture.
         const picture = this.props.navigation.state.params.picture
             ? this.props.navigation.state.params.picture
-            : await getShopPicture(this.state.shop);
+            : await getShopPicture(this.state.shopName);
 
         Promise.all([allCoffees, picture]).then(([coffees, picture]) => {
             this.setState({
@@ -55,14 +50,26 @@ class Cafe extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
-                <CafeHeader picture={this.state.shopPicture} />
-                <CoffeeList coffeeItems={this.state.CoffeItems} />
+            <View style={{ flex: 1, backgroundColor: '#FAFAFA' }}>
+                <CafeHeader
+                    picture={this.state.shopPicture}
+                    name={this.state.shopName}
+                    address={this.state.street}
+                />
+                <View style={styles.divisor}/>
+                <CoffeeList coffeeItems={this.state.CoffeItems} shopName={this.state.shopName}/>
                 <View style={{ marginBottom: 30 }}>
                     <CartField />
                 </View>
             </View>
         );
+    }
+}
+
+const styles = {
+    divisor: {
+        width: '100%',
+        height: 40,
     }
 }
 

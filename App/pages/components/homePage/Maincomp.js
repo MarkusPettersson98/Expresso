@@ -1,11 +1,10 @@
 import React from 'react';
 import { AppRegistry, ScrollView, View } from 'react-native';
-import { default as ShopView } from './ListShopView';
+import ShopView from './ListShopView';
 
 import { getAllShops, getShopPicture } from '../../../API/expressoAPI';
 
 export default class Maincomp extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = { ShopViews: [] };
@@ -28,7 +27,9 @@ export default class Maincomp extends React.Component {
         Promise.all(shopsWithPictures).then(shops => {
             // Create ShopView components to be rendered
             const shopViews = shops.map((shop, index) => (
-                <ShopView key={index} name={shop.name} picture={shop.picture} street={shop.street} numcoffees={shop.coffees} />
+                <View style={styles.cardcontainer} key={index}>
+                    <ShopView name={shop.name} picture={shop.picture} street={shop.street} numcoffees={shop.coffees} />
+                </View>
             ));
 
             // Update state
@@ -51,7 +52,18 @@ const styles = {
   container: {
       width: '100%',
       flexDirection: 'column',
-      backgroundColor: '#F0F7F4',
+      backgroundColor: '#FAFAFA',
       justifyContent: 'center',
   },
+  cardcontainer: {
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+
+        elevation: 2,
+  }
 };
