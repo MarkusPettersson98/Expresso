@@ -16,7 +16,7 @@ const BackArrow = props => {
                 <Ionicons
                     name="ios-arrow-back"
                     size={30}
-                    color={'#F0F7F4'}
+                    color={'#FAFAFA'}
                 />
             </TouchableOpacity>
         </View>

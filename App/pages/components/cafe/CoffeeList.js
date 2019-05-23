@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#F0F7F4',
+        backgroundColor: '#FAFAFA',
     },
 });
 

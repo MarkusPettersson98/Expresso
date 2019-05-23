@@ -50,18 +50,26 @@ class Cafe extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: '#F0F7F4' }}>
+            <View style={{ flex: 1, backgroundColor: '#FAFAFA' }}>
                 <CafeHeader
                     picture={this.state.shopPicture}
                     name={this.state.shopName}
                     address={this.state.street}
                 />
+                <View style={styles.divisor}/>
                 <CoffeeList coffeeItems={this.state.CoffeItems} />
                 <View style={{ marginBottom: 30 }}>
                     <CartField />
                 </View>
             </View>
         );
+    }
+}
+
+const styles = {
+    divisor: {
+        width: '100%',
+        height: 40,
     }
 }
 
