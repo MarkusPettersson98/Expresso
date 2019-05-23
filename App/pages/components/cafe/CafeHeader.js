@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
     backarrow: {
         marginLeft: '5%',
-        marginTop: '12%',
+        marginTop: '14%',
         width: 30,
         height: 30,
     },

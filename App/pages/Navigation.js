@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import {
-  createBottomTabNavigator,
-  createStackNavigator,
-  createAppContainer,
+    createBottomTabNavigator,
+    createStackNavigator,
+    createAppContainer,
 } from 'react-navigation';
 
 import Homepage from './Homepage';
@@ -23,192 +23,204 @@ import Purchases from './components/purchases/Purchases';
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
-  headerStyle: {
-    backgroundColor: '#57454B',
-    height: 60,
-  },
-  headerTintColor: '#fff',
+    headerStyle: {
+        backgroundColor: '#57454B',
+        height: 60,
+    },
+    headerTintColor: '#fff',
 };
 
 // determines icon sizes and color, could possibly be moved to a 'styles'-file to avoid passing props.
 const headerIconStyling = {
-  size: 32,
-  color: '#F0F7F4',
-  margin: 5,
+    size: 32,
+    color: '#F0F7F4',
+    margin: 5,
 };
 
 const tabIconStyling = {
-  size: 26,
-  selected: '#362D30',
-  inactive: '#9C9497',
+    size: 26,
+    selected: '#362D30',
+    inactive: '#9C9497',
 };
 
 export const Tabs = createBottomTabNavigator(
-  {
-    Lista: {
-      screen: () => (
-        <View style={{ flex: 1 }}>
-          <Homepage presentationMode={'List'} />
-          <CartField />
-        </View>
-      ),
-      navigationOptions: {
-        tabBarLabel: 'Lista',
-        tabBarIcon: ({ focused, tintColor }) => {
-          return (
-            <Feather
-              name={'list'}
-              color={
-                focused ? tabIconStyling.selected : tabIconStyling.inactive
-              }
-              size={tabIconStyling.size}
-            />
-          );
+    {
+        Lista: {
+            screen: () => (
+                <View style={{ flex: 1 }}>
+                    <Homepage presentationMode={'List'} />
+                    <CartField />
+                </View>
+            ),
+            navigationOptions: {
+                tabBarLabel: 'Lista',
+                tabBarIcon: ({ focused, tintColor }) => {
+                    return (
+                        <Feather
+                            name={'list'}
+                            color={
+                                focused
+                                    ? tabIconStyling.selected
+                                    : tabIconStyling.inactive
+                            }
+                            size={tabIconStyling.size}
+                        />
+                    );
+                },
+            },
         },
-      },
-    },
-    Karta: {
-      screen: () => (
-        <View style={{ flex: 1 }}>
-          <Homepage presentationMode={'Map'} />
-          <CartField />
-        </View>
-      ),
+        Karta: {
+            screen: () => (
+                <View style={{ flex: 1 }}>
+                    <Homepage presentationMode={'Map'} />
+                    <CartField />
+                </View>
+            ),
 
-      navigationOptions: {
-        tabBarLabel: 'Karta',
-        tabBarIcon: ({ focused, tintColor }) => {
-          return (
-            <Feather
-              name={'map'}
-              color={
-                focused ? tabIconStyling.selected : tabIconStyling.inactive
-              }
-              size={tabIconStyling.size}
-            />
-          );
+            navigationOptions: {
+                tabBarLabel: 'Karta',
+                tabBarIcon: ({ focused, tintColor }) => {
+                    return (
+                        <Feather
+                            name={'map'}
+                            color={
+                                focused
+                                    ? tabIconStyling.selected
+                                    : tabIconStyling.inactive
+                            }
+                            size={tabIconStyling.size}
+                        />
+                    );
+                },
+            },
         },
-      },
-    },
-    Order: {
-      screen: ({ navigation }) => (
-        <View style={{ flex: 1 }}>
-          <Purchases navigation={navigation} />
-          <CartField />
-        </View>
-      ),
+        Order: {
+            screen: ({ navigation }) => (
+                <View style={{ flex: 1 }}>
+                    <Purchases navigation={navigation} />
+                    <CartField />
+                </View>
+            ),
 
-      navigationOptions: {
-        tabBarLabel: 'Köp',
-        tabBarIcon: ({ focused, tintColor }) => {
-          return (
-            <MaterialIcons
-              name={'receipt'}
-              color={
-                focused ? tabIconStyling.selected : tabIconStyling.inactive
-              }
-              size={tabIconStyling.size}
-            />
-          );
+            navigationOptions: {
+                tabBarLabel: 'Köp',
+                tabBarIcon: ({ focused, tintColor }) => {
+                    return (
+                        <MaterialIcons
+                            name={'receipt'}
+                            color={
+                                focused
+                                    ? tabIconStyling.selected
+                                    : tabIconStyling.inactive
+                            }
+                            size={tabIconStyling.size}
+                        />
+                    );
+                },
+            },
         },
-      },
-    },
-    profile: {
-      screen: () => (
-        <View style={{ flex: 1 }}>
-          <Profilepage />
-          <CartField />
-        </View>
-      ),
+        profile: {
+            screen: () => (
+                <View style={{ flex: 1 }}>
+                    <Profilepage />
+                    <CartField />
+                </View>
+            ),
 
-      navigationOptions: {
-        tabBarLabel: 'Profil',
-        tabBarIcon: ({ focused, tintColor }) => {
-          return (
-            <Feather
-              name={'github'}
-              color={
-                focused ? tabIconStyling.selected : tabIconStyling.inactive
-              }
-              size={tabIconStyling.size}
-            />
-          );
+            navigationOptions: {
+                tabBarLabel: 'Profil',
+                tabBarIcon: ({ focused, tintColor }) => {
+                    return (
+                        <Feather
+                            name={'github'}
+                            color={
+                                focused
+                                    ? tabIconStyling.selected
+                                    : tabIconStyling.inactive
+                            }
+                            size={tabIconStyling.size}
+                        />
+                    );
+                },
+            },
         },
-      },
     },
-  },
-  {
-    tabBarOptions: {
-      // om bakgrunden
-      activeBackgroundColor: '#eee',
-      backgroundColor: 'white',
+    {
+        tabBarOptions: {
+            // om bakgrunden
+            activeBackgroundColor: '#eee',
+            backgroundColor: 'white',
 
-      // Om label
-      labelStyle: {
-        fontSize: 12,
-      },
-      // om textens färg
-      activeTintColor: '#362D30',
-      inactiveTintColor: '#9C9497',
+            // Om label
+            labelStyle: {
+                fontSize: 12,
+            },
+            // om textens färg
+            activeTintColor: '#362D30',
+            inactiveTintColor: '#9C9497',
+        },
     },
-  },
 );
 
 export const RootStack = createStackNavigator(
-  {
-    Main: {
-      screen: Tabs,
-      navigationOptions: ({ navigation }) => ({
-        headerTitle: <ExpressoLogoHeader />,
-        ...headerStyling,
-      }),
+    {
+        Main: {
+            screen: Tabs,
+            navigationOptions: ({ navigation }) => ({
+                headerTitle: <ExpressoLogoHeader />,
+                ...headerStyling,
+            }),
+        },
+        Checkout: {
+            screen: Checkout,
+            navigationOptions: ({ navigation }) => ({
+                headerRight: <ClearCheckoutHeader />,
+                headerLeft: (
+                    <View style={{margin:10}} >
+                        <BackArrow />
+                    </View>
+                ),
+                title: 'Betalning',
+                ...headerStyling,
+            }),
+        },
+        Cafe: {
+            screen: Cafe,
+            navigationOptions: ({ navigation }) => ({
+                header: null,
+                ...headerStyling,
+            }),
+        },
+        Receipts: {
+            screen: Receipts,
+            navigationOptions: ({ navigation }) => ({
+                headerTitle: 'Kvitton',
+                ...headerStyling,
+            }),
+        },
+        Login: {
+            screen: Login,
+            navigationOptions: {
+                ...headerStyling,
+            },
+        },
+        SignUp: {
+            screen: SignUp,
+            navigationOptions: {
+                ...headerStyling,
+            },
+        },
+        Forgot: {
+            screen: ForgotPassword,
+            navigationOptions: {
+                ...headerStyling,
+            },
+        },
     },
-    Checkout: {
-      screen: Checkout,
-      navigationOptions: ({ navigation }) => ({
-        headerRight: <ClearCheckoutHeader styling={headerIconStyling} />,
-        headerLeft: <BackArrow styling={headerIconStyling} />,
-        title: 'Betalning',
-        ...headerStyling,
-      }),
-    },
-    Cafe: {
-      screen: Cafe,
-      navigationOptions: ({ navigation }) => ({
-          header: null,
-          ...headerStyling,
-      }),
-  },
-    Receipts: {
-      screen: Receipts,
-      navigationOptions: ({ navigation }) => ({
-        headerTitle: 'Kvitton',
-        ...headerStyling,
-      }),
-    },
-    Login: {
-      screen: Login,
-      navigationOptions: {
-        ...headerStyling,
-      },
-    },
-    SignUp: {
-      screen: SignUp,
-      navigationOptions: {
-        ...headerStyling,
-      },
-    },
-    Forgot: {
-      screen: ForgotPassword,
-      navigationOptions: {
-        ...headerStyling,
-      },
-    },
-  },
 
-  {
-    mode: 'card',
-  },
+    {
+        mode: 'card',
+    },
 );
 
 const styles = {
