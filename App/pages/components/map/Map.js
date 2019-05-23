@@ -10,7 +10,7 @@ import { withNavigation } from 'react-navigation';
  * @param  navigation from withNavigation
  */
 
-const Map = ({ region, shops, navigation }) => {
+const MiniMap = ({ region, shops, navigation }) => {
     const renderMarkers = () => {
         return shops.map(({ shop, coordinates }, index) => {
             return (
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default withNavigation(Map);
+export default MiniMap;

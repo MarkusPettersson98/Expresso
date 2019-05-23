@@ -11,6 +11,7 @@ import { withNavigation } from 'react-navigation';
 
 import CoffeeDisplay from './CoffeeDisplay';
 import { getReceipt } from '../../../API/expressoAPI';
+import MiniMap from './MiniMap';
 
 class ReceiptView extends Component {
     /*Kvittot som hämtas sparas bak i customer för att minska kodduplicering
@@ -40,7 +41,7 @@ class ReceiptView extends Component {
             receipt: wantedReceipt,
         });
     }
-
+    
     render() {
         return (
             <View style={styles.container}>
@@ -74,33 +75,34 @@ class ReceiptView extends Component {
                     <ScrollView>
                         <CoffeeDisplay coffees={this.state.receipt.coffees} />
                     </ScrollView>
-                    <View style={{ flex: 7 }}>
-                        <Text style={styles.textUnderrubrik2}>
-                            Upphämtningsställe
-                        </Text>
-                        <Text style={styles.text}>
-                            {this.state.receipt.shop.name} {'\n'}
-                        </Text>
+                    <View style={styles.botContainer}>
 
-                        {/* Klickar nu endast vidare till kartan, borde visa vilket affär
-                            med någon typ av markering */}
-                        <Text style={styles.text}>
-                            Totalpris: {this.state.receipt.totalPrice} {'\n'}
-                        </Text>
-                        <Text style={styles.text}>
-                            Datum: {this.state.receipt.date} {'\n'}
-                        </Text>
-                        <TouchableOpacity
-                            onPress={() =>
-                                this.props.navigation.navigate('Karta')
-                            }
-                        >
-                            <Text style={styles.knapp}>Gå till karta</Text>
-                        </TouchableOpacity>
+                        <View style={styles.bot}>
+                            <Text style={styles.textUnderrubrik2}>
+                                Upphämtningsställe
+                            </Text>
+                            <Text style={styles.text}>
+                                {this.state.receipt.shop.name} {'\n'}
+                            </Text>
+
+                            {/* Klickar nu endast vidare till kartan, borde visa vilket affär
+                                med någon typ av markering */}
+                            <Text style={styles.text}>
+                                Totalpris: {this.state.receipt.totalPrice} {'\n'}
+                            </Text>
+                            <Text style={styles.text}>
+                                Datum: {this.state.receipt.date} {'\n'}
+                            </Text>
+                        </View>
+
+                        <View style={styles.bot}>
+                            <MiniMap shop = {this.state.receipt.shop} style = {styles.map2}></MiniMap>
+                        </View>
+
                     </View>
                 </View>
             </View>
-        );
+        ); 
     }
 }
 
@@ -169,6 +171,22 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginRight: '10%',
     },
+    botContainer: {
+        flex: 7,
+        flexDirection: 'row',
+        height: '100%'
+    },
+    bot: {
+        width: '50%',
+        height: '100%'
+    },
+    map2: {
+        borderRadius: 1000000,
+        margin: 5,
+        borderWidth: 2,
+        borderColor: '#57454B',
+        marginBottom: 20
+    }
 });
 
 export default withNavigation(ReceiptView);
