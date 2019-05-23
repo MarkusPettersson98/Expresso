@@ -121,8 +121,8 @@ const getReceipt = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const receipt = await getReceiptWith("id", id);
-
+        console.log("Trying to fetch single receipt by id! ", id);
+        const receipt = await getReceiptById(id);
         return res.status(200).send(receipt);
     } catch (e) {
         console.log(e);
@@ -135,7 +135,7 @@ const getReceiptUser = async (req, res) => {
     const { user } = req.params;
 
     try {
-        const receipt = await getReceiptWith("user", user);
+        const receipt = await getReceiptByUser(user);
         return res.status(200).send(receipt);
     } catch (e) {
         console.log(e);
@@ -143,12 +143,62 @@ const getReceiptUser = async (req, res) => {
     }
 };
 
+const getReceiptById = async id => {
+    try {
+        console.log("Trying to fetch single receipt by id! ", id);
+        const receipt = await fetch(
+            firebaseURL + `?orderBy=%22$key%22&equalTo=%22${id}%22`
+        )
+            .then(res => res.json())
+            .then(res => firebaseObjectToArray(res))
+            .catch(err =>
+                console.log("Firebase error: could not fetch id ", err)
+            );
+        return receipt;
+    } catch (e) {
+        console.log(e);
+        return e;
+    }
+};
+
+const getReceiptByUser = async user => {
+    try {
+        console.log("Trying to fetch user receipts! ", user);
+        const receipt = await fetch(
+            firebaseURL + `?orderBy=%22user%22&equalTo=%22${user}%22`
+        )
+            .then(res => res.json())
+            .then(res => firebaseObjectToArray(res))
+            .catch(err =>
+                console.log("Firebase error: could not fetch user ", err)
+            );
+        return receipt;
+    } catch (e) {
+        console.log(e);
+        return e;
+    }
+};
+
+const firebaseObjectToArray = firebaseObject => {
+    // Firebase database returns multiple differents records as a single object, where every property is a new object
+    // Turn this data form into a list of objects instead
+    const keys = Object.keys(firebaseObject);
+    const items = keys.map(key => {
+        const values = firebaseObject[key];
+        return {
+            ...values,
+            id: key
+        };
+    });
+    return items;
+};
+
 const getReceiptWith = async (key, value) => {
     // Generic function for getting a set of receipts
     // key = the propertry of the receipt to compare value with
     try {
-        const receipts = await getAllReceipts();
-        return receipts.filter(item => item[key] == value);
+        // const receipts = await getAllReceipts();
+        //return receipts.filter(item => item[key] == value);
     } catch (e) {
         return e;
     }
