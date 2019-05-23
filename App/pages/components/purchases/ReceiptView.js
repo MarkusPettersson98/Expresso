@@ -44,8 +44,6 @@ class ReceiptView extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.textRubrik}>Tack för din beställning!</Text>
-
                 <View style={styles.infoBox}>
                     <View>
                         <Text style={styles.textUnderrubrik1}> Kvitto </Text>
@@ -98,43 +96,21 @@ class ReceiptView extends Component {
                                 {this.state.receipt.shop.name} {'\n'}
                             </Text>
 
-                            {/* Klickar nu endast vidare till kartan, borde visa vilket affär
-                                med någon typ av markering */}
                             <Text style={styles.text}>
                                 Totalpris: {this.state.receipt.totalPrice} {'\n'}
                             </Text>
                             <Text style={styles.text}>
-                                Datum: {this.state.receipt.date} {'\n'}
+                                {new Date(this.state.receipt.date).toDateString()} {'\n'}
                             </Text>
-                            <View
-                                style={{
-                                    flex: 1,
-                                    top: '25%',
-                                    justifyContent: 'space-between',
-                                    backgroundColor: '#FAFAFA',
-                                    flexDirection: 'row',
-                                    alignItems: 'flex-start',
-                                }}
-                                >
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                                <View style={styles.bottomBanner} />
-                            </View>
                         </View>
 
                         <View style={styles.botMap}>
                             <MiniMap shop = {this.state.receipt.shop} style = {styles.map2}></MiniMap>
                         </View>
-
                     </View>
                 </View>
+
+                <View style={styles.hardKod} />
             </View>
         ); 
     }
@@ -160,8 +136,18 @@ const styles = StyleSheet.create({
     infoBox: {
         flex: 1,
         top: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#FAFAFA',
         borderRadius: 10,
+
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+
+        elevation: 2,
     },
     varorTable: {
         width: '100%',
@@ -213,12 +199,11 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginLeft: 10,
     },
-    bottomBanner: {
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
-        backgroundColor: 'white',
-        width: '10%',
-        height: '10%',
+    hardKod: {
+        width: '100%',
+        height: 50,
+        backgroundColor: '#FAFAFA',
+        top: 40,
     },
     botContainer: {
         width: '100%',
