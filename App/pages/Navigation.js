@@ -8,7 +8,6 @@ import {
 
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
-import OrderPage from './OrderPage';
 import Receipts from './components/profilePage/Receipts';
 import Checkout from './Checkout';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
@@ -89,31 +88,28 @@ export const Tabs = createBottomTabNavigator(
             />
           );
         },
+      },
+    },
+    Order: {
+      screen: ({ navigation }) => (
+        <View style={{ flex: 1 }}>
+          <Purchases navigation={navigation} />
+          <CartField />
+        </View>
+      ),
 
-        Order: {
-            screen: ({ navigation }) => (
-                <View style={{ flex: 1 }}>
-                    <Purchases navigation = {navigation}/>
-                    <CartField />
-                </View>
-            ),
-
-            navigationOptions: {
-                tabBarLabel: 'Köp',
-                tabBarIcon: ({ focused, tintColor }) => {
-                    return (
-                        <MaterialIcons
-                            name={'receipt'}
-                            color={
-                                focused
-                                    ? tabIconStyling.selected
-                                    : tabIconStyling.inactive
-                            }
-                            size={tabIconStyling.size}
-                        />
-                    );
-                },
-            },
+      navigationOptions: {
+        tabBarLabel: 'Köp',
+        tabBarIcon: ({ focused, tintColor }) => {
+          return (
+            <MaterialIcons
+              name={'receipt'}
+              color={
+                focused ? tabIconStyling.selected : tabIconStyling.inactive
+              }
+              size={tabIconStyling.size}
+            />
+          );
         },
       },
     },
@@ -159,32 +155,29 @@ export const Tabs = createBottomTabNavigator(
 );
 
 export const RootStack = createStackNavigator(
-    {
-        Main: {
-            screen: Tabs,
-            navigationOptions: ({ navigation }) => ({
-                headerTitle: <ExpressoLogoHeader />,
-                ...headerStyling,
-            }),
-        },
-        Checkout: {
-            screen: Checkout,
-            navigationOptions: ({ navigation }) => ({
-                headerRight: (
-                    <ClearCheckoutHeader styling={headerIconStyling} />
-                ),
-                headerLeft: <BackArrow styling={headerIconStyling} />,
-                title: 'Betalning',
-                ...headerStyling,
-            }),
-        },
-        Cafe: {
-            screen: Cafe,
-            navigationOptions: ({ navigation }) => ({
-                headerLeft: <BackArrow styling={headerIconStyling} />,
-                ...headerStyling,
-            }),
-        },
+  {
+    Main: {
+      screen: Tabs,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: <ExpressoLogoHeader />,
+        ...headerStyling,
+      }),
+    },
+    Checkout: {
+      screen: Checkout,
+      navigationOptions: ({ navigation }) => ({
+        headerRight: <ClearCheckoutHeader styling={headerIconStyling} />,
+        headerLeft: <BackArrow styling={headerIconStyling} />,
+        title: 'Betalning',
+        ...headerStyling,
+      }),
+    },
+    Cafe: {
+      screen: Cafe,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <BackArrow styling={headerIconStyling} />,
+        ...headerStyling,
+      }),
     },
     Receipts: {
       screen: Receipts,
@@ -197,19 +190,19 @@ export const RootStack = createStackNavigator(
       screen: Login,
       navigationOptions: {
         ...headerStyling,
-      }
+      },
     },
     SignUp: {
       screen: SignUp,
       navigationOptions: {
         ...headerStyling,
-      }
+      },
     },
     Forgot: {
       screen: ForgotPassword,
       navigationOptions: {
         ...headerStyling,
-      }
+      },
     },
   },
 
