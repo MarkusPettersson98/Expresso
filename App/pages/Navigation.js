@@ -182,8 +182,7 @@ export const RootStack = createStackNavigator(
         Cafe: {
             screen: Cafe,
             navigationOptions: ({ navigation }) => ({
-                headerLeft: <BackArrow styling={headerIconStyling}/>,
-                ...headerStyling,
+                header: null,
             }),
         },
     },
