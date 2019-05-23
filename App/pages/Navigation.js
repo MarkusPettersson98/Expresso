@@ -189,9 +189,24 @@ export const RootStack = createStackNavigator(
         ...headerStyling,
       }),
     },
-    Login: Login,
-    SignUp: SignUp,
-    Forgot: ForgotPassword,
+    Login: {
+      screen: Login,
+      navigationOptions: {
+        ...headerStyling,
+      }
+    },
+    SignUp: {
+      screen: SignUp,
+      navigationOptions: {
+        ...headerStyling,
+      }
+    },
+    Forgot: {
+      screen: ForgotPassword,
+      navigationOptions: {
+        ...headerStyling,
+      }
+    },
   },
 
   {
