@@ -130,6 +130,13 @@ export const getReceiptLink = id => {
     return herokuURL + 'getReceipt/' + id;
 };
 
+/*
+    Given an ID of a receipt, create a link to 'scan' that receipt
+*/
+export const getScanReceiptLink = id => {
+    return herokuURL + 'scanReceipt/' + id;
+};
+
 /**
  * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
  * @param selectedShop The shop of which the order belongs to.
@@ -158,6 +165,7 @@ export const sendOrder = async cart => {
     })
         .then(res => res.json())
         .then(res => {
+            console.log("Receipt link: ", getReceiptLink);
             return res.id;
         })
         .catch(err => console.log(err));
