@@ -19,7 +19,7 @@ class ReceiptView extends Component {
         hämtas hårdkodat genom funktionen getReceiptUser i Purchases.js detta borde
         göras dynamiskt istället.
         */
-        const customer = this.props.receipt[3];
+        const receipt = this.props.receipt;
 
         return (
             <View style={styles.container}>
@@ -51,23 +51,23 @@ class ReceiptView extends Component {
                         </Text>
                     </View>
                     <ScrollView>
-                        <CoffeeDisplay coffees={customer.coffees} />
+                        <CoffeeDisplay coffees={receipt.coffees} />
                     </ScrollView>
                     <View style={{ flex: 7 }}>
                         <Text style={styles.textUnderrubrik2}>
                             Upphämtningsställe
                         </Text>
                         <Text style={styles.text}>
-                            {customer.shop.name} {'\n'}
+                            {receipt.shop.name} {'\n'}
                         </Text>
 
                         {/* Klickar nu endast vidare till kartan, borde visa vilket affär
                             med någon typ av markering */}
                         <Text style={styles.text}>
-                            Totalpris: {customer.totalPrice} {'\n'}
+                            Totalpris: {receipt.totalPrice} {'\n'}
                         </Text>
                         <Text style={styles.text}>
-                            Datum: {customer.date} {'\n'}
+                            Datum: {receipt.date} {'\n'}
                         </Text>
                         <TouchableOpacity
                             onPress={() =>

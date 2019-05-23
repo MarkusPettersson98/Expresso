@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { getReceiptLink, getReceiptUser } from '../../../API/expressoAPI';
+import { getReceiptLink, getReceipt } from '../../../API/expressoAPI';
 import QRCode from 'react-native-qrcode';
 
 import ReceiptView from './ReceiptView';
@@ -19,14 +19,11 @@ export default class Purchases extends React.Component {
     }
 
     async componentDidMount() {
-        const receipt = await getReceiptUser();
+        const receipt = await getReceipt('-LfYMIYIpnqfHjs3Lxdw'); //TODO: Get receipt id dynamically
+        const receiptView = <ReceiptView receipt={receipt} />;
 
-        Promise.all(receipt).then(receipt => {
-            const receiptView = <ReceiptView receipt={receipt} />;
-
-            this.setState({
-                ReceiptView: receiptView,
-            });
+        this.setState({
+            ReceiptView: receiptView,
         });
     }
 
