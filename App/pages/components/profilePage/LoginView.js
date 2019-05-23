@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-class ProfilePage extends Component {
+class LoginView extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -14,6 +14,13 @@ class ProfilePage extends Component {
         >
           <Text style={styles.logInText}>LOGGA IN</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.logIn}
+          onPress={() => this.props.navigation.navigate('Register')}
+        >
+          <Text style={styles.logInText}>REGISTRERA</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -21,7 +28,6 @@ class ProfilePage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F7F4',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -44,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(ProfilePage);
+export default withNavigation(LoginView);

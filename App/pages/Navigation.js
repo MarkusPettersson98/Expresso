@@ -6,7 +6,6 @@ import {
   createAppContainer,
 } from 'react-navigation';
 
-
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import OrderPage from './OrderPage';
@@ -15,13 +14,12 @@ import Checkout from './Checkout';
 import ClearCheckoutHeader from './components/header/ClearCheckoutIcon';
 import Cafe from './components/cafe/Cafe';
 import ExpressoLogoHeader from './components/header/ExpressoLogo';
-import BackArrow from './components/header/BackArrow'
+import BackArrow from './components/header/BackArrow';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CartField from './components/CartField';
 import Login from './Login';
 import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
-
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
@@ -34,9 +32,9 @@ const headerStyling = {
 
 // determines icon sizes and color, could possibly be moved to a 'styles'-file to avoid passing props.
 const headerIconStyling = {
-    size: 32,
-    color: '#F0F7F4',
-    margin: 5,
+  size: 32,
+  color: '#F0F7F4',
+  margin: 5,
 };
 
 const tabIconStyling = {
@@ -92,14 +90,16 @@ export const Tabs = createBottomTabNavigator(
         },
       },
     },
-        Order: {
-            screen: ({navigation}) => (
-                <View style={{ flex: 1 }}>
-                    <OrderPage navigation = {navigation} />
-                    <CartField />
-                </View>
-            ),
-
+    Order: {
+      screen: ({ navigation }) => {
+        console.log(navigation);
+        return (
+          <View style={{ flex: 1 }}>
+            <OrderPage navigation={navigation} />
+            <CartField />
+          </View>
+        );
+      },
       navigationOptions: {
         tabBarLabel: 'Köp',
         tabBarIcon: ({ focused, tintColor }) => {
@@ -157,30 +157,30 @@ export const Tabs = createBottomTabNavigator(
 );
 
 export const RootStack = createStackNavigator(
-    {
+  {
     Main: {
-        screen: Tabs,
-        navigationOptions: ({ navigation }) => ({
-            headerTitle: <ExpressoLogoHeader />,
-            title: ' ',
-            ...headerStyling,
-        }),
+      screen: Tabs,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: <ExpressoLogoHeader />,
+        title: ' ',
+        ...headerStyling,
+      }),
     },
     Checkout: {
-    screen: Checkout,
-    navigationOptions: ({ navigation }) => ({
-        headerRight: <ClearCheckoutHeader styling={headerIconStyling}/>,
-        headerLeft: <BackArrow styling={headerIconStyling}/>,
+      screen: Checkout,
+      navigationOptions: ({ navigation }) => ({
+        headerRight: <ClearCheckoutHeader styling={headerIconStyling} />,
+        headerLeft: <BackArrow styling={headerIconStyling} />,
         title: 'Betalning',
         ...headerStyling,
-    }),
+      }),
     },
     Cafe: {
-        screen: Cafe,
-        navigationOptions: ({ navigation }) => ({
-            headerLeft: <BackArrow styling={headerIconStyling}/>,
-            ...headerStyling,
-        }),
+      screen: Cafe,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <BackArrow styling={headerIconStyling} />,
+        ...headerStyling,
+      }),
     },
     Receipts: {
       screen: Receipts,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Login from './components/profilePage/Login';
+import LoginView from './components/profilePage/LoginView';
 import Profile from './components/profilePage/Profile';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -38,7 +38,7 @@ export default class ProfilePage extends Component {
         {user ? (
           <Profile name={user.displayName} email={user.email} />
         ) : (
-          <Login />
+          <LoginView />
         )}
       </View>
     );
@@ -47,7 +47,6 @@ export default class ProfilePage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F7F4',
     alignItems: 'center',
     justifyContent: 'center',
   },
