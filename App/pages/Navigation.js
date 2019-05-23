@@ -21,7 +21,7 @@ import CartField from './components/CartField';
 import Login from './Login';
 import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
-import Receipts from './components/profilePage/Receipts';
+
 
 // so that the colour of the header is located at one spot.
 const headerStyling = {
