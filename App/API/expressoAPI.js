@@ -159,3 +159,30 @@ export const sendOrder = async cart => {
         })
         .catch(err => console.log(err));
 };
+/** Fixes a user in order to work well with API-request
+ *
+ * @param user An id of a user
+ */
+const fixUserString = user => {
+    const fixedString = encodeURIComponent(user);
+    return fixedString;
+};
+
+/**
+ * Returns all receipts for one user database using heroku
+ * 
+ */
+export const getReceiptsUser = async user => {
+    let fixedString = fixUserString(user);
+
+    const allInformation = await fetch(herokuURL + 'getReceiptUser/' + fixedString)
+        .then(res => res.json())
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
+    return allInformation;
+};

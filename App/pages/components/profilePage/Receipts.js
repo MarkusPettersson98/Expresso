@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ListReceipts from './ListReceipts';
+import { getReceiptsUser } from '../../../API/expressoAPI'
+
+let userID = 0;
+
 
 
 const list = [
@@ -25,10 +29,24 @@ const list = [
 
 
 export default class ProfilePage extends Component {
+  state = { userReceipts: [] };
+
+  async componentDidMount() {
+    // Request all recipts with userID that will be loaded from redux
+    const receipts = await getReceiptsUser(userID);
+    Promise.all(receipts).then(() => {
+
+      // Update state
+      this.setState({
+          userReceipts: receipts,
+      });
+      console.log({receipts})
+  });
+};
     render() {
         return (
             <View style = {styles.container}>
-                <ListReceipts receiptList = {list} />
+                <ListReceipts receiptList = {this.state.userReceipts} />
             </View>
         );
     }

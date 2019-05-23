@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView  } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
+/*
+TODO: Hämta informationen på rätt sätt
+*/
+
 const listReceipts = ({receiptList}) => {
     return(
         <ScrollView contentContainerStyle = {styles.container}>
@@ -12,13 +16,13 @@ const listReceipts = ({receiptList}) => {
                     onPress={() => console.log(item)}
                 >
                     <Text style = {styles.text}>
-                        {item.date}
+                        {(new Date(item.date)).toDateString()}
                     </Text>
                     <Text style = {styles.text}>
-                        {item.shop}
+                        'item.shop.name'
                     </Text> 
                     <Text style = {styles.text}>
-                        Totalt: {item.total}kr
+                        Totalt: {item.totalPrice}kr
                     </Text>
                 </TouchableOpacity> 
 
