@@ -1,32 +1,76 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView  } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import Accordion from 'react-native-collapsible/Accordion';
 
-const listReceipts = ({receiptList}) => {
+class listReceipts extends React.Component {
+  state = {
+    activeSections: [],
+  };
+
+  _renderHeader = section => {
+    return (
+      <View style={styles.receiptTitle}>
+        <Text style = {styles.text}>
+            {section.title.date}
+        </Text>
+        <Text style = {styles.text}>
+            {section.title.shop}
+        </Text>
+        <Text style = {styles.text}>
+            Totalt: {section.title.total}kr
+        </Text>
+      </View>
+    );
+  };
+
+  _renderContent = section => {
+    return (
+      <View style={styles.receiptContent}>
+        <Text style = {styles.text}>
+            This is the content!!
+        </Text>
+      </View>
+    );
+  };
+
+  _updateSections = activeSections => {
+    this.setState({ activeSections });
+  };
+
+  render() {
     return(
         <ScrollView contentContainerStyle = {styles.container}>
-            {receiptList.map((item,i) => (
+            {/* {this.props.receiptList.map((item,i) => (
                 <TouchableOpacity
-                    key = {i} 
+                    key = {i}
                     style = {styles.receiptItem}
                     onPress={() => console.log(item)}
                 >
                     <Text style = {styles.text}>
-                        {item.date}
+                        {item.title.date}
                     </Text>
                     <Text style = {styles.text}>
-                        {item.shop}
-                    </Text> 
-                    <Text style = {styles.text}>
-                        Totalt: {item.total}kr
+                        {item.title.shop}
                     </Text>
-                </TouchableOpacity> 
+                    <Text style = {styles.text}>
+                        Totalt: {item.title.total}kr
+                    </Text>
+                </TouchableOpacity>
 
             ))}
 
-            {console.log(receiptList)}
+            {console.log(this.props.receiptList)} */}
+            <Accordion
+              sections={this.props.receiptList}
+              activeSections={this.state.activeSections}
+              renderHeader={this._renderHeader}
+              renderContent={this._renderContent}
+              onChange={this._updateSections}
+            />
         </ScrollView>
     );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -35,22 +79,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
-    receiptItem: {
+    receiptTitle: {
         flexDirection: 'row',
-        height: '10%',
-        width: '95%',
+        width: '100%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        borderWidth: 3,
-        borderRadius: 10,
+        borderBottomWidth: 2,
+        borderColor: '#555',
         backgroundColor: '#d2d8d5',
-        marginTop: 10,
-        marginBottom: 10,
+        paddingVertical: 10,
+    },
+    receiptContent: {
+      paddingVertical: 10,
+      paddingHorizontal: 24,
+      borderBottomWidth: 2,
+      borderColor: '#555',
     },
     text: {
         fontSize: 18,
         color: 'black',
     },
-}); 
+});
 
 export default withNavigation(listReceipts);
