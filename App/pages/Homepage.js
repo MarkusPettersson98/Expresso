@@ -8,7 +8,7 @@ export default class Homepage extends Component {
     state = {
         toggle: this.props.presentationMode,
     };
-
+ 
     render() {
         return (
             <View style={styles.container}>
