@@ -3,7 +3,6 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 const herokuURL = 'https://expressobackend.herokuapp.com/api/';
 
-
 const firebaseURL =
     'https://share-places-1555452472826.firebaseio.com/kvitton.json';
 
@@ -47,12 +46,17 @@ export const getShop = async wantedShop => {
  * @param wantedShopId number representing the id of wanted shop
  */
 export const getShopById = async wantedShopId => {
-    const allInformation = await fetch(herokuURL + 'getShopById/' + wantedShopId)
+    const allInformation = await fetch(
+        herokuURL + 'getShopById/' + wantedShopId,
+    )
         .then(res => res.json())
         .then(response => {
             return response;
         })
-        .catch(error => {console.log('ERROR', error); return [];});
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
     return allInformation;
 };
 
@@ -83,7 +87,7 @@ export const getShopPicture = async wantedShop => {
  * Return a promise object with resolved API call
  * @param wantedShop  The name of the wanted shop
  */
-const getAllShops = async () => {
+export const getAllShops = async () => {
     const myData = await fetch(herokuURL + 'getAllShops/')
         .then(res => res.json())
         .then(response => {
@@ -126,6 +130,13 @@ export const getReceiptLink = id => {
     return herokuURL + 'getReceipt/' + id;
 };
 
+/*
+    Given an ID of a receipt, create a link to 'scan' that receipt
+*/
+export const getScanReceiptLink = id => {
+    return herokuURL + 'scanReceipt/' + id;
+};
+
 /**
  * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
  * @param selectedShop The shop of which the order belongs to.
@@ -142,9 +153,9 @@ export const sendOrder = async cart => {
         user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
     };
 
-    const sendOrderUrl = herokuURL + "postOrder/"
+    const sendOrderUrl = herokuURL + 'postOrder/';
 
-    fetch(sendOrderUrl, {
+    return fetch(sendOrderUrl, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -154,8 +165,8 @@ export const sendOrder = async cart => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log('Receipt id', res);
-            console.log("Receipt link: ", getReceiptLink(res.id))
+            console.log("Receipt link: ", getReceiptLink);
+            return res.id;
         })
         .catch(err => console.log(err));
 };

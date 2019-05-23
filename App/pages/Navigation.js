@@ -85,9 +85,9 @@ export const Tabs = createBottomTabNavigator(
         },
 
         Order: {
-            screen: () => (
+            screen: ({navigation}) => (
                 <View style={{ flex: 1 }}>
-                    <OrderPage />
+                    <OrderPage navigation = {navigation} />
                     <CartField />
                 </View>
             ),
