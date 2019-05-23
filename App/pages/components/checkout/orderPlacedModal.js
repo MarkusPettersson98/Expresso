@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
         top: 200,
         position: 'absolute',
         fontWeight: 'bold',
-        textAlign: 'top',
         color: '#7C6A70',
         margin: 10,
     },
