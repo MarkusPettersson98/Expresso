@@ -168,7 +168,10 @@ export const sendOrder = async (cart, uid = 0) => {
             console.log("Receipt link: ", getReceiptLink(res.id));
             return res.id;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          return err;
+        });
 };
 /** Fixes a user in order to work well with API-request
  *
@@ -181,7 +184,7 @@ const fixUserString = user => {
 
 /**
  * Returns all receipts for one user database using heroku
- * 
+ *
  */
 export const getReceiptsUser = async user => {
     let fixedString = fixUserString(user);
