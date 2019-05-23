@@ -196,36 +196,6 @@ const firebaseObjectToArray = firebaseObject => {
     return items;
 };
 
-const getReceiptWith = async (key, value) => {
-    // Generic function for getting a set of receipts
-    // key = the propertry of the receipt to compare value with
-    try {
-        // const receipts = await getAllReceipts();
-        //return receipts.filter(item => item[key] == value);
-    } catch (e) {
-        return e;
-    }
-};
-
-const getAllReceipts = async () => {
-    const receipts = await fetch(redundantFirebaseURL)
-        .then(res => res.json())
-        .then(res => {
-            const keys = Object.keys(res);
-            const receipts = keys.map(key => {
-                const values = res[key];
-                return {
-                    ...values,
-                    id: key
-                };
-            });
-            return receipts;
-        })
-        .catch(err => console.log("Error!", err));
-
-    return receipts;
-};
-
 const postOrder = async (req, res) => {
     // Function for adding an order to firebase
     const order = req.body;
@@ -294,7 +264,7 @@ const invalidateMirrorReceipt = async id => {
     // Find user with the active receipt id
     console.log("Trying to invalidate id ", id);
     const receipt = await getReceiptById(id);
-    const {user} = receipt[0]; // Firebase LUL
+    const { user } = receipt[0]; // Firebase LUL
     console.log("Trying to invalidate active receipt of user ", user);
     // overwrite current active receipt of user with empty object
     const active = user + "/active";
