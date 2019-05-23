@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { getReceipt, getScanReceiptLink } from '../../../API/expressoAPI';
 import QRCode from 'react-native-qrcode';
+import NoQRPage from './NoQRPage';
 
 import ReceiptView from './ReceiptView';
 
@@ -14,21 +15,26 @@ import ReceiptView from './ReceiptView';
 
 export default class Purchases extends React.Component {
     constructor(props) {
+        console.log('PARAMSUTOMORDERID', props.navigation.state)
         super(props);
-        console.log("PURCHASES ", props.navigation.state.params.orderID);
         this.state = {
             ReceiptView: [],
-            receiptId: props.navigation.state.params.orderID,
+            receiptId: props.navigation.state.params
+                ? props.navigation.state.params.orderID
+                : false,
         };
     }
 
     async componentDidMount() {
         const receiptId = this.state.receiptId;
-        console.log('RECEIPT ID ', receiptId);
 
         // const receipt = await getReceipt('-LfYMIYIpnqfHjs3Lxdw'); //TODO: Get receipt id dynamically
-        const receipt = await getReceipt(receiptId); //TODO: Get receipt id dynamically
-        const receiptView = <ReceiptView receipt={receipt} />;
+        if (receiptId) {
+            const receipt = await getReceipt(receiptId); //TODO: Get receipt id dynamically
+            const receiptView = <ReceiptView receipt={receipt} />;
+        } else {
+            const receiptView = <NoQRPage />;
+        }
 
         this.setState({
             ReceiptView: receiptView,
