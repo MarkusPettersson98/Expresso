@@ -47,7 +47,7 @@ const ShopView = ({ name, picture, street, numcoffees, navigation }) => {
                                 <Ionicons
                                     name="ios-cafe"
                                     size={20}
-                                    color={'black'}
+                                    color={'#57454B'}
                                 />
                             </View>
                         </View>

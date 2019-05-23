@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
     },
     cafeaddress: {
         color: 'white',
-        fontSize: 20,
-        fontWeight: '400',
-        opacity: 0.9,
+        fontSize: 18,
+        fontWeight: '500',
+        opacity: 0.95,
 
     }
 });
