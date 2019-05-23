@@ -9,19 +9,34 @@ let userID = 0;
 
 const list = [
     {
-      date: '2019-01-01',
-      shop: 'Bulten',
-      total: '40'
+      title: {
+        date: '2019-01-01',
+        shop: 'Bulten',
+        total: '40'
+      },
+      content: {
+
+      },
     },
     {
+      title: {
         date: '2019-01-02',
         shop: 'Bibblan',
         total: '100'
+      },
+      content: {
+
+      },
     },
     {
+      title: {
         date: '2019-01-03',
         shop: 'Linsen',
         total: '50'
+      },
+      content: {
+
+      },
     },
 
 ]
@@ -62,4 +77,4 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: 'black',
     },
-}); 
+});
