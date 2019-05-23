@@ -12,10 +12,10 @@ const getCurrentDate = () => {
 
 /** Fixes a shop in order to work well with API-request
  *
- * @param shop A name of a shop, like Veras Café or Bulten.
+ * @param urlArgument A name of a shop, like Veras Café or Bulten.
  */
-const fixShopString = shop => {
-    const fixedString = encodeURIComponent(shop);
+const fixString = urlArgument => {
+    const fixedString = encodeURIComponent(urlArgument);
     return fixedString;
 };
 /**
@@ -23,7 +23,7 @@ const fixShopString = shop => {
  * This includes the names, the coordinates and their drinklist
  */
 export const getShop = async wantedShop => {
-    let fixedString = fixShopString(wantedShop);
+    let fixedString = fixString(wantedShop);
 
     const allInformation = await fetch(herokuURL + 'getShop/' + fixedString)
         .then(res => res.json())
@@ -84,7 +84,7 @@ export const getShopPicture = async wantedShop => {
  * Return a promise object with resolved API call
  * @param wantedShop  The name of the wanted shop
  */
-const getAllShops = async () => {
+export const getAllShops = async () => {
     const myData = await fetch(herokuURL + 'getAllShops/')
         .then(res => res.json())
         .then(response => {
@@ -159,7 +159,7 @@ export const getScanReceiptLink = id => {
  * @param cart The actual cart when pressed on the button, @TODO this should be refactored to be independent of sender.
  * @param selectedShop The shop of which the order belongs to.
  */
-export const sendOrder = async cart => {
+export const sendOrder = async (cart, uid = 0) => {
     const { amount, price, shop, orderItems } = cart;
 
     const reciept = {
@@ -168,7 +168,7 @@ export const sendOrder = async cart => {
         coffees: orderItems,
         shop: shop,
         date: getCurrentDate(),
-        user: 0, // TODO: Replace with authenticated firebase user, this is only a mock
+        user: uid, // TODO: Replace with authenticated firebase user, this is only a mock
     };
 
     const sendOrderUrl = herokuURL + 'postOrder/';
@@ -186,5 +186,27 @@ export const sendOrder = async cart => {
             console.log('Receipt link: ', getReceiptLink(res.id));
             return res.id;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          return err;
+        });
+};
+
+/**
+ * Returns all receipts for one user database using heroku
+ *
+ */
+export const getReceiptsUser = async user => {
+    let fixedString = fixString(user);
+
+    const allInformation = await fetch(herokuURL + 'getReceiptUser/' + fixedString)
+        .then(res => res.json())
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
+    return allInformation;
 };

@@ -5,18 +5,22 @@ import { withNavigation } from 'react-navigation';
 
 const BackArrow = props => {
     return (
-        <View style={{ flexDirection: 'row', margin: props.styling.margin }}>
+        <View>
             <TouchableOpacity
                 onPress={() => {
                     props.navigation.goBack();
                 }}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                style={{
+                    width: 30,
+                    height: 30,
+                }}
             >
                 {/*Donute Button Image */}
                 <Ionicons
                     name="ios-arrow-back"
-                    size={props.styling.size}
-                    color={props.styling.color}
+                    size={30}
+                    color={'#FAFAFA'}
                 />
             </TouchableOpacity>
         </View>

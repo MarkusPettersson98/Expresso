@@ -41,21 +41,24 @@ class ReceiptView extends Component {
             receipt: wantedReceipt,
         });
     }
-    
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.textRubrik}>Tack för din beställning!</Text>
 
                 <View style={styles.infoBox}>
-                    <Text style={styles.textUnderrubrik1}>Varor</Text>
+                    <View>
+                        <Text style={styles.textUnderrubrik1}> Kvitto </Text>
+                    </View>
+                    <Text style={styles.textUnderrubrik1} />
 
                     <View style={styles.varorTable}>
                         <Text
                             style={{
-                                color: 'white',
+                                color: 'black',
                                 fontWeight: 'bold',
                                 width: 40,
+                                marginLeft: 8,
                             }}
                         >
                             Antal
@@ -64,9 +67,10 @@ class ReceiptView extends Component {
                         <Text style={styles.boldtext}>Muggtyp</Text>
                         <Text
                             style={{
-                                color: 'white',
+                                color: 'black',
                                 fontWeight: 'bold',
                                 width: 35,
+                                marginRight: 10,
                             }}
                         >
                             Pris
@@ -75,9 +79,19 @@ class ReceiptView extends Component {
                     <ScrollView>
                         <CoffeeDisplay coffees={this.state.receipt.coffees} />
                     </ScrollView>
+                    
                     <View style={styles.botContainer}>
 
                         <View style={styles.bot}>
+                            <View
+                                style={{
+                                    width: '90%',
+                                    height: '1%',
+                                    alignSelf: 'center',
+                                    borderBottomWidth: 1,
+                                    borderColor: 'black',
+                                }}
+                             />
                             <Text style={styles.textUnderrubrik2}>
                                 Upphämtningsställe
                             </Text>
@@ -93,6 +107,27 @@ class ReceiptView extends Component {
                             <Text style={styles.text}>
                                 Datum: {this.state.receipt.date} {'\n'}
                             </Text>
+                            <View
+                                style={{
+                                    flex: 1,
+                                    top: '25%',
+                                    justifyContent: 'space-between',
+                                    backgroundColor: '#FAFAFA',
+                                    flexDirection: 'row',
+                                    alignItems: 'flex-start',
+                                }}
+                                >
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                                <View style={styles.bottomBanner} />
+                            </View>
                         </View>
 
                         <View style={styles.bot}>
@@ -111,13 +146,13 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 20,
         width: '100%',
-        backgroundColor: '#57454B',
+        backgroundColor: '#FAFAFA',
         paddingLeft: 10,
         paddingRight: 10,
     },
     textRubrik: {
         top: 10,
-        color: 'white',
+        color: 'black',
         fontSize: 18,
         fontWeight: 'bold',
         textDecorationLine: 'underline',
@@ -126,6 +161,8 @@ const styles = StyleSheet.create({
     infoBox: {
         flex: 1,
         top: 20,
+        backgroundColor: 'white',
+        borderRadius: 10,
     },
     varorTable: {
         width: '100%',
@@ -133,26 +170,32 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     textUnderrubrik1: {
+        top: 5,
         fontSize: 16,
         fontWeight: 'bold',
-        color: 'white',
+        color: 'black',
         textDecorationLine: 'underline',
+        alignSelf: 'center',
+        bottom: 10,
     },
     textUnderrubrik2: {
         top: 10,
         fontSize: 16,
         fontWeight: 'bold',
-        color: 'white',
+        color: 'black',
         textDecorationLine: 'underline',
+        marginLeft: 10,
+        bottom: 20,
     },
     text: {
-        top: 10,
-        color: 'white',
+        top: '3%',
+        color: 'black',
+        marginLeft: 10,
     },
     boldtext: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
-        width: 140,
+        width: 110,
     },
     table: {
         flex: 1,
@@ -165,28 +208,19 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     },
     knapp: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 24,
-        alignSelf: 'flex-end',
-        marginRight: '10%',
+        alignSelf: 'flex-start',
+        marginLeft: 10,
     },
-    botContainer: {
-        flex: 7,
-        flexDirection: 'row',
-        height: '100%'
+    bottomBanner: {
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
+        backgroundColor: 'white',
+        width: '10%',
+        height: '10%',
     },
-    bot: {
-        width: '50%',
-        height: '100%'
-    },
-    map2: {
-        borderRadius: 1000000,
-        margin: 5,
-        borderWidth: 2,
-        borderColor: '#57454B',
-        marginBottom: 20
-    }
 });
 
 export default withNavigation(ReceiptView);

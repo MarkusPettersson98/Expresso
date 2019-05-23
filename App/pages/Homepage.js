@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Maincomp from './components/homePage/Maincomp';
 import Mapcomp from './components/homePage/Mapcomp';
-import CartField from './components/CartField';
 
 export default class Homepage extends Component {
     state = {
         toggle: this.props.presentationMode,
     };
-
+ 
     render() {
         return (
             <View style={styles.container}>
@@ -24,7 +23,7 @@ export default class Homepage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F0F7F4',
+        backgroundColor: '#FAFAFA',
     },
     comps: {
         flex: 1,
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        backgroundColor: '#F0F7F4',
+        backgroundColor: '#FAFAFA',
         borderBottomWidth: 5,
         bottom: 0,
     },
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
     item: {
         width: '33%',
         justifyContent: 'center',
-        backgroundColor: '#F0F7F4',
+        backgroundColor: '#FAFAFA',
         textDecorationLine: 'none',
     },
 });

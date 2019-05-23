@@ -12,9 +12,10 @@ const CoffeeDisplay = ({ coffees }) => {
             <View style={styles.spaceing} key={antal + namn + pris + mugg}>
                 <Text
                     style={{
-                        color: 'white',
+                        color: 'black',
                         fontWeight: 'bold',
                         width: 40,
+                        marginLeft: 10,
                     }}
                 >
                     {antal}
@@ -23,9 +24,10 @@ const CoffeeDisplay = ({ coffees }) => {
                 <Text style={styles.text}>{mugg}</Text>
                 <Text
                     style={{
-                        color: 'white',
+                        color: 'black',
                         fontWeight: 'bold',
                         width: 35,
+                        marginRight: 10,
                     }}
                 >
                     {pris}
@@ -47,7 +49,8 @@ const styles = StyleSheet.create({
     },
     text: {
         alignSelf: 'stretch',
-        color: 'white',
-        width: 140,
+        color: 'black',
+        width: 110,
+        backgroundColor: 'white',
     },
 });

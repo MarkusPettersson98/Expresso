@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         width: '50%',
         borderWidth: 10,
         justifyContent: 'center',
-        borderColor: '#F0F7F4',
+        borderColor: '#FAFAFA',
         backgroundColor: 'brown',
         alignItems: 'center',
         borderRadius: 40,
@@ -63,8 +63,7 @@ class CoffeeItem extends React.Component {
             // If cart contains coffee from another café
             Alert.alert(
                 'Varning',
-                'Varukorgen innehåller kaffe från ett annat kafé. Vill du rensa varukorgen och lägga till denna vara?',
-                [
+                `Varukorgen innehåller kaffe från ${this.props.cart.shop.name}. Vill du rensa varukorgen och lägga till en ${this.coffee.name} från ${this.props.shopName} istället?`,                [
                     {
                         text: 'Avbryt',
                         style: 'cancel',
@@ -151,7 +150,13 @@ class CoffeeItem extends React.Component {
                             justifyContent: 'flex-start',
                         }}
                     >
-                        <SimpleLineIcons name="cup" size={20} color="#5AA3B7" />
+                        <View style={{ height: 20, width: 20 }}>
+                            <SimpleLineIcons
+                                name="cup"
+                                size={20}
+                                color="#5AA3B7"
+                            />
+                        </View>
                         <View
                             style={{
                                 flex: 4,
