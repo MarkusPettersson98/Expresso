@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
+import LottieView from 'lottie-react-native';
 
 export default class OrderPlacedModal extends Component {
     constructor(props) {
@@ -13,20 +14,36 @@ export default class OrderPlacedModal extends Component {
         this.props.clearCart();
     };
 
+    componentDidUpdate() {
+      if (this.props.isVisible) {
+        console.log("playing animation");
+        this.animation.play();
+      }
+    }
+
     render() {
         return (
-            <Modal isVisible={this.props.isVisible}>
+            <Modal style={styles.modal} isVisible={this.props.isVisible}>
                 <View style={styles.modalContainer}>
+                    <LottieView
+                      style={styles.lottieView}
+                      ref={animation => {
+                        this.animation = animation;
+                      }}
+                      source={require('../resources/coffeeAnim.json')}
+                      speed={1.5}
+                    />
                     <Text style={styles.thank_you}>Tack för ditt köp!</Text>
                     <Text style={styles.press_text}>
                         Tryck på visa order för att visa din QR-kod.
                     </Text>
-                    <Text
-                        onPress={this.onClose}
-                        style={styles.show_order_container}
+
+                    <TouchableOpacity
+                      style={styles.btn}
+                      onPress={this.onClose}
                     >
-                        VISA ORDER
-                    </Text>
+                      <Text style={styles.btnText}>VISA ORDER</Text>
+                    </TouchableOpacity>
                 </View>
             </Modal>
         );
@@ -34,63 +51,62 @@ export default class OrderPlacedModal extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+    lottieView: {
+      width: 250,
+      height: 250,
+      marginTop: -20,
+    },
+    modal: {
+      justifyContent: 'flex-end',
+      margin: 0,
     },
     modalContainer: {
-        flex: 1,
-        bottom: 0,
-        position: 'absolute',
-        alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
         height: 500,
-        width: 370,
+        width: '100%',
         backgroundColor: '#F5FCFF',
-        marginTop: 10,
         paddingTop: 15,
-        borderRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
         borderWidth: 0,
-        borderColor: '#fff',
     },
     thank_you: {
         fontSize: 20,
-        top: 200,
-        position: 'absolute',
         fontWeight: 'bold',
         color: '#7C6A70',
-        margin: 10,
+        marginTop: -15,
     },
     press_text: {
         fontSize: 17,
-        top: 280,
-        position: 'absolute',
         textAlign: 'center',
         color: '#7C6A70',
-        margin: 10,
+        marginTop: 10,
     },
-    show_order_container: {
-        justifyContent: 'center',
-        backgroundColor: '#5AA3B7',
-        bottom: 60,
-        position: 'absolute',
-        color: '#FFFFFF',
-        width: 200,
-        height: 40,
-        textAlign: 'center',
-        fontSize: 17,
-        fontWeight: 'bold',
-        marginTop: 20,
-        paddingTop: 10,
-        paddingBottom: 30,
-        marginLeft: 30,
-        marginRight: 30,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#fff',
-        overflow: 'hidden',
+    logIn: {
+      backgroundColor: '#5AA3B7',
+      paddingVertical: 16,
+      borderRadius: 10,
+      alignItems: 'center',
+      marginBottom: 15,
+    },
+    logInText: {
+      color: 'white',
+      fontWeight: '700',
+      letterSpacing: 2,
+    },
+    btn: {
+      width: '90%',
+      backgroundColor: '#5AA3B7',
+      paddingVertical: 16,
+      borderRadius: 10,
+      alignItems: 'center',
+      marginTop: 60,
+      marginBottom: 15,
+    },
+    btnText: {
+      color: 'white',
+      fontWeight: '700',
+      letterSpacing: 2,
     },
 });
