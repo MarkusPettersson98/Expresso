@@ -19,7 +19,7 @@ class ReceiptView extends Component {
         hämtas hårdkodat genom funktionen getReceiptUser i Purchases.js detta borde
         göras dynamiskt istället.
         */
-        const customer = this.props.receipt[0];
+        const customer = this.props.receipt[3];
 
         return (
             <View style={styles.container}>
@@ -63,6 +63,12 @@ class ReceiptView extends Component {
 
                         {/* Klickar nu endast vidare till kartan, borde visa vilket affär
                             med någon typ av markering */}
+                        <Text style={styles.text}>
+                            Totalpris: {customer.totalPrice} {'\n'}
+                        </Text>
+                        <Text style={styles.text}>
+                            Datum: {customer.date} {'\n'}
+                        </Text>
                         <TouchableOpacity
                             onPress={() =>
                                 this.props.navigation.navigate('Karta')
@@ -70,12 +76,6 @@ class ReceiptView extends Component {
                         >
                             <Text style={styles.knapp}>Gå till karta</Text>
                         </TouchableOpacity>
-                        <Text style={styles.text}>
-                            Totalpris: {customer.totalPrice} {'\n'}
-                        </Text>
-                        <Text style={styles.text}>
-                            Datum: {customer.date} {'\n'}
-                        </Text>
                     </View>
                 </View>
             </View>
@@ -144,7 +144,9 @@ const styles = StyleSheet.create({
     knapp: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: 24,
+        alignSelf: 'flex-end',
+        marginRight: '10%',
     },
 });
 

@@ -3,9 +3,6 @@ import defaultPic from '../pages/components/resources/ExpressoTransp.png';
 
 const herokuURL = 'https://expressobackend.herokuapp.com/api/';
 
-const firebaseURL =
-    'https://share-places-1555452472826.firebaseio.com/kvitton.json';
-
 /**Returns all the receipts of a specified user - currently only customer '0' //TODO:add id as param
  *
  * @param id the id of the sought out customer
@@ -64,12 +61,17 @@ export const getShop = async wantedShop => {
  * @param wantedShopId number representing the id of wanted shop
  */
 export const getShopById = async wantedShopId => {
-    const allInformation = await fetch(herokuURL + 'getShopById/' + wantedShopId)
+    const allInformation = await fetch(
+        herokuURL + 'getShopById/' + wantedShopId,
+    )
         .then(res => res.json())
         .then(response => {
             return response;
         })
-        .catch(error => {console.log('ERROR', error); return [];});
+        .catch(error => {
+            console.log('ERROR', error);
+            return [];
+        });
     return allInformation;
 };
 

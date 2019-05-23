@@ -75,15 +75,4 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         opacity: 1,
     },
-    tc: {
-        backgroundColor: 'black',
-        width: '100%',
-        height: '30%',
-        bottom: 0,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        color: 'white',
-    },
 });
