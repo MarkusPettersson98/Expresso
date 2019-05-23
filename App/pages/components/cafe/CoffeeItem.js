@@ -3,7 +3,8 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 import { connect } from 'react-redux';
-import { addCoffee, clearCart } from '../redux/actions';
+import { addCoffee, clearCart, addShop } from '../redux/actions';
+import { getShopById } from '../../../API/expressoAPI';
 import ModalComp from './ChooseMugModal';
 
 const styles = StyleSheet.create({
@@ -84,10 +85,35 @@ class CoffeeItem extends React.Component {
         }
     };
 
+    resolveShop = shopId => {
+        console.log('CoffeeItem: Adding shop to cart .. ', shopId);
+        getShopById(shopId)
+            .then(shop => {
+                // Add shop to cart state
+                // But remove drink list first and id ;))
+                const { id, drinkList, ...wantedProperties } = shop;
+
+                this.props.onAddShop(wantedProperties);
+            })
+            .catch(err => {
+                console.log('CoffeeItem: Could not resolve shop, ', err);
+            });
+    };
+
     //Function to order coffee when ModalComp closes, is sent as props to ModalComp
     //Takes value of ownMug-selection t/f
     orderCoffee = ownMug => {
-        this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
+        const {
+            coffee: { shopId },
+        } = this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
+
+        // If shop has not been resolved yet, do so in the background
+        // and updated cart when done
+
+        const currentShop = this.props.cart.shop;
+        if (Object.keys(currentShop).length == 0) {
+            this.resolveShop(shopId);
+        }
     };
 
     render() {
@@ -161,10 +187,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAddCoffee: coffee => {
-            dispatch(addCoffee(coffee));
+            return dispatch(addCoffee(coffee));
         },
         onClearCart: () => {
             dispatch(clearCart());
+        },
+        onAddShop: shop => {
+            dispatch(addShop(shop));
         },
     };
 };
