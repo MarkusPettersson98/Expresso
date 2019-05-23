@@ -1,5 +1,4 @@
 import React from 'react';
-import { getReceipt } from '../../../API/expressoAPI';
 import NoQRPage from './NoQRPage';
 
 import QRPage from './QRPage';
@@ -12,31 +11,13 @@ import QRPage from './QRPage';
 
 export default class Purchases extends React.Component {
     constructor(props) {
-        console.log('Purchases: ', props.navigation.state);
         super(props);
-        this.state = {
-            receipt: {},
-            receiptId: props.navigation.state.params
-                ? props.navigation.state.params.orderID
-                : '',
-        };
-    }
-
-    async componentDidMount() {
-        const receiptId = this.state.receiptId;
-
-        // Check if receipt id exists. If so, resolve receipt
-        const receipt = await getReceipt(receiptId);
-        this.setState({
-            receipt: receipt,
-        });
     }
 
     render() {
-        return this.state.receipt ? (
-            <QRPage receipt={this.state.receipt} />
-        ) : (
-            <NoQRPage />
-        );
+        // If there is an orderID, render QR code.
+        const { params } = this.props.navigation.state;
+
+        return params ? <QRPage receiptId={params.orderID} /> : <NoQRPage />;
     }
 }

@@ -1,8 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
-import ReceiptView from './ReceiptView';
 import { View, StyleSheet } from 'react-native';
 import QRCode from 'react-native-qrcode';
+import ReceiptView from './ReceiptView';
 
 import { getScanReceiptLink } from '../../../API/expressoAPI';
 
@@ -11,20 +10,20 @@ import { getScanReceiptLink } from '../../../API/expressoAPI';
  * that s/he has done before.
  * This view does not have navigation, the navigation lies within the header folder.
  */
-const QRPage = ({ receipt }) => {
+const QRPage = ({ receiptId }) => {
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
                 <View style={styles.qr}>
                     <QRCode
-                        value={getScanReceiptLink(receipt.id)} //Ska vara en länk till den beställning som man gjort
+                        value={getScanReceiptLink(receiptId)} //Ska vara en länk till den beställning som man gjort
                         size={260}
                         bgColor="black"
                         fgColor="white"
                     />
                 </View>
             </View>
-            <ReceiptView />
+            {/* <ReceiptView receiptId={receiptId} /> */}
         </View>
     );
 };
