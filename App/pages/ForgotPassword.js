@@ -32,10 +32,9 @@ class ForgotPasswordPage extends React.Component {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        this.setState({ errorMessage, loading: false });
         return Alert.alert('Error', errorMessage, [
           {
-            text: 'OK',
+            text: 'OK', onPress: () =>  this.setState({ errorMessage, loading: false })
           },
         ]);
       });

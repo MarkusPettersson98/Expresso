@@ -25,7 +25,13 @@ import Purchases from './components/purchases/Purchases';
 const headerStyling = {
     headerStyle: {
         backgroundColor: '#57454B',
+        borderBottomWidth: 0,
         height: 60,
+        shadowRadius: 0,
+        shadowColor: 'transparent',
+        shadowOffset: {
+            height: 0,
+        },
     },
     headerTintColor: '#fff',
 };
@@ -176,7 +182,7 @@ export const RootStack = createStackNavigator(
             navigationOptions: ({ navigation }) => ({
                 headerRight: <ClearCheckoutHeader />,
                 headerLeft: (
-                    <View style={{margin:10}} >
+                    <View style={{ margin: 10 }}>
                         <BackArrow />
                     </View>
                 ),
@@ -201,18 +207,33 @@ export const RootStack = createStackNavigator(
         Login: {
             screen: Login,
             navigationOptions: {
+                headerLeft: (
+                    <View style={{ margin: 10 }}>
+                        <BackArrow />
+                    </View>
+                ),
                 ...headerStyling,
             },
         },
         SignUp: {
             screen: SignUp,
             navigationOptions: {
+                headerLeft: (
+                    <View style={{ margin: 10 }}>
+                        <BackArrow />
+                    </View>
+                ),
                 ...headerStyling,
             },
         },
         Forgot: {
             screen: ForgotPassword,
             navigationOptions: {
+                headerLeft: (
+                    <View style={{ margin: 10 }}>
+                        <BackArrow />
+                    </View>
+                ),
                 ...headerStyling,
             },
         },
