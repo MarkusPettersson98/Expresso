@@ -23,9 +23,6 @@ import ModalComp from './components/checkout/OrderPlacedModal';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-
-import { getShopById } from '../API/expressoAPI';
-
 class Checkout extends Component {
   state = {
     paymentCard: '',
@@ -38,22 +35,7 @@ class Checkout extends Component {
     user: null,
     loading: false,
     receiptId: '',
-    loadingShop: true,
   };
-
-  // when mounted first time
-  async componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user: user });
-    });
-    // Fetch data about which shop we are purchasing coffee from
-    const requestedShop = await getShopById(this.props.cart.shopId);
-    // This is a whole shop object, which carries more data than just name, e.g. street, coordinates ..
-    this.setState({
-      shop: requestedShop,
-      loadingShop: false,
-    });
-  }
 
   //Changes modalVisible-state to true, making ModalComp visible
   showModal = () => {
@@ -118,9 +100,7 @@ class Checkout extends Component {
   };
 
   render() {
-    const cart = this.props.cart;
-    const total = cart.price;
-    const orderItems = cart.orderItems;
+    const { price: total, orderItems, shop } = this.props.cart;
 
     return (
       <View style={{ flex: 1, backgroundColor: '#FFF' }}>
@@ -168,14 +148,13 @@ class Checkout extends Component {
                   </View>
 
                   <View>
-                    {this.state.loadingShop && <ActivityIndicator style={{marginTop: 3}} color="#5AA3B7" />}
                     <Text
                       style={{
                         color: '#57454B',
                         fontSize: 16,
                       }}
                     >
-                      {this.state.shop.name ? this.state.shop.name : ' '}
+                      {shop.name}
                     </Text>
                     <Text
                       style={{
@@ -184,7 +163,7 @@ class Checkout extends Component {
                         marginTop: 3,
                       }}
                     >
-                      {this.state.shop.street ? this.state.shop.street : ' '}
+                      {shop.street}
                     </Text>
                   </View>
                 </View>
