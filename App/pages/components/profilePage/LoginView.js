@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   botContainer: {
     width: '100%',
     paddingHorizontal: 24,
-    paddingVertical: 36,
+    paddingTop: 10,
+    paddingBottom: 70,
   },
   text: {
     fontSize: 14,

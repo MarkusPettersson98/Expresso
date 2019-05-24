@@ -10,9 +10,9 @@ import { withNavigation } from 'react-navigation';
  * @param  navigation from withNavigation
  */
 
-const MiniMap = ({ region, shops, navigation }) => {
+const Map = ({ region, shops, street,  navigation }) => {
     const renderMarkers = () => {
-        return shops.map(({ shop, coordinates }, index) => {
+        return shops.map(({ shop, coordinates, street }, index) => {
             return (
                 <View key={index}>
                     <MapView.Marker
@@ -25,6 +25,7 @@ const MiniMap = ({ region, shops, navigation }) => {
                         onCalloutPress={() =>
                             navigation.navigate('Cafe', {
                                 selectedShop: shop,
+                                street: street
                             })
                         }
                     />

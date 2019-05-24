@@ -10,20 +10,20 @@ import { getScanReceiptLink } from '../../../API/expressoAPI';
  * that s/he has done before.
  * This view does not have navigation, the navigation lies within the header folder.
  */
-const QRPage = ({ receiptId }) => {
+const QRPage = ({ receipt }) => {
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
                 <View style={styles.qr}>
                     <QRCode
-                        value={getScanReceiptLink(receiptId)} //Ska vara en länk till den beställning som man gjort
-                        size={280}
+                        value={getScanReceiptLink(receipt.user + receipt.date)} //Ska vara en länk till den beställning som man gjort
+                        size={260}
                         bgColor="black"
                         fgColor="#FAFAFA"
                     />
                 </View>
             </View>
-            <ReceiptView receiptId={receiptId} />
+            <ReceiptView receipt={receipt} />
         </View>
     );
 };
