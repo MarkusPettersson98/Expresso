@@ -106,20 +106,19 @@ class ReceiptView extends Component {
                     <View style={styles.botContainer}>
                         <View style={styles.bot}>
                             <Text style={styles.textUnderrubrik2}>
-                                Upphämtningsställe
-                            </Text>
-                            <Text style={styles.text}>
-                                {this.state.receipt.shop.name} {'\n'}
+                                
+                            
+                                {this.state.receipt.shop.name}{', '}{this.state.receipt.shop.street}{'\n'}
                             </Text>
 
                             <Text style={styles.text}>
-                                Totalpris: {this.state.receipt.totalPrice}{' '}
-                                {'\n'}
+                                Totalpris: {this.state.receipt.totalPrice}{'kr '}
+                                
                             </Text>
                             <Text style={styles.text}>
                                 {new Date(
                                     this.state.receipt.date,
-                                ).toDateString()}{' '}
+                                ).toString()}{' '}
                                 {'\n'}
                             </Text>
                         </View>
@@ -152,9 +151,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     textRubrik: {
-        top: 10,
+        top: 5,
         color: '#57454B',
-        fontSize: 18,
+        fontSize: 25,
         fontWeight: 'bold',
         alignSelf: 'center',
     },
