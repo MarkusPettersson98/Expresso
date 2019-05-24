@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { sendOrder as sendOrderAPI } from '../API/expressoAPI';
@@ -37,6 +38,7 @@ class Checkout extends Component {
     user: null,
     loading: false,
     receiptId: '',
+    loadingShop: true,
   };
 
   // when mounted first time
@@ -49,6 +51,7 @@ class Checkout extends Component {
     // This is a whole shop object, which carries more data than just name, e.g. street, coordinates ..
     this.setState({
       shop: requestedShop,
+      loadingShop: false,
     });
   }
 
@@ -75,7 +78,7 @@ class Checkout extends Component {
         this.props.onClearCart();*/
         this.setState({ loading: false,});
 
-        // This is to allow the modal to slide up, do not touch!!! 
+        // This is to allow the modal to slide up, do not touch!!!
         setTimeout(()=>{
           this.setState({ loading: false, modalVisible: true, receiptId: res, });
         }
@@ -165,13 +168,14 @@ class Checkout extends Component {
                   </View>
 
                   <View>
+                    {this.state.loadingShop && <ActivityIndicator style={{marginTop: 3}} color="#5AA3B7" />}
                     <Text
                       style={{
                         color: '#57454B',
                         fontSize: 16,
                       }}
                     >
-                      {this.state.shop.name}
+                      {this.state.shop.name ? this.state.shop.name : ' '}
                     </Text>
                     <Text
                       style={{
@@ -180,7 +184,7 @@ class Checkout extends Component {
                         marginTop: 3,
                       }}
                     >
-                      {this.state.shop.street}
+                      {this.state.shop.street ? this.state.shop.street : ' '}
                     </Text>
                   </View>
                 </View>
