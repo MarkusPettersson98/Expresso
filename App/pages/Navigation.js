@@ -207,6 +207,7 @@ export const RootStack = createStackNavigator(
         Login: {
             screen: Login,
             navigationOptions: {
+
                 headerLeft: (
                     <View style={{ margin: 10 }}>
                         <BackArrow />
@@ -218,6 +219,7 @@ export const RootStack = createStackNavigator(
         SignUp: {
             screen: SignUp,
             navigationOptions: {
+
                 headerLeft: (
                     <View style={{ margin: 10 }}>
                         <BackArrow />
@@ -229,6 +231,7 @@ export const RootStack = createStackNavigator(
         Forgot: {
             screen: ForgotPassword,
             navigationOptions: {
+
                 headerLeft: (
                     <View style={{ margin: 10 }}>
                         <BackArrow />
