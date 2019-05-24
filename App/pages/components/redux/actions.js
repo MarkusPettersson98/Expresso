@@ -16,7 +16,7 @@ export const ADD_SHOP = 'ADD_SHOP';
  */
 
 export function incrementCoffee(coffee) {
-    return { type: ITEM_INCREMENT, coffee };
+    return { type: ITEM_INCREMENT, coffee , amount: 1};
 }
 
 export function decrementCoffee(coffee) {

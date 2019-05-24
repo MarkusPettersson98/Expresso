@@ -106,7 +106,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
       };
 
       // Decrement amount of existing orderItem by one
-      const decrement = orderItem => decrementAmount(orderItem, action.amount);
+      const decrement = orderItem => decrementAmount(orderItem, 1);
 
       let newOrderItems = mapSome(
         currentCart.orderItems,
