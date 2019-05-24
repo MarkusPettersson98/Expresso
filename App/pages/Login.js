@@ -6,7 +6,6 @@ import {
   Text,
   StyleSheet,
   Alert,
-  Image,
   KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
@@ -14,6 +13,7 @@ import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { withNavigation } from 'react-navigation';
+import { SimpleLineIcons } from '@expo/vector-icons';
 
 class loginPage extends React.Component {
   state = { email: '', password: '', errorMessage: null, loading: false };
@@ -47,11 +47,9 @@ class loginPage extends React.Component {
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         {this.state.loading && <LoadingOverlay />}
 
-        <Image
-          style={{ height: 30, width: '100%', marginVertical: 50 }}
-          source={require('./components/resources/ExpressoLogoLight.png')}
-          resizeMode="contain"
-        />
+        <View style={styles.iconView}>
+          <SimpleLineIcons name="user" size={70} color="#57454B" />
+        </View>
 
         <TextInput
           style={styles.input}
@@ -75,11 +73,13 @@ class loginPage extends React.Component {
         </TouchableOpacity>
 
         <View style={styles.textButtonView}>
-          <Text style={{ color: 'white' }}>Har du inget konto? </Text>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('SignUp')}
           >
-            <Text style={{ color: '#5AA3B7' }}>Registrera dig</Text>
+            <View style = {styles.toView}>
+              <Text style={{ color: '#101010' }}>Har du inget konto? </Text>
+              <Text style={{ color: '#5AA3B7' }}>Registrera dig</Text>
+            </View>
           </TouchableOpacity>
         </View>
 
@@ -98,20 +98,25 @@ class loginPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#57454B',
+    backgroundColor: '#FAFAFA',
     justifyContent: 'center',
     paddingHorizontal: 26,
   },
+  iconView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 50
+  },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#101010',
     borderWidth: 0,
     borderBottomWidth: 2,
     marginBottom: 20,
-    color: 'white',
+    color: '#101010',
   },
   logIn: {
-    backgroundColor: '#5AA3B7',
+    backgroundColor: '#FAFAFA',
     paddingVertical: 16,
     borderRadius: 10,
     alignItems: 'center',
@@ -119,7 +124,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logInText: {
-    color: 'white',
+    color: '#101010',
     fontWeight: '700',
     letterSpacing: 2,
   },
@@ -129,6 +134,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 15,
   },
+  toView: {
+    flexDirection: 'row',
+
+  }
 });
 
 export default withNavigation(loginPage);

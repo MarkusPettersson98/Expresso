@@ -207,6 +207,8 @@ export const RootStack = createStackNavigator(
         Login: {
             screen: Login,
             navigationOptions: {
+                headerTitle: <ExpressoLogoHeader />,
+                ...headerStyling,
                 headerLeft: (
                     <View style={{ margin: 10 }}>
                         <BackArrow />
@@ -218,6 +220,8 @@ export const RootStack = createStackNavigator(
         SignUp: {
             screen: SignUp,
             navigationOptions: {
+                headerTitle: <ExpressoLogoHeader />,
+                ...headerStyling,
                 headerLeft: (
                     <View style={{ margin: 10 }}>
                         <BackArrow />
@@ -229,6 +233,8 @@ export const RootStack = createStackNavigator(
         Forgot: {
             screen: ForgotPassword,
             navigationOptions: {
+                headerTitle: <ExpressoLogoHeader />,
+                ...headerStyling,
                 headerLeft: (
                     <View style={{ margin: 10 }}>
                         <BackArrow />

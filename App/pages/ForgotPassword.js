@@ -5,13 +5,14 @@ import {
   Text,
   StyleSheet,
   Alert,
-  Image,
+  View,
   KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { SimpleLineIcons } from '@expo/vector-icons';
 
 class ForgotPasswordPage extends React.Component {
   state = { email: '', errorMessage: null, loading: false };
@@ -43,11 +44,9 @@ class ForgotPasswordPage extends React.Component {
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         {this.state.loading && <LoadingOverlay />}
 
-        <Image
-          style={{ height: 30, width: '100%', marginVertical: 50 }}
-          source={require('./components/resources/ExpressoLogoLight.png')}
-          resizeMode="contain"
-        />
+        <View style={styles.iconView}>
+          <SimpleLineIcons name="user" size={70} color="#57454B" />
+        </View>
 
         <TextInput
           style={styles.input}
@@ -75,17 +74,22 @@ class ForgotPasswordPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#57454B',
+    backgroundColor: '#FAFAFA',
     justifyContent: 'center',
     paddingHorizontal: 26,
   },
+  iconView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 100
+  },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#101010',
     borderWidth: 0,
     borderBottomWidth: 2,
     marginBottom: 20,
-    color: 'white',
+    color: '#101010',
   },
   button: {
     backgroundColor: '#5AA3B7',
