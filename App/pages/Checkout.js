@@ -179,10 +179,10 @@ class Checkout extends Component {
                 </View>
               </View>
 
-              {/* Betalningsmetod */}
+              {/* Kårkort */}
               <View style={{ ...styles.viewBlock, paddingHorizontal: 24 }}>
                 <Text style={{ ...styles.viewBlockTitle, marginHorizontal: 0 }}>
-                  Betalningsmetod
+                  Kårkort
                 </Text>
                 <PaymentMethod setPaymentCard={this.setPaymentCard} />
               </View>

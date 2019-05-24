@@ -61,7 +61,7 @@ class Profile extends Component {
         </View>
 
         <View style={styles.paymentInfoView}>
-          <Text style={styles.paymentHeader}>Betalningsmetod</Text>
+          <Text style={styles.paymentHeader}>Kårkort</Text>
           <PaymentMethod />
         </View>
       </View>
