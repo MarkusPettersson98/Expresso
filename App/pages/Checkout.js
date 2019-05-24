@@ -73,7 +73,14 @@ class Checkout extends Component {
         });
         // clear the cart
         this.props.onClearCart();*/
-        this.setState({ loading: false, modalVisible: true, receiptId: res, });
+        this.setState({ loading: false,});
+
+        // This is to allow the modal to slide up, do not touch!!! 
+        setTimeout(()=>{
+          this.setState({ loading: false, modalVisible: true, receiptId: res, });
+        }
+        ,1000)
+
         return res;
       })
       .catch(() => {

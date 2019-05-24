@@ -15,10 +15,10 @@ export default class OrderPlacedModal extends Component {
     };
 
     componentDidUpdate() {
-      if (this.props.isVisible) {
-        console.log("playing animation");
-        this.animation.play();
-      }
+        if (this.props.isVisible) {
+            console.log('playing animation');
+            this.animation.play();
+        }
     }
 
     render() {
@@ -26,23 +26,20 @@ export default class OrderPlacedModal extends Component {
             <Modal style={styles.modal} isVisible={this.props.isVisible}>
                 <View style={styles.modalContainer}>
                     <LottieView
-                      style={styles.lottieView}
-                      ref={animation => {
-                        this.animation = animation;
-                      }}
-                      source={require('../resources/coffeeAnim.json')}
-                      speed={1.5}
+                        style={styles.lottieView}
+                        ref={animation => {
+                            this.animation = animation;
+                        }}
+                        source={require('../resources/coffeeAnim.json')}
+                        speed={1.5}
                     />
                     <Text style={styles.thank_you}>Tack för ditt köp!</Text>
                     <Text style={styles.press_text}>
                         Tryck på visa order för att visa din QR-kod.
                     </Text>
 
-                    <TouchableOpacity
-                      style={styles.btn}
-                      onPress={this.onClose}
-                    >
-                      <Text style={styles.btnText}>VISA ORDER</Text>
+                    <TouchableOpacity style={styles.btn} onPress={this.onClose}>
+                        <Text style={styles.btnText}>VISA ORDER</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
@@ -52,20 +49,21 @@ export default class OrderPlacedModal extends Component {
 
 const styles = StyleSheet.create({
     lottieView: {
-      width: 250,
-      height: 250,
-      marginTop: -20,
+        width: 250,
+        height: 250,
+        marginTop: -80,
+        width: '100%',
     },
     modal: {
-      justifyContent: 'flex-end',
-      margin: 0,
+        justifyContent: 'flex-end',
+        margin: 0,
     },
     modalContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         height: 500,
         width: '100%',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: 'white',
         paddingTop: 15,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -84,29 +82,29 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     logIn: {
-      backgroundColor: '#5AA3B7',
-      paddingVertical: 16,
-      borderRadius: 10,
-      alignItems: 'center',
-      marginBottom: 15,
+        backgroundColor: '#5AA3B7',
+        paddingVertical: 16,
+        borderRadius: 10,
+        alignItems: 'center',
+        marginBottom: 15,
     },
     logInText: {
-      color: 'white',
-      fontWeight: '700',
-      letterSpacing: 2,
+        color: 'white',
+        fontWeight: '700',
+        letterSpacing: 2,
     },
     btn: {
-      width: '90%',
-      backgroundColor: '#5AA3B7',
-      paddingVertical: 16,
-      borderRadius: 10,
-      alignItems: 'center',
-      marginTop: 60,
-      marginBottom: 15,
+        width: '90%',
+        backgroundColor: '#5AA3B7',
+        paddingVertical: 16,
+        borderRadius: 10,
+        alignItems: 'center',
+        marginTop: 60,
+        marginBottom: 15,
     },
     btnText: {
-      color: 'white',
-      fontWeight: '700',
-      letterSpacing: 2,
+        color: 'white',
+        fontWeight: '700',
+        letterSpacing: 2,
     },
 });
