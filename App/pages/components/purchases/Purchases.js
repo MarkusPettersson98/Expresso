@@ -1,6 +1,7 @@
 import React from 'react';
 import NoQRPage from './NoQRPage';
 import QRPage from './QRPage';
+import LoadingScreen from '../loading/loadingScreen';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -19,7 +20,7 @@ class Purchases extends React.Component {
 
         this.state = {
             activeReceipt: undefined,
-            firebaseLoading: false,
+            firebaseLoading: true,
         };
     }
 
@@ -29,17 +30,6 @@ class Purchases extends React.Component {
                 const fbUserId = firebase.database().ref('users/' + user.uid);
                 fbUserId.on('value', snapshot => {
                     // fbUserId.on('child_changed', snapshot => {
-                    const activeReceipt =
-                        (snapshot.val() && snapshot.val().active) || '';
-                    console.log('Purchases: active receipt', activeReceipt);
-                    this.setState({
-                        activeReceipt,
-                        firebaseLoading: false,
-                    });
-                });
-
-                // Add event listener
-                fbUserId.on('child_changed', snapshot => {
                     const activeReceipt =
                         (snapshot.val() && snapshot.val().active) || '';
                     console.log('Purchases: active receipt', activeReceipt);
@@ -63,11 +53,16 @@ class Purchases extends React.Component {
                     flex: 1,
                 }}
             >
-                {this.state.activeReceipt ? (
-                    <QRPage receipt={this.state.activeReceipt} />
-                ) : (
-                    <NoQRPage />
-                )}
+              {this.state.firebaseLoading
+                ? <LoadingScreen />
+                : (
+                  this.state.activeReceipt ? (
+                      <QRPage receipt={this.state.activeReceipt} />
+                  ) : (
+                      <NoQRPage />
+                  )
+                )
+              }
             </View>
         );
     }
