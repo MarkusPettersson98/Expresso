@@ -129,6 +129,9 @@ class ReceiptView extends Component {
                                 shop={this.state.receipt.shop}
                                 style={styles.map2}
                             />
+                            <View style = {styles.overlay}>
+
+                            </View>
                         </View>
                     </View>
 
@@ -236,6 +239,13 @@ const styles = StyleSheet.create({
         width: '11%',
         height: '100%',
     },
+    overlay: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        zIndex: 100,
+        opacity: 1
+    }
 });
 
 export default withNavigation(ReceiptView);
