@@ -63,16 +63,17 @@ class loginPage extends React.Component {
             >
                 {this.state.loading && <LoadingOverlay />}
 
-                {this.state.fromPayment ? (
-                    <Text style={styles.fromPay}>
-                        Logga in för att göra beställning
-                    </Text>
-                ) : null}
                 <Image
                     style={{ height: 30, width: '100%', marginVertical: 50 }}
                     source={require('./components/resources/ExpressoTransp.png')}
                     resizeMode="contain"
                 />
+
+                {this.state.fromPayment ? (
+                    <Text style={styles.fromPay}>
+                        Logga in för att göra beställning
+                    </Text>
+                ) : null}
 
                 <TextInput
                     style={styles.input}
@@ -163,8 +164,7 @@ const styles = StyleSheet.create({
     },
     fromPay: {
         color: '#101010',
-        fontWeight: '700',
-        letterSpacing: 1,
+        fontWeight: '600',
         fontSize: 20,
         alignSelf: 'center',
         paddingBottom: 50,
