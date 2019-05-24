@@ -179,14 +179,20 @@ class Checkout extends Component {
                 </View>
               </View>
 
-
-              {/* Kårkort */}
+              {/* Betalningsmetod */}
+              {/* Borde bara visas om användaren är inloggad */}
+              {this.state.user ? (
               <View style={{ ...styles.viewBlock, paddingHorizontal: 24 }}>
                 <Text style={{ ...styles.viewBlockTitle, marginHorizontal: 0 }}>
                   Kårkort
                 </Text>
                 <PaymentMethod setPaymentCard={this.setPaymentCard} />
               </View>
+              ) 
+              : 
+              // Annars, visa ingenting
+              <View />}
+
             </ScrollView>
 
             {/* Nedre betalningsruta */}
