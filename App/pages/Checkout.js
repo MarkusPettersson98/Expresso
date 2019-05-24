@@ -78,10 +78,7 @@ class Checkout extends Component {
   };
 
   render() {
-    const cart = this.props.cart;
-    const total = cart.price;
-    const orderItems = cart.orderItems;
-    const shop = cart.shop;
+    const { price: total, orderItems, shop } = this.props.cart;
 
     return (
       <View style={{ flex: 1, backgroundColor: '#FFF' }}>
