@@ -33,10 +33,10 @@ class loginPage extends React.Component {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        this.setState({ errorMessage, loading: false });
         return Alert.alert('Error', errorMessage, [
           {
-            text: 'OK',
+            text: 'OK', onPress: () => this.setState({ errorMessage, loading: false })
+
           },
         ]);
       });
