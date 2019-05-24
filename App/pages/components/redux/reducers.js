@@ -48,7 +48,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
 
       // If order item already exists, call increment function instead
       if (existingOrderItem) {
-        return cart(currentCart, { type: ITEM_INCREMENT, coffee });
+        return cart(currentCart, { type: ITEM_INCREMENT, coffee, amount: action.amount });
       }
 
       // Create a new order item (add quantity to a coffee)
@@ -60,7 +60,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
           ownMug: ownMugOption,
           price: ownMugOption ? (coffee.price - ownMugDiscount) : coffee.price,
         },
-        amount: 1,
+        amount: action.amount, // Default is 1 if not given
       };
 
       // Copy old orderItems from cart and add the new orderItem
@@ -84,6 +84,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
         currentCart.orderItems,
         match,
         incrementAmount,
+        action.amount
       );
       const newCartPrice = calculateCartPrice(newOrderItems);
       const newCartAmount = calculateCartAmount(newOrderItems);
@@ -140,7 +141,7 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
         ...currentCart,
         shop: shop,
       };
-      
+
     }
     default:
       return currentCart;
@@ -148,8 +149,8 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
 };
 
 // Increment amount of orderItem by one
-const incrementAmount = orderItem => {
-  const newAmount = orderItem.amount + 1;
+const incrementAmount = (orderItem, amount) => {
+  const newAmount = orderItem.amount + amount;
   return {
     ...orderItem,
     amount: newAmount,
@@ -157,8 +158,8 @@ const incrementAmount = orderItem => {
 };
 
 // Decrement amount of orderItem by one
-const decrementAmount = orderItem => {
-  const newAmount = orderItem.amount - 1;
+const decrementAmount = (orderItem, amount) => {
+  const newAmount = orderItem.amount - amount;
   // Else, just decrement orderItem amount by one
   return {
     ...orderItem,
@@ -167,9 +168,9 @@ const decrementAmount = orderItem => {
 };
 
 // Selectively apply a function on items for which predicate is truthy
-const mapSome = (array, predicate, fun) => {
+const mapSome = (array, predicate, fun, amount = 1) => {
   return array.map(item => {
-    return predicate(item) ? fun(item) : item;
+    return predicate(item) ? fun(item, amount) : item;
   });
 };
 
