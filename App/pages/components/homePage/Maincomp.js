@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import ShopView from './ListShopView';
-import LoadingScreen from '../loading/loadingScreen';
+import LoadingScreen from '../loading/loadingCoffee';
 
 import { getAllShops, getShopPicture } from '../../../API/expressoAPI';
 

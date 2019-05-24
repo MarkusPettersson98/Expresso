@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import ListReceipts from './ListReceipts';
-import Loading from '../loading/loadingScreen';
+import Loading from '../loading/loadingCoffee';
 import { getReceiptsUser } from '../../../API/expressoAPI'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';

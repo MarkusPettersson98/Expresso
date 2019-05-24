@@ -1,7 +1,7 @@
 import React from 'react';
 import NoQRPage from './NoQRPage';
 import QRPage from './QRPage';
-import LoadingScreen from '../loading/loadingScreen';
+import LoadingScreen from '../loading/loadingCoffee';
 import ScanModal from './ScanModal';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
