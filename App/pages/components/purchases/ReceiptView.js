@@ -4,22 +4,11 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    TouchableOpacity,
 } from 'react-native';
-
-import { withNavigation } from 'react-navigation';
-
 import CoffeeDisplay from './CoffeeDisplay';
-import { getReceipt } from '../../../API/expressoAPI';
 import MiniMap from './MiniMap';
 
 class ReceiptView extends Component {
-    /*Kvittot som hämtas sparas bak i customer för att minska kodduplicering
-        
-        Är just nu hårdkodat både här, man hämtar endast kvitto #7, även kunden 
-        hämtas hårdkodat genom funktionen getReceiptUser i Purchases.js detta borde
-        göras dynamiskt istället.
-        */
 
     constructor(props) {
         super(props);
@@ -40,7 +29,7 @@ class ReceiptView extends Component {
         });
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         // const wantedReceipt = await getReceipt(this.props.receiptId);
         if (prevProps.receipt !== this.props.receipt) {
             this.setState({
@@ -107,15 +96,14 @@ class ReceiptView extends Component {
                     />
                     <View style={styles.botContainer}>
                         <View style={styles.bot}>
-                            <Text style={styles.textUnderrubrik2}>
-                                
-                            
-                                {this.state.receipt.shop.name}{', '}{this.state.receipt.shop.street}{'\n'}
+                            <Text style={styles.textUnderrubrik2}>                           
+                                {this.state.receipt.shop.name}
                             </Text>
-
                             <Text style={styles.text}>
-                                Totalpris: {this.state.receipt.totalPrice}{'kr '}
-                                
+                                {this.state.receipt.shop.street}                         
+                            </Text>
+                            <Text style={styles.text}>
+                                Totalpris: {this.state.receipt.totalPrice}{'kr '}                              
                             </Text>
                             <Text style={styles.text}>
                                 {new Date(
@@ -130,9 +118,7 @@ class ReceiptView extends Component {
                                 shop={this.state.receipt.shop}
                                 style={styles.map2}
                             />
-                            <View style = {styles.overlay}>
-
-                            </View>
+                            <View style = {styles.overlay} />
                         </View>
                     </View>
 
@@ -140,7 +126,6 @@ class ReceiptView extends Component {
                         {this.createBanner()}
                     </View>
                 </View>
-
                 <View style={styles.hardKod} />
             </View>
         );
@@ -252,4 +237,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default withNavigation(ReceiptView);
+export default ReceiptView;
