@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  View,
   TouchableOpacity,
   TextInput,
   Text,
@@ -49,7 +48,6 @@ class signUpPage extends React.Component {
       })
       .catch(error => {
         // Handle Errors here.
-        const errorCode = error.code;
         const errorMessage = error.message;
         return Alert.alert('Error', errorMessage, [
           {

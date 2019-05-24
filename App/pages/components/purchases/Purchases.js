@@ -35,16 +35,18 @@ class Purchases extends React.Component {
                         (snapshot.val() && snapshot.val().active) || '';
                     console.log('Purchases: active receipt', activeReceipt);
                     if (!activeReceipt && this.state.activeReceipt) {
-                      // Visa modal
-                      console.log("if: visa modal");
-                      this.setState({ modalVisible: true, firebaseLoading: false, });
-                    }
-                    else {
-                      console.log("else: lagra firebase receipt");
-                      this.setState({
-                          activeReceipt,
-                          firebaseLoading: false,
-                      });
+                        // Visa modal
+                        console.log('if: visa modal');
+                        this.setState({
+                            modalVisible: true,
+                            firebaseLoading: false,
+                        });
+                    } else {
+                        console.log('else: lagra firebase receipt');
+                        this.setState({
+                            activeReceipt,
+                            firebaseLoading: false,
+                        });
                     }
                 });
             } else {
@@ -55,7 +57,7 @@ class Purchases extends React.Component {
 
     //Changes state to false, hiding ModalComp
     hideModal = () => {
-        this.setState({ modalVisible: false, activeReceipt: undefined, });
+        this.setState({ modalVisible: false, activeReceipt: undefined });
     };
 
     // const { params } = props.navigation.state;
@@ -67,21 +69,18 @@ class Purchases extends React.Component {
                     flex: 1,
                 }}
             >
-              {this.state.firebaseLoading
-                ? <LoadingScreen />
-                : (
-                  this.state.activeReceipt ? (
-                      <QRPage receipt={this.state.activeReceipt} />
-                  ) : (
-                      <NoQRPage />
-                  )
-                )
-              }
+                {this.state.firebaseLoading ? (
+                    <LoadingScreen />
+                ) : this.state.activeReceipt ? (
+                    <QRPage receipt={this.state.activeReceipt} />
+                ) : (
+                    <NoQRPage />
+                )}
 
-              <ScanModal
-                  isVisible={this.state.modalVisible}
-                  hideModal={() => this.hideModal()}
-              />
+                <ScanModal
+                    isVisible={this.state.modalVisible}
+                    hideModal={() => this.hideModal()}
+                />
             </View>
         );
     }

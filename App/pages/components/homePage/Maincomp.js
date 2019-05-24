@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import ShopView from './ListShopView';
 import LoadingScreen from '../loading/loadingScreen';
 
@@ -15,22 +15,28 @@ export default class Maincomp extends React.Component {
         // Request all shops names
         const allShops = await getAllShops();
 
-        const shopsWithPictures = await allShops.map(async ({name, street, drinkList}) => {
-            return {
-                name: name,
-                picture: await getShopPicture(name),
-                street: street,
-                coffees: drinkList.length,
-            };
-        });
+        const shopsWithPictures = await allShops.map(
+            async ({ name, street, drinkList }) => {
+                return {
+                    name: name,
+                    picture: await getShopPicture(name),
+                    street: street,
+                    coffees: drinkList.length,
+                };
+            },
+        );
 
         // When all promises have resolved, update state
         Promise.all(shopsWithPictures).then(shops => {
             // Create ShopView components to be rendered
             const shopViews = shops.map((shop, index) => (
-                <View style={styles.cardcontainer} key={index}>
-                    <ShopView name={shop.name} picture={shop.picture} street={shop.street} numcoffees={shop.coffees} />
-                </View>
+                <ShopView
+                    key={index}
+                    name={shop.name}
+                    picture={shop.picture}
+                    street={shop.street}
+                    numcoffees={shop.coffees}
+                />
             ));
 
             // Update state
@@ -39,7 +45,7 @@ export default class Maincomp extends React.Component {
                 loading: false,
             });
         });
-    };
+    }
 
     render() {
         return (

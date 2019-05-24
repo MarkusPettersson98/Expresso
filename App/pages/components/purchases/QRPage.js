@@ -19,7 +19,7 @@ const QRPage = ({ receipt }) => {
                         value={getScanReceiptLink(receipt.user + receipt.date)} //Ska vara en länk till den beställning som man gjort
                         size={260}
                         bgColor="black"
-                        fgColor="white"
+                        fgColor="#FAFAFA"
                     />
                 </View>
             </View>
@@ -33,23 +33,23 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#57454B',
+        backgroundColor: '#FAFAFA',
     },
     innerContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         width: 320,
         height: 320,
-        backgroundColor: 'white',
+        backgroundColor: '#FAFAFA',
         borderRadius: 40,
         top: 20,
     },
     qr: {
-        width: 300,
-        height: 300,
+        width: 320,
+        height: 320,
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 5,
+        borderWidth: 7,
         borderColor: '#57454B',
         borderRadius: 40,
         opacity: 1,

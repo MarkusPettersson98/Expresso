@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  ScrollView,
   TouchableOpacity,
   Text,
   TextInput,
@@ -14,7 +13,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
-class PaymentMethod extends React.Component {
+class PaymentMethod extends Component {
   state = {
     paymentCard: '',
     paymentCardTemp: '',
