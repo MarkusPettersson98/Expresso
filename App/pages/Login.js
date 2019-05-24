@@ -16,7 +16,9 @@ import 'firebase/auth';
 import { withNavigation } from 'react-navigation';
 
 class loginPage extends React.Component {
-  state = { email: '', password: '', errorMessage: null, loading: false };
+  state = { email: '', password: '', errorMessage: null, loading: false, fromPayment: this.props.fromPayment = false };
+
+  
 
   handleLogin = () => {
     Keyboard.dismiss();
@@ -47,6 +49,12 @@ class loginPage extends React.Component {
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         {this.state.loading && <LoadingOverlay />}
 
+        {this.state.fromPayment
+          ? <Text style = {styles.fromPay}>
+              Logga in för att göra beställning
+            </Text>
+          : null
+        }
         <Image
           style={{ height: 30, width: '100%', marginVertical: 50 }}
           source={require('./components/resources/ExpressoLogoLight.png')}
@@ -129,6 +137,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 15,
   },
+  fromPay: {
+    color: 'white',
+    fontWeight: '700',
+    letterSpacing: 1,
+    fontSize: 20,
+    alignSelf: 'center',
+    paddingBottom: 50
+  }
 });
 
 export default withNavigation(loginPage);
