@@ -37,6 +37,16 @@ class Checkout extends Component {
     receiptId: '',
   };
 
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user: user });
+    });
+    this.setState({
+      shop: this.props.cart.shop.name,
+      loadingShop: false,
+    });
+  }
+
   //Changes modalVisible-state to true, making ModalComp visible
   showModal = () => {
       this.setState({ modalVisible: true });
