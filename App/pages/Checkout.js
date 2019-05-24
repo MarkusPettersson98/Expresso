@@ -63,6 +63,7 @@ class Checkout extends Component {
   };
 
   sendTheOrder = () => {
+    this.setState({ loading: true });
     const uid = this.state.user ? this.state.user.uid : 0;
 
     sendOrderAPI(this.props.cart, uid)
@@ -72,7 +73,7 @@ class Checkout extends Component {
         });
         // clear the cart
         this.props.onClearCart();*/
-        this.setState({ loading: false });
+        this.setState({ loading: false, modalVisible: true, receiptId: res, });
         return res;
       })
       .catch(() => {
@@ -195,10 +196,7 @@ class Checkout extends Component {
               </View>
               <OrderButton
                 onPress={async () => {
-                  this.setState({ loading: true });
-                  const newReceiptId = await this.sendTheOrder();
-                  this.setState({ receiptId: newReceiptId });
-                  this.showModal();
+                  await this.sendTheOrder();
                 }}
                 buttonText="BETALA"
                 disabled={this.state.paymentCard ? false : true}
