@@ -34,10 +34,10 @@ class ReceiptView extends Component {
     }
 
     async componentDidMount() {
-        const wantedReceipt = await getReceipt(this.props.receiptId);
+        // const wantedReceipt = await getReceipt(this.props.receiptId);
 
         this.setState({
-            receipt: wantedReceipt,
+            receipt: this.props.receipt,
         });
     }
 

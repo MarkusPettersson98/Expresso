@@ -150,7 +150,7 @@ const getReceiptById = async id => {
     try {
         console.log("Trying to fetch single receipt by id! ", id);
         const receipt = await fetch(
-            redundantFirebaseURL + `?orderBy=%22$key%22&equalTo=%22${id}%22`
+            redundantFirebaseURL + `?orderBy=%22id%22&equalTo=%22${id}%22`
         )
             .then(res => res.json())
             .then(res => firebaseObjectToArray(res))
@@ -186,37 +186,7 @@ const firebaseObjectToArray = firebaseObject => {
     // Firebase database returns multiple differents records as a single object, where every property is a new object
     // Turn this data form into a list of objects instead
     const keys = Object.keys(firebaseObject);
-    const items = keys.map(key => {
-        const values = firebaseObject[key];
-        return {
-            ...values,
-            id: key
-        };
-    });
-    return items;
-};
-
-const postOrder = async (req, res) => {
-    // Function for adding an order to firebase
-    const order = req.body;
-
-    // Set order as active
-    order.active = true;
-    console.log("Post order", order);
-
-    firebase("POST", order).then(response => {
-        console.log("Firebase new receipt id: ", response);
-        const receiptId = response.name;
-        res.set("Content-Type", "application/json");
-        res.end(
-            JSON.stringify({
-                id: receiptId
-            })
-        );
-    });
-
-    // Mirror new receipts to user database (Update user with new receipt)
-    mirrorOrder(order);
+    return keys.map(key => firebaseObject[key]);
 };
 
 const mirrorOrder = order => {
@@ -261,12 +231,9 @@ const invalidateReceipt = async (req, res) => {
 };
 
 const invalidateMirrorReceipt = async id => {
-    // Find user with the active receipt id
-    console.log("Trying to invalidate id ", id);
     const receipt = await getReceiptById(id);
-    const { user } = receipt[0]; // Firebase LUL
-    console.log("Trying to invalidate active receipt of user ", user);
     // overwrite current active receipt of user with empty object
+    const { user } = receipt[0];
     const active = user + "/active";
 
     const receiptUpdate = {
@@ -299,7 +266,7 @@ const invalidateReceiptWithId = async id => {
     // E.g.
     /*
     {
-        -LfKye-hFPSWEbTBchsr/active: false
+        XsdAO80VPGRZNYyCebNhSpNZKAY21558635930592/active: false
     }
     */
 
@@ -315,6 +282,32 @@ const invalidateReceiptWithId = async id => {
     return firebase("PATCH", receiptUpdate).then(res =>
         console.log("Firebase: updated object status: ", res)
     );
+};
+
+const postOrder = async (req, res) => {
+    // Function for adding an order to firebase
+    const order = req.body;
+
+    // Set order as active
+    order.active = true;
+    console.log("Post order", order);
+
+    // Create a unique id / hash for the new order
+    const uniqueId = order.user + order.date;
+    order.id = uniqueId;
+
+    firebase("PUT", { [uniqueId]: order }).then(response => {
+        console.log("Firebase new receipt id: ", response);
+        res.set("Content-Type", "application/json");
+        res.end(
+            JSON.stringify({
+                id: uniqueId
+            })
+        );
+    });
+
+    // Mirror new receipts to user database (Update user with new receipt)
+    mirrorOrder(order);
 };
 
 const firebase = async (action, data) => {
