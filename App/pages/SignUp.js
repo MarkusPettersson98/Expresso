@@ -13,6 +13,7 @@ import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { withNavigation } from 'react-navigation';
+import { View } from 'react-native-animatable';
 
 
 class signUpPage extends React.Component {
@@ -100,7 +101,10 @@ class signUpPage extends React.Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Login')}
         >
-          <Text style={{ color: '#5AA3B7', marginTop: 10 }}>Logga in</Text>
+          <View style={styles.toView}>
+            <Text style={{ color: '#101010', marginTop: 30, }}>Redan registrerad? </Text>
+            <Text style={{ color: '#5AA3B7', marginTop: 30, }}>Logga in</Text>
+          </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
@@ -135,6 +139,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 2,
   },
+  toView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
 
 export default withNavigation(signUpPage);

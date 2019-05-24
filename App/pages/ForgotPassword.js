@@ -66,7 +66,7 @@ class ForgotPasswordPage extends React.Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Login')}
         >
-          <Text style={{ color: '#5AA3B7', marginTop: 10 }}>Logga in</Text>
+          <Text style={{ color: '#5AA3B7', marginTop: 30, alignSelf: 'center'}}>Logga in</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
