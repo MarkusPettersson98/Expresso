@@ -8,8 +8,10 @@ import { getAllShops, getShopPicture } from '../../../API/expressoAPI';
 export default class Maincomp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { ShopViews: [], loading: true, };
-    };
+        this.state = { ShopViews: [], loading: true };
+    }
+
+    loadingTime = 1000;
 
     async componentDidMount() {
         // Request all shops names
@@ -40,10 +42,12 @@ export default class Maincomp extends React.Component {
             ));
 
             // Update state
-            this.setState({
-                ShopViews: shopViews,
-                loading: false,
-            });
+            setTimeout(() => {
+                this.setState({
+                    ShopViews: shopViews,
+                    loading: false,
+                });
+            }, this.loadingTime);
         });
     }
 
@@ -58,14 +62,14 @@ export default class Maincomp extends React.Component {
 }
 
 const styles = {
-  container: {
-      flexGrow: 1,
-      width: '100%',
-      flexDirection: 'column',
-      backgroundColor: '#FAFAFA',
-      justifyContent: 'center',
-  },
-  cardcontainer: {
+    container: {
+        flexGrow: 1,
+        width: '100%',
+        flexDirection: 'column',
+        backgroundColor: '#FAFAFA',
+        justifyContent: 'center',
+    },
+    cardcontainer: {
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -75,5 +79,5 @@ const styles = {
         shadowRadius: 4,
 
         elevation: 2,
-  }
+    },
 };
