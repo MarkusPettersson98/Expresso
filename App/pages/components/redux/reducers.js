@@ -80,11 +80,12 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
 
     case ITEM_INCREMENT: {
       // Increment amount of existing orderItem by one
+      const increment = orderItem => incrementAmount(orderItem, action.amount);
+
       const newOrderItems = mapSome(
         currentCart.orderItems,
         match,
-        incrementAmount,
-        action.amount
+        increment,
       );
       const newCartPrice = calculateCartPrice(newOrderItems);
       const newCartAmount = calculateCartAmount(newOrderItems);
@@ -105,10 +106,12 @@ export const cart = function(currentCart = INITIAL_CART_STATE, action) {
       };
 
       // Decrement amount of existing orderItem by one
+      const decrement = orderItem => decrementAmount(orderItem, action.amount);
+
       let newOrderItems = mapSome(
         currentCart.orderItems,
         match,
-        decrementAmount,
+        decrement,
       );
 
       // Check if orderItem should be deleted
@@ -168,9 +171,9 @@ const decrementAmount = (orderItem, amount) => {
 };
 
 // Selectively apply a function on items for which predicate is truthy
-const mapSome = (array, predicate, fun, amount = 1) => {
+const mapSome = (array, predicate, fun) => {
   return array.map(item => {
-    return predicate(item) ? fun(item, amount) : item;
+    return predicate(item) ? fun(item) : item;
   });
 };
 
