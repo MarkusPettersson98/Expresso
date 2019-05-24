@@ -1,47 +1,56 @@
 import React from 'react';
-import { AppRegistry, ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import ShopView from './ListShopView';
+import LoadingScreen from '../loading/loadingScreen';
 
 import { getAllShops, getShopPicture } from '../../../API/expressoAPI';
 
 export default class Maincomp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { ShopViews: [] };
+        this.state = { ShopViews: [], loading: true, };
     };
 
     async componentDidMount() {
         // Request all shops names
         const allShops = await getAllShops();
 
-        const shopsWithPictures = await allShops.map(async ({name, street, drinkList}) => {
-            return {
-                name: name,
-                picture: await getShopPicture(name),
-                street: street,
-                coffees: drinkList.length,
-            };
-        });
+        const shopsWithPictures = await allShops.map(
+            async ({ name, street, drinkList }) => {
+                return {
+                    name: name,
+                    picture: await getShopPicture(name),
+                    street: street,
+                    coffees: drinkList.length,
+                };
+            },
+        );
 
         // When all promises have resolved, update state
         Promise.all(shopsWithPictures).then(shops => {
             // Create ShopView components to be rendered
             const shopViews = shops.map((shop, index) => (
-                <View style={styles.cardcontainer} key={index}>
-                    <ShopView name={shop.name} picture={shop.picture} street={shop.street} numcoffees={shop.coffees} />
-                </View>
+                <ShopView
+                    key={index}
+                    name={shop.name}
+                    picture={shop.picture}
+                    street={shop.street}
+                    numcoffees={shop.coffees}
+                />
             ));
 
             // Update state
             this.setState({
                 ShopViews: shopViews,
+                loading: false,
             });
         });
-    };
+    }
 
     render() {
         return (
             <ScrollView contentContainerStyle={styles.container}>
+                {this.state.loading && <LoadingScreen />}
                 {this.state.ShopViews}
             </ScrollView>
         );
@@ -50,6 +59,7 @@ export default class Maincomp extends React.Component {
 
 const styles = {
   container: {
+      flexGrow: 1,
       width: '100%',
       flexDirection: 'column',
       backgroundColor: '#FAFAFA',

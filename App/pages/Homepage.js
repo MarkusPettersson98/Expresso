@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Maincomp from './components/homePage/Maincomp';
 import Mapcomp from './components/homePage/Mapcomp';
-import CartField from './components/CartField';
 
 export default class Homepage extends Component {
     state = {

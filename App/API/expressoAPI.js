@@ -102,7 +102,7 @@ export const getAllShops = async () => {
  */
 export const getAllShopsCoords = async () => {
     const getNameCoords = shop => {
-        return { shop: shop.name, coordinates: shop.coordinates };
+        return { shop: shop.name, coordinates: shop.coordinates, street: shop.street};
     };
     shops = await getAllShops();
     return shops.map(getNameCoords);

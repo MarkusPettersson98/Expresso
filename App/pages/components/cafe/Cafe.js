@@ -4,6 +4,8 @@ import { View } from 'react-native';
 import CoffeeList from './CoffeeList';
 import CafeHeader from './CafeHeader';
 
+import LoadingScreen from '../loading/loadingScreen';
+
 import CartField from './../CartField';
 import {
     getAllCoffeeFromAShop,
@@ -29,6 +31,7 @@ class Cafe extends React.Component {
             CoffeItems: [],
             shopPicture: props.navigation.state.params.picture,
             street: props.navigation.state.params.street,
+            loading: true,
         };
     }
 
@@ -44,6 +47,7 @@ class Cafe extends React.Component {
                 ...this.state,
                 CoffeItems: coffees,
                 shopPicture: picture,
+                loading: false,
             });
         });
     }
@@ -51,6 +55,7 @@ class Cafe extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: '#FAFAFA' }}>
+                {this.state.loading && <LoadingScreen />}
                 <CafeHeader
                     picture={this.state.shopPicture}
                     name={this.state.shopName}

@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { sendOrder as sendOrderAPI } from '../API/expressoAPI';
@@ -59,7 +60,7 @@ class Checkout extends Component {
         this.props.onClearCart();*/
         this.setState({ loading: false,});
 
-        // This is to allow the modal to slide up, do not touch!!! 
+        // This is to allow the modal to slide up, do not touch!!!
         setTimeout(()=>{
           this.setState({ loading: false, modalVisible: true, receiptId: res, });
         }

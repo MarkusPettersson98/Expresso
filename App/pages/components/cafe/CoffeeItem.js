@@ -99,10 +99,10 @@ class CoffeeItem extends React.Component {
 
     //Function to order coffee when ModalComp closes, is sent as props to ModalComp
     //Takes value of ownMug-selection t/f
-    orderCoffee = ownMug => {
+    orderCoffee = (ownMug, amount) => {
         const {
             coffee: { shopId },
-        } = this.props.onAddCoffee({ ...this.coffee, ownMug: ownMug });
+        } = this.props.onAddCoffee({ ...this.coffee, ownMug }, amount);
 
         // If shop has not been resolved yet, do so in the background
         // and updated cart when done
@@ -127,7 +127,7 @@ class CoffeeItem extends React.Component {
                     //Function hideModal is sent as props to be able to hide modal from ModalComp
                     hideModal={() => this.hideModal()}
                     //Function to order coffee from ModalComp
-                    orderCoffee={() => this.orderCoffee(ownMug)}
+                    orderCoffee={this.orderCoffee}
                 />
                 <TouchableOpacity
                     onPress={this.handleClick}
@@ -189,8 +189,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddCoffee: coffee => {
-            return dispatch(addCoffee(coffee));
+        onAddCoffee: (coffee, amount) => {
+            return dispatch(addCoffee(coffee, amount));
         },
         onClearCart: () => {
             dispatch(clearCart());
