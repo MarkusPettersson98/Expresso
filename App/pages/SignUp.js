@@ -13,6 +13,8 @@ import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { withNavigation } from 'react-navigation';
+import { View } from 'react-native-animatable';
+
 
 class signUpPage extends React.Component {
   state = {
@@ -64,7 +66,7 @@ class signUpPage extends React.Component {
 
         <Image
           style={{ height: 30, width: '100%', marginVertical: 50 }}
-          source={require('./components/resources/ExpressoLogoLight.png')}
+          source={require('./components/resources/ExpressoTransp.png')}
           resizeMode="contain"
         />
 
@@ -99,7 +101,10 @@ class signUpPage extends React.Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Login')}
         >
-          <Text style={{ color: '#5AA3B7', marginTop: 10 }}>Logga in</Text>
+          <View style={styles.toView}>
+            <Text style={{ color: '#101010', marginTop: 30, }}>Redan registrerad? </Text>
+            <Text style={{ color: '#5AA3B7', marginTop: 30, }}>Logga in</Text>
+          </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
@@ -109,17 +114,18 @@ class signUpPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#57454B',
+    backgroundColor: '#FAFAFA',
     justifyContent: 'center',
     paddingHorizontal: 26,
   },
+
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#101010',
     borderWidth: 0,
     borderBottomWidth: 2,
     marginBottom: 20,
-    color: 'white',
+    color: '#101010',
   },
   button: {
     backgroundColor: '#5AA3B7',
@@ -133,6 +139,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 2,
   },
+  toView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
 
 export default withNavigation(signUpPage);
