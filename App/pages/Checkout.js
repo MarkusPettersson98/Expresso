@@ -18,8 +18,10 @@ import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { clearCart } from './components/redux/actions';
 import Modal from 'react-native-modal';
+import ModalComp from './components/checkout/OrderPlacedModal';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+
 
 import { getShopById } from '../API/expressoAPI';
 
@@ -34,6 +36,7 @@ class Checkout extends Component {
     },
     user: null,
     loading: false,
+    receiptId: '',
   };
 
   // when mounted first time
@@ -49,22 +52,41 @@ class Checkout extends Component {
     });
   }
 
-  sendTheOrder = async () => {
+  //Changes modalVisible-state to true, making ModalComp visible
+  showModal = () => {
+      this.setState({ modalVisible: true });
+  };
+
+  //Changes state to false, hiding ModalComp
+  hideModal = () => {
+      this.setState({ modalVisible: false });
+  };
+
+  sendTheOrder = () => {
     this.setState({ loading: true });
     const uid = this.state.user ? this.state.user.uid : 0;
 
     sendOrderAPI(this.props.cart, uid)
       .then(res => {
-        this.props.navigation.navigate('Order', {
+        /*this.props.navigation.navigate('Order', {
           orderID: res,
         });
         // clear the cart
-        this.props.onClearCart();
-        this.setState({ loading: false });
+        this.props.onClearCart();*/
+        this.setState({ loading: false,});
+
+        // This is to allow the modal to slide up, do not touch!!! 
+        setTimeout(()=>{
+          this.setState({ loading: false, modalVisible: true, receiptId: res, });
+        }
+        ,1000)
+
+        return res;
       })
       .catch(() => {
         console.log("error!!");
         this.setState({ loading: false });
+        return null;
       })
   };
 
@@ -180,11 +202,25 @@ class Checkout extends Component {
                 <Text style={styles.totalText}>{total} kr</Text>
               </View>
               <OrderButton
-                onPress={async () => await this.sendTheOrder()}
+                onPress={async () => {
+                  await this.sendTheOrder();
+                }}
                 buttonText="BETALA"
                 disabled={this.state.paymentCard ? false : true}
               />
             </View>
+
+            <ModalComp
+                isVisible={this.state.modalVisible}
+                hideModal={() => this.hideModal()}
+                navFunc={() =>
+                    this.props.navigation.navigate(
+                        'Order',
+                        this.state.receiptId,
+                    )
+                }
+                clearCart={() => this.props.onClearCart()}
+            />
 
             <Modal
               isVisible={this.state.showPaymentCardModal}
