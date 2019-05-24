@@ -3,15 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import LottieView from 'lottie-react-native';
 
-export default class OrderPlacedModal extends Component {
+export default class ScanModal extends Component {
     constructor(props) {
         super(props);
     }
 
     onClose = () => {
         this.props.hideModal();
-        this.props.navFunc();
-        this.props.clearCart();
     };
 
     componentDidUpdate() {
@@ -30,19 +28,19 @@ export default class OrderPlacedModal extends Component {
                       ref={animation => {
                         this.animation = animation;
                       }}
-                      source={require('../resources/qrAnim.json')}
+                      source={require('../resources/coffeeAnim.json')}
                       speed={1.5}
                     />
-                    <Text style={styles.thank_you}>Tack för ditt köp!</Text>
+                    <Text style={styles.thank_you}>Bra scannat!</Text>
                     <Text style={styles.press_text}>
-                        Tryck på visa order för att visa din QR-kod.
+                        Njut av din kaffe. Vi ses snart igen!
                     </Text>
 
                     <TouchableOpacity
                       style={styles.btn}
                       onPress={this.onClose}
                     >
-                      <Text style={styles.btnText}>VISA ORDER</Text>
+                      <Text style={styles.btnText}>STÄNG</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>

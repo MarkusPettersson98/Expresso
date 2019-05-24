@@ -16,7 +16,7 @@ const QRPage = ({ receipt }) => {
             <View style={styles.innerContainer}>
                 <View style={styles.qr}>
                     <QRCode
-                        value={getScanReceiptLink(receipt.id)} //Ska vara en länk till den beställning som man gjort
+                        value={getScanReceiptLink(receipt.user + receipt.date)} //Ska vara en länk till den beställning som man gjort
                         size={260}
                         bgColor="black"
                         fgColor="white"

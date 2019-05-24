@@ -2,6 +2,7 @@ import React from 'react';
 import NoQRPage from './NoQRPage';
 import QRPage from './QRPage';
 import LoadingScreen from '../loading/loadingScreen';
+import ScanModal from './ScanModal';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -33,16 +34,29 @@ class Purchases extends React.Component {
                     const activeReceipt =
                         (snapshot.val() && snapshot.val().active) || '';
                     console.log('Purchases: active receipt', activeReceipt);
-                    this.setState({
-                        activeReceipt,
-                        firebaseLoading: false,
-                    });
+                    if (!activeReceipt && this.state.activeReceipt) {
+                      // Visa modal
+                      console.log("if: visa modal");
+                      this.setState({ modalVisible: true, firebaseLoading: false, });
+                    }
+                    else {
+                      console.log("else: lagra firebase receipt");
+                      this.setState({
+                          activeReceipt,
+                          firebaseLoading: false,
+                      });
+                    }
                 });
             } else {
                 this.setState({ firebaseLoading: false });
             }
         });
     }
+
+    //Changes state to false, hiding ModalComp
+    hideModal = () => {
+        this.setState({ modalVisible: false, activeReceipt: undefined, });
+    };
 
     // const { params } = props.navigation.state;
     // If there is an orderID, render QR code.
@@ -63,6 +77,11 @@ class Purchases extends React.Component {
                   )
                 )
               }
+
+              <ScanModal
+                  isVisible={this.state.modalVisible}
+                  hideModal={() => this.hideModal()}
+              />
             </View>
         );
     }
