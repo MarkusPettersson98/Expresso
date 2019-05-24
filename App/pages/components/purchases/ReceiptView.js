@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    ScrollView,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import CoffeeDisplay from './CoffeeDisplay';
 import MiniMap from './MiniMap';
 
 class ReceiptView extends Component {
-
     constructor(props) {
         super(props);
 
@@ -30,7 +24,6 @@ class ReceiptView extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // const wantedReceipt = await getReceipt(this.props.receiptId);
         if (prevProps.receipt !== this.props.receipt) {
             this.setState({
                 receipt: this.props.receipt,
@@ -39,19 +32,19 @@ class ReceiptView extends Component {
     }
 
     createBanner = () => {
-        const list = [];
+        const banners = [];
 
         for (let i = 0; i < 8; i++) {
-            list.push(<View key={i} style={styles.bottomBanner} />);
+            banners.push(<View key={i} style={styles.bottomBanner} />);
         }
 
-        return list;
+        return banners;
     };
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.infoBox}>
-                    <View style = {styles.content}>
+                    <View style={styles.content}>
                         <View>
                             <Text style={styles.textRubrik}> Kvitto </Text>
                         </View>
@@ -82,7 +75,9 @@ class ReceiptView extends Component {
                             </Text>
                         </View>
                         <ScrollView>
-                            <CoffeeDisplay coffees={this.state.receipt.coffees} />
+                            <CoffeeDisplay
+                                coffees={this.state.receipt.coffees}
+                            />
                         </ScrollView>
                     </View>
                     <View
@@ -96,19 +91,18 @@ class ReceiptView extends Component {
                     />
                     <View style={styles.botContainer}>
                         <View style={styles.bot}>
-                            <Text style={styles.textUnderrubrik2}>                           
+                            <Text style={styles.textUnderrubrik2}>
                                 {this.state.receipt.shop.name}
                             </Text>
                             <Text style={styles.text}>
-                                {this.state.receipt.shop.street}                         
+                                {this.state.receipt.shop.street}
                             </Text>
                             <Text style={styles.text}>
-                                Totalpris: {this.state.receipt.totalPrice}{'kr '}                              
+                                Totalpris: {this.state.receipt.totalPrice}
+                                {'kr '}
                             </Text>
                             <Text style={styles.text}>
-                                {new Date(
-                                    this.state.receipt.date,
-                                ).toString()}{' '}
+                                {new Date(this.state.receipt.date).toString()}{' '}
                                 {'\n'}
                             </Text>
                         </View>
@@ -118,7 +112,7 @@ class ReceiptView extends Component {
                                 shop={this.state.receipt.shop}
                                 style={styles.map2}
                             />
-                            <View style = {styles.overlay} />
+                            <View style={styles.overlay} />
                         </View>
                     </View>
 
@@ -156,7 +150,7 @@ const styles = StyleSheet.create({
     },
     content: {
         height: '30%',
-        paddingBottom: 3
+        paddingBottom: 3,
     },
     varorTable: {
         width: '100%',
@@ -233,8 +227,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         zIndex: 100,
-        opacity: 1
-    }
+        opacity: 1,
+    },
 });
 
 export default ReceiptView;
