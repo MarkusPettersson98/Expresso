@@ -62,38 +62,40 @@ class ReceiptView extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.infoBox}>
-                    <View>
-                        <Text style={styles.textRubrik}> Kvitto </Text>
-                    </View>
-                    <Text style={styles.textUnderrubrik1} />
+                    <View style = {styles.content}>
+                        <View>
+                            <Text style={styles.textRubrik}> Kvitto </Text>
+                        </View>
+                        <Text style={styles.textUnderrubrik1} />
 
-                    <View style={styles.varorTable}>
-                        <Text
-                            style={{
-                                color: '#57454B',
-                                fontWeight: 'bold',
-                                width: 40,
-                                marginLeft: 8,
-                            }}
-                        >
-                            Antal
-                        </Text>
-                        <Text style={styles.boldtext}>Kaffesort</Text>
-                        <Text style={styles.boldtext}>Muggtyp</Text>
-                        <Text
-                            style={{
-                                color: '#57454B',
-                                fontWeight: 'bold',
-                                width: 35,
-                                marginRight: 10,
-                            }}
-                        >
-                            Pris
-                        </Text>
+                        <View style={styles.varorTable}>
+                            <Text
+                                style={{
+                                    color: '#57454B',
+                                    fontWeight: 'bold',
+                                    width: 40,
+                                    marginLeft: 8,
+                                }}
+                            >
+                                Antal
+                            </Text>
+                            <Text style={styles.boldtext}>Kaffesort</Text>
+                            <Text style={styles.boldtext}>Muggtyp</Text>
+                            <Text
+                                style={{
+                                    color: '#57454B',
+                                    fontWeight: 'bold',
+                                    width: 35,
+                                    marginRight: 10,
+                                }}
+                            >
+                                Pris
+                            </Text>
+                        </View>
+                        <ScrollView>
+                            <CoffeeDisplay coffees={this.state.receipt.coffees} />
+                        </ScrollView>
                     </View>
-                    <ScrollView>
-                        <CoffeeDisplay coffees={this.state.receipt.coffees} />
-                    </ScrollView>
                     <View
                         style={{
                             width: '90%',
@@ -167,6 +169,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 14,
     },
+    content: {
+        height: '30%',
+        paddingBottom: 3
+    },
     varorTable: {
         width: '100%',
         justifyContent: 'space-between',
@@ -206,8 +212,7 @@ const styles = StyleSheet.create({
     },
     botContainer: {
         width: '100%',
-        height: '100%',
-        flex: 7,
+        height: '60%',
         justifyContent: 'center',
         flexDirection: 'row',
     },
