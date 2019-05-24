@@ -1,14 +1,15 @@
 import React from 'react';
-import { AppRegistry, ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import ShopView from './ListShopView';
+import LoadingScreen from '../loading/loadingScreen';
 
 import { getAllShops, getShopPicture } from '../../../API/expressoAPI';
 
 export default class Maincomp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { ShopViews: [] };
-    }
+        this.state = { ShopViews: [], loading: true, };
+    };
 
     async componentDidMount() {
         // Request all shops names
@@ -41,6 +42,7 @@ export default class Maincomp extends React.Component {
             // Update state
             this.setState({
                 ShopViews: shopViews,
+                loading: false,
             });
         });
     }
@@ -48,6 +50,7 @@ export default class Maincomp extends React.Component {
     render() {
         return (
             <ScrollView contentContainerStyle={styles.container}>
+                {this.state.loading && <LoadingScreen />}
                 {this.state.ShopViews}
             </ScrollView>
         );
@@ -56,6 +59,7 @@ export default class Maincomp extends React.Component {
 
 const styles = {
   container: {
+      flexGrow: 1,
       width: '100%',
       flexDirection: 'column',
       backgroundColor: '#FAFAFA',

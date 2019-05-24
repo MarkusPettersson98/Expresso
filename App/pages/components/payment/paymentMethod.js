@@ -127,9 +127,10 @@ class PaymentMethod extends Component {
             >
               <TextInput
                 style={styles.cardInput}
-                textContentType="creditCardNumber"
+                textContentType={"creditCardNumber"}
                 keyboardType="numeric"
-                placeholder="XXXX XXXX XXXX XXXX"
+                placeholder="XXXXXXXXXXXXXXXX"
+                size={"16"}
                 onChangeText={text => this.onCardTextChange(text)}
                 value={this.state.paymentCardTemp}
                 maxLength={16}
@@ -179,6 +180,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderWidth: 0,
     borderBottomWidth: 2,
+    padding: 2,
+    flex: 1,
     color: '#57454B',
     marginRight: 24,
   },
