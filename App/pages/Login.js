@@ -8,12 +8,13 @@ import {
   Alert,
   KeyboardAvoidingView,
   Keyboard,
+  Image
 } from 'react-native';
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { withNavigation } from 'react-navigation';
-import { SimpleLineIcons } from '@expo/vector-icons';
+
 
 class loginPage extends React.Component {
   state = { email: '', password: '', errorMessage: null, loading: false };
@@ -47,9 +48,11 @@ class loginPage extends React.Component {
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         {this.state.loading && <LoadingOverlay />}
 
-        <View style={styles.iconView}>
-          <SimpleLineIcons name="user" size={70} color="#57454B" />
-        </View>
+        <Image
+          style={{ height: 30, width: '100%', marginVertical: 50 }}
+          source={require('./components/resources/ExpressoTransp.png')}
+          resizeMode="contain"
+        />
 
         <TextInput
           style={styles.input}
@@ -101,11 +104,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
     justifyContent: 'center',
     paddingHorizontal: 26,
-  },
-  iconView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 50
   },
   input: {
     height: 40,
