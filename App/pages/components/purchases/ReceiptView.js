@@ -41,19 +41,31 @@ class ReceiptView extends Component {
             receipt: wantedReceipt,
         });
     }
+
+    createBanner = () => {
+        var i;
+
+        const list = [];
+
+        for (i = 0; i < 10; i++) {
+            list.push(<View style={styles.bottomBanner} />);
+        }
+
+        return list;
+    };
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.infoBox}>
                     <View>
-                        <Text style={styles.textUnderrubrik1}> Kvitto </Text>
+                        <Text style={styles.textRubrik}> Kvitto </Text>
                     </View>
                     <Text style={styles.textUnderrubrik1} />
 
                     <View style={styles.varorTable}>
                         <Text
                             style={{
-                                color: 'black',
+                                color: '#57454B',
                                 fontWeight: 'bold',
                                 width: 40,
                                 marginLeft: 8,
@@ -65,7 +77,7 @@ class ReceiptView extends Component {
                         <Text style={styles.boldtext}>Muggtyp</Text>
                         <Text
                             style={{
-                                color: 'black',
+                                color: '#57454B',
                                 fontWeight: 'bold',
                                 width: 35,
                                 marginRight: 10,
@@ -85,9 +97,8 @@ class ReceiptView extends Component {
                             borderBottomWidth: 1,
                             borderColor: 'black',
                         }}
-                    />                   
-                     <View style={styles.botContainer}>
-
+                    />
+                    <View style={styles.botContainer}>
                         <View style={styles.bot}>
                             <Text style={styles.textUnderrubrik2}>
                                 Upphämtningsställe
@@ -97,22 +108,40 @@ class ReceiptView extends Component {
                             </Text>
 
                             <Text style={styles.text}>
-                                Totalpris: {this.state.receipt.totalPrice} {'\n'}
+                                Totalpris: {this.state.receipt.totalPrice}{' '}
+                                {'\n'}
                             </Text>
                             <Text style={styles.text}>
-                                {new Date(this.state.receipt.date).toDateString()} {'\n'}
+                                {new Date(
+                                    this.state.receipt.date,
+                                ).toDateString()}{' '}
+                                {'\n'}
                             </Text>
                         </View>
 
                         <View style={styles.botMap}>
-                            <MiniMap shop = {this.state.receipt.shop} style = {styles.map2}></MiniMap>
+                            <MiniMap
+                                shop={this.state.receipt.shop}
+                                style={styles.map2}
+                            />
                         </View>
+                    </View>
+
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: 'space-between',
+                            flexDirection: 'row',
+                            alignItems: 'flex-end',
+                        }}
+                    >
+                        {this.createBanner()}
                     </View>
                 </View>
 
                 <View style={styles.hardKod} />
             </View>
-        ); 
+        );
     }
 }
 
@@ -122,32 +151,31 @@ const styles = StyleSheet.create({
         top: 20,
         width: '100%',
         backgroundColor: '#FAFAFA',
-        paddingLeft: 10,
-        paddingRight: 10,
+        paddingHorizontal: 10,
     },
     textRubrik: {
         top: 10,
-        color: 'black',
+        color: '#57454B',
         fontSize: 18,
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
         alignSelf: 'center',
     },
     infoBox: {
         flex: 1,
         top: 20,
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#C4DEE5',
         borderRadius: 10,
+        paddingHorizontal: 14,
 
-        shadowColor: '#000',
+        /* shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 4,
         },
-        shadowOpacity: 0.5,
+        shadowOpacity: 0.05,
         shadowRadius: 4,
 
-        elevation: 2,
+        elevation: 2, */
     },
     varorTable: {
         width: '100%',
@@ -158,8 +186,7 @@ const styles = StyleSheet.create({
         top: 5,
         fontSize: 16,
         fontWeight: 'bold',
-        color: 'black',
-        textDecorationLine: 'underline',
+        color: '#57454B',
         alignSelf: 'center',
         bottom: 10,
     },
@@ -167,65 +194,51 @@ const styles = StyleSheet.create({
         top: 10,
         fontSize: 16,
         fontWeight: 'bold',
-        color: 'black',
-        textDecorationLine: 'underline',
+        color: '#57454B',
         marginLeft: 10,
-        bottom: 20,
+        bottom: 60,
     },
     text: {
         top: '3%',
-        color: 'black',
+        color: '#57454B',
         marginLeft: 10,
     },
     boldtext: {
-        color: 'black',
+        color: '#57454B',
         fontWeight: 'bold',
         width: 110,
-    },
-    table: {
-        flex: 1,
-        alignSelf: 'stretch',
-        flexDirection: 'row',
-    },
-    map: {
-        width: '47%',
-        height: '50%',
-        alignSelf: 'flex-end',
-    },
-    knapp: {
-        color: 'black',
-        fontWeight: 'bold',
-        fontSize: 24,
-        alignSelf: 'flex-start',
-        marginLeft: 10,
     },
     hardKod: {
         width: '100%',
         height: 50,
         backgroundColor: '#FAFAFA',
         top: 40,
-    }, 
+    },
     botContainer: {
         width: '100%',
         height: '100%',
         flex: 7,
         justifyContent: 'center',
-        flexDirection: 'row'
-
+        flexDirection: 'row',
     },
     bot: {
         width: '50%',
         height: '100%',
-        justifyContent: 'center',
-
+        justifyContent: 'space-evenly',
     },
     botMap: {
         width: '50%',
         height: '100%',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
         opacity: 0.9,
-
+    },
+    bottomBanner: {
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        backgroundColor: '#FAFAFA',
+        width: '10%',
+        height: '100%',
     },
 });
 

@@ -17,7 +17,7 @@ const QRPage = ({ receiptId }) => {
                 <View style={styles.qr}>
                     <QRCode
                         value={getScanReceiptLink(receiptId)} //Ska vara en länk till den beställning som man gjort
-                        size={260}
+                        size={280}
                         bgColor="black"
                         fgColor="#FAFAFA"
                     />
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
         top: 20,
     },
     qr: {
-        width: 300,
-        height: 300,
+        width: 320,
+        height: 320,
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 5,
