@@ -14,7 +14,7 @@ const NoQRPage = () => {
                 <AntDesign name="qrcode" size={128 + 64} color="#57454B" />
                 <Text style={styles.textTitle}>Du har ingen aktiv order.</Text>
                 <Text style={styles.textDesc}>
-                    Om du köper en kaffe kommer din qr-kod finnas här!
+                    Om du köper en kaffe kommer din QR-kod finnas här!
                 </Text>
             </View>
         </View>
