@@ -296,7 +296,7 @@ const postOrder = async (req, res) => {
     const uniqueId = order.user + order.date;
     order.id = uniqueId;
 
-    firebase("PUT", { [uniqueId]: order }).then(response => {
+    firebase("POST", { [uniqueId]: order }).then(response => {
         console.log("Firebase new receipt id: ", response);
         res.set("Content-Type", "application/json");
         res.end(
