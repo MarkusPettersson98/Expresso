@@ -31,7 +31,7 @@ export default class OrderPlacedModal extends Component {
                         this.animation = animation;
                       }}
                       source={require('../resources/qrAnim.json')}
-                      speed={1.5}
+                      speed={1.2}
                     />
                     <Text style={styles.thank_you}>Tack för ditt köp!</Text>
                     <Text style={styles.press_text}>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     lottieView: {
       width: '100%',
       height: 250,
-      marginTop: -80,
+      marginTop: -30,
     },
     modal: {
       justifyContent: 'flex-end',
@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#7C6A70',
-        marginTop: -15,
+        marginTop: -10,
     },
     press_text: {
         fontSize: 17,
         textAlign: 'center',
         color: '#7C6A70',
-        marginTop: 10,
+        marginTop: 15,
     },
     logIn: {
       backgroundColor: '#5AA3B7',
@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
       paddingVertical: 16,
       borderRadius: 10,
       alignItems: 'center',
-      marginTop: 60,
-      marginBottom: 15,
+      marginTop: 100,
+      marginBottom: 10,
     },
     btnText: {
       color: 'white',
