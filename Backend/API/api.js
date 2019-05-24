@@ -101,17 +101,21 @@ const scanReceipt = async (req, res) => {
     // invalidating it and returning it.
     const { id } = req.params;
 
+    // Get firebase id of receipt
+    const receiptList = await getReceiptById(id);
+    const receipt = receiptList[0];
+
     try {
-        const receipt = await getReceiptById(id);
+        // const receipt = await getReceiptById(id);
         // Check if scanned receipt is valid!
-        if (receipt[0].active) {
+        if (receipt.active) {
             console.log("Scanned receipt is valid!");
         } else {
             console.log("Error! Scanned receipt has already been used");
         }
         // Ivalidate fetched receipt
         // Note: getReceiptWith returns an array !
-        invalidateReceiptWithId(id);
+        invalidateReceiptWithId(receipt);
 
         return res.status(200).send(receipt);
     } catch (e) {
@@ -186,7 +190,13 @@ const firebaseObjectToArray = firebaseObject => {
     // Firebase database returns multiple differents records as a single object, where every property is a new object
     // Turn this data form into a list of objects instead
     const keys = Object.keys(firebaseObject);
-    return keys.map(key => firebaseObject[key]);
+    return keys.map(key => {
+        const receipt = firebaseObject[key];
+        return {
+            ...receipt,
+            firebaseId: key
+        };
+    });
 };
 
 const mirrorOrder = order => {
@@ -225,15 +235,16 @@ const invalidateReceipt = async (req, res) => {
         return res.status(400).end();
     }
 
-    const status = await invalidateReceiptWithId(id);
+    const status = await invalidateReceiptWithId(existingReceipt);
 
     return res.status(200).send(status);
 };
 
 const invalidateMirrorReceipt = async id => {
-    const receipt = await getReceiptById(id);
+    const receiptList = await getReceiptById(id);
+    const receipt = receiptList[0];
     // overwrite current active receipt of user with empty object
-    const { user } = receipt[0];
+    const { user } = receipt;
     const active = user + "/active";
 
     const receiptUpdate = {
@@ -253,7 +264,7 @@ const invalidateMirrorReceipt = async id => {
         .catch(err => console.log("Firebase error: ", err));
 };
 
-const invalidateReceiptWithId = async id => {
+const invalidateReceiptWithId = async receipt => {
     // This endpoint is used for invalidating an active receipt.
     // E.g. after a receipt has been scanned it should be marked
     // as no longer active
@@ -270,10 +281,12 @@ const invalidateReceiptWithId = async id => {
     }
     */
 
+    const { id, firebaseId } = receipt;
+
     // Also, invalidate mirror receipt
     invalidateMirrorReceipt(id);
 
-    const active = id + "/active";
+    const active = firebaseId + "/active";
 
     const receiptUpdate = {
         [active]: false
