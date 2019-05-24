@@ -34,21 +34,26 @@ class ReceiptView extends Component {
         };
     }
 
-    async componentDidMount() {
-        // const wantedReceipt = await getReceipt(this.props.receiptId);
-
+    componentDidMount() {
         this.setState({
             receipt: this.props.receipt,
         });
     }
 
-    createBanner = () => {
-        var i;
+    componentDidUpdate(prevProps, prevState) {
+        // const wantedReceipt = await getReceipt(this.props.receiptId);
+        if (prevProps.receipt !== this.props.receipt) {
+            this.setState({
+                receipt: this.props.receipt,
+            });
+        }
+    }
 
+    createBanner = () => {
         const list = [];
 
-        for (i = 0; i < 10; i++) {
-            list.push(<View style={styles.bottomBanner} />);
+        for (let i = 0; i < 8; i++) {
+            list.push(<View key={i} style={styles.bottomBanner} />);
         }
 
         return list;
@@ -94,8 +99,8 @@ class ReceiptView extends Component {
                             width: '90%',
                             height: '1%',
                             alignSelf: 'center',
-                            borderBottomWidth: 1,
-                            borderColor: 'black',
+                            borderBottomWidth: 3,
+                            borderColor: '#FAFAFA',
                         }}
                     />
                     <View style={styles.botContainer}>
@@ -127,14 +132,7 @@ class ReceiptView extends Component {
                         </View>
                     </View>
 
-                    <View
-                        style={{
-                            flex: 1,
-                            justifyContent: 'space-between',
-                            flexDirection: 'row',
-                            alignItems: 'flex-end',
-                        }}
-                    >
+                    <View style={styles.bannerContainer}>
                         {this.createBanner()}
                     </View>
                 </View>
@@ -166,16 +164,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#C4DEE5',
         borderRadius: 10,
         paddingHorizontal: 14,
-
-        /* shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.05,
-        shadowRadius: 4,
-
-        elevation: 2, */
     },
     varorTable: {
         width: '100%',
@@ -233,11 +221,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         opacity: 0.9,
     },
+    bannerContainer: {
+        flex: 1,
+        top: 10,
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        paddingHorizontal: -14,
+    },
     bottomBanner: {
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: '#FAFAFA',
-        width: '10%',
+        width: '11%',
         height: '100%',
     },
 });
