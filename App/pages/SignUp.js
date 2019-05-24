@@ -41,16 +41,17 @@ class signUpPage extends React.Component {
           })
           .catch(error => {
             // An error happened.
+            //this.setState({ loading: false});
+
             console.log(error.message);
           });
       })
       .catch(error => {
         // Handle Errors here.
         const errorMessage = error.message;
-        this.setState({ errorMessage, loading: false });
         return Alert.alert('Error', errorMessage, [
           {
-            text: 'OK',
+            text: 'OK', onPress: () => this.setState({ errorMessage, loading: false })
           },
         ]);
       });
