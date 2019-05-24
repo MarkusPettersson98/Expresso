@@ -21,8 +21,6 @@ import Modal from 'react-native-modal';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-import { getShopById } from '../API/expressoAPI';
-
 class Checkout extends Component {
   state = {
     paymentCard: '',
@@ -35,19 +33,6 @@ class Checkout extends Component {
     user: null,
     loading: false,
   };
-
-  // when mounted first time
-  async componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user: user });
-    });
-    // Fetch data about which shop we are purchasing coffee from
-    const requestedShop = await getShopById(this.props.cart.shopId);
-    // This is a whole shop object, which carries more data than just name, e.g. street, coordinates ..
-    this.setState({
-      shop: requestedShop,
-    });
-  }
 
   sendTheOrder = async () => {
     this.setState({ loading: true });
@@ -96,6 +81,7 @@ class Checkout extends Component {
     const cart = this.props.cart;
     const total = cart.price;
     const orderItems = cart.orderItems;
+    const shop = cart.shop;
 
     return (
       <View style={{ flex: 1, backgroundColor: '#FFF' }}>
@@ -149,7 +135,7 @@ class Checkout extends Component {
                         fontSize: 16,
                       }}
                     >
-                      {this.state.shop.name}
+                      {shop.name}
                     </Text>
                     <Text
                       style={{
@@ -158,7 +144,7 @@ class Checkout extends Component {
                         marginTop: 3,
                       }}
                     >
-                      {this.state.shop.street}
+                      {shop.street}
                     </Text>
                   </View>
                 </View>
