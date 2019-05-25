@@ -87,7 +87,7 @@ export const Tabs = createBottomTabNavigator(
                 tabBarLabel: 'Karta',
                 tabBarIcon: ({ focused, tintColor }) => {
                     return (
-                        <Feather
+                        <MaterialIcons
                             name={'map'}
                             color={
                                 focused
@@ -137,8 +137,8 @@ export const Tabs = createBottomTabNavigator(
                 tabBarLabel: 'Profil',
                 tabBarIcon: ({ focused, tintColor }) => {
                     return (
-                        <Feather
-                            name={'github'}
+                        <MaterialIcons
+                            name={'person'}
                             color={
                                 focused
                                     ? tabIconStyling.selected
@@ -259,4 +259,3 @@ const styles = {
 };
 
 export default createAppContainer(RootStack);
-
