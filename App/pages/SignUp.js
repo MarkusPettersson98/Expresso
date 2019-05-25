@@ -23,6 +23,9 @@ class signUpPage extends React.Component {
     password: '',
     errorMessage: null,
     loading: false,
+    fromPayment: this.props.navigation.state.params
+        ? this.props.navigation.state.params.fromPayment
+        : false,
   };
 
   handleRegister = () => {
@@ -39,7 +42,7 @@ class signUpPage extends React.Component {
           .then(() => {
             // Update successful.
             console.log(`display name set to ${this.state.name}`);
-            this.props.navigation.navigate('Main');
+            this.props.navigation.navigate(this.state.fromPayment ? 'Checkout' : 'Main');
           })
           .catch(error => {
             // An error happened.

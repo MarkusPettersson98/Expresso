@@ -38,7 +38,7 @@ class loginPage extends React.Component {
             .signInWithEmailAndPassword(email, password)
             .then(() => {
                 // Logged in
-                this.props.navigation.navigate('Main');
+                this.props.navigation.navigate(this.state.fromPayment ? 'Checkout' : 'Main');
             })
             .catch(error => {
                 // Handle Errors here.
@@ -101,7 +101,7 @@ class loginPage extends React.Component {
 
                 <View style={styles.textButtonView}>
                     <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('SignUp')}
+                        onPress={() => this.props.navigation.navigate('SignUp', { fromPayment: this.state.fromPayment })}
                     >
                         <View style={styles.toView}>
                             <Text style={{ color: '#101010' }}>
