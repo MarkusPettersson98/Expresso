@@ -11,7 +11,7 @@ export default class Maincomp extends React.Component {
         this.state = { ShopViews: [], loading: true };
     }
 
-    loadingTime = 1000;
+    loadingTime = 0;
 
     async componentDidMount() {
         // Request all shops names
