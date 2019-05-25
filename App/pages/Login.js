@@ -81,6 +81,7 @@ class loginPage extends React.Component {
                     keyboardType="email-address"
                     autoCapitalize="none"
                     placeholder="Email"
+                    placeholderTextColor="#7C6A70"
                     onChangeText={email => this.setState({ email })}
                 />
 
@@ -89,6 +90,7 @@ class loginPage extends React.Component {
                     textContentType="password"
                     secureTextEntry
                     placeholder="Lösenord"
+                    placeholderTextColor="#7C6A70"
                     onChangeText={password => this.setState({ password })}
                 />
 
@@ -137,14 +139,14 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderColor: '#101010',
+        borderColor: '#7C6A70',
         borderWidth: 0,
         borderBottomWidth: 2,
         marginBottom: 20,
-        color: '#101010',
+        color: '#57454B',
     },
     logIn: {
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#5AA3B7',
         paddingVertical: 16,
         borderRadius: 10,
         alignItems: 'center',
@@ -152,7 +154,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     logInText: {
-        color: '#101010',
+        color: 'white',
         fontWeight: '700',
         letterSpacing: 2,
     },

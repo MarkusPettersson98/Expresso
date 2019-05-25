@@ -8,7 +8,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Keyboard,
-  
+
 } from 'react-native';
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
@@ -56,6 +56,7 @@ class ForgotPasswordPage extends React.Component {
           keyboardType="email-address"
           autoCapitalize="none"
           placeholder="Email"
+          placeholderTextColor="#7C6A70"
           onChangeText={email => this.setState({ email })}
         />
 
@@ -82,11 +83,11 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: '#101010',
+    borderColor: '#7C6A70',
     borderWidth: 0,
     borderBottomWidth: 2,
     marginBottom: 20,
-    color: '#101010',
+    color: '#57454B',
   },
   button: {
     backgroundColor: '#5AA3B7',
