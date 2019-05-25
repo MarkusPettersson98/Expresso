@@ -5,7 +5,7 @@ import {
     createStackNavigator,
     createAppContainer,
 } from 'react-navigation';
-
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import Homepage from './Homepage';
 import Profilepage from './ProfilePage';
 import Receipts from './components/profilePage/Receipts';
@@ -45,11 +45,9 @@ const headerIconStyling = {
 
 const tabIconStyling = {
     size: 26,
-    selected: '#362D30',
-    inactive: '#9C9497',
 };
 
-export const Tabs = createBottomTabNavigator(
+export const Tabs = createMaterialBottomTabNavigator(
     {
         Lista: {
             screen: () => (
@@ -64,11 +62,7 @@ export const Tabs = createBottomTabNavigator(
                     return (
                         <Feather
                             name={'list'}
-                            color={
-                                focused
-                                    ? tabIconStyling.selected
-                                    : tabIconStyling.inactive
-                            }
+                            color={tintColor}
                             size={tabIconStyling.size}
                         />
                     );
@@ -87,13 +81,9 @@ export const Tabs = createBottomTabNavigator(
                 tabBarLabel: 'Karta',
                 tabBarIcon: ({ focused, tintColor }) => {
                     return (
-                        <Feather
+                        <MaterialIcons
                             name={'map'}
-                            color={
-                                focused
-                                    ? tabIconStyling.selected
-                                    : tabIconStyling.inactive
-                            }
+                            color={tintColor}
                             size={tabIconStyling.size}
                         />
                     );
@@ -114,11 +104,7 @@ export const Tabs = createBottomTabNavigator(
                     return (
                         <MaterialIcons
                             name={'receipt'}
-                            color={
-                                focused
-                                    ? tabIconStyling.selected
-                                    : tabIconStyling.inactive
-                            }
+                            color={tintColor}
                             size={tabIconStyling.size}
                         />
                     );
@@ -137,13 +123,9 @@ export const Tabs = createBottomTabNavigator(
                 tabBarLabel: 'Profil',
                 tabBarIcon: ({ focused, tintColor }) => {
                     return (
-                        <Feather
-                            name={'github'}
-                            color={
-                                focused
-                                    ? tabIconStyling.selected
-                                    : tabIconStyling.inactive
-                            }
+                        <MaterialIcons
+                            name={'person'}
+                            color={tintColor}
                             size={tabIconStyling.size}
                         />
                     );
@@ -152,19 +134,10 @@ export const Tabs = createBottomTabNavigator(
         },
     },
     {
-        tabBarOptions: {
-            // om bakgrunden
-            activeBackgroundColor: '#eee',
-            backgroundColor: 'white',
-
-            // Om label
-            labelStyle: {
-                fontSize: 12,
-            },
-            // om textens färg
-            activeTintColor: '#362D30',
-            inactiveTintColor: '#9C9497',
-        },
+      initialRouteName: 'Lista',
+      activeColor: '#57454B',
+      inactiveColor: '#bcb6b9',
+      barStyle: { backgroundColor: 'white' },
     },
 );
 
@@ -259,4 +232,3 @@ const styles = {
 };
 
 export default createAppContainer(RootStack);
-
