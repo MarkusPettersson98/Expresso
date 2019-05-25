@@ -25,6 +25,16 @@ firebase.initializeApp(firebaseConfig);
 
 const store = createStore(expressoApp);
 
+function cacheImages(images) {
+  return images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
+}
+
 function cacheFonts(fonts) {
   return fonts.map(font => Font.loadAsync(font));
 }
@@ -35,6 +45,12 @@ export default class App extends React.Component {
   };
 
   async _loadAssetsAsync() {
+    const imageAssets = cacheImages([
+      require('./pages/components/resources/ExpressoWhite.png'),
+      require('./pages/components/resources/ExpressoTransp.png'),
+      require('./pages/components/resources/ExpressoLogoLight.png'),
+    ]);
+
     const fontAssets = cacheFonts([
       SimpleLineIcons.font,
       AntDesign.font,
@@ -43,7 +59,7 @@ export default class App extends React.Component {
       MaterialIcons.font,
     ]);
 
-    await Promise.all([...fontAssets]);
+    await Promise.all([...imageAssets, ...fontAssets]);
   }
 
   render() {
