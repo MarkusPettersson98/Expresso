@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import QRCode from 'react-native-qrcode';
 import ReceiptView from './ReceiptView';
 
@@ -23,7 +23,9 @@ const QRPage = ({ receipt }) => {
                     />
                 </View>
             </View>
-            <ReceiptView receipt={receipt} />
+            <ScrollView style={styles.receiptbox}>
+                <ReceiptView receipt={receipt} />
+            </ScrollView>
         </View>
     );
 };
@@ -31,6 +33,7 @@ const QRPage = ({ receipt }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#FAFAFA',
@@ -43,6 +46,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAFAFA',
         borderRadius: 40,
         top: 20,
+    },
+    receiptcontainer: {
+        width: '100%',
+        height: '100%',
+    },
+    receiptbox: {
+        marginTop: 20,
+        flexGrow: 1,
+        width: '100%',
+        flexDirection: 'column',
+        backgroundColor: '#FAFAFA',
     },
     qr: {
         width: 320,
