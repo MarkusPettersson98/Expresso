@@ -45,8 +45,8 @@ const headerIconStyling = {
 
 const tabIconStyling = {
     size: 26,
-    selected: '#362D30',
-    inactive: '#9C9497',
+    selected: '#141B20',
+    inactive: '#ADA5A8',
 };
 
 export const Tabs = createBottomTabNavigator(
@@ -154,7 +154,7 @@ export const Tabs = createBottomTabNavigator(
     {
         tabBarOptions: {
             // om bakgrunden
-            activeBackgroundColor: '#eee',
+            // activeBackgroundColor: '#eee',
             backgroundColor: 'white',
 
             // Om label
@@ -162,7 +162,7 @@ export const Tabs = createBottomTabNavigator(
                 fontSize: 12,
             },
             // om textens färg
-            activeTintColor: '#362D30',
+            activeTintColor: '#141B20',
             inactiveTintColor: '#9C9497',
         },
     },
