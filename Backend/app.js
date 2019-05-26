@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 const api = require("./API/api").api;
 
 require("dotenv").config();
@@ -13,6 +14,10 @@ app.use(bodyParser.json());
 
 // Allow CORS
 app.use(cors());
+
+// Load temlate engine
+app.set("views", path.join(__dirname, 'Views'));
+app.set("view engine", "pug");
 
 app.get("/", (req, res) => res.send("Hej Världen!"));
 

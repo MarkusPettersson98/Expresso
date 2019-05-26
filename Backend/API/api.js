@@ -106,18 +106,34 @@ const scanReceipt = async (req, res) => {
     const receipt = receiptList[0];
 
     try {
-        // const receipt = await getReceiptById(id);
         // Check if scanned receipt is valid!
+        let template = "no-receipt";
+        let content = {
+            status: ""
+        };
+
         if (receipt.active) {
             console.log("Scanned receipt is valid!");
+            template = "receipt";
+            content = {
+                status:
+                    "Kvittot som skannades är giltigt. \n Tack för ditt köp!",
+                coffees: receipt.coffees,
+            };
         } else {
             console.log("Error! Scanned receipt has already been used");
+            template = "no-receipt";
+            content = {
+                status: "Kvittot som skannades har redan aktiverats.",
+            };
         }
         // Ivalidate fetched receipt
         // Note: getReceiptWith returns an array !
         invalidateReceiptWithId(receipt);
 
-        return res.status(200).send(receipt);
+        return res.status(200).render(template, content);
+
+
     } catch (e) {
         console.log(e);
         return res.status(400).send(":(");

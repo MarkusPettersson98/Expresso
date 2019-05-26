@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title Expresso
+    body
+        h1 #{status}
+        table(style='width:100%', border='1')
+            tr
+                th Kaffe
+                th Mugg
+                th Antal
+                th Pris
+            each coffeeItem, i in coffees
+                tr
+                    td= coffeeItem.coffee.name
+                    if coffeeItem.coffee.ownMug
+                        td Egen mugg
+                    else
+                        td Lånar
+                    td= coffeeItem.amount
+                    td #{( coffeeItem.amount * coffeeItem.coffee.price )} kr
