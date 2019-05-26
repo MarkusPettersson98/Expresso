@@ -73,13 +73,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#7C6A70',
-        marginTop: -15,
+        marginTop: -5,
     },
     press_text: {
         fontSize: 17,
         textAlign: 'center',
         color: '#7C6A70',
-        marginTop: 10,
+        marginTop: 0,
     },
     logIn: {
       backgroundColor: '#5AA3B7',
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
       paddingVertical: 16,
       borderRadius: 10,
       alignItems: 'center',
-      marginTop: 60,
-      marginBottom: 15,
+      marginTop: 120,
+      marginBottom: 0,
     },
     btnText: {
       color: 'white',
