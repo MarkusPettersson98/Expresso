@@ -22,7 +22,7 @@ class ListReceipts extends Component {
             {item.shop.name}
         </Text>
         <Text style = {styles.text}>
-            Totalt: {item.totalPrice}kr
+            Totalt: {item.totalPrice} kr
         </Text>
       </View>
     );

@@ -20,7 +20,7 @@ const CafeHeader = ({ picture, name, address }) => {
                 />
                 <View style={styles.selectionparent}>
                     <View style={styles.selection}>
-                        <Text style={styles.selectiontext}> Kaffemeny </Text>
+                        <Text style={styles.selectiontext}>Kaffemeny</Text>
                     </View>
                 </View>
             </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     },
     selection: {
         backgroundColor: '#FAFAFA',
-        width: '35%',
+        width: '40%',
         height: '100%',
         
         shadowColor: '#000',

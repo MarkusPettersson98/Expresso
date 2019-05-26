@@ -21,7 +21,7 @@ export default class ListCoffees extends Component{
                             ? <Text style = {styles.text}>Egen</Text>
                             : <Text style = {styles.text}>Låna</Text>
                         }
-                        <Text style = {styles.text}>{receiptItem.coffee.price}Kr</Text>
+                        <Text style = {styles.text}>{receiptItem.coffee.price} kr</Text>
                     </View>
                     )    
                 }      

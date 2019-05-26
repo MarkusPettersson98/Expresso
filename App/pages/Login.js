@@ -38,7 +38,9 @@ class loginPage extends React.Component {
             .signInWithEmailAndPassword(email, password)
             .then(() => {
                 // Logged in
-                this.props.navigation.navigate(this.state.fromPayment ? 'Checkout' : 'Main');
+                this.props.navigation.navigate(
+                    this.state.fromPayment ? 'Checkout' : 'Main',
+                );
             })
             .catch(error => {
                 // Handle Errors here.
@@ -70,9 +72,11 @@ class loginPage extends React.Component {
                 />
 
                 {this.state.fromPayment ? (
-                    <Text style={styles.fromPay}>
-                        Logga in för att göra beställning
-                    </Text>
+                    <View>
+                        <Text style={styles.fromPay}>
+                            Logga in för att göra beställning
+                        </Text>
+                    </View>
                 ) : null}
 
                 <TextInput
@@ -102,18 +106,22 @@ class loginPage extends React.Component {
                 </TouchableOpacity>
 
                 <View style={styles.textButtonView}>
-                    <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('SignUp', { fromPayment: this.state.fromPayment })}
-                    >
-                        <View style={styles.toView}>
-                            <Text style={{ color: '#101010' }}>
-                                Har du inget konto?{' '}
-                            </Text>
+                    <View style={styles.toView}>
+                        <Text style={{ color: '#101010' }}>
+                            Har du inget konto?{' '}
+                        </Text>
+                        <TouchableOpacity
+                            onPress={() =>
+                                this.props.navigation.navigate('SignUp', {
+                                    fromPayment: this.state.fromPayment,
+                                })
+                            }
+                        >
                             <Text style={{ color: '#5AA3B7' }}>
                                 Registrera dig
                             </Text>
-                        </View>
-                    </TouchableOpacity>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <View style={styles.textButtonView}>
@@ -165,9 +173,9 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     fromPay: {
-        color: '#101010',
+        color: '#57454B',
         fontWeight: '600',
-        fontSize: 20,
+        fontSize: 18,
         alignSelf: 'center',
         paddingBottom: 50,
     },
