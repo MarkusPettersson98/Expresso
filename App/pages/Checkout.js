@@ -180,12 +180,19 @@ class Checkout extends Component {
               </View>
 
               {/* Betalningsmetod */}
+              {/* Borde bara visas om användaren är inloggad */}
+              {this.state.user ? (
               <View style={{ ...styles.viewBlock, paddingHorizontal: 24 }}>
                 <Text style={{ ...styles.viewBlockTitle, marginHorizontal: 0 }}>
-                  Betalningsmetod
+                  Kårkort
                 </Text>
                 <PaymentMethod setPaymentCard={this.setPaymentCard} />
               </View>
+              ) 
+              : 
+              // Annars, visa ingenting
+              <View />}
+
             </ScrollView>
 
             {/* Nedre betalningsruta */}
@@ -194,13 +201,22 @@ class Checkout extends Component {
                 <Text style={styles.totalText}>Totalt</Text>
                 <Text style={styles.totalText}>{total} kr</Text>
               </View>
-              <OrderButton
+
+            {/* Visa olika knappar beroende på om användaren är inloggad eller ej */}
+            {this.state.user ? <OrderButton
                 onPress={async () => {
                   await this.sendTheOrder();
                 }}
                 buttonText="BETALA"
                 disabled={this.state.paymentCard ? false : true}
-              />
+              /> : <OrderButton
+              onPress={() => this.props.navigation.navigate('Login', { fromPayment: true })}
+              buttonText="LOGGA IN FÖR ATT BETALA"
+              disabled={false}
+            />}   
+
+
+
             </View>
 
             <ModalComp

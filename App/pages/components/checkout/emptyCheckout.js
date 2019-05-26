@@ -11,8 +11,8 @@ const EmptyCheckout = () => {
     return (
         <View style={styles.app}>
             <View style={styles.content}>
-                <View style={{ width: 64, height: 64 }}>
-                    <Feather name="shopping-bag" size={64} color="#57454B" />
+                <View style={{ width: 96, height: 96 }}>
+                    <Feather name="shopping-bag" size={96} color="#57454B" />
                 </View>
                 <Text style={styles.textTitle}>Här var det tomt.</Text>
                 <Text style={styles.textDesc}>Lägg till en vara först.</Text>

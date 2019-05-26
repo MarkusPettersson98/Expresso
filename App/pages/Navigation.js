@@ -201,6 +201,11 @@ export const RootStack = createStackNavigator(
             screen: Receipts,
             navigationOptions: ({ navigation }) => ({
                 headerTitle: 'Kvitton',
+                headerLeft: (
+                    <View style={{ margin: 10 }}>
+                        <BackArrow />
+                    </View>
+                ),
                 ...headerStyling,
             }),
         },

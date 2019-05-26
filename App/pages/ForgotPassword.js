@@ -8,6 +8,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Keyboard,
+
 } from 'react-native';
 import LoadingOverlay from './components/loading/loadingOverlay';
 import * as firebase from 'firebase/app';
@@ -45,7 +46,7 @@ class ForgotPasswordPage extends React.Component {
 
         <Image
           style={{ height: 30, width: '100%', marginVertical: 50 }}
-          source={require('./components/resources/ExpressoLogoLight.png')}
+          source={require('./components/resources/ExpressoTransp.png')}
           resizeMode="contain"
         />
 
@@ -55,6 +56,7 @@ class ForgotPasswordPage extends React.Component {
           keyboardType="email-address"
           autoCapitalize="none"
           placeholder="Email"
+          placeholderTextColor="#7C6A70"
           onChangeText={email => this.setState({ email })}
         />
 
@@ -65,7 +67,7 @@ class ForgotPasswordPage extends React.Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Login')}
         >
-          <Text style={{ color: '#5AA3B7', marginTop: 10 }}>Logga in</Text>
+          <Text style={{ color: '#5AA3B7', marginTop: 30, alignSelf: 'center'}}>Logga in</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
@@ -75,17 +77,17 @@ class ForgotPasswordPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#57454B',
+    backgroundColor: '#FAFAFA',
     justifyContent: 'center',
     paddingHorizontal: 26,
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#7C6A70',
     borderWidth: 0,
     borderBottomWidth: 2,
     marginBottom: 20,
-    color: 'white',
+    color: '#57454B',
   },
   button: {
     backgroundColor: '#5AA3B7',
