@@ -146,11 +146,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0, left: 0, right: 0,
         height: 300,
+        zIndex: 10,
     },
     lottieview: {
         width: '100%',
         height: 250,
         marginTop: 20,
+        zIndex: 10,
     },
     textRubrik: {
         top: 5,
