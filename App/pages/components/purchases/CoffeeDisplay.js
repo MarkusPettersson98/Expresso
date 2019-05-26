@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
         marginBottom: 3,
     },
     outerLeft: {
-        flex: 2,
+        flex: 1.5,
     },
     innerLeft: {
-        flex: 3,
+        flex: 2.5,
     },
     innerRight: {
         flex: 2,

@@ -24,7 +24,7 @@ class ReceiptView extends Component {
         });
         setTimeout(() => {
             this.animation.play();
-        }, 3000);
+        }, 2000);
     }
 
     componentDidUpdate(prevProps) {
@@ -55,7 +55,7 @@ class ReceiptView extends Component {
                                 this.animation = animation;
                             }}
                             source={require('../resources/swipeup.json')}
-                            speed={1}
+                            speed={0.5}
                             loop={false}
                         />
                     </View>
@@ -146,12 +146,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0, left: 0, right: 0,
         height: 300,
-        zIndex: 999,
+        zIndex: 10,
     },
     lottieview: {
         width: '100%',
         height: 250,
-        marginTop: 40,
+        marginTop: 20,
+        zIndex: 10,
     },
     textRubrik: {
         top: 5,
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     },
     locationheader: {
         alignSelf: 'center',
-        marginBottom: 10,
+        marginBottom: 20,
     },
     locationheadertext: {
         color: '#57454B',
@@ -190,10 +191,10 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     outerLeft: {
-        flex: 2,
+        flex: 1.5,
     },
     innerLeft: {
-        flex: 3,
+        flex: 2.5,
     },
     innerRight: {
         flex: 2,
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
     },
     totaltext: {
-        flex: 7,
+        flex: 6,
     },
     totalprice: {
         flex: 1,
