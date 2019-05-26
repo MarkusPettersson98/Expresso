@@ -49,6 +49,11 @@ export default class App extends React.Component {
       require('./pages/components/resources/ExpressoWhite.png'),
       require('./pages/components/resources/ExpressoTransp.png'),
       require('./pages/components/resources/ExpressoLogoLight.png'),
+      require('./pages/components/resources/biblan.jpg'),
+      require('./pages/components/resources/bulten.jpg'),
+      require('./pages/components/resources/linsen.jpg'),
+      require('./pages/components/resources/vera.jpg'),
+      require('./pages/components/resources/wijkanders.jpg'),
     ]);
 
     const fontAssets = cacheFonts([
