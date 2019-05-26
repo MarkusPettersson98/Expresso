@@ -7,31 +7,22 @@ const CoffeeDisplay = ({ coffees }) => {
         let antal = amount;
         let namn = coffee.name;
         let pris = coffee.price;
-        let mugg = coffee.ownMug ? 'Har egen mugg' : 'Lånar mugg';
+        let mugg = coffee.ownMug ? 'Egen' : 'Låna';
         return (
             <View style={styles.spaceing} key={antal + namn + pris + mugg}>
-                <Text
-                    style={{
-                        color: '#57454B',
-                        fontWeight: 'bold',
-                        width: 40,
-                        marginLeft: 10,
-                    }}
-                >
-                    {antal}
-                </Text>
-                <Text style={styles.text}>{namn}</Text>
-                <Text style={styles.text}>{mugg}</Text>
-                <Text
-                    style={{
-                        color: '#57454B',
-                        fontWeight: 'bold',
-                        width: 35,
-                        marginRight: 10,
-                    }}
-                >
-                    {pris}
-                </Text>
+
+                <View style={styles.outerLeft}>
+                    <Text style={styles.text}>{antal}</Text>
+                </View>
+                <View style={styles.innerLeft}>
+                    <Text style={styles.text}>{namn}</Text>
+                </View>
+                <View style={styles.innerRight}>
+                    <Text style={styles.text}>{mugg}</Text>
+                </View>
+                <View style={styles.outerRight}>
+                    <Text style={styles.text}>{pris}</Text>
+                </View>
             </View>
         );
     });
@@ -42,14 +33,25 @@ export default CoffeeDisplay;
 
 const styles = StyleSheet.create({
     spaceing: {
-        alignSelf: 'stretch',
         width: '100%',
         justifyContent: 'space-between',
         flexDirection: 'row',
+        marginBottom: 3,
+    },
+    outerLeft: {
+        flex: 2,
+    },
+    innerLeft: {
+        flex: 3,
+    },
+    innerRight: {
+        flex: 2,
+    },
+    outerRight: {
+        flex: 1,
     },
     text: {
-        alignSelf: 'stretch',
         color: '#57454B',
-        width: 110,
+        fontSize: 18
     },
 });

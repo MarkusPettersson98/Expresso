@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import CoffeeDisplay from './CoffeeDisplay';
 import MiniMap from './MiniMap';
+import LottieView from 'lottie-react-native';
 
 class ReceiptView extends Component {
     constructor(props) {
@@ -21,6 +22,9 @@ class ReceiptView extends Component {
         this.setState({
             receipt: this.props.receipt,
         });
+        setTimeout(() => {
+            this.animation.play();
+        }, 3000);
     }
 
     componentDidUpdate(prevProps) {
@@ -34,7 +38,7 @@ class ReceiptView extends Component {
     createBanner = () => {
         const banners = [];
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 9; i++) {
             banners.push(<View key={i} style={styles.bottomBanner} />);
         }
 
@@ -43,84 +47,88 @@ class ReceiptView extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.infoBox}>
+                <View style={styles.receipt}>
+                    <View style={styles.lottiecontainer}>
+                        <LottieView
+                            style={styles.lottieview}
+                            ref={animation => {
+                                this.animation = animation;
+                            }}
+                            source={require('../resources/swipeup.json')}
+                            speed={1}
+                            loop={false}
+                        />
+                    </View>
                     <View style={styles.content}>
-                        <View>
+                        <View style={{ marginTop: 10, marginBottom: 20 }}>
                             <Text style={styles.textRubrik}> Kvitto </Text>
                         </View>
-                        <Text style={styles.textUnderrubrik1} />
 
                         <View style={styles.varorTable}>
-                            <Text
-                                style={{
-                                    color: '#57454B',
-                                    fontWeight: 'bold',
-                                    width: 40,
-                                    marginLeft: 8,
-                                }}
-                            >
-                                Antal
-                            </Text>
-                            <Text style={styles.boldtext}>Kaffesort</Text>
-                            <Text style={styles.boldtext}>Muggtyp</Text>
-                            <Text
-                                style={{
-                                    color: '#57454B',
-                                    fontWeight: 'bold',
-                                    width: 35,
-                                    marginRight: 10,
-                                }}
-                            >
-                                Pris
-                            </Text>
+                            <View style={styles.outerLeft}>
+                                <Text style={styles.boldtext}>Antal</Text>
+                            </View>
+                            <View style={styles.innerLeft}>
+                                <Text style={styles.boldtext}>Kaffetyp</Text>
+                            </View>
+                            <View style={styles.innerRight}>
+                                <Text style={styles.boldtext}>Muggval</Text>
+                            </View>
+                            <View style={styles.outerRight}>
+                                <Text style={styles.boldtext}>Pris</Text>
+                            </View>
                         </View>
-                        <ScrollView>
-                            <CoffeeDisplay
-                                coffees={this.state.receipt.coffees}
-                            />
-                        </ScrollView>
+                        <CoffeeDisplay coffees={this.state.receipt.coffees} />
+                        <View style={styles.totalcontainer}>
+                            <View style={styles.totaltext}>
+                                <Text style={styles.subtext}>Total:</Text>
+                            </View>
+                            <View style={styles.totalprice}>
+                                <Text style={styles.subtext}>
+                                    {this.state.receipt.totalPrice}
+                                    {' kr '}
+                                </Text>
+                            </View>
+                        </View>
                     </View>
-                    <View
-                        style={{
-                            width: '90%',
-                            height: '1%',
-                            alignSelf: 'center',
-                            borderBottomWidth: 3,
-                            borderColor: '#FAFAFA',
-                        }}
-                    />
+                    <View style={styles.locationheader}>
+                        <Text style={styles.locationheadertext}>
+                            Här hittar du din order
+                        </Text>
+                    </View>
                     <View style={styles.botContainer}>
-                        <View style={styles.bot}>
-                            <Text style={styles.textUnderrubrik2}>
+                        <View style={styles.location}>
+                            <Text style={styles.boldtext}>
                                 {this.state.receipt.shop.name}
                             </Text>
-                            <Text style={styles.text}>
+                            <Text style={styles.subtext}>
                                 {this.state.receipt.shop.street}
                             </Text>
-                            <Text style={styles.text}>
-                                Totalpris: {this.state.receipt.totalPrice}
-                                {'kr '}
-                            </Text>
-                            <Text style={styles.text}>
-                                {new Date(this.state.receipt.date).toString()}{' '}
-                                {'\n'}
-                            </Text>
+                            <View style={styles.datecont}>
+                                <Text style={styles.datetext}>
+                                    {new Date(
+                                        this.state.receipt.date,
+                                    ).toString()}{' '}
+                                    {'\n'}
+                                </Text>
+                            </View>
                         </View>
-
-                        <View style={styles.botMap}>
-                            <MiniMap
-                                shop={this.state.receipt.shop}
-                                style={styles.map2}
-                            />
+                        <View style={styles.map}>
+                            <MiniMap shop={this.state.receipt.shop} />
                             <View style={styles.overlay} />
                         </View>
+                    </View>
+
+                    <View style={styles.goodbye}>
+                        <Text style={styles.subtext}>
+                            Tack för ditt köp! Välkommen åter.
+                        </Text>
                     </View>
 
                     <View style={styles.bannerContainer}>
                         {this.createBanner()}
                     </View>
                 </View>
-                <View style={styles.hardKod} />
             </View>
         );
     }
@@ -129,10 +137,21 @@ class ReceiptView extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        top: 20,
+        marginTop: 20,
         width: '100%',
         backgroundColor: '#FAFAFA',
         paddingHorizontal: 10,
+    },
+    lottiecontainer: {
+        position: 'absolute',
+        top: 0, left: 0, right: 0,
+        height: 300,
+        zIndex: 999,
+    },
+    lottieview: {
+        width: '100%',
+        height: 250,
+        marginTop: 40,
     },
     textRubrik: {
         top: 5,
@@ -141,86 +160,107 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         alignSelf: 'center',
     },
-    infoBox: {
-        flex: 1,
-        top: 20,
+    receipt: {
+        flexGrow: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         backgroundColor: '#C4DEE5',
-        borderRadius: 10,
-        paddingHorizontal: 14,
+        borderTopLeftRadius: 6,
+        borderTopRightRadius: 6,
+        width: '100%',
+        marginBottom: 20,
     },
     content: {
-        height: '30%',
-        paddingBottom: 3,
+        marginBottom: 20,
+        marginHorizontal: 10,
     },
     varorTable: {
         width: '100%',
         justifyContent: 'space-between',
         flexDirection: 'row',
+        marginBottom: 10,
     },
-    textUnderrubrik1: {
-        top: 5,
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#57454B',
+    locationheader: {
         alignSelf: 'center',
-        bottom: 10,
+        marginBottom: 10,
     },
-    textUnderrubrik2: {
-        top: 10,
-        fontSize: 16,
-        fontWeight: 'bold',
+    locationheadertext: {
         color: '#57454B',
-        marginLeft: 10,
-        bottom: 60,
+        fontSize: 22,
+        fontWeight: '600',
     },
-    text: {
-        top: '3%',
-        color: '#57454B',
-        marginLeft: 10,
+    outerLeft: {
+        flex: 2,
+    },
+    innerLeft: {
+        flex: 3,
+    },
+    innerRight: {
+        flex: 2,
+    },
+    outerRight: {
+        flex: 1,
     },
     boldtext: {
         color: '#57454B',
         fontWeight: 'bold',
-        width: 110,
+        fontSize: 20,
     },
-    hardKod: {
+    totalcontainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         width: '100%',
-        height: 50,
-        backgroundColor: '#FAFAFA',
-        top: 40,
+        marginTop: 5,
+        borderTopWidth: 1,
+        borderTopColor: '#57454B',
+        paddingTop: 5,
+    },
+    totaltext: {
+        flex: 7,
+    },
+    totalprice: {
+        flex: 1,
     },
     botContainer: {
         width: '100%',
-        height: '60%',
-        justifyContent: 'center',
+        paddingHorizontal: 10,
         flexDirection: 'row',
-    },
-    bot: {
-        width: '50%',
-        height: '100%',
-        justifyContent: 'space-evenly',
-    },
-    botMap: {
-        width: '50%',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        opacity: 0.9,
+        justifyContent: 'space-between',
+        marginBottom: 10,
     },
     bannerContainer: {
-        flex: 1,
-        top: 10,
-        justifyContent: 'space-between',
+        height: 30,
+        width: '100%',
+        justifyContent: 'space-evenly',
         flexDirection: 'row',
-        alignItems: 'flex-end',
-        paddingHorizontal: -14,
+        alignItems: 'center',
+    },
+    location: {
+        flex: 1,
+    },
+    datecont: {
+        position: 'absolute',
+        bottom: 0,
+    },
+    datetext: {
+        fontSize: 16,
+        color: '#57454B',
+    },
+    subtext: {
+        color: '#57454B',
+        fontSize: 18,
     },
     bottomBanner: {
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
         backgroundColor: '#FAFAFA',
-        width: '11%',
+        width: '12%',
         height: '100%',
+        marginTop: '4%',
+    },
+    map: {
+        flex: 1,
+        alignItems: 'flex-end',
     },
     overlay: {
         position: 'absolute',
@@ -228,6 +268,12 @@ const styles = StyleSheet.create({
         height: '100%',
         zIndex: 100,
         opacity: 1,
+    },
+    goodbye: {
+        alignSelf: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginVertical: 20,
     },
 });
 
