@@ -63,7 +63,7 @@ class PaymentMethod extends Component {
         firebase
           .database()
           .ref('users/' + user.uid)
-          .set({
+          .update({
             paymentCard: paymentCardTemp,
           });
       }
