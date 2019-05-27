@@ -22,6 +22,7 @@ class Purchases extends React.Component {
         this.state = {
             activeReceipt: undefined,
             firebaseLoading: true,
+            user: null,
         };
     }
 
@@ -29,6 +30,9 @@ class Purchases extends React.Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 const fbUserId = firebase.database().ref('users/' + user.uid);
+                this.setState({
+                    user: user,
+                });
                 fbUserId.on('value', snapshot => {
                     // fbUserId.on('child_changed', snapshot => {
                     const activeReceipt =
@@ -50,7 +54,10 @@ class Purchases extends React.Component {
                     }
                 });
             } else {
-                this.setState({ firebaseLoading: false });
+                this.setState({ 
+                    firebaseLoading: false,
+                    user: user,
+                 });
             }
         });
     }
@@ -71,7 +78,7 @@ class Purchases extends React.Component {
             >
                 {this.state.firebaseLoading ? (
                     <LoadingScreen />
-                ) : this.state.activeReceipt ? (
+                ) : this.state.activeReceipt && this.state.user ? (
                     <QRPage receipt={this.state.activeReceipt} />
                 ) : (
                     <NoQRPage />
