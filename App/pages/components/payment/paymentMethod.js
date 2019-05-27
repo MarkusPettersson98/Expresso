@@ -20,15 +20,23 @@ class PaymentMethod extends Component {
     showPaymentCardModal: false,
     cardErrorText: '',
     firebaseLoading: true,
+    databaseRef: null,
   };
+
+  componentWillUnmount() {
+      this.state.databaseRef.off();  
+  }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        var userDataRef = firebase.database().ref('users/' + user.uid);
+        const userDataRef = firebase.database().ref('users/' + user.uid + '/paymentCard');
+        this.setState({
+          databaseRef: userDataRef,
+        });
         userDataRef.on('value', snapshot => {
           const paymentCard =
-            (snapshot.val() && snapshot.val().paymentCard) || '';
+            snapshot.val() || '';
           this.setState({
             paymentCard,
             firebaseLoading: false,

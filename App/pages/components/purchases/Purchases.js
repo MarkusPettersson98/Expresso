@@ -23,20 +23,27 @@ class Purchases extends React.Component {
             activeReceipt: undefined,
             firebaseLoading: true,
             user: null,
+            databaseRef: null,
         };
+    }
+
+    componentWillUnmount() {
+        this.state.databaseRef.off();  
     }
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
+            console.log("USER I FIREBASE", user);
             if (user) {
-                const fbUserId = firebase.database().ref('users/' + user.uid);
+                const fbUserId = firebase.database().ref('users/' + user.uid + '/active');
                 this.setState({
                     user: user,
+                    databaseRef: fbUserId,
                 });
                 fbUserId.on('value', snapshot => {
                     // fbUserId.on('child_changed', snapshot => {
                     const activeReceipt =
-                        (snapshot.val() && snapshot.val().active) || '';
+                        snapshot.val() || '';
                     console.log('Purchases: active receipt', activeReceipt);
                     if (!activeReceipt && this.state.activeReceipt) {
                         // Visa modal
