@@ -8,8 +8,8 @@
 
 ## The app
 ### Selecting and paying for a Coffee
-![](buyCoffee.gif)
+![](Assets/buyCoffee.gif)
 ### Scanning recieved QR-code
-![](purchase.gif)
+![](Assets/purchase.gif)
 ### General navigation
-![](navigate.gif)
+![](Assets/navigate.gif)
