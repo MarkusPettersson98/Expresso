@@ -6,7 +6,20 @@
 
 <img src="App/pages/components/resources/ExpressoTransp.png" width= "70%">
 
-This is the GitHub-page for Group Togepi the course  "DAT256 / DIT543 Software engineering project" held at Chalmers University of Technology.
+This is the GitHub-page for Group Togepi in the course  "DAT256 / DIT543 Software engineering project" held at Chalmers University of Technology.
+
+## About
+During the course we developed a React Native application in which you can order coffee.
+
+## Group members
+- Lucas Fallqvist (I)
+- Markus Pettersson (IT)
+- Klara Pohjanen (I)
+- Mateo Raspudic (D)
+- Iman Radjavi (D)
+- Emil Svensson (I)
+- Sofija Zdjelar (D)
+- Robert Zetterlund (IT)
 
 ## The app
 ### Selecting and paying for a Coffee
