@@ -43,3 +43,10 @@ https://github.com/RobertZetterlund/ExpressoBackend
 
 ### Usages of wiki
 There's some technical documentation under the wiki-tab of this repository which collected information and aided group-members with the development-process.
+
+## Installation
+Clone the repo
+
+use the makefile and
+
+`.....`
