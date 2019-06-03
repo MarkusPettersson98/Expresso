@@ -9,7 +9,7 @@
 This is the GitHub-page for Group Togepi in the course  "DAT256 / DIT543 Software engineering project" held at Chalmers University of Technology.
 
 ## About
-During the course we developed a React Native application in which you can order coffee.
+During the course we developed a React Native application in which you can order coffee from selected cafés around campus. The purpose of the project was to facilitate the process of ordering coffee as well as contributing to improved sustainability by reducing the amount of disposable cups.
 
 ## Group members
 - Lucas Fallqvist (I)
