@@ -4,15 +4,37 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest",
+    "test-with-cov": "jest && codecov"
   },
   "dependencies": {
     "expo": "^32.0.0",
+    "firebase": "^5.11.0",
+    "node-fetch": "^2.5.0",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-check-box": "^2.1.7",
+    "react-native-collapsible": "^1.4.0",
+    "react-native-maps": "^0.23.0",
+    "react-native-modal": "^10.0.0",
+    "react-native-paper": "^2.15.2",
+    "react-native-qrcode": "^0.2.7",
+    "react-native-radio-buttons-group": "^1.0.7",
+    "react-navigation": "^3.8.1",
+    "react-navigation-material-bottom-tabs": "^1.0.0",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^5.0.0",
+    "codecov": "^3.3.0",
+    "jest": "^24.7.1"
+  },
+  "jest": {
+    "preset": "react-native",
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "private": true
 }
